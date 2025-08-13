@@ -23,7 +23,7 @@ const ServiceArea = () => {
     <section 
       id="area" 
       className="section relative text-white overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #059669 0%, #047857 100%)' }}
+      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">

@@ -12,6 +12,7 @@ import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
 import QuotePopup from './components/QuotePopup';
+import DynamicBackground from './components/DynamicBackground';
 
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
@@ -48,6 +49,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <DynamicBackground />
       <Header onQuoteClick={openQuotePopup} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}

@@ -74,11 +74,6 @@ function App() {
             </div>
           </div>
         </ScrollReveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Service 1 → Service 2 : diagonale "/" */}
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
@@ -128,11 +123,6 @@ function App() {
             </div>
           </div>
         </ScrollReveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Service 2 → Service 3 : diagonale "\" */}
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
@@ -181,11 +171,6 @@ function App() {
             </div>
           </div>
         </ScrollReveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Service 3 → Service 4 : diagonale "/" */}
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
@@ -235,11 +220,6 @@ function App() {
             </div>
           </div>
         </ScrollReveal>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         
         {/* Service 4 → Zone d'intervention : diagonale "\" */}
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />

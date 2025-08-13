@@ -28,7 +28,7 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll dynamic-bg-contact"
+      className="section relative py-8 lg:py-12 reveal-on-scroll tech-grid"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       {/* Éléments décoratifs futuristes */}

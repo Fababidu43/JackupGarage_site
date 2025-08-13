@@ -7,19 +7,9 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
-    // Effet de parallaxe pour l'image de fond
+    // Parallaxe pour les autres éléments (grille, formes)
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
-      
-      // Parallaxe pour l'image de fond du hero
-      const heroSection = document.getElementById('hero');
-      if (heroSection) {
-        const speed = 0.3; // Vitesse de parallaxe (plus c'est bas, plus c'est lent)
-        const yPos = scrolled * speed;
-        heroSection.style.backgroundPosition = `center ${yPos}px`;
-      }
-      
-      // Parallaxe pour les autres éléments
       const parallaxElements = document.querySelectorAll('.parallax-element');
       parallaxElements.forEach((element) => {
         const speed = 0.5;

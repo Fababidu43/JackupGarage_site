@@ -1,43 +1,63 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Car } from 'lucide-react';
+import { Car, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ScrollCarAnimation = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('');
-  const lineRef = useRef<HTMLDivElement>(null);
-  const carRef = useRef<HTMLDivElement>(null);
+  const [scrollDirection, setScrollDirection] = useState('down');
+  const [activeStage, setActiveStage] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const animationRef = useRef<HTMLDivElement>(null);
+
+  // Points d'étape alignés avec les sections principales
+  const stages = [
+    { id: 'hero', name: 'ACCUEIL', position: 5 },
+    { id: 'services', name: 'SERVICES', position: 20 },
+    { id: 'service-1', name: 'ENTRETIEN', position: 35 },
+    { id: 'service-2', name: 'EMBRAYAGE', position: 50 },
+    { id: 'service-3', name: 'DISTRIBUTION', position: 65 },
+    { id: 'area', name: 'ZONE', position: 80 },
+    { id: 'contact', name: 'CONTACT', position: 95 }
+  ];
 
   useEffect(() => {
+    // Vérifier si l'utilisateur préfère les animations réduites
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setIsVisible(false);
+      return;
+    }
+
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = Math.min(scrollTop / documentHeight, 1);
       
+      // Déterminer la direction du scroll
+      const direction = scrollTop > lastScrollY.current ? 'down' : 'up';
+      setScrollDirection(direction);
+      lastScrollY.current = scrollTop;
+      
       setScrollProgress(progress);
 
-      // Déterminer la section active
-      const sections = ['hero', 'services', 'faq', 'area', 'contact'];
-      let currentSection = '';
-      
-      sections.forEach(sectionId => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const sectionCenter = rect.top + rect.height / 2;
-          
-          // Si le centre de la section est proche du centre de l'écran
-          if (sectionCenter >= -200 && sectionCenter <= window.innerHeight + 200) {
-            currentSection = sectionId;
-          }
-        }
+      // Déterminer l'étape active basée sur la position de scroll
+      const currentStage = stages.findIndex((stage, index) => {
+        const nextStage = stages[index + 1];
+        const stageProgress = stage.position / 100;
+        const nextStageProgress = nextStage ? nextStage.position / 100 : 1;
+        
+        return progress >= stageProgress && progress < nextStageProgress;
       });
       
-      if (currentSection) {
-        setActiveSection(currentSection);
+      if (currentStage !== -1 && currentStage !== activeStage) {
+        setActiveStage(currentStage);
+        
+        // Déclencher l'effet de phares
+        triggerHeadlightEffect(stages[currentStage].id);
       }
     };
 
-    // Throttle scroll events for performance
+    // Throttle avec requestAnimationFrame pour performance
     let ticking = false;
     const throttledScroll = () => {
       if (!ticking) {
@@ -49,113 +69,126 @@ const ScrollCarAnimation = () => {
       }
     };
 
-    window.addEventListener('scroll', throttledScroll);
-    handleScroll(); // Initial call
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    handleScroll(); // Appel initial
 
     return () => window.removeEventListener('scroll', throttledScroll);
-  }, []);
+  }, [activeStage]);
 
-  // Calculer la position de la voiture
-  const carPosition = scrollProgress * 100;
+  const triggerHeadlightEffect = (sectionId: string) => {
+    // Créer un effet de halo lumineux sur la section
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Ajouter temporairement une classe pour l'effet lumineux
+      section.classList.add('headlight-illuminated');
+      
+      // Retirer l'effet après 2 secondes
+      setTimeout(() => {
+        section.classList.remove('headlight-illuminated');
+      }, 2000);
+    }
+  };
+
+  // Calculer la position de la voiture (5% à 95% de l'écran)
+  const carPosition = 5 + (scrollProgress * 90);
+
+  if (!isVisible) return null;
 
   return (
-    <div className="scroll-car-animation">
-      {/* Ligne de guidage */}
-      <div 
-        ref={lineRef}
-        className="fixed left-8 top-0 w-1 bg-gradient-to-b from-orange-500/30 via-orange-400/50 to-orange-500/30 z-30 pointer-events-none"
-        style={{ 
-          height: '100vh',
-          background: `linear-gradient(to bottom, 
-            rgba(255, 107, 53, 0.2) 0%, 
-            rgba(255, 107, 53, 0.6) 50%, 
-            rgba(255, 107, 53, 0.2) 100%)`
-        }}
-      >
-        {/* Points de connexion pour chaque section */}
-        <div className="absolute top-[10%] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg animate-pulse" />
-        <div className="absolute top-[30%] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg animate-pulse" />
-        <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg animate-pulse" />
-        <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg animate-pulse" />
-        <div className="absolute top-[90%] left-1/2 transform -translate-x-1/2 w-3 h-3 bg-orange-500 rounded-full shadow-lg animate-pulse" />
+    <div 
+      ref={animationRef}
+      className="fixed left-4 top-0 bottom-0 z-30 pointer-events-none hidden lg:block"
+      style={{ width: '60px' }}
+    >
+      {/* Ligne conductrice verticale */}
+      <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-orange-500/40 to-transparent">
+        {/* Points d'étape */}
+        {stages.map((stage, index) => (
+          <div
+            key={stage.id}
+            className={`absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full transition-all duration-300 ${
+              index === activeStage 
+                ? 'bg-orange-500 shadow-lg shadow-orange-500/50 scale-125' 
+                : 'bg-orange-500/60'
+            }`}
+            style={{ top: `${stage.position}%` }}
+          >
+            {/* Pulse effect pour l'étape active */}
+            {index === activeStage && (
+              <div className="absolute inset-0 rounded-full bg-orange-500 animate-ping opacity-75"></div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Labels des étapes */}
+      <div className="absolute left-12 top-0 bottom-0">
+        {stages.map((stage, index) => (
+          <div
+            key={`label-${stage.id}`}
+            className={`absolute text-xs font-tech transition-all duration-300 whitespace-nowrap ${
+              index === activeStage 
+                ? 'text-orange-400 font-semibold opacity-100' 
+                : 'text-gray-500 opacity-60'
+            }`}
+            style={{ 
+              top: `${stage.position}%`,
+              transform: 'translateY(-50%)'
+            }}
+          >
+            {stage.name}
+          </div>
+        ))}
       </div>
 
       {/* Voiture qui suit le scroll */}
       <div 
-        ref={carRef}
-        className="fixed left-4 z-40 pointer-events-none transition-all duration-100 ease-out"
+        className="absolute left-0 transition-all duration-100 ease-out"
         style={{ 
-          top: `${10 + (carPosition * 0.8)}%`,
-          transform: 'translateY(-50%)'
+          top: `${carPosition}%`,
+          transform: `translateY(-50%) ${scrollDirection === 'up' ? 'rotate(180deg)' : 'rotate(0deg)'}`
         }}
       >
         {/* Phares de la voiture */}
-        <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 w-16 h-8 bg-gradient-to-r from-yellow-300/60 to-transparent rounded-full blur-sm animate-pulse" />
-        <div className="absolute -right-12 top-1/2 transform -translate-y-1/2 w-24 h-12 bg-gradient-to-r from-yellow-200/40 to-transparent rounded-full blur-md" />
-        
+        <div className={`absolute transition-all duration-200 ${
+          scrollDirection === 'down' 
+            ? 'right-0 top-1/2 transform translate-x-full -translate-y-1/2' 
+            : 'left-0 top-1/2 transform -translate-x-full -translate-y-1/2'
+        }`}>
+          {/* Faisceau principal */}
+          <div className="w-16 h-6 bg-gradient-to-r from-yellow-300/60 to-transparent rounded-full blur-sm"></div>
+          {/* Faisceau étendu */}
+          <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-24 h-10 bg-gradient-to-r from-yellow-200/30 to-transparent rounded-full blur-md"></div>
+        </div>
+
         {/* Corps de la voiture */}
-        <div className="relative bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg p-3 shadow-xl border-2 border-orange-400/50 hover:scale-110 transition-transform duration-200">
-          <Car className="w-6 h-6 text-white transform rotate-90" />
+        <div className="relative bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg p-2 shadow-xl border border-orange-400/50 hover:scale-110 transition-transform duration-200">
+          <Car className="w-5 h-5 text-white" />
           
-          {/* Effet de mouvement */}
-          <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-orange-300 rounded-full animate-bounce" />
-          <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-orange-300 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+          {/* Indicateur de direction */}
+          <div className="absolute -top-1 -right-1 w-3 h-3 bg-orange-300 rounded-full flex items-center justify-center">
+            {scrollDirection === 'down' ? (
+              <ChevronDown className="w-2 h-2 text-orange-800" />
+            ) : (
+              <ChevronUp className="w-2 h-2 text-orange-800" />
+            )}
+          </div>
         </div>
 
         {/* Traînée de mouvement */}
-        <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 w-4 h-1 bg-gradient-to-l from-orange-400/60 to-transparent rounded-full" />
-        <div className="absolute top-1/2 -left-4 transform -translate-y-1/2 w-2 h-0.5 bg-gradient-to-l from-orange-300/40 to-transparent rounded-full" />
+        <div className={`absolute top-1/2 transform -translate-y-1/2 transition-all duration-200 ${
+          scrollDirection === 'down' 
+            ? '-left-4 w-3 h-0.5 bg-gradient-to-r from-orange-400/60 to-transparent' 
+            : '-right-4 w-3 h-0.5 bg-gradient-to-l from-orange-400/60 to-transparent'
+        } rounded-full`}></div>
       </div>
 
-      {/* Effets d'illumination pour chaque section */}
-      {activeSection && (
-        <div className="fixed inset-0 pointer-events-none z-20">
-          {/* Spotlight effect */}
-          <div 
-            className="absolute inset-0 transition-all duration-500 ease-out"
-            style={{
-              background: `radial-gradient(circle at 50% 50%, 
-                rgba(255, 107, 53, 0.1) 0%, 
-                rgba(255, 107, 53, 0.05) 30%, 
-                transparent 60%)`
-            }}
-          />
-          
-          {/* Particules lumineuses */}
-          <div className="absolute inset-0">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-orange-400 rounded-full animate-ping"
-                style={{
-                  left: `${20 + Math.random() * 60}%`,
-                  top: `${20 + Math.random() * 60}%`,
-                  animationDelay: `${i * 0.2}s`,
-                  animationDuration: '2s'
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Indicateur de progression */}
-      <div className="fixed left-2 top-1/2 transform -translate-y-1/2 z-30 pointer-events-none">
-        <div className="w-1 h-32 bg-gray-300/30 rounded-full overflow-hidden">
-          <div 
-            className="w-full bg-gradient-to-t from-orange-500 to-orange-400 rounded-full transition-all duration-100 ease-out"
-            style={{ height: `${scrollProgress * 100}%` }}
-          />
-        </div>
-      </div>
-
-      {/* Labels des sections (optionnel) */}
-      <div className="fixed left-16 top-0 z-25 pointer-events-none text-xs font-tech text-white/60">
-        <div className="absolute top-[10%] transform -translate-y-1/2 opacity-60">ACCUEIL</div>
-        <div className="absolute top-[30%] transform -translate-y-1/2 opacity-60">SERVICES</div>
-        <div className="absolute top-[50%] transform -translate-y-1/2 opacity-60">FAQ</div>
-        <div className="absolute top-[70%] transform -translate-y-1/2 opacity-60">ZONE</div>
-        <div className="absolute top-[90%] transform -translate-y-1/2 opacity-60">CONTACT</div>
+      {/* Barre de progression */}
+      <div className="absolute right-0 top-1/4 bottom-1/4 w-1 bg-gray-300/20 rounded-full overflow-hidden">
+        <div 
+          className="w-full bg-gradient-to-t from-orange-500 to-orange-400 rounded-full transition-all duration-100 ease-out"
+          style={{ height: `${scrollProgress * 100}%` }}
+        />
       </div>
     </div>
   );

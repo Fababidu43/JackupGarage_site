@@ -28,25 +28,9 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-12 lg:py-16 overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #F6F6F6 0%, #F0F1F3 25%, #FAFBFC 50%, #F0F1F3 75%, #F6F6F6 100%)' }}
+      className="section relative py-12 lg:py-16"
+      style={{ background: '#F6F6F6' }}
     >
-      {/* Éléments décoratifs subtils */}
-      <div className="absolute inset-0 opacity-4">
-        <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-orange-200 to-red-200 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-32 left-16 w-28 h-28 bg-gradient-to-tl from-orange-100 to-yellow-100 rounded-full blur-xl"></div>
-        <div className="absolute top-1/2 right-1/3 w-20 h-20 bg-gradient-to-r from-red-100 to-orange-100 rounded-full blur-lg"></div>
-      </div>
-      
-      {/* Motif géométrique subtil */}
-      <div className="absolute inset-0 opacity-2">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 30% 40%, rgba(222,81,33,0.1) 1px, transparent 1px),
-                           radial-gradient(circle at 70% 60%, rgba(222,81,33,0.05) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px, 120px 120px'
-        }}></div>
-      </div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase">

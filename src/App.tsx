@@ -28,13 +28,7 @@ function App() {
         <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #DE5121 0%, #E85D2A 50%, #DE5121 100%)' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-10 right-10 w-24 h-24 bg-white rounded-full blur-xl"></div>
-            <div className="absolute bottom-20 left-20 w-32 h-32 bg-white rounded-full blur-2xl"></div>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent"></div>
+        <div className="section section--entretien py-8 lg:py-12" style={{ background: '#DE5121' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -74,12 +68,7 @@ function App() {
         <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 50%, #FFFFFF 100%)' }}>
-          {/* Éléments décoratifs subtils */}
-          <div className="absolute inset-0 opacity-3">
-            <div className="absolute top-16 left-16 w-20 h-20 bg-gradient-to-br from-orange-200 to-red-200 rounded-full blur-xl"></div>
-            <div className="absolute bottom-16 right-16 w-28 h-28 bg-gradient-to-tl from-orange-100 to-yellow-100 rounded-full blur-2xl"></div>
-          </div>
+        <div className="section py-8 lg:py-12" style={{ background: '#FFFFFF' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -120,13 +109,7 @@ function App() {
         <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #DE5121 0%, #E85D2A 50%, #DE5121 100%)' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-10 w-28 h-28 bg-white rounded-full blur-xl"></div>
-            <div className="absolute bottom-10 right-20 w-20 h-20 bg-white rounded-full blur-lg"></div>
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-tl from-transparent via-white/5 to-transparent"></div>
+        <div className="section py-8 lg:py-12" style={{ background: '#DE5121' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -166,12 +149,7 @@ function App() {
         <DiagonalSlash topColor="#DE5121" bottomColor="#F6F6F6" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F6F6F6 0%, #F0F1F3 50%, #F6F6F6 100%)' }}>
-          {/* Éléments décoratifs subtils */}
-          <div className="absolute inset-0 opacity-4">
-            <div className="absolute top-12 right-12 w-24 h-24 bg-gradient-to-br from-orange-200 to-red-200 rounded-full blur-xl"></div>
-            <div className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-tl from-orange-100 to-yellow-100 rounded-full blur-2xl"></div>
-          </div>
+        <div className="section py-8 lg:py-12" style={{ background: '#F6F6F6' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">

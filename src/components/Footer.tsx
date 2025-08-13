@@ -4,17 +4,8 @@ import { Facebook, Instagram, Phone, Mail, Wrench } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className="bg-black text-white py-12 relative overflow-hidden">
-      {/* Gradient overlay pour plus de profondeur */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-black to-gray-900"></div>
-      
-      {/* Éléments décoratifs */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-20 w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 bg-gradient-to-tl from-orange-400 to-yellow-400 rounded-full blur-lg"></div>
-      </div>
-      
       {/* Logo en filigrane */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-3">
+      <div className="absolute inset-0 flex items-center justify-center opacity-5">
         <Wrench className="w-48 h-48 text-white transform rotate-12" />
       </div>
       

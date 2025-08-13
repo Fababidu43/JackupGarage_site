@@ -4,27 +4,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        orange: {
-          500: '#DE5121',
-          600: '#C9471D',
+        base: {
+          900: '#0B0B0F',
+          800: '#111217',
+          700: '#171923',
         },
-        gray: {
-          50: '#F6F6F6',
-          900: '#0F1222',
-          700: '#5B6573',
+        text: {
+          primary: '#E6E6E9',
+          muted: '#A9ABB3',
+        },
+        brand: {
+          400: '#FF8A1E',
+          500: '#FF6A00',
+          600: '#E35F00',
         }
       },
       fontFamily: {
-        sans: ['Source Sans Pro', 'Helvetica', 'sans-serif'],
+        display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'diagonal-appear': 'diagonalAppear 0.6s ease-out forwards',
-        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
-        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+      boxShadow: {
+        glow: '0 0 40px rgba(255, 106, 0, 0.35)',
       },
       keyframes: {
+        bgpan: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '200% 50%' }
+        },
         fadeInUp: {
           '0%': {
             opacity: '0',
@@ -34,45 +40,11 @@ export default {
             opacity: '1',
             transform: 'translateY(0)'
           }
-        },
-        fadeIn: {
-          '0%': {
-            opacity: '0'
-          },
-          '100%': {
-            opacity: '1'
-          }
-        },
-        diagonalAppear: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(10px)'
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0)'
-          }
-        },
-        slideInLeft: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(-30px)'
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0)'
-          }
-        },
-        slideInRight: {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(30px)'
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0)'
-          }
         }
+      },
+      animation: {
+        bgpan: 'bgpan 12s linear infinite',
+        fadeInUp: 'fadeInUp 0.6s ease-out forwards',
       }
     },
   },

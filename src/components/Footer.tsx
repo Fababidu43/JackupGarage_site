@@ -1,121 +1,126 @@
 import React from 'react';
-import { Facebook, Instagram, Phone, Mail, Wrench } from 'lucide-react';
+import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 relative overflow-hidden tech-grid">
-      {/* Logo en filigrane */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-3">
-        <Wrench className="w-48 h-48 text-orange-500 transform rotate-12" />
-      </div>
+    <footer className="bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20">
+      {/* Grille tech subtile */}
+      <div className="absolute inset-0 tech-grid opacity-20"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Jack Up Garage */}
-          <div>
-            <div className="flex items-baseline space-x-5 mb-6">
-              <div 
-                className="w-32 h-24 rounded-lg flex items-center justify-center bg-white/95 border-2 border-orange-500/30 p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 flex-shrink-0 hover-scale shadow-lg"
-                role="button"
-                aria-label="Jack Up Garage - Retour à l'accueil"
-                onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <img 
-                  src="/src/logo.png" 
-                  alt="Jack Up Garage" 
-                  className="max-h-20 w-auto object-contain hover-scale"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white tracking-wide uppercase font-futuristic mb-1">Jack Up Garage</h3>
-                <p className="text-orange-400 font-medium tracking-wide text-base uppercase font-tech">Mécanicien à domicile</p>
-              </div>
+        {/* Layout horizontal compact */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+          
+          {/* Logo + Nom compact */}
+          <div className="flex items-center space-x-3">
+            <div 
+              className="w-12 h-12 rounded-lg flex items-center justify-center bg-white/95 border border-orange-500/30 p-1 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale"
+              onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <img 
+                src="/src/logo.png" 
+                alt="Jack Up Garage" 
+                className="max-h-10 w-auto object-contain"
+              />
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed font-light text-base font-tech">
-              Service professionnel de mécanique automobile à domicile dans la Haute-Loire (43) 
-              et la Loire (42). Intervention rapide et devis gratuit.
-            </p>
-            <div className="flex space-x-3">
+            <div>
+              <h3 className="text-lg font-bold text-white font-futuristic">Jack Up Garage</h3>
+              <p className="text-orange-400 text-sm font-tech">Mécanicien à domicile</p>
+            </div>
+          </div>
+
+          {/* Navigation horizontale */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {[
+              { name: 'Accueil', href: '#hero' },
+              { name: 'Services', href: '#services' },
+              { name: 'Zone', href: '#area' },
+              { name: 'Contact', href: '#contact' }
+            ].map((link) => (
+              <a 
+                key={link.name}
+                href={link.href}
+                className="text-gray-400 hover:text-orange-400 text-sm font-tech uppercase tracking-wide underline-animate transition-colors hover-lift"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          {/* Contact + Réseaux sociaux */}
+          <div className="flex items-center space-x-4">
+            {/* Contact rapide */}
+            <div className="flex items-center space-x-3">
+              <a 
+                href="tel:+33123456789"
+                className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
+              >
+                <Phone className="w-4 h-4 mr-1" />
+                <span className="text-sm font-tech">01 23 45 67 89</span>
+              </a>
+              <div className="w-1 h-4 bg-gray-700"></div>
+              <a 
+                href="mailto:contact@jackupgarage.fr"
+                className="flex items-center text-gray-400 hover:text-orange-400 transition-colors hover-lift"
+              >
+                <Mail className="w-4 h-4 mr-1" />
+                <span className="text-sm font-tech">Email</span>
+              </a>
+            </div>
+
+            {/* Séparateur */}
+            <div className="w-1 h-6 bg-gray-700"></div>
+
+            {/* Réseaux sociaux */}
+            <div className="flex space-x-2">
               <a 
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
+                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-4 h-4" />
               </a>
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
+                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-4 h-4" />
               </a>
             </div>
           </div>
-
-          {/* Navigation */}
-          <div>
-            <h4 className="text-lg font-bold text-white mb-5 tracking-wide uppercase font-futuristic">Navigation</h4>
-            <ul className="space-y-3">
-              {[
-                { name: 'Accueil', href: '#hero' },
-                { name: 'Services', href: '#services' },
-                { name: 'Zone d\'intervention', href: '#area' },
-                { name: 'Contact', href: '#contact' }
-              ].map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href}
-                    className="text-gray-400 hover:text-orange-400 tracking-wide text-base font-light uppercase font-tech underline-animate transition-colors hover-lift"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-lg font-bold text-white mb-5 tracking-wide uppercase font-futuristic hover-glow-text">Contact</h4>
-            <div className="space-y-4">
-              <div className="flex items-center text-gray-400">
-                <Phone className="w-5 h-5 mr-3 text-orange-400" />
-                <a 
-                  href="tel:+33123456789"
-                  className="font-light text-base hover:text-orange-400 transition-colors font-tech hover-lift"
-                >
-                  01 23 45 67 89
-                </a>
-              </div>
-              <div className="flex items-center text-gray-400">
-                <Mail className="w-5 h-5 mr-3 text-orange-400" />
-                <a 
-                  href="mailto:contact@jackupgarage.fr"
-                  className="font-light text-base hover:text-orange-400 transition-colors font-tech hover-lift"
-                >
-                  contact@jackupgarage.fr
-                </a>
-              </div>
-            </div>
-            <div className="mt-5 p-4 bg-gray-900 rounded-lg border border-orange-500/20 border-glow">
-              <p className="text-sm text-gray-300 font-light font-tech">
-                <span className="font-bold tracking-wide uppercase text-orange-400">Réponse rapide :</span><br />
-                Sous 12h par téléphone ou mail
-              </p>
-            </div>
-          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-10 pt-8 text-center">
-          <p className="text-gray-400 tracking-wide text-sm font-light uppercase font-tech">
-            © 2024 Jack Up Garage. Tous droits réservés.
+        {/* Version mobile - Navigation */}
+        <nav className="md:hidden flex justify-center space-x-4 mt-4 pt-4 border-t border-gray-800">
+          {[
+            { name: 'Accueil', href: '#hero' },
+            { name: 'Services', href: '#services' },
+            { name: 'Zone', href: '#area' },
+            { name: 'Contact', href: '#contact' }
+          ].map((link) => (
+            <a 
+              key={link.name}
+              href={link.href}
+              className="text-gray-400 hover:text-orange-400 text-xs font-tech uppercase tracking-wide underline-animate transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* Copyright minimaliste */}
+        <div className="text-center mt-4 pt-3 border-t border-gray-800">
+          <p className="text-gray-500 text-xs font-tech">
+            © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>
         </div>
       </div>
+
+      {/* Accent orange subtil en bas */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent"></div>
     </footer>
   );
 };

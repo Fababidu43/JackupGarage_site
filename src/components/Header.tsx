@@ -179,53 +179,54 @@ const Header = () => {
             />
             
             {/* Menu Panel */}
-            <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-black/90 backdrop-blur-md 
-              border-l border-orange-500/30 z-40 md:hidden transform transition-transform duration-300 ease-out">
+            <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-black/95 backdrop-blur-md 
+              border-l border-orange-500/30 z-40 md:hidden transform transition-transform duration-300 ease-out
+              safe-area-inset-right safe-area-inset-top">
               
               {/* Header du menu mobile */}
-              <div className="flex items-center justify-between p-6 border-b border-orange-500/20">
+              <div className="flex items-center justify-between p-4 sm:p-6 pt-safe border-b border-orange-500/20">
                 <h3 className="text-lg font-bold text-white font-futuristic uppercase tracking-wide">Menu</h3>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-white hover:text-orange-400 transition-colors duration-200
+                  className="p-3 text-white hover:text-orange-400 transition-colors duration-200
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 rounded"
                   aria-label="Fermer le menu"
                 >
-                  <X size={20} />
+                  <X size={24} />
                 </button>
               </div>
               
               {/* Navigation Links */}
-              <nav className="py-6 px-6 space-y-2">
+              <nav className="py-4 px-4 sm:py-6 sm:px-6 space-y-1 overflow-y-auto max-h-[60vh]">
                 {navigationItems.map((item) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center px-4 py-4 text-left rounded-lg transition-all duration-200
+                    className={`w-full flex items-center px-4 py-5 text-left rounded-lg transition-all duration-200
                       focus:outline-none focus:ring-2 focus:ring-orange-500/50 font-tech text-base
                       ${activeSection === item.id 
                         ? 'text-orange-400 bg-orange-500/10 border-l-2 border-orange-500' 
                         : 'text-white/90 hover:text-orange-400 hover:bg-orange-500/5'
                       }`}
-                    style={{ minHeight: '48px' }}
+                    style={{ minHeight: '56px' }}
                   >
-                    <span className="mr-4 text-lg">{item.icon}</span>
-                    {item.name}
+                    <span className="mr-4 text-xl">{item.icon}</span>
+                    <span className="text-lg">{item.name}</span>
                   </button>
                 ))}
               </nav>
               
               {/* CTA Mobile */}
-              <div className="absolute bottom-6 left-6 right-6">
+              <div className="absolute bottom-4 left-4 right-4 pb-safe">
                 <a
                   href="tel:+33123456789"
-                  className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 
+                  className="w-full flex items-center justify-center px-6 py-5 bg-gradient-to-r from-orange-500 to-orange-600 
                     text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105
                     hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50
-                    font-tech uppercase tracking-wide"
-                  style={{ minHeight: '48px' }}
+                    font-tech uppercase tracking-wide text-lg"
+                  style={{ minHeight: '60px' }}
                 >
-                  <span className="mr-3 text-lg">📱</span>
+                  <span className="mr-3 text-xl">📱</span>
                   Appeler Maintenant
                 </a>
               </div>

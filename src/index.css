@@ -65,11 +65,11 @@
   }
   
   .diag--slash::before {
-    clip-path: polygon(-5% -2%, 105% -2%, -5% 105%);
+    clip-path: polygon(-8% -3%, 108% -3%, -8% 108%);
   }
 
   .diag--backslash::before {
-    clip-path: polygon(-5% -2%, 105% -2%, 105% 105%);
+    clip-path: polygon(-8% -3%, 108% -3%, 108% 108%);
   }
 }
 
@@ -83,11 +83,11 @@
   }
   
   .diag--slash::before {
-    clip-path: polygon(-8% -3%, 108% -3%, -8% 108%);
+    clip-path: polygon(-12% -4%, 112% -4%, -12% 112%);
   }
 
   .diag--backslash::before {
-    clip-path: polygon(-8% -3%, 108% -3%, 108% 108%);
+    clip-path: polygon(-12% -4%, 112% -4%, 112% 112%);
   }
 }
 
@@ -518,6 +518,17 @@
   padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 }
 
+.pt-safe {
+  padding-top: calc(1rem + env(safe-area-inset-top));
+}
+
+.safe-area-inset-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-area-inset-top {
+  padding-top: env(safe-area-inset-top);
+}
 /* === CORRECTION FOOTER MOBILE === */
 @supports (-webkit-touch-callout: none) {
   /* Styles spécifiques iOS */

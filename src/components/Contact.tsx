@@ -28,7 +28,7 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-12 lg:py-16"
+      className="section relative py-12 lg:py-16 reveal-on-scroll"
       style={{ background: '#F8F9FA' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

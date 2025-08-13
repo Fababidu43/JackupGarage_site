@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 const Services = () => {
   return (
-    <section id="services" className="relative">
+    <section id="services" className="relative reveal-on-scroll">
       {/* Titre Services sur fond blanc */}
       <div className="section py-12 lg:py-16 scan-lines" style={{ background: '#F8F9FA' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

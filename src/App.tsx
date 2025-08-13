@@ -45,9 +45,7 @@ function App() {
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
         
         {/* Services intro (blanc #FFFFFF) */}
-        <div className="reveal-on-scroll">
-          <Services />
-        </div>
+        <Services />
         
         {/* Services → Service 1 : diagonale "\" */}
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
@@ -223,17 +221,13 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <div className="reveal-on-scroll">
-          <ServiceArea />
-        </div>
+        <ServiceArea />
         
         {/* Zone → Contact : diagonale "/" */}
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
         
         {/* Contact (clair #F6F6F6) */}
-        <div className="reveal-on-scroll">
-          <Contact />
-        </div>
+        <Contact />
       </main>
       <Footer />
       <MobileCTA />

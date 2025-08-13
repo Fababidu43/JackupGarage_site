@@ -337,6 +337,16 @@
   transform: translateY(0);
 }
 
+/* Animation spéciale pour le footer */
+.footer-reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.footer-reveal.revealed {
+  opacity: 1;
+}
+
 /* Effet de slide latéral */
 .slide-in-left {
   opacity: 0;

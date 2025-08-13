@@ -1,9 +1,36 @@
 import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    if (footerRef.current) {
+      observer.observe(footerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <footer className="bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 reveal-on-scroll">
+    <footer 
+      ref={footerRef}
+      className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 footer-reveal ${isVisible ? 'revealed' : ''}`}
+    >
       {/* Grille tech subtile */}
       <div className="absolute inset-0 tech-grid opacity-20"></div>
       

@@ -36,38 +36,63 @@ const Header = () => {
             className="flex items-center cursor-pointer glow-hover"
             onClick={() => scrollToSection('hero')}
           >
-            <img 
-              src="/src/logo.png" 
-              alt="Jack Up Garage" 
-              className="h-14 w-auto drop-shadow-lg filter brightness-110 hover-scale"
-            />
+            <div className="w-16 h-12 bg-white/95 border-2 border-orange-500/30 rounded-lg flex items-center justify-center p-2 hover:bg-white hover:border-orange-500/50 transition-all duration-300 shadow-lg hover-scale">
+              <img 
+                src="/src/logo.png" 
+                alt="Jack Up Garage" 
+                className="max-h-8 w-auto object-contain"
+              />
+            </div>
           </div>
 
-          {/* Desktop Navigation - Style Solid State */}
-          <nav className="hidden md:flex items-center space-x-8 mr-4">
-            {[
-              { name: 'Accueil', id: 'hero' },
-              { name: 'Services', id: 'services' },
-              { name: 'Zone', id: 'area' },
-              { name: 'Contact', id: 'contact' }
-            ].map((item) => (
+          {/* Desktop Navigation - Menu Déroulant */}
+          <div className="hidden md:flex items-center relative">
+            <div className="relative">
               <button
-                key={item.name}
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-white/90 hover:text-orange-400 tracking-wide uppercase underline-animate font-tech transition-colors hover-lift"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="flex items-center px-6 py-3 bg-orange-500/10 border border-orange-500/30 rounded-lg text-white/90 hover:text-orange-400 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300 font-tech uppercase tracking-wide text-sm font-medium glow-hover"
               >
-                {item.name}
+                Menu
+                <div className={`ml-2 transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </button>
-            ))}
-            
-            {/* Bouton Appeler dans le header */}
-            <a
-              href="tel:+33123456789"
-              className="ml-6 px-4 py-2 btn-primary rounded-lg text-sm font-tech glow-hover hover-scale"
-            >
-              Appeler
-            </a>
-          </nav>
+              
+              {/* Menu Déroulant Desktop */}
+              {isMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 bg-black/95 backdrop-blur-sm border border-orange-500/30 rounded-lg shadow-2xl overflow-hidden z-50">
+                  <div className="py-2">
+                    {[
+                      { name: 'Accueil', id: 'hero', icon: '🏠' },
+                      { name: 'Services', id: 'services', icon: '🔧' },
+                      { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
+                      { name: 'Contact', id: 'contact', icon: '📞' }
+                    ].map((item) => (
+                      <button
+                        key={item.name}
+                        onClick={() => scrollToSection(item.id)}
+                        className="w-full flex items-center px-4 py-3 text-left text-white/90 hover:text-orange-400 hover:bg-orange-500/10 transition-all duration-200 font-tech text-sm hover-lift"
+                      >
+                        <span className="mr-3 text-base">{item.icon}</span>
+                        {item.name}
+                      </button>
+                    ))}
+                    <div className="border-t border-orange-500/20 mt-2 pt-2">
+                      <a
+                        href="tel:+33123456789"
+                        className="w-full flex items-center px-4 py-3 text-left btn-primary rounded-none hover:bg-orange-600 transition-all duration-200 font-tech text-sm font-medium"
+                      >
+                        <span className="mr-3 text-base">📱</span>
+                        Appeler Maintenant
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* Mobile Menu Button */}
           <button

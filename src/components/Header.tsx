@@ -36,22 +36,11 @@ const Header = () => {
             className="flex items-center cursor-pointer glow-hover"
             onClick={() => scrollToSection('hero')}
           >
-            <div className="relative group">
-              {/* Halo lumineux en arrière-plan */}
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-orange-400/10 rounded-xl blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 scale-110"></div>
-              
-              {/* Conteneur du logo avec bordure subtile */}
-              <div className="relative bg-gradient-to-br from-orange-500/5 to-transparent border border-orange-500/10 rounded-lg p-2 backdrop-blur-sm transition-all duration-300 group-hover:border-orange-500/30 group-hover:bg-orange-500/10">
-                <img 
-                  src="/src/logo.png" 
-                  alt="Jack Up Garage" 
-                  className="h-12 w-auto filter brightness-110 group-hover:brightness-125 transition-all duration-300 drop-shadow-md group-hover:drop-shadow-xl"
-                />
-              </div>
-              
-              {/* Reflet subtil */}
-              <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent rounded-t-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+            <img 
+              src="/src/logo.png" 
+              alt="Jack Up Garage" 
+              className="h-14 w-auto drop-shadow-lg filter brightness-110 hover-scale"
+            />
           </div>
 
           {/* Desktop Navigation - Style Solid State */}

@@ -58,7 +58,7 @@ function App() {
                   <img 
                     src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Vidange moteur - Entretien automobile" 
-                    className="w-full h-full object-cover rounded-lg opacity-90 hover:opacity-100 transition-opacity duration-300 fade-in-on-hover" 
+                    className="w-full h-full object-cover rounded-lg" 
                   />
                 </div>
               </div>
@@ -101,7 +101,7 @@ function App() {
                   <img 
                     src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Kit embrayage et volant moteur" 
-                    className="w-full h-full object-cover rounded-lg opacity-95 hover:opacity-100 transition-opacity duration-300 fade-in-on-hover" 
+                    className="w-full h-full object-cover rounded-lg" 
                   />
                 </div>
               </div>
@@ -143,7 +143,7 @@ function App() {
                   <img 
                     src="https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Kit de distribution - Courroie et galets" 
-                    className="w-full h-full object-cover rounded-lg opacity-90 hover:opacity-100 transition-opacity duration-300 fade-in-on-hover" 
+                    className="w-full h-full object-cover rounded-lg" 
                   />
                 </div>
               </div>
@@ -186,7 +186,7 @@ function App() {
                   <img 
                     src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Amortisseurs et suspensions automobile" 
-                    className="w-full h-full object-cover rounded-lg opacity-95 hover:opacity-100 transition-opacity duration-300 fade-in-on-hover" 
+                    className="w-full h-full object-cover rounded-lg" 
                   />
                 </div>
               </div>

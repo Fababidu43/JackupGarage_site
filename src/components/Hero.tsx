@@ -16,13 +16,9 @@ const Hero = () => {
       style={{ background: '#DE5121' }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        <div className="flex justify-center mb-6">
-          <img 
-            src="/src/logo.png" 
-            alt="Jack Up Garage" 
-            className="h-24 sm:h-32 md:h-40 lg:h-48 w-auto drop-shadow-2xl"
-          />
-        </div>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase">
+          Jack Up Garage
+        </h1>
         
         <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8 tracking-wide uppercase">
           Mécanicien à domicile

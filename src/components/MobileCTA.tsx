@@ -7,7 +7,7 @@ const MobileCTA = () => {
       <div className="flex">
         <a
           href="tel:+33123456789"
-          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm font-tech"
+          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm font-tech hover-scale"
           style={{ background: '#FF6B35' }}
         >
           <Phone className="w-4 h-4 mr-2" />
@@ -15,7 +15,7 @@ const MobileCTA = () => {
         </a>
         <a
           href="#contact"
-          className="flex-1 flex items-center justify-center py-4 bg-gray-900 text-white font-bold tracking-wide text-sm font-tech"
+          className="flex-1 flex items-center justify-center py-4 bg-gray-900 text-white font-bold tracking-wide text-sm font-tech hover-scale"
         >
           <FileText className="w-4 h-4 mr-2" />
           DEVIS

@@ -22,29 +22,29 @@ const Hero = () => {
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow">
-          Mécanicien à domicile
+          <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-4 tracking-wide uppercase font-futuristic">
+        <div className="text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-4 tracking-wide uppercase font-futuristic pulse-subtle">
           Haute-Loire & Loire (43–42)
         </div>
         
         <p className="text-lg sm:text-xl text-white/80 font-light mb-8 tracking-wide font-tech">
           Entretien, freins, embrayage, distribution, suspensions.<br />
-          <span className="text-orange-300">Nous venons chez vous.</span>
+          <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover"
+            className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale"
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 btn-secondary rounded-lg text-lg font-tech glow-hover"
+            className="inline-flex items-center px-8 py-4 btn-secondary rounded-lg text-lg font-tech glow-hover hover-scale"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler

@@ -33,10 +33,10 @@ const Contact = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic hover-glow-text">
             Contact
           </h2>
-          <p className="text-lg font-semibold uppercase font-tech" style={{ color: '#FF6B35' }}>
+          <p className="text-lg font-semibold uppercase font-tech pulse-subtle" style={{ color: '#FF6B35' }}>
             Réponse sous 12h par téléphone ou mail
           </p>
         </div>
@@ -44,16 +44,16 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Info */}
           <div className="space-y-6">
-            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
+            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic">Téléphone</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Téléphone</h3>
                   <a 
                     href="tel:+33123456789"
-                    className="font-semibold hover:opacity-80 font-tech"
+                    className="font-semibold hover:opacity-80 font-tech hover-lift"
                     style={{ color: '#FF6B35' }}
                   >
                     01 23 45 67 89
@@ -62,16 +62,16 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
+            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic">Email</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Email</h3>
                   <a 
                     href="mailto:contact@jackupgarage.fr"
-                    className="font-semibold hover:opacity-80 font-tech"
+                    className="font-semibold hover:opacity-80 font-tech hover-lift"
                     style={{ color: '#FF6B35' }}
                   >
                     contact@jackupgarage.fr
@@ -80,13 +80,13 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
+            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic">Horaires</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Horaires</h3>
                   <p className="text-gray-700 font-light text-sm font-tech">
                     Lun - Sam: 8h - 18h<br />
                     Dimanche: Sur demande
@@ -98,7 +98,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10">
+            <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 hover-scale border-glow">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
@@ -111,7 +111,7 @@ const Contact = () => {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   />
                 </div>
                 <div>
@@ -125,7 +125,7 @@ const Contact = () => {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@ const Contact = () => {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                 />
               </div>
 
@@ -157,7 +157,7 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   />
                 </div>
                 <div>
@@ -171,7 +171,7 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   />
                 </div>
               </div>
@@ -187,7 +187,7 @@ const Contact = () => {
                     name="registration"
                     value={formData.registration}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   />
                 </div>
                 <div>
@@ -200,7 +200,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
                   >
                     <option value="">Sélectionner</option>
                     <option value="entretien">Entretien / Vidange</option>
@@ -223,7 +223,7 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none resize-none rounded font-light font-tech form-input glow-focus"
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none resize-none rounded font-light font-tech form-input glow-focus border-glow"
                   placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
               </div>
@@ -244,7 +244,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover"
+                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale"
               >
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande

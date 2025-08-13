@@ -89,6 +89,58 @@
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
+/* === NOUVEAUX DYNAMISMES SOBRES === */
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
+}
+
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow-text {
+  transition: text-shadow 0.3s ease;
+}
+
+.hover-glow-text:hover {
+  text-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+}
+
+.pulse-subtle {
+  animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.fade-in-on-hover {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.fade-in-on-hover:hover {
+  opacity: 1;
+}
+
+.border-glow {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-glow:hover {
+  border-color: var(--orange-primary);
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.2);
+}
+
 .glow-focus:focus {
   outline: 2px solid var(--orange-primary);
   outline-offset: 2px;

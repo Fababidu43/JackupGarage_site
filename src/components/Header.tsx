@@ -39,7 +39,7 @@ const Header = () => {
             <img 
               src="/src/logo.png" 
               alt="Jack Up Garage" 
-              className="h-14 w-auto drop-shadow-lg filter brightness-110"
+              className="h-14 w-auto drop-shadow-lg filter brightness-110 hover-scale"
             />
           </div>
 
@@ -54,7 +54,7 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-white/90 hover:text-orange-400 tracking-wide uppercase underline-animate font-tech transition-colors"
+                className="text-sm font-medium text-white/90 hover:text-orange-400 tracking-wide uppercase underline-animate font-tech transition-colors hover-lift"
               >
                 {item.name}
               </button>
@@ -63,7 +63,7 @@ const Header = () => {
             {/* Bouton Appeler dans le header */}
             <a
               href="tel:+33123456789"
-              className="ml-6 px-4 py-2 btn-primary rounded-lg text-sm font-tech glow-hover"
+              className="ml-6 px-4 py-2 btn-primary rounded-lg text-sm font-tech glow-hover hover-scale"
             >
               Appeler
             </a>
@@ -91,14 +91,14 @@ const Header = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-white/90 hover:text-orange-400 font-medium tracking-wide uppercase text-sm font-tech transition-colors"
+                  className="block w-full text-left px-4 py-2 text-white/90 hover:text-orange-400 font-medium tracking-wide uppercase text-sm font-tech transition-colors hover-lift"
                 >
                   {item.name}
                 </button>
               ))}
               <a
                 href="tel:+33123456789"
-                className="block mx-4 mt-4 px-4 py-2 btn-primary rounded-lg text-sm font-tech text-center"
+                className="block mx-4 mt-4 px-4 py-2 btn-primary rounded-lg text-sm font-tech text-center hover-scale"
               >
                 Appeler
               </a>

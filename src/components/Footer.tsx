@@ -40,7 +40,7 @@ const Footer = () => {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover"
+                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -48,7 +48,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover"
+                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -68,7 +68,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-gray-400 hover:text-orange-400 tracking-wide text-base font-light uppercase font-tech underline-animate transition-colors"
+                    className="text-gray-400 hover:text-orange-400 tracking-wide text-base font-light uppercase font-tech underline-animate transition-colors hover-lift"
                   >
                     {link.name}
                   </a>
@@ -79,13 +79,13 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-bold text-white mb-5 tracking-wide uppercase font-futuristic">Contact</h4>
+            <h4 className="text-lg font-bold text-white mb-5 tracking-wide uppercase font-futuristic hover-glow-text">Contact</h4>
             <div className="space-y-4">
               <div className="flex items-center text-gray-400">
                 <Phone className="w-5 h-5 mr-3 text-orange-400" />
                 <a 
                   href="tel:+33123456789"
-                  className="font-light text-base hover:text-orange-400 transition-colors font-tech"
+                  className="font-light text-base hover:text-orange-400 transition-colors font-tech hover-lift"
                 >
                   01 23 45 67 89
                 </a>
@@ -94,13 +94,13 @@ const Footer = () => {
                 <Mail className="w-5 h-5 mr-3 text-orange-400" />
                 <a 
                   href="mailto:contact@jackupgarage.fr"
-                  className="font-light text-base hover:text-orange-400 transition-colors font-tech"
+                  className="font-light text-base hover:text-orange-400 transition-colors font-tech hover-lift"
                 >
                   contact@jackupgarage.fr
                 </a>
               </div>
             </div>
-            <div className="mt-5 p-4 bg-gray-900 rounded-lg border border-orange-500/20">
+            <div className="mt-5 p-4 bg-gray-900 rounded-lg border border-orange-500/20 border-glow">
               <p className="text-sm text-gray-300 font-light font-tech">
                 <span className="font-bold tracking-wide uppercase text-orange-400">Réponse rapide :</span><br />
                 Sous 12h par téléphone ou mail

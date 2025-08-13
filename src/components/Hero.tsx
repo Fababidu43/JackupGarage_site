@@ -3,10 +3,135 @@ import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
 
 const Hero = () => {
   useEffect(() => {
-    // Effet de parallaxe subtil
+    // Progress bar de lecture
+    const progressBar = document.createElement('div');
+    progressBar.className = 'reading-progress';
+    document.body.appendChild(progressBar);
+
+    // Parallaxe mesh subtil + Progress bar
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.parallax-element');
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrolled / docHeight) * 100;
+      
+      // Progress bar
+      progressBar.style.width = `${scrollPercent}%`;
+      progressBar.classList.toggle('visible', scrolled > 100);
+      
+      // Parallaxe mesh très subtil
+      const meshElements = document.querySelectorAll('.mesh-parallax');
+      meshElements.forEach((element) => {
+        const speed = 0.005; // Très subtil
+        const yPos = scrolled * speed;
+        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
+    };
+
+    // Split lines animation pour le H1
+    const splitTitle = () => {
+      const h1 = document.querySelector('h1');
+      if (h1) {
+        const text = h1.textContent || '';
+        const words = text.split(' ');
+        h1.innerHTML = words.map((word, index) => 
+          `<span class="split-line" style="transition-delay: ${index * 100}ms">${word}</span>`
+        ).join(' ');
+        
+        // Révéler après un court délai
+        setTimeout(() => {
+          document.querySelectorAll('.split-line').forEach(line => {
+            line.classList.add('revealed');
+          });
+        }, 300);
+      }
+    };
+
+    // Intersection Observer pour les animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Soulignement des titres
+          if (entry.target.classList.contains('title-underline')) {
+            entry.target.classList.add('animate');
+          }
+          
+          // Images slide-in
+          if (entry.target.classList.contains('image-slide-in')) {
+            entry.target.classList.add('revealed');
+          }
+          
+          // Fade rise staggered
+          if (entry.target.classList.contains('fade-rise')) {
+            entry.target.classList.add('revealed');
+          }
+          
+          // Pop in wave
+          if (entry.target.classList.contains('pop-in-wave')) {
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, Math.random() * 200); // Stagger aléatoire
+          }
+          
+          // Slide message
+          if (entry.target.classList.contains('slide-message')) {
+            entry.target.classList.add('revealed');
+          }
+          
+          // Désactiver l'observation après animation
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observer tous les éléments animés
+    const elementsToAnimate = document.querySelectorAll(`
+      .title-underline,
+      .image-slide-in,
+      .fade-rise,
+      .pop-in-wave,
+      .slide-message
+    `);
+    elementsToAnimate.forEach((el) => observer.observe(el));
+
+    splitTitle();
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+      if (document.body.contains(progressBar)) {
+        document.body.removeChild(progressBar);
+      }
+    };
+  }, []);
+
+  // Labels flottants pour les formulaires
+  useEffect(() => {
+    const setupFloatingLabels = () => {
+      const inputs = document.querySelectorAll('.floating-label input, .floating-label textarea');
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          const microCheck = input.parentElement?.querySelector('.micro-check');
+          if (microCheck) {
+            microCheck.classList.add('visible');
+            setTimeout(() => microCheck.classList.add('checked'), 300);
+          }
+        });
+      });
+    };
+
+    setTimeout(setupFloatingLabels, 1000);
+  }, []);
+
+  // Ancien code parallaxe (simplifié)
+  useEffect(() => {
+    const handleLegacyScroll = () => {
+      const scrolled = window.pageYOffset;
       
       parallaxElements.forEach((element) => {
         const speed = 0.5;
@@ -15,8 +140,8 @@ const Hero = () => {
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleLegacyScroll);
+    return () => window.removeEventListener('scroll', handleLegacyScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -29,7 +154,7 @@ const Hero = () => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden circuit-bg"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden circuit-bg mesh-parallax"
       style={{ 
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
@@ -59,7 +184,7 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow split-lines">
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
@@ -75,14 +200,14 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 reveal-on-scroll">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
+            className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech soft-glow micro-pulse accessible-focus"
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 btn-secondary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
+            className="inline-flex items-center px-8 py-4 btn-secondary rounded-lg text-lg font-tech soft-glow accessible-focus"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler

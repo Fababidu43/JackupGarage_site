@@ -231,20 +231,6 @@
   color: #888;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  :root { 
-    --diag-h-section: 6vh;
-    --diag-h-service: 4vh;
-  }
-  
-  .tech-grid {
-    background-size: 15px 15px;
-  }
-}
-
-/* === RESPECT PREFERS-REDUCED-MOTION === */
-@media (prefers-reduced-motion: reduce) {
   .reveal-on-scroll,
   .slide-in-left,
   .slide-in-right,

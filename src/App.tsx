@@ -19,20 +19,20 @@ function App() {
         <Hero />
         
         {/* Hero → Services : diagonale "/" */}
-        <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="section" />
+        <DiagonalSlash topColor="#1a1a1a" bottomColor="#FFFFFF" type="section" />
         
         {/* Services intro (blanc #FFFFFF) */}
         <Services />
         
         {/* Services → Service 1 : diagonale "\" */}
-        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
+        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#1a1a1a" type="service" />
         
-        {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-8 lg:py-12" style={{ background: '#DE5121' }}>
+        {/* Service 1 - Noir #1a1a1a */}
+        <div className="section section--entretien py-8 lg:py-12" style={{ background: '#1a1a1a' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#DE5121' }}>
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#1a1a1a' }}>
                   <Droplets className="w-10 h-10" />
                 </div>
                 
@@ -65,14 +65,14 @@ function App() {
         </div>
 
         {/* Service 1 → Service 2 : diagonale "/" */}
-        <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="service" />
+        <DiagonalSlash topColor="#1a1a1a" bottomColor="#FFFFFF" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
         <div className="section py-8 lg:py-12" style={{ background: '#FFFFFF' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#DE5121' }}>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#1a1a1a' }}>
                   <Zap className="w-10 h-10" />
                 </div>
                 
@@ -87,7 +87,7 @@ function App() {
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80"
-                  style={{ color: '#DE5121' }}
+                  style={{ color: '#1a1a1a' }}
                 >
                   Demander un devis
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -95,7 +95,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #DE5121, #C9471D)' }}>
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1a1a1a, #0f0f0f)' }}>
                   <div className="text-white text-4xl opacity-20">
                     <Zap className="w-16 h-16" />
                   </div>
@@ -106,14 +106,14 @@ function App() {
         </div>
 
         {/* Service 2 → Service 3 : diagonale "\" */}
-        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
+        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#1a1a1a" type="service" />
         
-        {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-8 lg:py-12" style={{ background: '#DE5121' }}>
+        {/* Service 3 - Noir #1a1a1a */}
+        <div className="section py-8 lg:py-12" style={{ background: '#1a1a1a' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#DE5121' }}>
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#1a1a1a' }}>
                   <Settings className="w-10 h-10" />
                 </div>
                 
@@ -146,14 +146,14 @@ function App() {
         </div>
 
         {/* Service 3 → Service 4 : diagonale "/" */}
-        <DiagonalSlash topColor="#DE5121" bottomColor="#F6F6F6" type="service" />
+        <DiagonalSlash topColor="#1a1a1a" bottomColor="#F6F6F6" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
         <div className="section py-8 lg:py-12" style={{ background: '#F6F6F6' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#DE5121' }}>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#1a1a1a' }}>
                   <Car className="w-10 h-10" />
                 </div>
                 
@@ -168,7 +168,7 @@ function App() {
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80"
-                  style={{ color: '#DE5121' }}
+                  style={{ color: '#1a1a1a' }}
                 >
                   Demander un devis
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -176,7 +176,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #DE5121, #C9471D)' }}>
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1a1a1a, #0f0f0f)' }}>
                   <div className="text-white text-4xl opacity-20">
                     <Car className="w-16 h-16" />
                   </div>
@@ -187,13 +187,13 @@ function App() {
         </div>
         
         {/* Service 4 → Zone d'intervention : diagonale "\" */}
-        <DiagonalBackslash topColor="#F6F6F6" bottomColor="#DE5121" type="section" />
+        <DiagonalBackslash topColor="#F6F6F6" bottomColor="#1a1a1a" type="section" />
         
-        {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
+        {/* Zone d'intervention (gradient #1a1a1a → #0f0f0f) */}
         <ServiceArea />
         
         {/* Zone → Contact : diagonale "/" */}
-        <DiagonalSlash topColor="#C9471D" bottomColor="#F6F6F6" type="section" />
+        <DiagonalSlash topColor="#0f0f0f" bottomColor="#F6F6F6" type="section" />
         
         {/* Contact (clair #F6F6F6) */}
         <Contact />

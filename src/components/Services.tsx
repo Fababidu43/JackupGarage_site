@@ -9,7 +9,7 @@ const Services = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase">
             Nos Services
           </h2>
-          <p className="text-lg font-semibold uppercase" style={{ color: '#DE5121' }}>
+          <p className="text-lg font-semibold uppercase" style={{ color: '#1a1a1a' }}>
             Intervention professionnelle à domicile
           </p>
         </div>

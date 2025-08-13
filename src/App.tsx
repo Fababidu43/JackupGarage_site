@@ -12,7 +12,6 @@ import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
 import QuotePopup from './components/QuotePopup';
-import ScrollCarAnimation from './components/ScrollCarAnimation';
 
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
@@ -251,7 +250,6 @@ function App() {
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />
       <QuotePopup isOpen={isQuotePopupOpen} onClose={closeQuotePopup} />
-      <ScrollCarAnimation />
     </div>
   );
 }

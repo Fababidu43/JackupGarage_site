@@ -525,41 +525,6 @@
 .safe-area-inset-top {
   padding-top: env(safe-area-inset-top);
 }
-
-/* Animation de la voiture */
-@keyframes headlightPulse {
-  0% { 
-    opacity: 0; 
-    transform: translateY(-25%) scale(0.8); 
-  }
-  50% { 
-    opacity: 1; 
-    transform: translateY(-25%) scale(1.1); 
-  }
-  100% { 
-    opacity: 0.7; 
-    transform: translateY(-25%) scale(1); 
-  }
-}
-
-@keyframes sectionIllumination {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
-
-/* Transition fluide pour la ligne */
-.transition-all {
-  transition-property: all;
-}
-
-.duration-2000 {
-  transition-duration: 2000ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
 /* === CORRECTION FOOTER MOBILE === */
 @supports (-webkit-touch-callout: none) {
   /* Styles spécifiques iOS */

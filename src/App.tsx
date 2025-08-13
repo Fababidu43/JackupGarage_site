@@ -235,7 +235,9 @@ function App() {
           <Contact />
         </div>
       </main>
-      <Footer />
+      <div className="reveal-on-scroll">
+        <Footer />
+      </div>
       <MobileCTA />
     </div>
   );

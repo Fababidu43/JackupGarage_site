@@ -3,7 +3,7 @@ import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20">
+    <footer className="bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 reveal-on-scroll">
       {/* Grille tech subtile */}
       <div className="absolute inset-0 tech-grid opacity-20"></div>
       

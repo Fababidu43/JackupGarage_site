@@ -23,8 +23,18 @@ const ServiceArea = () => {
     <section 
       id="area" 
       className="section relative text-white overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
+      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #E85D2A 30%, #D4491F 70%, #C9471D 100%)' }}
     >
+      {/* Éléments décoratifs dynamiques */}
+      <div className="absolute inset-0 opacity-8">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-white/20 to-yellow-200/20 rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-40 right-20 w-32 h-32 bg-gradient-to-tl from-white/15 to-orange-200/15 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-r from-white/10 to-red-200/10 rounded-full blur-lg animate-pulse" style={{ animationDelay: '3s' }}></div>
+      </div>
+      
+      {/* Overlay pour plus de profondeur */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/5 to-black/10"></div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase">

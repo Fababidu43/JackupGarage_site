@@ -23,6 +23,7 @@ export default {
         'diagonal-appear': 'diagonalAppear 0.6s ease-out forwards',
         'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
         'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+        'pulse': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeInUp: {

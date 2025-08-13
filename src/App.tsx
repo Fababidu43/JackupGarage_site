@@ -184,7 +184,7 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
                   <img 
-                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Amortisseurs et suspensions automobile" 
                     className="w-full h-full object-cover rounded-lg opacity-95 hover:opacity-100 transition-opacity duration-300 fade-in-on-hover" 
                   />

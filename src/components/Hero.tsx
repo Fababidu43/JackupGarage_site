@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
 
 const Hero = () => {

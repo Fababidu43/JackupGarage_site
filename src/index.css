@@ -243,6 +243,31 @@
   }
 }
 
+/* === RESPECT PREFERS-REDUCED-MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .slide-in-left,
+  .slide-in-right,
+  .hover-scale,
+  .hover-lift,
+  .pulse-subtle,
+  .animate-spin-slow,
+  .floating-particles .particle,
+  .scan-lines::before,
+  .circuit-bg {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .reveal-on-scroll,
+  .slide-in-left,
+  .slide-in-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
 /* === EFFETS FUTURISTES === */
 

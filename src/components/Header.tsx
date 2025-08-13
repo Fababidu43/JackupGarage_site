@@ -4,14 +4,60 @@ import { Menu, X } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 50);
+      
+      // Barre de progression de lecture
+      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollY / documentHeight) * 100;
+      setScrollProgress(Math.min(progress, 100));
+      
+      // Scroll spy pour section active
+      const sections = ['hero', 'services', 'area', 'contact'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Fermer le menu avec Escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Focus trap basique
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -21,117 +67,173 @@ const Header = () => {
     }
   };
 
+  const navigationItems = [
+    { name: 'Accueil', id: 'hero', icon: '🏠' },
+    { name: 'Services', id: 'services', icon: '🔧' },
+    { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
+    { name: 'Contact', id: 'contact', icon: '📞' }
+  ];
+
   return (
-    <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-black/90 backdrop-blur-sm shadow-lg border-b border-orange-500/20' 
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo - Style Solid State */}
-          <div 
-            className="flex items-center cursor-pointer glow-hover"
-            onClick={() => scrollToSection('hero')}
-          >
-            <div className="w-24 h-12 bg-white/90 border border-orange-500/25 rounded-md flex items-center justify-center px-3 py-2 hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md hover-scale mt-2">
-              <img 
-                src="/src/logo.png" 
-                alt="Jack Up Garage" 
-                className="max-h-8 w-auto object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Desktop Navigation - Menu Déroulant */}
-          <div className="hidden md:flex items-center relative">
-            <div className="relative">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="flex items-center px-6 py-3 bg-orange-500/10 border border-orange-500/30 rounded-lg text-white/90 hover:text-orange-400 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all duration-300 font-tech uppercase tracking-wide text-sm font-medium glow-hover"
+    <>
+      {/* Barre de progression de lecture */}
+      <div 
+        className="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 z-50 transition-all duration-300 ease-out"
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
+      <header 
+        className={`fixed w-full top-0 z-40 transition-all duration-300 ease-out ${
+          isScrolled 
+            ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-2' 
+            : 'bg-transparent py-3'
+        }`}
+        style={{
+          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={`flex justify-between items-center transition-all duration-300 ease-out ${
+            isScrolled ? 'h-14' : 'h-16'
+          }`}>
+            
+            {/* Logo */}
+            <div 
+              className="flex items-center cursor-pointer group"
+              onClick={() => scrollToSection('hero')}
+            >
+              <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-3 py-2 
+                hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
+                transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
+                ${isScrolled ? 'w-20 h-10' : 'w-24 h-12'}`}
               >
-                Menu
-                <div className={`ml-2 transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`}>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </button>
-              
-              {/* Menu Déroulant Desktop */}
-              {isMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-black/95 backdrop-blur-sm border border-orange-500/30 rounded-lg shadow-2xl overflow-hidden z-50">
-                  <div className="py-2">
-                    {[
-                      { name: 'Accueil', id: 'hero', icon: '🏠' },
-                      { name: 'Services', id: 'services', icon: '🔧' },
-                      { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
-                      { name: 'Contact', id: 'contact', icon: '📞' }
-                    ].map((item) => (
-                      <button
-                        key={item.name}
-                        onClick={() => scrollToSection(item.id)}
-                        className="w-full flex items-center px-4 py-3 text-left text-white/90 hover:text-orange-400 hover:bg-orange-500/10 transition-all duration-200 font-tech text-sm hover-lift"
-                      >
-                        <span className="mr-3 text-base">{item.icon}</span>
-                        {item.name}
-                      </button>
-                    ))}
-                    <div className="border-t border-orange-500/20 mt-2 pt-2">
-                      <a
-                        href="tel:+33123456789"
-                        className="w-full flex items-center px-4 py-3 text-left btn-primary rounded-none hover:bg-orange-600 transition-all duration-200 font-tech text-sm font-medium"
-                      >
-                        <span className="mr-3 text-base">📱</span>
-                        Appeler Maintenant
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              )}
+                <img 
+                  src="/src/logo.png" 
+                  alt="Jack Up Garage" 
+                  className={`w-auto object-contain transition-all duration-300 ${
+                    isScrolled ? 'max-h-6' : 'max-h-8'
+                  }`}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-white"
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-black/95 backdrop-blur-sm border-t border-orange-500/20">
-            <nav className="py-4 space-y-2">
-              {[
-                { name: 'Accueil', id: 'hero' },
-                { name: 'Services', id: 'services' },
-                { name: 'Zone', id: 'area' },
-                { name: 'Contact', id: 'contact' }
-              ].map((item) => (
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navigationItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-white/90 hover:text-orange-400 font-medium tracking-wide uppercase text-sm font-tech transition-colors hover-lift"
+                  className={`relative px-3 py-2 text-sm font-medium tracking-wide uppercase font-tech
+                    transition-all duration-200 ease-out transform hover:translate-y-[-1px]
+                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
+                    ${activeSection === item.id 
+                      ? 'text-orange-400' 
+                      : 'text-white/90 hover:text-orange-400'
+                    }`}
                 >
                   {item.name}
+                  
+                  {/* Soulignement animé */}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-orange-500 transition-all duration-300 ease-out
+                    ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  
+                  {/* Indicateur section active */}
+                  {activeSection === item.id && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500" />
+                  )}
                 </button>
               ))}
+              
+              {/* CTA Appeler Desktop */}
               <a
                 href="tel:+33123456789"
-                className="block mx-4 mt-4 px-4 py-2 btn-primary rounded-lg text-sm font-tech text-center hover-scale"
+                className="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
+                  rounded-lg transition-all duration-200 ease-out transform hover:scale-105
+                  hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
+                  font-tech uppercase tracking-wide text-sm"
               >
                 Appeler
               </a>
-            </nav>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200
+                focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded"
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+        </div>
+
+        {/* Mobile Navigation Overlay */}
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            
+            {/* Menu Panel */}
+            <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-black/90 backdrop-blur-md 
+              border-l border-orange-500/30 z-40 md:hidden transform transition-transform duration-300 ease-out">
+              
+              {/* Header du menu mobile */}
+              <div className="flex items-center justify-between p-6 border-b border-orange-500/20">
+                <h3 className="text-lg font-bold text-white font-futuristic uppercase tracking-wide">Menu</h3>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 text-white hover:text-orange-400 transition-colors duration-200
+                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 rounded"
+                  aria-label="Fermer le menu"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              
+              {/* Navigation Links */}
+              <nav className="py-6 px-6 space-y-2">
+                {navigationItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center px-4 py-4 text-left rounded-lg transition-all duration-200
+                      focus:outline-none focus:ring-2 focus:ring-orange-500/50 font-tech text-base
+                      ${activeSection === item.id 
+                        ? 'text-orange-400 bg-orange-500/10 border-l-2 border-orange-500' 
+                        : 'text-white/90 hover:text-orange-400 hover:bg-orange-500/5'
+                      }`}
+                    style={{ minHeight: '48px' }}
+                  >
+                    <span className="mr-4 text-lg">{item.icon}</span>
+                    {item.name}
+                  </button>
+                ))}
+              </nav>
+              
+              {/* CTA Mobile */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <a
+                  href="tel:+33123456789"
+                  className="w-full flex items-center justify-center px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 
+                    text-white font-bold rounded-lg transition-all duration-200 transform hover:scale-105
+                    hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50
+                    font-tech uppercase tracking-wide"
+                  style={{ minHeight: '48px' }}
+                >
+                  <span className="mr-3 text-lg">📱</span>
+                  Appeler Maintenant
+                </a>
+              </div>
+            </div>
+          </>
         )}
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

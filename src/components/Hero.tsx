@@ -37,16 +37,17 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       style={{ 
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
+          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover no-repeat,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-        `
+        `,
+        backgroundAttachment: 'fixed'
       }}
     >
       {/* Overlay mécanique avec grille tech */}
-      <div className="absolute inset-0 tech-grid opacity-30 parallax-element"></div>
+      <div className="absolute inset-0 tech-grid opacity-30 parallax-element animate-pulse"></div>
       
       {/* Particules flottantes */}
-      <div className="floating-particles">
+      <div className="floating-particles opacity-80">
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="particle"></div>
@@ -56,11 +57,22 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       
       {/* Éléments mécaniques flottants */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none parallax-element">
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
-        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
-        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>
-        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/10 rounded-full"></div>
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/30 rounded-full animate-spin-slow hover:border-orange-500/50 transition-colors duration-300"></div>
+        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/40 rotate-45 animate-pulse"></div>
+        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/25 rounded-lg rotate-12 hover:rotate-45 transition-transform duration-500"></div>
+        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/20 rounded-full pulse-subtle"></div>
+        <div className="absolute top-1/3 left-1/3 w-4 h-4 border border-orange-300/30 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-10 h-10 border-2 border-orange-400/20 rotate-12 animate-spin-slow"></div>
       </div>
+      
+      {/* Effet de scan lumineux */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500/60 to-transparent animate-scan-horizontal"></div>
+        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-orange-500/40 to-transparent animate-scan-vertical"></div>
+      </div>
+      
+      {/* Overlay dynamique avec mouvement */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-orange-600/10 animate-gradient-shift"></div>
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">

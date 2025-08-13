@@ -22,9 +22,19 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden tech-grid"
+      className="section relative text-white overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
+      {/* Fond animé complexe */}
+      <div className="absolute inset-0 tech-grid opacity-15"></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-52 h-52 border-2 border-orange-500/12 rounded-full animate-spin-slow"></div>
+        <div className="absolute bottom-32 right-24 w-40 h-40 border border-orange-400/15 rounded-lg rotate-45 floating-element"></div>
+        <div className="absolute top-1/3 right-1/5 w-28 h-28 bg-orange-500/8 rounded-full pulse-glow"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-20 h-20 border border-orange-500/10 rotate-12 floating-element-reverse"></div>
+        <div className="absolute top-2/3 left-1/2 w-16 h-16 bg-gradient-to-br from-orange-500/6 to-orange-600/3 rounded-full floating-element-slow"></div>
+        <div className="absolute top-1/4 right-1/3 w-12 h-12 border border-orange-400/12 rotate-45 floating-element"></div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight uppercase font-futuristic hover-glow-text">

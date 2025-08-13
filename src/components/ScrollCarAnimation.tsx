@@ -30,47 +30,53 @@ const ScrollCarAnimation = () => {
 
   return (
     <div className="scroll-car-animation">
-      {/* Ligne simple du Hero vers Services */}
+      {/* Ligne continue qui traverse toutes les sections */}
       <svg 
         className="fixed inset-0 w-full h-full z-10 pointer-events-none"
         style={{ mixBlendMode: 'normal' }}
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
       >
         <defs>
-          <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="pathGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#FF6B35" />
-            <stop offset="50%" stopColor="#FF8C42" />
+            <stop offset="25%" stopColor="#FF8C42" />
+            <stop offset="50%" stopColor="#FF6B35" />
+            <stop offset="75%" stopColor="#FF8C42" />
             <stop offset="100%" stopColor="#FF6B35" />
           </linearGradient>
         </defs>
         
-        {/* Ligne du Hero vers Services */}
-        <line
-          x1={window.innerWidth * 0.5}
-          y1={window.innerHeight * 0.85}
-          x2={window.innerWidth * 0.5}
-          y2={window.innerHeight * 1.15}
-          stroke="url(#orangeGradient)"
-          strokeWidth="4"
+        {/* Tracé principal qui suit exactement vos images */}
+        <path
+          d="M 8 15 
+             L 8 25
+             Q 8 35, 15 40
+             L 25 45
+             Q 35 50, 45 52
+             L 55 54
+             Q 65 56, 75 60
+             L 85 65
+             Q 90 68, 85 72
+             L 75 76
+             Q 65 80, 55 82
+             L 45 84
+             Q 35 86, 25 88
+             L 15 90
+             Q 8 92, 8 95"
+          stroke="url(#pathGradient)"
+          strokeWidth="0.8"
+          fill="none"
           strokeLinecap="round"
+          strokeLinejoin="round"
         />
         
-        {/* Point de départ dans le Hero */}
-        <circle 
-          cx={window.innerWidth * 0.5} 
-          cy={window.innerHeight * 0.85} 
-          r="6" 
-          fill="#FF6B35" 
-          opacity="0.9"
-        />
-        
-        {/* Point d'arrivée vers Services */}
-        <circle 
-          cx={window.innerWidth * 0.5} 
-          cy={window.innerHeight * 1.15} 
-          r="6" 
-          fill="#FF6B35" 
-          opacity="0.9"
-        />
+        {/* Points de repère pour chaque section */}
+        <circle cx="8" cy="15" r="0.4" fill="#FF6B35" opacity="0.8" />
+        <circle cx="25" cy="45" r="0.3" fill="#FF8C42" opacity="0.7" />
+        <circle cx="75" cy="60" r="0.3" fill="#FF6B35" opacity="0.7" />
+        <circle cx="45" cy="84" r="0.3" fill="#FF8C42" opacity="0.7" />
+        <circle cx="8" cy="95" r="0.4" fill="#FF6B35" opacity="0.8" />
       </svg>
     </div>
   );

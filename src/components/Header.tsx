@@ -36,11 +36,11 @@ const Header = () => {
             className="flex items-center cursor-pointer glow-hover"
             onClick={() => scrollToSection('hero')}
           >
-            <div className="w-16 h-12 bg-white/95 border-2 border-orange-500/30 rounded-lg flex items-center justify-center p-2 hover:bg-white hover:border-orange-500/50 transition-all duration-300 shadow-lg hover-scale">
+            <div className="w-20 h-16 bg-white/95 border-2 border-orange-500/30 rounded-lg flex items-center justify-center p-2 hover:bg-white hover:border-orange-500/50 transition-all duration-300 shadow-lg hover-scale">
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 
-                className="max-h-8 w-auto object-contain"
+                className="max-h-12 w-auto object-contain"
               />
             </div>
           </div>

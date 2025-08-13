@@ -170,6 +170,16 @@
   text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
 }
 
+/* === ANIMATIONS MÉCANIQUES === */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
 /* === BOUTONS FUTURISTES === */
 .btn-primary {
   background: linear-gradient(135deg, var(--orange-primary), var(--orange-glow));

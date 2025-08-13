@@ -13,12 +13,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Jack Up Garage */}
           <div>
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="w-24 h-20 rounded-lg flex items-center justify-center glow-hover bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-2">
+            <div className="flex items-baseline space-x-5 mb-6">
+              <div 
+                className="w-20 h-16 rounded-lg flex items-center justify-center bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-3 cursor-pointer hover:brightness-110 transition-all duration-300 flex-shrink-0"
+                role="button"
+                aria-label="Jack Up Garage - Retour à l'accueil"
+                onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
-                  className="h-16 w-auto max-w-none drop-shadow-xl filter brightness-125 hover:brightness-150 transition-all duration-300"
+                  className="max-h-12 w-auto object-contain filter brightness-110"
                 />
               </div>
               <div>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Phone, Mail, Send, Clock, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Phone, Mail, Send, Clock } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,113 +8,53 @@ const Contact = () => {
     address: '',
     phone: '',
     email: '',
-    licensePlate: '',
+    registration: '',
     subject: '',
-    description: '',
-    consent: false
+    message: ''
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
-    
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.address.trim()) newErrors.address = 'Address is required';
-    if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    if (!formData.subject) newErrors.subject = 'Subject is required';
-    if (!formData.description.trim()) newErrors.description = 'Description is required';
-    if (!formData.consent) newErrors.consent = 'You must accept the privacy policy';
-
-    // Email validation
-    if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (validateForm()) {
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
-      setIsSubmitted(true);
-    }
+    console.log('Form submitted:', formData);
   };
 
-  if (isSubmitted) {
-    return (
-      <section id="contact" className="py-20 bg-base-800">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-base-700 rounded-xl p-12">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-white" />
-            </div>
-            <h2 className="text-3xl font-display font-bold text-text-primary mb-4">
-              Message Sent Successfully!
-            </h2>
-            <p className="text-text-muted mb-6">
-              Thank you for your request. We will reply within 12 hours by phone or email.
-            </p>
-            <button
-              onClick={() => setIsSubmitted(false)}
-              className="text-brand-500 hover:text-brand-400 font-medium"
-            >
-              Send another message
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="contact" className="py-20 bg-base-800">
+    <section 
+      id="contact" 
+      className="section relative py-12 lg:py-16"
+      style={{ background: '#F6F6F6' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-text-primary mb-4">
-            Contact & Booking
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase">
+            Contact
           </h2>
-          <div className="inline-flex items-center px-4 py-2 bg-brand-500/20 border border-brand-500/30 rounded-full">
-            <Clock className="w-4 h-4 mr-2 text-brand-400" />
-            <span className="text-sm font-medium text-brand-400">Reply within 12h</span>
-          </div>
+          <p className="text-lg font-semibold uppercase" style={{ color: '#DE5121' }}>
+            Réponse sous 12h par téléphone ou mail
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Info */}
           <div className="space-y-6">
-            <div className="bg-base-700 rounded-xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-brand-500 rounded-lg flex items-center justify-center mr-4">
-                  <Phone className="w-6 h-6 text-white" />
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-display font-semibold text-text-primary">Phone</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Téléphone</h3>
                   <a 
                     href="tel:+33123456789"
-                    className="text-brand-400 hover:text-brand-300 font-medium"
+                    className="font-semibold hover:opacity-80"
+                    style={{ color: '#DE5121' }}
                   >
                     01 23 45 67 89
                   </a>
@@ -122,16 +62,17 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-base-700 rounded-xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-brand-500 rounded-lg flex items-center justify-center mr-4">
-                  <Mail className="w-6 h-6 text-white" />
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-display font-semibold text-text-primary">Email</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Email</h3>
                   <a 
                     href="mailto:contact@jackupgarage.fr"
-                    className="text-brand-400 hover:text-brand-300 font-medium"
+                    className="font-semibold hover:opacity-80"
+                    style={{ color: '#DE5121' }}
                   >
                     contact@jackupgarage.fr
                   </a>
@@ -139,16 +80,16 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-base-700 rounded-xl p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-brand-500 rounded-lg flex items-center justify-center mr-4">
-                  <Clock className="w-6 h-6 text-white" />
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-display font-semibold text-text-primary">Hours</h3>
-                  <p className="text-text-muted text-sm">
-                    Mon - Sat: 8am - 6pm<br />
-                    Sunday: On request
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Horaires</h3>
+                  <p className="text-gray-700 font-light text-sm">
+                    Lun - Sam: 8h - 18h<br />
+                    Dimanche: Sur demande
                   </p>
                 </div>
               </div>
@@ -157,173 +98,144 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-base-700 rounded-xl p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-text-primary mb-2">
-                    First Name *
+                  <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Prénom *
                   </label>
                   <input
                     type="text"
                     id="firstName"
                     name="firstName"
+                    required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                      errors.firstName ? 'border-red-500' : 'border-white/10'
-                    }`}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                    style={{ '--focus-border-color': '#DE5121' } as React.CSSProperties}
                   />
-                  {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName}</p>}
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-text-primary mb-2">
-                    Last Name *
+                  <label htmlFor="lastName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Nom *
                   </label>
                   <input
                     type="text"
                     id="lastName"
                     name="lastName"
+                    required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                      errors.lastName ? 'border-red-500' : 'border-white/10'
-                    }`}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                   />
-                  {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName}</p>}
                 </div>
               </div>
 
-              <div className="mb-6">
-                <label htmlFor="address" className="block text-sm font-medium text-text-primary mb-2">
-                  Intervention Address *
+              <div className="mb-4">
+                <label htmlFor="address" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                  Adresse d'intervention *
                 </label>
                 <input
                   type="text"
                   id="address"
                   name="address"
+                  required
                   value={formData.address}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                    errors.address ? 'border-red-500' : 'border-white/10'
-                  }`}
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                 />
-                {errors.address && <p className="text-red-400 text-sm mt-1">{errors.address}</p>}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-text-primary mb-2">
-                    Phone *
+                  <label htmlFor="phone" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Téléphone *
                   </label>
                   <input
                     type="tel"
                     id="phone"
                     name="phone"
+                    required
                     value={formData.phone}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                      errors.phone ? 'border-red-500' : 'border-white/10'
-                    }`}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                   />
-                  {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-2">
+                  <label htmlFor="email" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
                     Email *
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
+                    required
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                      errors.email ? 'border-red-500' : 'border-white/10'
-                    }`}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                   />
-                  {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="licensePlate" className="block text-sm font-medium text-text-primary mb-2">
-                    License Plate (optional but recommended)
+                  <label htmlFor="registration" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Immatriculation (facultatif)
                   </label>
                   <input
                     type="text"
-                    id="licensePlate"
-                    name="licensePlate"
-                    value={formData.licensePlate}
+                    id="registration"
+                    name="registration"
+                    value={formData.registration}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-base-800 border border-white/10 rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                   />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-text-primary mb-2">
-                    Subject *
+                  <label htmlFor="subject" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Objet *
                   </label>
                   <select
                     id="subject"
                     name="subject"
+                    required
                     value={formData.subject}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 ${
-                      errors.subject ? 'border-red-500' : 'border-white/10'
-                    }`}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                   >
-                    <option value="">Select a service</option>
-                    <option value="maintenance">Maintenance (oil & brakes)</option>
-                    <option value="clutch">Clutch & flywheel</option>
-                    <option value="timing">Timing belt kits</option>
-                    <option value="suspension">Shocks, suspension, joints</option>
-                    <option value="other">Other</option>
+                    <option value="">Sélectionner</option>
+                    <option value="entretien">Entretien / Vidange</option>
+                    <option value="embrayage">Embrayage / Volant moteur</option>
+                    <option value="distribution">Kit distribution</option>
+                    <option value="suspension">Suspensions / Amortisseurs</option>
+                    <option value="autre">Autre</option>
                   </select>
-                  {errors.subject && <p className="text-red-400 text-sm mt-1">{errors.subject}</p>}
                 </div>
               </div>
 
               <div className="mb-6">
-                <label htmlFor="description" className="block text-sm font-medium text-text-primary mb-2">
-                  Problem Description *
+                <label htmlFor="message" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                  Description du problème *
                 </label>
                 <textarea
-                  id="description"
-                  name="description"
+                  id="message"
+                  name="message"
                   rows={4}
-                  value={formData.description}
+                  required
+                  value={formData.message}
                   onChange={handleChange}
-                  placeholder="Describe symptoms, unusual noises, or any other useful details..."
-                  className={`w-full px-4 py-3 bg-base-800 border rounded-lg text-text-primary focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none ${
-                    errors.description ? 'border-red-500' : 'border-white/10'
-                  }`}
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none resize-none rounded font-light"
+                  placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
-                {errors.description && <p className="text-red-400 text-sm mt-1">{errors.description}</p>}
-              </div>
-
-              <div className="mb-6">
-                <label className="flex items-start">
-                  <input
-                    type="checkbox"
-                    name="consent"
-                    checked={formData.consent}
-                    onChange={handleChange}
-                    className="mt-1 mr-3 w-4 h-4 text-brand-500 bg-base-800 border-white/10 rounded focus:ring-brand-500 focus:ring-2"
-                  />
-                  <span className="text-sm text-text-muted">
-                    I agree to the processing of my personal data in accordance with the{' '}
-                    <a href="/privacy" className="text-brand-400 hover:text-brand-300">privacy policy</a> *
-                  </span>
-                </label>
-                {errors.consent && <p className="text-red-400 text-sm mt-1">{errors.consent}</p>}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-brand-500 text-white py-4 px-6 font-semibold hover:bg-brand-400 rounded-lg transition-all duration-300 hover:shadow-glow flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-base-700"
+                className="w-full text-white py-4 px-6 font-bold hover:opacity-90 shadow-lg flex items-center justify-center tracking-wide rounded uppercase"
+                style={{ background: '#DE5121' }}
               >
                 <Send className="w-5 h-5 mr-2" />
-                Send Request
+                Envoyer la demande
               </button>
             </form>
           </div>

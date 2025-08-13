@@ -13,9 +13,29 @@ const Hero = () => {
     <section 
       id="hero"
       className="section relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: '#DE5121' }}
     >
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
+      {/* Vidéo d'arrière-plan */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/6195149/6195149-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay sombre pour améliorer la lisibilité */}
+        <div 
+          className="absolute inset-0 z-10"
+          style={{ 
+            background: 'linear-gradient(135deg, rgba(222, 81, 33, 0.85) 0%, rgba(201, 71, 29, 0.85) 100%)'
+          }}
+        />
+      </div>
+
+      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase">
           Jack Up Garage
         </h1>
@@ -32,7 +52,7 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center px-8 py-4 bg-white text-orange-500 font-bold text-lg hover:bg-gray-50 shadow-lg hover:shadow-xl rounded group"
+            className="inline-flex items-center px-8 py-4 bg-white text-orange-500 font-bold text-lg hover:bg-gray-50 shadow-lg hover:shadow-xl rounded group transition-all duration-300"
             style={{ color: '#DE5121' }}
           >
             Demander un devis
@@ -40,7 +60,7 @@ const Hero = () => {
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 rounded"
+            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 rounded transition-all duration-300"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler

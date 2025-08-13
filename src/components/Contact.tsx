@@ -98,10 +98,10 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 hover-scale border-glow subtle-glow animated-border">
+            <form onSubmit={handleSubmit} className="bg-black p-6 shadow-lg rounded-lg border border-orange-500/30 hover-scale border-glow subtle-glow animated-border">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="firstName" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Prénom *
                   </label>
                   <input
@@ -111,11 +111,11 @@ const Contact = () => {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="lastName" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Nom *
                   </label>
                   <input
@@ -125,13 +125,13 @@ const Contact = () => {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
               </div>
 
               <div className="mb-4">
-                <label htmlFor="address" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                <label htmlFor="address" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                   Adresse d'intervention *
                 </label>
                 <input
@@ -141,13 +141,13 @@ const Contact = () => {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                  className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="phone" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Téléphone *
                   </label>
                   <input
@@ -157,11 +157,11 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="email" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Email *
                   </label>
                   <input
@@ -171,14 +171,14 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label htmlFor="registration" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="registration" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Immatriculation (facultatif)
                   </label>
                   <input
@@ -187,11 +187,11 @@ const Contact = () => {
                     name="registration"
                     value={formData.registration}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                  <label htmlFor="subject" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                     Objet *
                   </label>
                   <select
@@ -200,7 +200,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   >
                     <option value="">Sélectionner</option>
                     <option value="entretien">Entretien / Vidange</option>
@@ -213,7 +213,7 @@ const Contact = () => {
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
+                <label htmlFor="message" className="block text-sm font-bold text-white mb-2 tracking-wide uppercase font-tech">
                   Description du problème *
                 </label>
                 <textarea
@@ -223,7 +223,7 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none resize-none rounded font-light font-tech form-input glow-focus border-glow"
+                  className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus"
                   placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
               </div>
@@ -236,7 +236,7 @@ const Contact = () => {
                     className="mr-3 w-4 h-4 text-orange-500 border-2 border-gray-300 rounded focus:ring-orange-500"
                     required
                   />
-                  <span className="text-sm font-medium text-gray-900 font-tech">
+                  <span className="text-sm font-medium text-white font-tech">
                     J'ai un sol dur et plat disponible *
                   </span>
                 </label>

@@ -56,6 +56,11 @@
 
 /* === RESPONSIVITÉ MOBILE POUR DIAGONALES === */
 @media (max-width: 768px) {
+  /* Masquer l'animation sur mobile pour les performances */
+  .scroll-car-animation {
+    display: none;
+  }
+  
   .diag {
     --h: 4vh;
   }

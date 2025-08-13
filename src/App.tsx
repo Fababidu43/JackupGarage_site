@@ -17,29 +17,6 @@ function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
 
   useEffect(() => {
-    // Effet de parallaxe pour les sections noires
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const speed = 0.3;
-      
-      // Parallaxe pour toutes les sections noires
-      const blackSections = [
-        'hero',
-        'service-entretien', 
-        'service-distribution'
-      ];
-      
-      blackSections.forEach(sectionId => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const yPos = scrolled * speed;
-          section.style.backgroundPosition = `center ${yPos}px`;
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
     // Intersection Observer pour les animations au scroll
     const observerOptions = {
       threshold: 0.1,
@@ -57,7 +34,6 @@ function App() {
     // Observer tous les éléments avec les classes d'animation
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
     elementsToAnimate.forEach((el) => observer.observe(el));
-      window.removeEventListener('scroll', handleScroll);
 
     return () => observer.disconnect();
   }, []);
@@ -87,18 +63,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div 
-          id="service-entretien"
-          className="section section--entretien py-4 sm:py-6 lg:py-8 tech-grid slide-in-left" 
-          style={{ 
-            background: `
-              linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-              url('https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
-              radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-            `,
-            backgroundAttachment: 'fixed'
-          }}
-        >
+        <div className="section section--entretien py-4 sm:py-6 lg:py-8 tech-grid slide-in-left" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -125,9 +90,11 @@ function App() {
               
               <div>
                 <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow mt-4 lg:mt-0">
-                  <div className="w-full h-full bg-gradient-to-br from-orange-500/30 to-orange-600/20 rounded-lg flex items-center justify-center">
-                    <Droplets className="w-16 h-16 text-orange-400" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Vidange moteur - Entretien automobile" 
+                    className="w-full h-full object-cover rounded-lg" 
+                  />
                 </div>
               </div>
             </div>
@@ -181,18 +148,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="z-10" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div 
-          id="service-distribution"
-          className="section py-4 sm:py-6 lg:py-8 tech-grid slide-in-left relative z-20" 
-          style={{ 
-            background: `
-              linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-              url('https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
-              radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-            `,
-            backgroundAttachment: 'fixed'
-          }}
-        >
+        <div className="section py-4 sm:py-6 lg:py-8 tech-grid slide-in-left relative z-20" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -219,9 +175,11 @@ function App() {
               
               <div>
                 <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow mt-4 lg:mt-0">
-                  <div className="w-full h-full bg-gradient-to-br from-orange-500/30 to-orange-600/20 rounded-lg flex items-center justify-center">
-                    <Settings className="w-16 h-16 text-orange-400" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Kit de distribution - Courroie et galets" 
+                    className="w-full h-full object-cover rounded-lg" 
+                  />
                 </div>
               </div>
             </div>

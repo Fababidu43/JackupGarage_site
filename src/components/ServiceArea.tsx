@@ -1,0 +1,133 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+
+const ServiceArea = () => {
+  const [showAllCommunes43, setShowAllCommunes43] = useState(false);
+  const [showAllCommunes42, setShowAllCommunes42] = useState(false);
+
+  const communes43 = [
+    "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
+    "Sainte-Sigolène", "Retournac", "Bas-en-Basset", "Saint-Just-Malmont", "Dunières", 
+    "Tence", "Saint-Didier-en-Velay", "Craponne-sur-Arzon", "Vorey", "Aurec-sur-Loire", 
+    "Saint-Paulien", "Allegre", "Saugues", "Pinols", "Lavoûte-Chilhac"
+  ];
+
+  const communes42 = [
+    "Saint-Étienne", "Firminy", "Saint-Chamond", "Rive-de-Gier", "Roanne", "Montbrison", 
+    "Veauche", "Sorbiers", "La Ricamarie", "Le Chambon-Feugerolles", "Unieux", 
+    "Roche-la-Molière", "Saint-Genest-Malifaux", "Bourg-Argental", "Pélussin", 
+    "Charlieu", "Feurs", "Boën-sur-Lignon", "Andrézieux-Bouthéon", "Saint-Just-Saint-Rambert"
+  ];
+
+  return (
+    <section 
+      id="area" 
+      className="section relative text-white overflow-hidden"
+      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase">
+            Zone d'intervention
+          </h2>
+          <p className="text-lg sm:text-xl text-white/90 font-light">
+            Service disponible dans la Haute-Loire et la Loire
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
+          {/* Haute-Loire */}
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
+                Haute-Loire (43)
+              </h3>
+            </div>
+            
+            <div className="text-white/90 leading-relaxed font-light text-sm">
+              {communes43.slice(0, showAllCommunes43 ? communes43.length : 8).map((commune, index) => (
+                <span key={index}>
+                  {commune}
+                  {index < (showAllCommunes43 ? communes43.length - 1 : 7) && ', '}
+                </span>
+              ))}
+              {!showAllCommunes43 && communes43.length > 8 && '...'}
+            </div>
+            
+            <button
+              onClick={() => setShowAllCommunes43(!showAllCommunes43)}
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
+            >
+              {showAllCommunes43 ? (
+                <>
+                  Voir moins <ChevronUp className="ml-1 w-4 h-4" />
+                </>
+              ) : (
+                <>
+                  Voir toutes <ChevronDown className="ml-1 w-4 h-4" />
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Loire */}
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
+                Loire (42)
+              </h3>
+            </div>
+            
+            <div className="text-white/90 leading-relaxed font-light text-sm">
+              {communes42.slice(0, showAllCommunes42 ? communes42.length : 8).map((commune, index) => (
+                <span key={index}>
+                  {commune}
+                  {index < (showAllCommunes42 ? communes42.length - 1 : 7) && ', '}
+                </span>
+              ))}
+              {!showAllCommunes42 && communes42.length > 8 && '...'}
+            </div>
+            
+            <button
+              onClick={() => setShowAllCommunes42(!showAllCommunes42)}
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
+            >
+              {showAllCommunes42 ? (
+                <>
+                  Voir moins <ChevronUp className="ml-1 w-4 h-4" />
+                </>
+              ) : (
+                <>
+                  Voir toutes <ChevronDown className="ml-1 w-4 h-4" />
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Conditions d'intervention */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-wide text-center uppercase">
+              Conditions d'intervention
+            </h4>
+            <p className="text-base leading-relaxed mb-3 text-center font-light" style={{ color: '#5B6573' }}>
+              Intervention sur sol dur et plat uniquement pour des raisons de sécurité.
+            </p>
+            <p className="text-sm leading-relaxed text-center font-light" style={{ color: '#5B6573' }}>
+              Pour les embrayages, possibilité de déplacement longue distance avec supplément kilométrique.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ServiceArea;

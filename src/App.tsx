@@ -133,10 +133,10 @@ function App() {
         </div>
 
         {/* Service 2 → Service 3 : diagonale "\" */}
-        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="z-10" />
+        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="z-10 -mb-px" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-6 sm:py-8 lg:py-12 tech-grid slide-in-left relative z-20" style={{ background: '#0A0A0A' }}>
+        <div className="section py-6 sm:py-8 lg:py-12 tech-grid slide-in-left relative z-20 -mt-px" style={{ background: '#0A0A0A', borderTop: '1px solid #0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -175,7 +175,7 @@ function App() {
         </div>
 
         {/* Service 3 → Service 4 : diagonale "/" */}
-        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" className="-mb-px" />
         
         {/* Service 4 - Clair #F6F6F6 */}
         <div className="section py-6 sm:py-8 lg:py-12 slide-in-right" style={{ background: '#F8F9FA' }}>

@@ -31,6 +31,7 @@
   isolation: isolate;
   z-index: 0;
   background: var(--bottom-bg, #fff);
+  overflow: hidden;
 }
 
 .diag::before {
@@ -44,6 +45,7 @@
   background: var(--top-bg, #000);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .diag--slash::before {
@@ -58,6 +60,7 @@
 @media (max-width: 768px) {
   .diag {
     --h: 4vh;
+    margin: -1px 0;
   }
   
   .diag--service {
@@ -65,17 +68,18 @@
   }
   
   .diag--slash::before {
-    clip-path: polygon(-8% -3%, 108% -3%, -8% 108%);
+    clip-path: polygon(-10% -4%, 110% -4%, -10% 110%);
   }
 
   .diag--backslash::before {
-    clip-path: polygon(-8% -3%, 108% -3%, 108% 108%);
+    clip-path: polygon(-10% -4%, 110% -4%, 110% 110%);
   }
 }
 
 @media (max-width: 480px) {
   .diag {
     --h: 3vh;
+    margin: -2px 0;
   }
   
   .diag--service {
@@ -83,11 +87,11 @@
   }
   
   .diag--slash::before {
-    clip-path: polygon(-12% -4%, 112% -4%, -12% 112%);
+    clip-path: polygon(-15% -5%, 115% -5%, -15% 115%);
   }
 
   .diag--backslash::before {
-    clip-path: polygon(-12% -4%, 112% -4%, 112% 112%);
+    clip-path: polygon(-15% -5%, 115% -5%, 115% 115%);
   }
 }
 

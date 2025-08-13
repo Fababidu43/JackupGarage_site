@@ -23,69 +23,76 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      className={`fixed w-full top-0 z-50 transition-all duration-500 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-sm' 
+          ? 'bg-black/95 backdrop-blur-sm shadow-lg border-b border-orange-500/30' 
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo - Style Solid State */}
+          {/* Logo futuriste */}
           <div 
-            className="flex items-center cursor-pointer"
+            className="flex items-center cursor-pointer hover-scale"
             onClick={() => scrollToSection('hero')}
           >
             <img 
               src="/src/logo.png" 
               alt="Jack Up Garage" 
-              className="h-10 w-auto"
+              className="h-12 w-auto drop-shadow-lg hover-neon transition-all duration-300"
             />
           </div>
 
-          {/* Desktop Navigation - Style Solid State */}
+          {/* Desktop Navigation futuriste */}
           <nav className="hidden md:flex items-center space-x-8">
             {[
               { name: 'Accueil', id: 'hero' },
               { name: 'Services', id: 'services' },
               { name: 'Zone', id: 'area' },
               { name: 'Contact', id: 'contact' }
-            ].map((item) => (
+            ].map((item, index) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-gray-700 tracking-wide uppercase"
-                style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
+                className={`text-sm font-medium tracking-wide uppercase transition-all duration-300 hover-glow relative ${
+                  isScrolled ? 'text-white' : 'text-white'
+                }`}
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                }}
               >
                 {item.name}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 hover:w-full"></div>
               </button>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button futuriste */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-900"
+            className={`md:hidden p-2 rounded-lg transition-all duration-300 hover-scale ${
+              isScrolled ? 'text-white bg-orange-500/20' : 'text-white bg-black/20'
+            }`}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation futuriste */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200">
+          <div className="md:hidden bg-black/95 backdrop-blur-sm border-t border-orange-500/30 animate-fade-up">
             <nav className="py-4 space-y-2">
               {[
                 { name: 'Accueil', id: 'hero' },
                 { name: 'Services', id: 'services' },
                 { name: 'Zone', id: 'area' },
                 { name: 'Contact', id: 'contact' }
-              ].map((item) => (
+              ].map((item, index) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-gray-700 font-medium tracking-wide uppercase text-sm"
-                  style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
+                  className="block w-full text-left px-4 py-3 text-white font-medium tracking-wide uppercase text-sm hover:bg-orange-500/20 hover:text-orange-400 transition-all duration-300 animate-slide-left"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {item.name}
                 </button>

@@ -48,43 +48,47 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="section py-12 lg:py-16 reveal-on-scroll" style={{ background: '#F8F9FA' }}>
+    <section id="faq" className="section py-12 lg:py-16 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+      {/* Éléments décoratifs */}
+      <div className="absolute top-10 left-10 w-20 h-20 border-2 border-orange-500/10 rounded-full animate-spin-slow"></div>
+      <div className="absolute bottom-20 right-20 w-12 h-12 border border-orange-400/20 rotate-45"></div>
+      <div className="absolute top-1/2 left-1/4 w-6 h-6 bg-orange-500/5 rounded-full"></div>
+      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center text-white mx-auto mb-4 pulse-subtle">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-6 pulse-subtle shadow-lg hover-scale">
             <HelpCircle className="w-6 h-6" />
           </div>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-3 sm:mb-4 tracking-tight uppercase font-futuristic hover-glow-text">
             Questions Fréquentes
           </h2>
-          <p className="text-base sm:text-lg font-semibold uppercase font-tech" style={{ color: '#FF6B35' }}>
+          <p className="text-base sm:text-lg font-semibold uppercase font-tech mb-2" style={{ color: '#FF6B35' }}>
             Toutes les réponses à vos questions
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6">
           {faqItems.map((item, index) => (
             <div 
               key={index}
-              className="bg-white rounded-lg shadow-lg border border-orange-500/10 hover-scale border-glow subtle-glow animated-border overflow-hidden"
+              className="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl border-2 border-orange-500/20 hover-scale border-glow subtle-glow animated-border overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-orange-500/40"
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-orange-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50"
+                className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-25 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500/50 group"
               >
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic pr-4">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 font-futuristic pr-4 group-hover:text-orange-600 transition-colors duration-300">
                   {item.question}
                 </h3>
-                {openItems.includes(index) ? (
-                  <ChevronUp className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                ) : (
-                  <ChevronDown className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                )}
+                <div className={`w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>
+                  <ChevronDown className="w-5 h-5 text-orange-500 transition-transform duration-300" />
+                </div>
               </button>
               
               {openItems.includes(index) && (
-                <div className="px-6 pb-4 border-t border-orange-500/10">
-                  <p className="text-sm sm:text-base text-gray-700 font-tech leading-relaxed pt-3">
+                <div className="px-6 sm:px-8 pb-5 sm:pb-6 border-t border-orange-500/20 bg-gradient-to-r from-orange-50/50 to-transparent">
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-700 font-tech leading-relaxed pt-4 sm:pt-5">
                     {item.answer}
                   </p>
                 </div>
@@ -93,7 +97,7 @@ const FAQ = () => {
           ))}
         </div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-12 sm:mt-16">
           <p className="text-sm text-gray-600 font-tech mb-4">
             Vous avez d'autres questions ?
           </p>

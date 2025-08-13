@@ -241,8 +241,8 @@ function App() {
         {/* FAQ (clair #F6F6F6) */}
         <FAQ />
         
-        {/* Zone → Contact : diagonale "/" */}
-        <DiagonalSlash topColor="#F8F9FA" bottomColor="#F8F9FA" type="section" />
+        {/* FAQ → Contact : diagonale "/" */}
+        <DiagonalSlash topColor="#FFFFFF" bottomColor="#F8F9FA" type="section" />
         
         {/* Contact (clair #F6F6F6) */}
         <Contact />

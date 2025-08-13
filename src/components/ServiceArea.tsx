@@ -23,31 +23,31 @@ const ServiceArea = () => {
     <section 
       id="area" 
       className="section relative text-white overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #FFFFFF 0%, #F6F6F6 100%)' }}
+      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight uppercase" style={{ color: '#E67E22' }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase">
             Zone d'intervention
           </h2>
-          <p className="text-lg sm:text-xl font-light" style={{ color: '#E67E22' }}>
+          <p className="text-lg sm:text-xl text-white/90 font-light">
             Service disponible dans la Haute-Loire et la Loire
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Haute-Loire */}
-          <div className="p-6 rounded-lg" style={{ background: 'rgba(230, 126, 34, 0.1)' }}>
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3" style={{ color: '#E67E22' }}>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold tracking-wide uppercase" style={{ color: '#E67E22' }}>
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
                 Haute-Loire (43)
               </h3>
             </div>
             
-            <div className="leading-relaxed font-light text-sm" style={{ color: '#E67E22' }}>
+            <div className="text-white/90 leading-relaxed font-light text-sm">
               {communes43.slice(0, showAllCommunes43 ? communes43.length : 8).map((commune, index) => (
                 <span key={index}>
                   {commune}
@@ -59,8 +59,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-              className="mt-3 inline-flex items-center hover:opacity-80 transition-colors font-medium text-sm uppercase"
-              style={{ color: '#E67E22' }}
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
             >
               {showAllCommunes43 ? (
                 <>
@@ -75,17 +74,17 @@ const ServiceArea = () => {
           </div>
 
           {/* Loire */}
-          <div className="p-6 rounded-lg" style={{ background: 'rgba(230, 126, 34, 0.1)' }}>
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-3" style={{ color: '#E67E22' }}>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold tracking-wide uppercase" style={{ color: '#E67E22' }}>
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
                 Loire (42)
               </h3>
             </div>
             
-            <div className="leading-relaxed font-light text-sm" style={{ color: '#E67E22' }}>
+            <div className="text-white/90 leading-relaxed font-light text-sm">
               {communes42.slice(0, showAllCommunes42 ? communes42.length : 8).map((commune, index) => (
                 <span key={index}>
                   {commune}
@@ -97,8 +96,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-              className="mt-3 inline-flex items-center hover:opacity-80 transition-colors font-medium text-sm uppercase"
-              style={{ color: '#E67E22' }}
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
             >
               {showAllCommunes42 ? (
                 <>

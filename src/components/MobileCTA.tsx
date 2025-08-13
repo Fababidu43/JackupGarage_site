@@ -7,8 +7,8 @@ const MobileCTA = () => {
       <div className="flex">
         <a
           href="tel:+33123456789"
-          className="flex-1 flex items-center justify-center py-4 font-bold tracking-wide text-sm text-white"
-          style={{ background: '#E67E22' }}
+          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm"
+          style={{ background: '#DE5121' }}
         >
           <Phone className="w-4 h-4 mr-2" />
           APPELER

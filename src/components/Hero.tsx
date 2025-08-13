@@ -12,41 +12,35 @@ const Hero = () => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden particles"
-      style={{ background: 'linear-gradient(135deg, #E67E22 0%, #D35400 50%, #3498DB 100%)' }}
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: '#DE5121' }}
     >
-      {/* Effets de fond animés */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-48 h-48 bg-cyan-500/20 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
-
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase neon-text animate-slide-glow">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase">
           Jack Up Garage
         </h1>
         
-        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8 tracking-wide uppercase animate-slide-glow" style={{ animationDelay: '0.2s' }}>
+        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8 tracking-wide uppercase">
           Mécanicien à domicile
         </p>
 
-        <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light animate-slide-glow" style={{ animationDelay: '0.4s' }}>
+        <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
           Service professionnel de mécanique automobile à domicile dans la Haute-Loire (43) et la Loire (42). 
           Intervention sur sol dur et plat uniquement.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-glow" style={{ animationDelay: '0.6s' }}>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={() => scrollToSection('contact')}
-            className="btn-futuristic inline-flex items-center px-8 py-4 text-white font-bold text-lg rounded-lg group neon-glow"
+            className="inline-flex items-center px-8 py-4 bg-white text-orange-500 font-bold text-lg hover:bg-gray-50 shadow-lg hover:shadow-xl rounded group"
+            style={{ color: '#DE5121' }}
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 glass border-2 border-white/30 text-white font-bold text-lg hover:bg-white/20 hover:border-white/50 rounded-lg transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 rounded"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler
@@ -54,18 +48,18 @@ const Hero = () => {
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/90 animate-slide-glow" style={{ animationDelay: '0.8s' }}>
-          <div className="flex items-center glass px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/90">
+          <div className="flex items-center">
             <Shield className="w-5 h-5 mr-2" />
             <span className="font-medium tracking-wide text-sm uppercase">RC Pro</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-white/50 rounded-full"></div>
-          <div className="flex items-center glass px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300">
+          <div className="flex items-center">
             <FileText className="w-5 h-5 mr-2" />
             <span className="font-medium tracking-wide text-sm uppercase">Devis gratuit</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-white/50 rounded-full"></div>
-          <div className="flex items-center glass px-4 py-2 rounded-full hover:bg-white/10 transition-all duration-300">
+          <div className="flex items-center">
             <Clock className="w-5 h-5 mr-2" />
             <span className="font-medium tracking-wide text-sm uppercase">Réponse &lt; 12h</span>
           </div>

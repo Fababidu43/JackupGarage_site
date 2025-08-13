@@ -25,7 +25,7 @@ const Header = () => {
     <header 
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'glass shadow-lg border-b border-white/10' 
+          ? 'bg-white/95 backdrop-blur-sm shadow-sm' 
           : 'bg-transparent'
       }`}
     >
@@ -36,14 +36,11 @@ const Header = () => {
             className="flex items-center cursor-pointer"
             onClick={() => scrollToSection('hero')}
           >
-            <div className="relative">
-              <img 
-                src="/src/logo.png" 
-                alt="Jack Up Garage" 
-                className="h-12 w-auto drop-shadow-lg animate-float"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-lg blur-xl -z-10"></div>
-            </div>
+            <img 
+              src="/src/logo.png" 
+              alt="Jack Up Garage" 
+              className="h-10 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation - Style Solid State */}
@@ -57,11 +54,8 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-bold tracking-wide uppercase transition-all duration-300 ${
-                  isScrolled 
-                    ? 'text-white hover:text-orange-400' 
-                    : 'text-white/90 hover:text-white'
-                } hover:scale-110 hover:drop-shadow-lg`}
+                className="text-sm font-medium text-gray-700 tracking-wide uppercase"
+                style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
               >
                 {item.name}
               </button>
@@ -71,9 +65,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden p-2 transition-colors duration-300 ${
-              isScrolled ? 'text-white' : 'text-white'
-            }`}
+            className="md:hidden p-2 text-gray-900"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -81,7 +73,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden glass-dark border-t border-white/10">
+          <div className="md:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200">
             <nav className="py-4 space-y-2">
               {[
                 { name: 'Accueil', id: 'hero' },
@@ -92,7 +84,8 @@ const Header = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-2 text-white font-bold tracking-wide uppercase text-sm hover:text-orange-400 hover:bg-white/5 transition-all duration-300"
+                  className="block w-full text-left px-4 py-2 text-gray-700 font-medium tracking-wide uppercase text-sm"
+                  style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
                 >
                   {item.name}
                 </button>

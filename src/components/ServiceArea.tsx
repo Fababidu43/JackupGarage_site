@@ -22,33 +22,27 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden particles"
+      className="section relative text-white overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
     >
-      {/* Effets de fond */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/3 left-1/6 w-32 h-32 bg-blue-500/30 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-1/6 w-48 h-48 bg-cyan-500/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase neon-text animate-slide-glow">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase">
             Zone d'intervention
           </h2>
-          <p className="text-lg sm:text-xl text-white/90 font-light animate-slide-glow" style={{ animationDelay: '0.2s' }}>
+          <p className="text-lg sm:text-xl text-white/90 font-light">
             Service disponible dans la Haute-Loire et la Loire
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Haute-Loire */}
-          <div className="glass p-6 rounded-lg card-hover animate-slide-glow" style={{ animationDelay: '0.4s' }}>
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3 neon-glow animate-pulse-glow">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold text-white tracking-wide uppercase neon-text">
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
                 Haute-Loire (43)
               </h3>
             </div>
@@ -65,7 +59,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-              className="mt-3 inline-flex items-center text-white hover:text-orange-300 transition-all duration-300 font-medium text-sm uppercase glass px-3 py-1 rounded-full hover:bg-white/10"
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
             >
               {showAllCommunes43 ? (
                 <>
@@ -80,12 +74,12 @@ const ServiceArea = () => {
           </div>
 
           {/* Loire */}
-          <div className="glass p-6 rounded-lg card-hover animate-slide-glow" style={{ animationDelay: '0.6s' }}>
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3 neon-glow animate-pulse-glow">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold text-white tracking-wide uppercase neon-text">
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
                 Loire (42)
               </h3>
             </div>
@@ -102,7 +96,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-              className="mt-3 inline-flex items-center text-white hover:text-orange-300 transition-all duration-300 font-medium text-sm uppercase glass px-3 py-1 rounded-full hover:bg-white/10"
+              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
             >
               {showAllCommunes42 ? (
                 <>
@@ -119,14 +113,14 @@ const ServiceArea = () => {
 
         {/* Conditions d'intervention */}
         <div className="max-w-4xl mx-auto">
-          <div className="glass-dark p-6 rounded-lg shadow-lg card-hover animate-slide-glow" style={{ animationDelay: '0.8s' }}>
-            <h4 className="text-xl font-bold text-white mb-3 tracking-wide text-center uppercase neon-text">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-wide text-center uppercase">
               Conditions d'intervention
             </h4>
-            <p className="text-base leading-relaxed mb-3 text-center font-light text-white/90">
+            <p className="text-base leading-relaxed mb-3 text-center font-light" style={{ color: '#5B6573' }}>
               Intervention sur sol dur et plat uniquement pour des raisons de sécurité.
             </p>
-            <p className="text-sm leading-relaxed text-center font-light text-white/80">
+            <p className="text-sm leading-relaxed text-center font-light" style={{ color: '#5B6573' }}>
               Pour les embrayages, possibilité de déplacement longue distance avec supplément kilométrique.
             </p>
           </div>

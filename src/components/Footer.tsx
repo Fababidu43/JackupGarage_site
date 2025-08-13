@@ -3,16 +3,16 @@ import { Facebook, Instagram, Phone, Mail, Wrench } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 relative overflow-hidden tech-grid">
+    <footer className="text-white py-12 relative overflow-hidden tech-grid warm-bg-dark">
       {/* Logo en filigrane */}
       <div className="absolute inset-0 flex items-center justify-center opacity-3">
         <Wrench className="w-48 h-48 text-orange-500 transform rotate-12" />
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 scroll-reveal">
           {/* Jack Up Garage */}
-          <div>
+          <div className="scroll-reveal-left">
             <div className="flex items-baseline space-x-5 mb-6">
               <div 
                 className="w-32 h-24 rounded-lg flex items-center justify-center bg-white/95 border-2 border-orange-500/30 p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 flex-shrink-0 hover-scale shadow-lg"

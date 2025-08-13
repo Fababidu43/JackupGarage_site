@@ -12,12 +12,14 @@ const Hero = () => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden warm-bg-gradient"
       style={{ 
         background: `
+          radial-gradient(ellipse at top, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
-          radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
+          linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)
         `
       }}
     >
@@ -26,27 +28,29 @@ const Hero = () => {
       
       {/* Éléments mécaniques flottants */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
-        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
-        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>
-        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/10 rounded-full"></div>
+        <div className="floating-element absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/30 rounded-full animate-spin-slow"></div>
+        <div className="floating-element absolute top-40 right-20 w-8 h-8 border border-orange-400/40 rotate-45"></div>
+        <div className="floating-element absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/25 rounded-lg rotate-12"></div>
+        <div className="floating-element absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/20 rounded-full"></div>
+        <div className="floating-element absolute top-1/3 left-1/3 w-4 h-4 bg-orange-400/15 rotate-45"></div>
+        <div className="floating-element absolute bottom-1/3 right-1/4 w-10 h-10 border border-orange-500/20 rounded-full"></div>
       </div>
       
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow">
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 scroll-reveal">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow scroll-reveal-scale">
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-4 tracking-wide uppercase font-futuristic pulse-subtle">
+        <div className="text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-4 tracking-wide uppercase font-futuristic pulse-subtle scroll-reveal">
           Haute-Loire & Loire (43–42)
         </div>
         
-        <p className="text-lg sm:text-xl text-white/80 font-light mb-8 tracking-wide font-tech">
+        <p className="text-lg sm:text-xl text-white/80 font-light mb-8 tracking-wide font-tech scroll-reveal">
           Entretien, freins, embrayage, distribution, suspensions.<br />
           <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 scroll-reveal">
           <button
             onClick={() => scrollToSection('contact')}
             className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale"
@@ -64,7 +68,7 @@ const Hero = () => {
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/80">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/80 scroll-reveal">
           <div className="flex items-center">
             <Shield className="w-5 h-5 mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-sm uppercase font-tech">RC Pro</span>

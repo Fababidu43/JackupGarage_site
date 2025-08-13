@@ -36,7 +36,7 @@ const Contact = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase">
             Contact
           </h2>
-          <p className="text-lg font-semibold uppercase" style={{ color: '#DE5121' }}>
+          <p className="text-lg font-semibold uppercase" style={{ color: '#1a1a1a' }}>
             Réponse sous 12h par téléphone ou mail
           </p>
         </div>
@@ -46,7 +46,7 @@ const Contact = () => {
           <div className="space-y-6">
             <div className="bg-white p-6 shadow-lg rounded-lg">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#1a1a1a' }}>
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -64,7 +64,7 @@ const Contact = () => {
 
             <div className="bg-white p-6 shadow-lg rounded-lg">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#1a1a1a' }}>
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -82,7 +82,7 @@ const Contact = () => {
 
             <div className="bg-white p-6 shadow-lg rounded-lg">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#1a1a1a' }}>
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -232,7 +232,7 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full text-white py-4 px-6 font-bold hover:opacity-90 shadow-lg flex items-center justify-center tracking-wide rounded uppercase"
-                style={{ background: '#DE5121' }}
+                style={{ background: '#1a1a1a' }}
               >
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande

@@ -32,16 +32,15 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center px-8 py-4 font-bold text-lg hover:opacity-90 shadow-lg hover:shadow-xl rounded group text-white"
-            style={{ background: '#DE5121' }}
+            className="inline-flex items-center px-8 py-4 bg-white font-bold text-lg hover:bg-gray-50 shadow-lg hover:shadow-xl rounded group"
+            style={{ color: '#1a1a1a' }}
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 bg-transparent border-2 text-white font-bold text-lg hover:opacity-80 rounded"
-            style={{ borderColor: '#DE5121' }}
+            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 rounded"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler

@@ -39,7 +39,7 @@ const ServiceArea = () => {
           {/* Haute-Loire */}
           <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-bold text-white tracking-wide uppercase">
@@ -76,7 +76,7 @@ const ServiceArea = () => {
           {/* Loire */}
           <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-bold text-white tracking-wide uppercase">

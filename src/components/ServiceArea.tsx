@@ -49,7 +49,6 @@ const ServiceArea = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Haute-Loire */}
-          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 hover-scale border-glow">
           <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 hover-scale border-glow subtle-glow animated-border">
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle">

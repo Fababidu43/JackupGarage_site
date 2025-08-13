@@ -23,12 +23,8 @@ const Footer = () => {
           {/* Jack Up Garage */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
-                <img 
-                  src="/src/logo.png" 
-                  alt="Jack Up Garage" 
-                  className="w-full h-full object-contain"
-                />
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+               <Wrench className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white tracking-wide uppercase">Jack Up Garage</h3>

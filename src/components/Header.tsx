@@ -85,8 +85,8 @@ const Header = () => {
       <header 
         className={`fixed w-full top-0 z-40 transition-all duration-300 ease-out ${
           isScrolled 
-            ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-2' 
-            : 'bg-transparent py-3'
+            ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-2'
+            : 'bg-transparent py-3 border-b border-orange-500/30'
         }`}
         style={{
           backdropFilter: isScrolled ? 'blur(12px)' : 'none',

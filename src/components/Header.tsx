@@ -92,7 +92,7 @@ const Header = () => {
           backdropFilter: isScrolled ? 'blur(12px)' : 'none',
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className={`flex justify-between items-center transition-all duration-300 ease-out ${
             isScrolled ? 'h-14' : 'h-16'
           }`}>
@@ -105,13 +105,13 @@ const Header = () => {
               <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-3 py-2 
                 hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
                 transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                ${isScrolled ? 'w-20 h-10' : 'w-24 h-12'}`}
+                ${isScrolled ? 'w-24 h-12' : 'w-32 h-16'}`}
               >
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
                   className={`w-auto object-contain transition-all duration-300 ${
-                    isScrolled ? 'max-h-6' : 'max-h-8'
+                    isScrolled ? 'max-h-8' : 'max-h-12'
                   }`}
                 />
               </div>

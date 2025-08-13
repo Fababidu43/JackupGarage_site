@@ -41,17 +41,19 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero />
         
+        {/* Hero → Services : diagonale "/" */}
+        <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        
         {/* Services intro (blanc #FFFFFF) */}
-        <div className="reveal-on-scroll relative">
-          {/* Diagonale intégrée Hero → Services */}
-          <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="reveal-on-scroll">
           <Services />
         </div>
         
+        {/* Services → Service 1 : diagonale "\" */}
+        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-8 lg:py-12 tech-grid slide-in-left relative" style={{ background: '#0A0A0A' }}>
-          {/* Diagonale intégrée Services → Service 1 */}
-          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="section section--entretien py-8 lg:py-12 tech-grid slide-in-left" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -89,10 +91,11 @@ function App() {
           </div>
         </div>
 
+        {/* Service 1 → Service 2 : diagonale "/" */}
+        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-8 lg:py-12 slide-in-right relative" style={{ background: '#F8F9FA' }}>
-          {/* Diagonale intégrée Service 1 → Service 2 */}
-          <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="section py-8 lg:py-12 slide-in-right" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -131,10 +134,11 @@ function App() {
           </div>
         </div>
 
+        {/* Service 2 → Service 3 : diagonale "\" */}
+        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-8 lg:py-12 tech-grid slide-in-left relative" style={{ background: '#0A0A0A' }}>
-          {/* Diagonale intégrée Service 2 → Service 3 */}
-          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="section py-8 lg:py-12 tech-grid slide-in-left" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -172,10 +176,11 @@ function App() {
           </div>
         </div>
 
+        {/* Service 3 → Service 4 : diagonale "/" */}
+        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-8 lg:py-12 slide-in-right relative" style={{ background: '#F8F9FA' }}>
-          {/* Diagonale intégrée Service 3 → Service 4 */}
-          <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="section py-8 lg:py-12 slide-in-right" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -214,17 +219,19 @@ function App() {
           </div>
         </div>
         
+        {/* Service 4 → Zone d'intervention : diagonale "\" */}
+        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
+        
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <div className="reveal-on-scroll relative">
-          {/* Diagonale intégrée Service 4 → Zone d'intervention */}
-          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="reveal-on-scroll">
           <ServiceArea />
         </div>
         
+        {/* Zone → Contact : diagonale "/" */}
+        <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        
         {/* Contact (clair #F6F6F6) */}
-        <div className="reveal-on-scroll relative">
-          {/* Diagonale intégrée Zone → Contact */}
-          <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" className="absolute top-0 left-0 right-0 z-0" />
+        <div className="reveal-on-scroll">
           <Contact />
         </div>
       </main>

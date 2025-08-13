@@ -111,7 +111,7 @@ const Contact = () => {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
@@ -125,7 +125,7 @@ const Contact = () => {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@ const Contact = () => {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                 />
               </div>
 
@@ -157,7 +157,7 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
@@ -171,7 +171,7 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
               </div>
@@ -187,7 +187,7 @@ const Contact = () => {
                     name="registration"
                     value={formData.registration}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   />
                 </div>
                 <div>
@@ -200,7 +200,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus"
                   >
                     <option value="">Sélectionner</option>
                     <option value="entretien">Entretien / Vidange</option>
@@ -223,7 +223,7 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 text-white focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus"
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus"
                   placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
               </div>

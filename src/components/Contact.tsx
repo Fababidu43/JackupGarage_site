@@ -28,13 +28,19 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll tech-grid"
+      className="section relative py-8 lg:py-12 reveal-on-scroll dynamic-bg tech-grid-animated"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Éléments décoratifs futuristes */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
-      <div className="absolute bottom-12 right-12 w-12 h-12 border border-orange-400/30 rotate-45"></div>
-      <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-orange-500/10 rounded-full pulse-subtle"></div>
+      {/* Couches de parallaxe futuristes */}
+      <div className="parallax-layer parallax-slow energy-bg opacity-50"></div>
+      <div className="parallax-layer parallax-medium particle-bg opacity-30"></div>
+      <div className="parallax-layer parallax-fast geometric-bg opacity-20"></div>
+      
+      {/* Éléments décoratifs flottants */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow parallax-element"></div>
+      <div className="absolute bottom-12 right-12 w-12 h-12 border border-orange-400/30 rotate-45 parallax-element"></div>
+      <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-orange-500/10 rounded-full pulse-subtle parallax-element"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-6 h-6 border border-orange-500/15 rounded parallax-element"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">

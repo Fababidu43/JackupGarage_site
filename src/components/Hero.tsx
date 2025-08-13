@@ -7,7 +7,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
-    // Effet de parallaxe pour l'image de fond
+    // Effets de parallaxe dynamiques
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       
@@ -19,12 +19,31 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         heroSection.style.backgroundPosition = `center ${yPos}px`;
       }
       
-      // Parallaxe pour les autres éléments
+      // Parallaxe pour tous les fonds dynamiques
+      const dynamicBgs = document.querySelectorAll('.dynamic-bg');
+      dynamicBgs.forEach((element, index) => {
+        const speed = 0.1 + (index * 0.05); // Vitesses différentes
+        const yPos = -(scrolled * speed);
+        const bgElement = element.querySelector('::before') as HTMLElement;
+        if (bgElement) {
+          (element as HTMLElement).style.setProperty('--parallax-y', `${yPos}px`);
+        }
+      });
+      
+      // Parallaxe pour les éléments décoratifs
       const parallaxElements = document.querySelectorAll('.parallax-element');
       parallaxElements.forEach((element) => {
         const speed = 0.5;
         const yPos = -(scrolled * speed);
         (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
+      
+      // Parallaxe pour les couches de profondeur
+      const parallaxLayers = document.querySelectorAll('.parallax-layer');
+      parallaxLayers.forEach((layer, index) => {
+        const speed = 0.2 + (index * 0.1);
+        const yPos = scrolled * speed;
+        (layer as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
     };
 
@@ -42,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden circuit-bg"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden dynamic-bg"
       style={{ 
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
@@ -52,8 +71,10 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundAttachment: 'fixed'
       }}
     >
-      {/* Overlay mécanique avec grille tech */}
-      <div className="absolute inset-0 tech-grid opacity-30 parallax-element"></div>
+      {/* Couches de parallaxe avec effets dynamiques */}
+      <div className="parallax-layer parallax-slow tech-grid-animated opacity-20"></div>
+      <div className="parallax-layer parallax-medium particle-bg opacity-30"></div>
+      <div className="parallax-layer parallax-fast energy-bg opacity-10"></div>
       
       {/* Particules flottantes */}
       <div className="floating-particles">
@@ -65,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       </div>
       
       {/* Éléments mécaniques flottants */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none parallax-element">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
         <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
         <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>

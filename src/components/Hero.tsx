@@ -13,8 +13,24 @@ const Hero = () => {
     <section 
       id="hero"
       className="section relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: '#DE5121' }}
+      className="bg-gradient-to-br from-orange-500 via-orange-600 to-red-600"
     >
+      {/* Éléments décoratifs de fond */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-white rounded-full blur-xl"></div>
+        <div className="absolute bottom-32 right-16 w-48 h-48 bg-white rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-white rounded-full blur-lg"></div>
+      </div>
+      
+      {/* Motif géométrique subtil */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, white 2px, transparent 2px),
+                           radial-gradient(circle at 75% 75%, white 2px, transparent 2px)`,
+          backgroundSize: '60px 60px'
+        }}></div>
+      </div>
+
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase">
           Jack Up Garage

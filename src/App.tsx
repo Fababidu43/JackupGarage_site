@@ -48,30 +48,6 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Formes dynamiques globales */}
-      <div className="dynamic-shapes">
-        <div className="shape shape-1"></div>
-        <div className="shape shape-2"></div>
-        <div className="shape shape-3"></div>
-        <div className="shape shape-4"></div>
-        <div className="shape shape-5"></div>
-      </div>
-      
-      {/* Formes géométriques */}
-      <div className="geometric-shapes">
-        <div className="geo-shape geo-1"></div>
-        <div className="geo-shape geo-2"></div>
-        <div className="geo-shape geo-3"></div>
-        <div className="geo-shape geo-4"></div>
-      </div>
-      
-      {/* Lignes flottantes */}
-      <div className="floating-lines">
-        <div className="line line-1"></div>
-        <div className="line line-2"></div>
-        <div className="line line-3"></div>
-      </div>
-      
       <Header onQuoteClick={openQuotePopup} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}

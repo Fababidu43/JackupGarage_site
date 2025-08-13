@@ -63,11 +63,10 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-4 sm:py-6 lg:py-8 dynamic-bg slide-in-left relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Effet de mouvement subtil */}
-          <div className="absolute inset-0 opacity-25">
-            <div className="particle-bg h-full w-full"></div>
-          </div>
+        <div className="section section--entretien py-4 sm:py-6 lg:py-8 dynamic-bg tech-grid-animated slide-in-left" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Couches de parallaxe pour service sombre */}
+          <div className="parallax-layer parallax-slow energy-bg opacity-30"></div>
+          <div className="parallax-layer parallax-medium particle-bg opacity-20"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -110,11 +109,10 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg slide-in-right relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
-          {/* Effet de mouvement subtil */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="wave-bg h-full w-full"></div>
-          </div>
+        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg geometric-bg slide-in-right" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          {/* Couches de parallaxe pour service clair */}
+          <div className="parallax-layer parallax-slow wave-bg opacity-25"></div>
+          <div className="parallax-layer parallax-medium opacity-15" style={{ background: 'radial-gradient(circle at 60% 40%, rgba(255, 107, 53, 0.03) 0%, transparent 50%)' }}></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -158,11 +156,10 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="z-10" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg slide-in-left relative z-20 overflow-hidden" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Effet de mouvement subtil */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="energy-bg h-full w-full"></div>
-          </div>
+        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg tech-grid-animated slide-in-left relative z-20" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Couches de parallaxe pour service sombre */}
+          <div className="parallax-layer parallax-slow energy-bg opacity-35"></div>
+          <div className="parallax-layer parallax-medium particle-bg opacity-25"></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
@@ -205,11 +202,10 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg slide-in-right relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
-          {/* Effet de mouvement subtil */}
-          <div className="absolute inset-0 opacity-15">
-            <div className="geometric-bg h-full w-full"></div>
-          </div>
+        <div className="section py-4 sm:py-6 lg:py-8 dynamic-bg wave-bg slide-in-right" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          {/* Couches de parallaxe pour service clair */}
+          <div className="parallax-layer parallax-slow geometric-bg opacity-20"></div>
+          <div className="parallax-layer parallax-medium opacity-10" style={{ background: 'radial-gradient(circle at 40% 60%, rgba(255, 107, 53, 0.04) 0%, transparent 50%)' }}></div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">

@@ -28,23 +28,29 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll dynamic-bg"
+      className="section relative py-8 lg:py-12 reveal-on-scroll dynamic-bg tech-grid-animated"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Effet de mouvement subtil */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="energy-bg h-full w-full"></div>
-      </div>
+      {/* Couches de parallaxe futuristes */}
+      <div className="parallax-layer parallax-slow energy-bg opacity-50"></div>
+      <div className="parallax-layer parallax-medium particle-bg opacity-30"></div>
+      <div className="parallax-layer parallax-fast geometric-bg opacity-20"></div>
+      
+      {/* Éléments décoratifs flottants */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow parallax-element"></div>
+      <div className="absolute bottom-12 right-12 w-12 h-12 border border-orange-400/30 rotate-45 parallax-element"></div>
+      <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-orange-500/10 rounded-full pulse-subtle parallax-element"></div>
+      <div className="absolute bottom-1/4 left-1/3 w-6 h-6 border border-orange-500/15 rounded parallax-element"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg hover-scale">
+          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 pulse-subtle shadow-lg hover-scale">
             <Phone className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 tracking-tight uppercase font-futuristic text-glow">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 tracking-tight uppercase font-futuristic hover-glow-text text-glow scan-lines">
             Contact
           </h2>
-          <p className="text-base sm:text-lg font-semibold uppercase font-tech px-4 text-orange-400">
+          <p className="text-base sm:text-lg font-semibold uppercase font-tech pulse-subtle px-4 text-orange-400">
             Réponse sous 12h par téléphone ou mail
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full mt-3"></div>

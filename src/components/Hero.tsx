@@ -7,16 +7,44 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
+    // Effets de parallaxe dynamiques
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       
-      // Parallaxe simple pour l'image de fond du hero
+      // Parallaxe pour l'image de fond du hero
       const heroSection = document.getElementById('hero');
       if (heroSection) {
         const speed = 0.3; // Vitesse de parallaxe (plus c'est bas, plus c'est lent)
         const yPos = scrolled * speed;
         heroSection.style.backgroundPosition = `center ${yPos}px`;
       }
+      
+      // Parallaxe pour tous les fonds dynamiques
+      const dynamicBgs = document.querySelectorAll('.dynamic-bg');
+      dynamicBgs.forEach((element, index) => {
+        const speed = 0.1 + (index * 0.05); // Vitesses différentes
+        const yPos = -(scrolled * speed);
+        const bgElement = element.querySelector('::before') as HTMLElement;
+        if (bgElement) {
+          (element as HTMLElement).style.setProperty('--parallax-y', `${yPos}px`);
+        }
+      });
+      
+      // Parallaxe pour les éléments décoratifs
+      const parallaxElements = document.querySelectorAll('.parallax-element');
+      parallaxElements.forEach((element) => {
+        const speed = 0.5;
+        const yPos = -(scrolled * speed);
+        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
+      
+      // Parallaxe pour les couches de profondeur
+      const parallaxLayers = document.querySelectorAll('.parallax-layer');
+      parallaxLayers.forEach((layer, index) => {
+        const speed = 0.2 + (index * 0.1);
+        const yPos = scrolled * speed;
+        (layer as HTMLElement).style.transform = `translateY(${yPos}px)`;
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden dynamic-bg"
       style={{ 
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
@@ -43,31 +71,53 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundAttachment: 'fixed'
       }}
     >
+      {/* Couches de parallaxe avec effets dynamiques */}
+      <div className="parallax-layer parallax-slow tech-grid-animated opacity-20"></div>
+      <div className="parallax-layer parallax-medium particle-bg opacity-30"></div>
+      <div className="parallax-layer parallax-fast energy-bg opacity-10"></div>
+      
+      {/* Particules flottantes */}
+      <div className="floating-particles">
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+      </div>
+      
+      {/* Éléments mécaniques flottants */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
+        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
+        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>
+        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/10 rounded-full"></div>
+      </div>
+      
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
-          Mécanicien à domicile
+          <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
+        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic pulse-subtle reveal-on-scroll scan-lines">
           Haute-Loire & Loire (43–42)
         </div>
         
         <p className="text-base sm:text-lg lg:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2">
           Entretien, freins, embrayage, distribution, suspensions.<br />
-          <span className="text-orange-300">Nous venons chez vous.</span>
+          <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-4">
           <button
             onClick={onQuoteClick}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-base sm:text-lg font-tech hover-scale min-h-[48px]"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-base sm:text-lg font-tech hover-scale min-h-[48px]"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler

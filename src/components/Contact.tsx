@@ -37,7 +37,6 @@ const Contact = () => {
             Contact
           </h2>
           <p className="text-lg font-semibold uppercase" style={{ color: '#DE5121' }}>
-          <p className="text-lg font-semibold uppercase" style={{ color: '#E67E22' }}>
             Réponse sous 12h par téléphone ou mail
           </p>
         </div>

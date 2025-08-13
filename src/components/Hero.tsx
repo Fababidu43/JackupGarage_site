@@ -100,6 +100,7 @@ const Hero = () => {
         </AnimatedElement>
       </div>
     </section>
+  )
   );
 };
 

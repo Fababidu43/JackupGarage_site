@@ -179,32 +179,56 @@ const Header = () => {
             />
             
             {/* Menu Panel */}
-            <div className="fixed top-16 right-4 w-48 bg-black/95 backdrop-blur-md rounded-lg shadow-xl
+            <div className="fixed top-16 right-4 w-64 bg-black/95 backdrop-blur-md rounded-lg shadow-xl
               border border-orange-500/30 z-40 md:hidden transform transition-all duration-200 ease-out">
               
-              {/* Navigation Links Simple */}
-              <nav className="py-2">
+              {/* Header avec croix */}
+              <div className="flex items-center justify-between p-4 border-b border-orange-500/20">
+                <span className="text-white font-medium text-sm font-tech uppercase tracking-wide">Menu</span>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-1 text-white/70 hover:text-orange-400 transition-colors duration-200
+                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded"
+                  aria-label="Fermer le menu"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              
+              {/* Navigation Links identique au desktop */}
+              <nav className="py-3">
                 {navigationItems.map((item, index) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full px-4 py-3 text-left text-sm font-tech transition-colors duration-150
+                    className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out
                       ${activeSection === item.id 
-                        ? 'text-orange-400 bg-orange-500/10' 
-                        : 'text-white/90 hover:text-orange-400 hover:bg-white/5'
-                      } ${index === 0 ? 'rounded-t-lg' : ''} ${index === navigationItems.length - 1 ? 'rounded-b-lg border-b-0' : 'border-b border-white/10'}`}
+                        ? 'text-orange-400' 
+                        : 'text-white/90 hover:text-orange-400'
+                      } ${index !== navigationItems.length - 1 ? 'border-b border-white/10' : ''}`}
                   >
                     {item.name}
+                    
+                    {/* Soulignement animé identique au desktop */}
+                    <span className={`absolute bottom-0 left-4 right-4 h-0.5 bg-orange-500 transition-all duration-300 ease-out
+                      ${activeSection === item.id ? 'w-[calc(100%-2rem)]' : 'w-0 group-hover:w-[calc(100%-2rem)]'}`} />
+                    
+                    {/* Indicateur section active */}
+                    {activeSection === item.id && (
+                      <span className="absolute left-0 top-0 bottom-0 w-1 bg-orange-500 rounded-r" />
+                    )}
                   </button>
                 ))}
               </nav>
               
-              {/* CTA Simple */}
-              <div className="p-2 border-t border-orange-500/20">
+              {/* CTA identique au desktop */}
+              <div className="p-4 border-t border-orange-500/20">
                 <a
                   href="tel:+33123456789"
-                  className="w-full flex items-center justify-center px-3 py-2 bg-orange-500 
-                    text-white font-medium rounded text-sm transition-colors duration-150 hover:bg-orange-600"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
+                    rounded-lg transition-all duration-200 ease-out transform hover:scale-105
+                    hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
+                    font-tech uppercase tracking-wide text-sm"
                 >
                   Appeler
                 </a>

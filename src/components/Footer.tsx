@@ -13,15 +13,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Jack Up Garage */}
           <div>
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="w-24 h-20 rounded-lg flex items-center justify-center glow-hover bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-2">
+            <div className="flex items-start space-x-5 mb-6">
+              <div className="w-28 h-24 rounded-lg flex items-center justify-center glow-hover bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-3 flex-shrink-0">
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
-                  className="h-16 w-auto max-w-none drop-shadow-xl filter brightness-125 hover:brightness-150 transition-all duration-300"
+                  className="h-18 w-auto max-w-none drop-shadow-xl filter brightness-125 hover:brightness-150 transition-all duration-300"
                 />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-xl font-bold text-white tracking-wide uppercase font-futuristic mb-1">Jack Up Garage</h3>
                 <p className="text-orange-400 font-medium tracking-wide text-base uppercase font-tech">Mécanicien à domicile</p>
               </div>

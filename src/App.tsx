@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
-import { AnimatedElement, ParallaxElement, MorphingShape } from './components/ScrollAnimations';
 
 function App() {
   return (
@@ -32,41 +31,37 @@ function App() {
         <div className="section section--entretien py-8 lg:py-12 tech-grid" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <AnimatedElement animation="slideInLeft" delay={200}>
-                <div>
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
-                    <Droplets className="w-10 h-10" />
-                  </div>
-                
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                    Entretiens
-                  </h3>
-                
-                  <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-white/80 font-tech">
-                    Vidanges, filtres, freins. Interventions propres et rapides, à domicile.
-                  </p>
-                
-                  <button 
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-orange-400 hover:text-orange-300 underline-animate font-tech transition-colors hover-lift"
-                  >
-                    Demander un devis
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </button>
+              <div>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
+                  <Droplets className="w-10 h-10" />
                 </div>
-              </AnimatedElement>
+                
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
+                  Entretiens
+                </h3>
+                
+                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-white/80 font-tech">
+                  Vidanges, filtres, freins. Interventions propres et rapides, à domicile.
+                </p>
+                
+                <button 
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-orange-400 hover:text-orange-300 underline-animate font-tech transition-colors hover-lift"
+                >
+                  Demander un devis
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </button>
+              </div>
               
-              <AnimatedElement animation="scaleIn" delay={400}>
-                <div>
-                  <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
-                    <img 
-                      src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
-                      alt="Vidange moteur - Entretien automobile" 
-                      className="w-full h-full object-cover rounded-lg" 
-                    />
-                  </div>
+              <div>
+                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
+                  <img 
+                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Vidange moteur - Entretien automobile" 
+                    className="w-full h-full object-cover rounded-lg" 
+                  />
                 </div>
-              </AnimatedElement>
+              </div>
             </div>
           </div>
         </div>
@@ -78,42 +73,38 @@ function App() {
         <div className="section py-8 lg:py-12" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <AnimatedElement animation="slideInRight" delay={200} className="lg:order-2">
-                <div>
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35' }}>
-                    <Zap className="w-10 h-10" />
-                  </div>
-                
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
-                    Embrayage & Volant Moteur
-                  </h3>
-                
-                  <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-700 font-tech">
-                    Remplacement complet avec essais. Déplacements étendus sur demande.
-                  </p>
-                
-                  <button 
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80 underline-animate font-tech transition-colors hover-lift"
-                    style={{ color: '#FF6B35' }}
-                  >
-                    Demander un devis
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </button>
+              <div className="lg:order-2">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35' }}>
+                  <Zap className="w-10 h-10" />
                 </div>
-              </AnimatedElement>
+                
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                  Embrayage & Volant Moteur
+                </h3>
+                
+                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-700 font-tech">
+                  Remplacement complet avec essais. Déplacements étendus sur demande.
+                </p>
+                
+                <button 
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80 underline-animate font-tech transition-colors hover-lift"
+                  style={{ color: '#FF6B35' }}
+                >
+                  Demander un devis
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </button>
+              </div>
               
-              <AnimatedElement animation="hologram" delay={400} className="lg:order-1">
-                <div>
-                  <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
-                    <img 
-                      src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
-                      alt="Kit embrayage et volant moteur" 
-                      className="w-full h-full object-cover rounded-lg" 
-                    />
-                  </div>
+              <div className="lg:order-1">
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
+                  <img 
+                    src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Kit embrayage et volant moteur" 
+                    className="w-full h-full object-cover rounded-lg" 
+                  />
                 </div>
-              </AnimatedElement>
+              </div>
             </div>
           </div>
         </div>

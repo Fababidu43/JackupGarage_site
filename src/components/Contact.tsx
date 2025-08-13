@@ -28,23 +28,32 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-12 lg:py-16 reveal-on-scroll"
-      style={{ background: '#F8F9FA' }}
+      className="section relative py-12 lg:py-16 reveal-on-scroll tech-grid"
+      style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      {/* Éléments décoratifs futuristes */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
+      <div className="absolute bottom-12 right-12 w-12 h-12 border border-orange-400/30 rotate-45"></div>
+      <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-orange-500/10 rounded-full pulse-subtle"></div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-3 sm:mb-4 tracking-tight uppercase font-futuristic hover-glow-text subtle-glow scan-lines">
+          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 pulse-subtle shadow-lg hover-scale">
+            <Phone className="w-6 h-6" />
+          </div>
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-3 sm:mb-4 tracking-tight uppercase font-futuristic hover-glow-text text-glow scan-lines">
             Contact
           </h2>
-          <p className="text-base sm:text-lg font-semibold uppercase font-tech pulse-subtle px-4" style={{ color: '#FF6B35' }}>
+          <p className="text-base sm:text-lg font-semibold uppercase font-tech pulse-subtle px-4 text-orange-400">
             Réponse sous 12h par téléphone ou mail
           </p>
+          <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full mt-3"></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
           {/* Contact Info */}
           <div className="space-y-4 sm:space-y-6">
-            <div className="bg-white p-4 sm:p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow subtle-glow animated-border">
+            <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
               <div className="flex items-center mb-2 sm:mb-3">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Phone className="w-5 h-5" />
@@ -62,7 +71,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white p-4 sm:p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow subtle-glow animated-border">
+            <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
               <div className="flex items-center mb-2 sm:mb-3">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Mail className="w-5 h-5" />
@@ -80,14 +89,14 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white p-4 sm:p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow subtle-glow animated-border">
+            <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
               <div className="flex items-center mb-2 sm:mb-3">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Horaires</h3>
-                  <p className="text-gray-700 font-light text-xs sm:text-sm font-tech">
+                  <p className="text-gray-600 font-light text-xs sm:text-sm font-tech">
                     Lun - Sam: 8h - 18h<br />
                     Dimanche: Sur demande
                   </p>
@@ -98,7 +107,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="bg-black p-4 sm:p-6 shadow-lg rounded-lg border border-orange-500/30 hover-scale border-glow subtle-glow animated-border">
+            <form onSubmit={handleSubmit} className="bg-black/90 backdrop-blur-sm p-4 sm:p-6 shadow-2xl rounded-lg border-2 border-orange-500/40 hover-scale border-glow subtle-glow animated-border">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                 <div>
                   <label htmlFor="firstName" className="block text-xs sm:text-sm font-bold text-white mb-1 sm:mb-2 tracking-wide uppercase font-tech">
@@ -111,7 +120,7 @@ const Contact = () => {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   />
                 </div>
                 <div>
@@ -125,7 +134,7 @@ const Contact = () => {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   />
                 </div>
               </div>
@@ -141,7 +150,7 @@ const Contact = () => {
                   required
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                 />
               </div>
 
@@ -157,7 +166,7 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   />
                 </div>
                 <div>
@@ -171,7 +180,7 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   />
                 </div>
               </div>
@@ -187,7 +196,7 @@ const Contact = () => {
                     name="registration"
                     value={formData.registration}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   />
                 </div>
                 <div>
@@ -200,7 +209,7 @@ const Contact = () => {
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px]"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
                   >
                     <option value="">Sélectionner</option>
                     <option value="entretien">Entretien / Vidange</option>
@@ -223,7 +232,7 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[80px]"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[80px] transition-all duration-200"
                   placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
               </div>
@@ -250,7 +259,7 @@ const Contact = () => {
                 Envoyer la demande
               </button>
               
-              <p className="text-center text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4 font-tech">
+              <p className="text-center text-xs sm:text-sm text-white/60 mt-3 sm:mt-4 font-tech">
                 Retour par mail ou téléphone sous 12 h.
               </p>
             </form>

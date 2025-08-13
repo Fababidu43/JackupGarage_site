@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, Send, Clock } from 'lucide-react';
+import { AnimatedElement } from './ScrollAnimations';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -33,18 +34,23 @@ const Contact = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic hover-glow-text">
-            Contact
-          </h2>
-          <p className="text-lg font-semibold uppercase font-tech pulse-subtle" style={{ color: '#FF6B35' }}>
-            Réponse sous 12h par téléphone ou mail
-          </p>
+          <AnimatedElement animation="fadeInUp" delay={200}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic hover-glow-text">
+              Contact
+            </h2>
+          </AnimatedElement>
+          <AnimatedElement animation="glitch" delay={400}>
+            <p className="text-lg font-semibold uppercase font-tech pulse-subtle" style={{ color: '#FF6B35' }}>
+              Réponse sous 12h par téléphone ou mail
+            </p>
+          </AnimatedElement>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Contact Info */}
-          <div className="space-y-6">
-            <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow">
+          <AnimatedElement animation="slideInLeft" delay={600}>
+            <div className="space-y-6">
+              <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover hover-scale border-glow">
               <div className="flex items-center mb-3">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                   <Phone className="w-5 h-5" />

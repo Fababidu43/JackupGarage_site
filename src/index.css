@@ -245,9 +245,7 @@
 
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
 *, *::before, *::after {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
+  /* Réactivation des animations pour l'expérience futuriste */
 }
 
 /* Seuls les hovers instantanés sont autorisés */
@@ -261,12 +259,201 @@ a:hover,
   transition: all 0.3s ease !important;
 }
 
-.animate-fade-in-up,
-.animate-fade-in,
-.animate-diagonal-appear,
-.animate-slide-in-left,
+/* === ANIMATIONS FUTURISTES AVANCÉES === */
+
+/* Animations d'entrée */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) rotateX(30deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) skewX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) skewX(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(45deg);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Effet Glitch */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  20% {
+    transform: translate(-4px, -2px);
+    filter: hue-rotate(180deg);
+  }
+  30% {
+    transform: translate(4px, 2px);
+    filter: hue-rotate(270deg);
+  }
+  40% {
+    transform: translate(-2px, -4px);
+    filter: hue-rotate(360deg);
+  }
+  50% {
+    transform: translate(2px, 4px);
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* Effet Hologramme */
+@keyframes hologram {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+  }
+  25% {
+    opacity: 0.8;
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+  }
+  50% {
+    opacity: 0.9;
+    box-shadow: 0 0 60px rgba(255, 107, 53, 0.4);
+  }
+  75% {
+    opacity: 0.7;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
+  }
+}
+
+/* Animation de particules flottantes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(240deg);
+  }
+}
+
+/* Morphing shapes */
+@keyframes morph {
+  0%, 100% {
+    border-radius: 20% 80% 30% 70%;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 70% 30% 80% 20%;
+    transform: rotate(90deg) scale(1.1);
+  }
+  50% {
+    border-radius: 80% 20% 70% 30%;
+    transform: rotate(180deg) scale(0.9);
+  }
+  75% {
+    border-radius: 30% 70% 20% 80%;
+    transform: rotate(270deg) scale(1.05);
+  }
+}
+
+/* Classes d'animation */
+.animate-fade-in-up {
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
 .animate-slide-in-right {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
+  animation: slideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out infinite alternate;
+}
+
+.animate-hologram {
+  animation: hologram 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.morphing-shape {
+  animation: morph 8s ease-in-out infinite;
+  background: linear-gradient(45deg, var(--orange-primary), var(--orange-glow));
+  width: 100px;
+  height: 100px;
+}
+
+/* Effets de parallaxe optimisés */
+.parallax-layer {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimisations de performance */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+/* Responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .animate-fade-in-up,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in {
+    animation-duration: 0.6s;
+  }
 }

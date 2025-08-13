@@ -14,11 +14,11 @@ const Footer = () => {
           {/* Jack Up Garage */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center glow-hover">
+              <div className="w-16 h-16 rounded-lg flex items-center justify-center glow-hover bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20">
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
-                  className="h-10 w-auto drop-shadow-lg filter brightness-110"
+                  className="h-12 w-auto drop-shadow-xl filter brightness-125 hover:brightness-150 transition-all duration-300"
                 />
               </div>
               <div>

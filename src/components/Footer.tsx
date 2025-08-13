@@ -3,19 +3,10 @@ import { Facebook, Instagram, Phone, Mail, Wrench } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 relative overflow-hidden">
+    <footer className="bg-black text-white py-12 relative overflow-hidden tech-grid">
       {/* Logo en filigrane */}
       <div className="absolute inset-0 flex items-center justify-center opacity-3">
         <Wrench className="w-48 h-48 text-orange-500 transform rotate-12" />
-      </div>
-      
-      {/* Fond animé pour le footer */}
-      <div className="absolute inset-0 tech-grid opacity-10"></div>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-12 left-12 w-40 h-40 border border-orange-500/15 rounded-full animate-spin-slow"></div>
-        <div className="absolute bottom-16 right-16 w-32 h-32 border border-orange-400/12 rounded-lg rotate-45 floating-element"></div>
-        <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-orange-500/8 rounded-full pulse-glow"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-16 h-16 border border-orange-500/10 rotate-12 floating-element-reverse"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -28,15 +28,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-8 lg:py-12 relative overflow-hidden" style={{ background: '#0A0A0A' }}>
-          {/* Fond animé avec particules */}
-          <div className="absolute inset-0 tech-grid opacity-20"></div>
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-10 left-10 w-32 h-32 border border-orange-500/10 rounded-full animate-spin-slow"></div>
-            <div className="absolute bottom-20 right-20 w-24 h-24 border border-orange-400/15 rounded-lg rotate-45 floating-element"></div>
-            <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-orange-500/5 rounded-full pulse-glow"></div>
-            <div className="absolute bottom-1/3 left-2/3 w-8 h-8 border border-orange-500/20 rotate-12 floating-element-reverse"></div>
-          </div>
+        <div className="section section--entretien py-8 lg:py-12 tech-grid" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -78,14 +70,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: '#F8F9FA' }}>
-          {/* Fond animé subtil */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-20 right-10 w-40 h-40 bg-orange-500/5 rounded-full floating-element-slow"></div>
-            <div className="absolute bottom-10 left-20 w-28 h-28 border border-orange-400/10 rounded-lg rotate-45 floating-element"></div>
-            <div className="absolute top-1/3 right-1/3 w-12 h-12 bg-gradient-to-br from-orange-500/8 to-orange-600/5 rounded-full pulse-subtle"></div>
-            <div className="absolute bottom-1/2 left-1/4 w-6 h-6 bg-orange-500/10 rotate-45 floating-element-reverse"></div>
-          </div>
+        <div className="section py-8 lg:py-12" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -128,15 +113,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: '#0A0A0A' }}>
-          {/* Fond animé avec éléments mécaniques */}
-          <div className="absolute inset-0 tech-grid opacity-20"></div>
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-16 right-16 w-36 h-36 border-2 border-orange-500/15 rounded-full animate-spin-slow"></div>
-            <div className="absolute bottom-24 left-16 w-20 h-20 border border-orange-400/20 rounded-lg rotate-12 floating-element"></div>
-            <div className="absolute top-2/3 right-1/4 w-14 h-14 bg-orange-500/8 rounded-full pulse-glow"></div>
-            <div className="absolute top-1/4 left-1/3 w-10 h-10 border border-orange-500/15 rotate-45 floating-element-reverse"></div>
-          </div>
+        <div className="section py-8 lg:py-12 tech-grid" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div>
@@ -178,14 +155,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: '#F8F9FA' }}>
-          {/* Fond animé doux */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-12 left-12 w-44 h-44 bg-gradient-to-br from-orange-500/6 to-orange-600/3 rounded-full floating-element-slow"></div>
-            <div className="absolute bottom-16 right-12 w-32 h-32 border border-orange-400/12 rounded-lg rotate-45 floating-element"></div>
-            <div className="absolute top-1/2 left-1/3 w-18 h-18 bg-orange-500/8 rounded-full pulse-subtle"></div>
-            <div className="absolute bottom-1/3 right-1/3 w-8 h-8 bg-orange-500/10 rotate-12 floating-element-reverse"></div>
-          </div>
+        <div className="section py-8 lg:py-12" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">

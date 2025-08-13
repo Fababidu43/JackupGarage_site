@@ -244,76 +244,29 @@
 }
 
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
-/* === NOUVELLES ANIMATIONS DYNAMIQUES === */
-
-/* Éléments flottants */
-.floating-element {
-  animation: float 6s ease-in-out infinite;
+*, *::before, *::after {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
 }
 
-.floating-element-reverse {
-  animation: floatReverse 8s ease-in-out infinite;
+/* Seuls les hovers instantanés sont autorisés */
+button:hover,
+a:hover,
+.glow-hover:hover,
+.underline-animate:hover::after,
+.btn-primary:hover,
+.btn-secondary:hover,
+.form-input:focus {
+  transition: all 0.3s ease !important;
 }
 
-.floating-element-slow {
-  animation: floatSlow 10s ease-in-out infinite;
-}
-
-.pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(5deg); }
-}
-
-@keyframes floatReverse {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(15px) rotate(-3deg); }
-}
-
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-10px) scale(1.05); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { 
-    opacity: 0.3; 
-    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.2);
-  }
-  50% { 
-    opacity: 0.8; 
-    box-shadow: 0 0 20px 5px rgba(255, 107, 53, 0.1);
-  }
-}
-
-/* Animation de particules */
-@keyframes particleFloat {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-}
-
-/* Amélioration des animations existantes */
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
-}
-
-.pulse-subtle {
-  animation: pulseSubtle 3s ease-in-out infinite;
-}
-
-/* Transitions fluides pour les interactions */
-.hover-lift,
-.hover-scale,
-.hover-glow-text,
-.underline-animate,
-.btn-primary,
-.btn-secondary,
-.form-input,
-.glow-hover {
-  transition: all 0.3s ease;
+.animate-fade-in-up,
+.animate-fade-in,
+.animate-diagonal-appear,
+.animate-slide-in-left,
+.animate-slide-in-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }

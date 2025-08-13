@@ -28,17 +28,9 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-12 lg:py-16 overflow-hidden"
+      className="section relative py-12 lg:py-16"
       style={{ background: '#F8F9FA' }}
     >
-      {/* Fond animé pour le contact */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-16 right-16 w-56 h-56 bg-gradient-to-br from-orange-500/5 to-orange-600/2 rounded-full floating-element-slow"></div>
-        <div className="absolute bottom-20 left-20 w-44 h-44 border border-orange-400/10 rounded-lg rotate-45 floating-element"></div>
-        <div className="absolute top-1/2 left-1/5 w-32 h-32 bg-orange-500/6 rounded-full pulse-subtle"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-24 h-24 border border-orange-500/8 rotate-12 floating-element-reverse"></div>
-        <div className="absolute top-1/4 left-1/2 w-16 h-16 bg-orange-500/8 rounded-full floating-element"></div>
-      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic hover-glow-text">

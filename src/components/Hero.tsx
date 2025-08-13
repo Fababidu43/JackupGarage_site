@@ -13,39 +13,23 @@ const Hero = () => {
     <section 
       id="hero"
       className="section relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ 
+        background: `
+          linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
+          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
+          radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
+        `
+      }}
     >
-      {/* Vidéo de fond */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
-          {/* Fallback image si la vidéo ne charge pas */}
-          <img 
-            src="https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop" 
-            alt="Atelier mécanique" 
-            className="w-full h-full object-cover"
-          />
-        </video>
-        {/* Overlay sombre pour la lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
-      </div>
-
       {/* Overlay mécanique avec grille tech */}
       <div className="absolute inset-0 tech-grid opacity-30"></div>
       
       {/* Éléments mécaniques flottants */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/30 rounded-full animate-spin-slow floating-element"></div>
-        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/40 rotate-45 floating-element-reverse"></div>
-        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/25 rounded-lg rotate-12 floating-element"></div>
-        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/20 rounded-full pulse-glow"></div>
-        <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-orange-400/15 rotate-45 floating-element-slow"></div>
-        <div className="absolute top-2/3 right-1/4 w-10 h-10 border border-orange-500/20 rounded-full animate-spin-slow"></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
+        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
+        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>
+        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/10 rounded-full"></div>
       </div>
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">

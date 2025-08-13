@@ -101,7 +101,6 @@ const Footer = () => {
             <div className="mt-4 p-3 bg-gray-900 rounded-lg">
               <p className="text-xs text-gray-300 font-light">
                 <span className="font-bold tracking-wide uppercase" style={{ color: '#DE5121' }}>Réponse rapide :</span><br />
-                <span className="font-bold tracking-wide uppercase" style={{ color: '#059669' }}>Réponse rapide :</span><br />
                 Sous 12h par téléphone ou mail
               </p>
             </div>
@@ -120,3 +119,5 @@ const Footer = () => {
 };
 
 export default Footer;
+  )
+}

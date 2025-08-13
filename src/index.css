@@ -2,6 +2,176 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === VARIABLES GLOBALES === */
+:root {
+  --primary-orange: #E67E22;
+  --secondary-orange: #D35400;
+  --accent-blue: #3498DB;
+  --accent-cyan: #1ABC9C;
+  --dark-bg: #0F1419;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* === EFFETS GLASSMORPHISM === */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dark {
+  background: rgba(15, 20, 25, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === GRADIENTS FUTURISTES === */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === NÉONS ET LUEURS === */
+.neon-glow {
+  box-shadow: 
+    0 0 20px rgba(230, 126, 34, 0.3),
+    0 0 40px rgba(230, 126, 34, 0.2),
+    0 0 60px rgba(230, 126, 34, 0.1);
+}
+
+.neon-text {
+  text-shadow: 
+    0 0 10px rgba(230, 126, 34, 0.8),
+    0 0 20px rgba(230, 126, 34, 0.6),
+    0 0 30px rgba(230, 126, 34, 0.4);
+}
+
+/* === ANIMATIONS DYNAMIQUES === */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(230, 126, 34, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(230, 126, 34, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slide-in-glow {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+    box-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    box-shadow: 0 0 20px rgba(230, 126, 34, 0.3);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-slide-glow {
+  animation: slide-in-glow 0.8s ease-out forwards;
+}
+
+/* === PARTICULES ET EFFETS === */
+.particles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(230, 126, 34, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(26, 188, 156, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px, 80px 80px, 60px 60px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* === BOUTONS FUTURISTES === */
+.btn-futuristic {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s ease;
+}
+
+.btn-futuristic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-futuristic:hover::before {
+  left: 100%;
+}
+
+.btn-futuristic:hover {
+  box-shadow: 
+    0 0 20px rgba(230, 126, 34, 0.5),
+    0 0 40px rgba(230, 126, 34, 0.3);
+  transform: translateY(-2px);
+}
+
+/* === CARTES AVEC EFFETS === */
+.card-hover {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(230, 126, 34, 0.2);
+  border-color: rgba(230, 126, 34, 0.3);
+}
+
 /* === SÉPARATEURS DIAGONAUX - UN SEUL TRIANGLE === */
 .diag {
   position: relative;
@@ -40,6 +210,22 @@
 /* hauteurs */
 .diag--section { --h: 7vh; }
 .diag--service { --h: 5vh; }
+
+/* === EFFETS SUR LES SÉPARATEURS === */
+.diag::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(230, 126, 34, 0.1) 0%, 
+    transparent 50%, 
+    rgba(52, 152, 219, 0.1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
 
 /* sections au-dessus du séparateur */
 .section {

@@ -266,6 +266,3 @@ const Contact = () => {
     </section>
   );
 };
-
-  )
-}

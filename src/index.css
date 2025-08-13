@@ -55,6 +55,16 @@
 }
 
 /* === RESPONSIVITÉ MOBILE POUR DIAGONALES === */
+/* === FOND DYNAMIQUE - DÉSACTIVATION POUR REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  .dynamic-background,
+  .dynamic-background * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .diag {
     --h: 4vh;

@@ -319,6 +319,264 @@
   100% { opacity: 0; transform: translateY(0) scale(0); }
 }
 
+/* === FORMES DYNAMIQUES GLOBALES === */
+.dynamic-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 107, 53, 0.1);
+  animation: floatShape 15s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 60px;
+  height: 60px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  background: rgba(255, 107, 53, 0.08);
+}
+
+.shape-2 {
+  width: 40px;
+  height: 40px;
+  top: 40%;
+  right: 15%;
+  animation-delay: -3s;
+  background: rgba(255, 140, 66, 0.06);
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  top: 60%;
+  left: 5%;
+  animation-delay: -6s;
+  background: rgba(255, 107, 53, 0.04);
+}
+
+.shape-4 {
+  width: 30px;
+  height: 30px;
+  top: 80%;
+  right: 25%;
+  animation-delay: -9s;
+  background: rgba(255, 179, 71, 0.08);
+}
+
+.shape-5 {
+  width: 50px;
+  height: 50px;
+  top: 30%;
+  left: 70%;
+  animation-delay: -12s;
+  background: rgba(255, 107, 53, 0.06);
+}
+
+@keyframes floatShape {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-15px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) rotate(270deg);
+    opacity: 0.7;
+  }
+}
+
+/* Formes géométriques */
+.geometric-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.geo-shape {
+  position: absolute;
+  border: 2px solid rgba(255, 107, 53, 0.15);
+  animation: rotateGeo 20s linear infinite;
+}
+
+.geo-1 {
+  width: 40px;
+  height: 40px;
+  top: 25%;
+  right: 10%;
+  border-radius: 0;
+  animation-delay: 0s;
+}
+
+.geo-2 {
+  width: 60px;
+  height: 60px;
+  top: 55%;
+  left: 15%;
+  border-radius: 50%;
+  animation-delay: -5s;
+}
+
+.geo-3 {
+  width: 35px;
+  height: 35px;
+  top: 75%;
+  right: 30%;
+  border-radius: 0;
+  transform: rotate(45deg);
+  animation-delay: -10s;
+}
+
+.geo-4 {
+  width: 25px;
+  height: 25px;
+  top: 35%;
+  left: 80%;
+  border-radius: 50%;
+  animation-delay: -15s;
+}
+
+@keyframes rotateGeo {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.3;
+  }
+}
+
+/* Lignes flottantes */
+.floating-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
+  animation: moveLine 12s ease-in-out infinite;
+}
+
+.line-1 {
+  width: 200px;
+  height: 2px;
+  top: 30%;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+.line-2 {
+  width: 150px;
+  height: 1px;
+  top: 60%;
+  right: -150px;
+  animation-delay: -4s;
+}
+
+.line-3 {
+  width: 180px;
+  height: 2px;
+  top: 80%;
+  left: -180px;
+  animation-delay: -8s;
+}
+
+@keyframes moveLine {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px));
+    opacity: 0;
+  }
+}
+
+/* Responsive - Réduire sur mobile */
+@media (max-width: 768px) {
+  .shape {
+    animation-duration: 10s;
+  }
+  
+  .shape-1, .shape-3 {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .shape-2, .shape-4, .shape-5 {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .geo-shape {
+    animation-duration: 15s;
+  }
+  
+  .geo-1, .geo-2 {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .geo-3, .geo-4 {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .line {
+    animation-duration: 8s;
+  }
+  
+  .line-1, .line-2, .line-3 {
+    width: 120px;
+  }
+}
 /* Lignes de scan futuristes */
 .scan-lines {
   position: relative;

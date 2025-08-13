@@ -232,7 +232,7 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full text-white py-4 px-6 font-bold hover:opacity-90 shadow-lg flex items-center justify-center tracking-wide rounded uppercase"
-                style={{ background: '#DE5121' }}
+                style={{ background: '#059669' }}
               >
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande

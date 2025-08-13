@@ -12,35 +12,31 @@ import DiagonalBackslash from './components/DiagonalBackslash';
 
 function App() {
   return (
-    <div className="min-h-screen pb-16 md:pb-0 bg-black">
+    <div className="min-h-screen pb-16 md:pb-0">
       <Header />
       <main>
-        {/* Hero (gradient futuriste) */}
+        {/* Hero (orange #DE5121) */}
         <Hero />
         
         {/* Hero → Services : diagonale "/" */}
-        <DiagonalSlash topColor="linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #FF6B35 100%)" bottomColor="#000000" type="section" />
+        <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="section" />
         
-        {/* Services intro (noir #000000) */}
+        {/* Services intro (blanc #FFFFFF) */}
         <Services />
         
         {/* Services → Service 1 : diagonale "\" */}
-        <DiagonalBackslash topColor="#000000" bottomColor="#FF6B35" type="service" />
+        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
         
-        {/* Service 1 - Orange #FF6B35 */}
-        <div className="section section--entretien py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB366 100%)' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute top-10 right-10 w-20 h-20 border border-white/20 rounded-full animate-rotate"></div>
-          <div className="absolute bottom-10 left-10 w-3 h-3 bg-white/30 rounded-full animate-float"></div>
-          
+        {/* Service 1 - Orange #DE5121 */}
+        <div className="section section--entretien py-8 lg:py-12" style={{ background: '#DE5121' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="animate-slide-left">
-                <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4 animate-neon-glow" style={{ boxShadow: '0 0 20px rgba(0,0,0,0.5)' }}>
-                  <Droplets className="w-10 h-10 text-orange-500" />
+              <div>
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#DE5121' }}>
+                  <Droplets className="w-10 h-10" />
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white hover-glow">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white">
                   Entretiens
                 </h3>
                 
@@ -50,17 +46,17 @@ function App() {
                 
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-white hover:text-black bg-black/20 px-6 py-3 rounded-lg hover:bg-white transition-all duration-300 hover-scale"
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-white hover:text-white/80"
                 >
                   Demander un devis
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
               </div>
               
-              <div className="animate-slide-right">
-                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-black/30 to-black/10 rounded-lg shadow-lg flex items-center justify-center hover-scale animate-float">
-                  <div className="text-white text-4xl opacity-80">
-                    <Droplets className="w-16 h-16 animate-pulse-custom" />
+              <div>
+                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-white/20 to-white/10 rounded-lg shadow-lg flex items-center justify-center">
+                  <div className="text-white text-4xl opacity-60">
+                    <Droplets className="w-16 h-16" />
                   </div>
                 </div>
               </div>
@@ -69,42 +65,39 @@ function App() {
         </div>
 
         {/* Service 1 → Service 2 : diagonale "/" */}
-        <DiagonalSlash topColor="#FFB366" bottomColor="#000000" type="service" />
+        <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="service" />
         
-        {/* Service 2 - Noir #000000 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden particles-bg" style={{ background: '#000000' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute top-20 left-20 w-16 h-16 border border-orange-500/20 rounded-full animate-rotate" style={{ animationDirection: 'reverse' }}></div>
-          <div className="absolute bottom-20 right-20 w-2 h-2 bg-orange-500 rounded-full animate-pulse-custom"></div>
-          
+        {/* Service 2 - Blanc #FFFFFF */}
+        <div className="section py-8 lg:py-12" style={{ background: '#FFFFFF' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="lg:order-2 animate-slide-right">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-black mb-4 animate-neon-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB366)' }}>
+              <div className="lg:order-2">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#DE5121' }}>
                   <Zap className="w-10 h-10" />
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white hover-glow">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-gray-900">
                   Embrayage & Volant Moteur
                 </h3>
                 
-                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-300">
+                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-600">
                   Remplacement complet de l'embrayage et du volant moteur avec diagnostic précis. Intervention professionnelle pour retrouver une conduite fluide.
                 </p>
                 
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-orange-500 hover:text-white bg-orange-500/20 px-6 py-3 rounded-lg hover:bg-orange-500 transition-all duration-300 hover-scale border border-orange-500"
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80"
+                  style={{ color: '#DE5121' }}
                 >
                   Demander un devis
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
               </div>
               
-              <div className="lg:order-1 animate-slide-left">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center hover-scale animate-float" style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB366)', animationDelay: '1s' }}>
-                  <div className="text-black text-4xl opacity-30">
-                    <Zap className="w-16 h-16 animate-pulse-custom" />
+              <div className="lg:order-1">
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #DE5121, #C9471D)' }}>
+                  <div className="text-white text-4xl opacity-20">
+                    <Zap className="w-16 h-16" />
                   </div>
                 </div>
               </div>
@@ -113,22 +106,18 @@ function App() {
         </div>
 
         {/* Service 2 → Service 3 : diagonale "\" */}
-        <DiagonalBackslash topColor="#000000" bottomColor="#FF6B35" type="service" />
+        <DiagonalBackslash topColor="#FFFFFF" bottomColor="#DE5121" type="service" />
         
-        {/* Service 3 - Orange #FF6B35 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB366 100%)' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute top-10 left-10 w-24 h-24 border border-white/20 rounded-full animate-rotate"></div>
-          <div className="absolute bottom-10 right-10 w-4 h-4 bg-white/30 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-          
+        {/* Service 3 - Orange #DE5121 */}
+        <div className="section py-8 lg:py-12" style={{ background: '#DE5121' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="animate-slide-left">
-                <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center mb-4 animate-neon-glow">
-                  <Settings className="w-10 h-10 text-orange-500" />
+              <div>
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-4" style={{ color: '#DE5121' }}>
+                  <Settings className="w-10 h-10" />
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white hover-glow">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white">
                   Kit Distributions
                 </h3>
                 
@@ -138,17 +127,17 @@ function App() {
                 
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-white hover:text-black bg-black/20 px-6 py-3 rounded-lg hover:bg-white transition-all duration-300 hover-scale"
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-white hover:text-white/80"
                 >
                   Demander un devis
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
               </div>
               
-              <div className="animate-slide-right">
-                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-black/30 to-black/10 rounded-lg shadow-lg flex items-center justify-center hover-scale animate-float" style={{ animationDelay: '0.5s' }}>
-                  <div className="text-white text-4xl opacity-80">
-                    <Settings className="w-16 h-16 animate-pulse-custom animate-rotate" style={{ animationDuration: '10s' }} />
+              <div>
+                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-white/20 to-white/10 rounded-lg shadow-lg flex items-center justify-center">
+                  <div className="text-white text-4xl opacity-60">
+                    <Settings className="w-16 h-16" />
                   </div>
                 </div>
               </div>
@@ -157,42 +146,39 @@ function App() {
         </div>
 
         {/* Service 3 → Service 4 : diagonale "/" */}
-        <DiagonalSlash topColor="#FFB366" bottomColor="#000000" type="service" />
+        <DiagonalSlash topColor="#DE5121" bottomColor="#F6F6F6" type="service" />
         
-        {/* Service 4 - Noir #000000 */}
-        <div className="section py-8 lg:py-12 relative overflow-hidden particles-bg" style={{ background: '#000000' }}>
-          {/* Éléments décoratifs */}
-          <div className="absolute top-20 right-20 w-12 h-12 border border-orange-500/20 rounded-full animate-rotate" style={{ animationDirection: 'reverse' }}></div>
-          <div className="absolute bottom-20 left-20 w-3 h-3 bg-orange-500 rounded-full animate-pulse-custom" style={{ animationDelay: '1s' }}></div>
-          
+        {/* Service 4 - Clair #F6F6F6 */}
+        <div className="section py-8 lg:py-12" style={{ background: '#F6F6F6' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="lg:order-2 animate-slide-right">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-black mb-4 animate-neon-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB366)' }}>
+              <div className="lg:order-2">
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4" style={{ background: '#DE5121' }}>
                   <Car className="w-10 h-10" />
                 </div>
                 
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-white hover-glow">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-black mb-3 tracking-tight leading-tight uppercase text-gray-900">
                   Suspensions & Amortisseurs
                 </h3>
                 
-                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-300">
+                <p className="text-sm sm:text-base leading-relaxed mb-4 font-light text-gray-600">
                   Remplacement des amortisseurs, suspensions, rotules et silent-blocs pour un confort de conduite optimal et une sécurité renforcée.
                 </p>
                 
                 <button 
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide text-orange-500 hover:text-white bg-orange-500/20 px-6 py-3 rounded-lg hover:bg-orange-500 transition-all duration-300 hover-scale border border-orange-500"
+                  className="inline-flex items-center font-semibold text-base group uppercase tracking-wide hover:opacity-80"
+                  style={{ color: '#DE5121' }}
                 >
                   Demander un devis
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
               </div>
               
-              <div className="lg:order-1 animate-slide-left">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center hover-scale animate-float" style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB366)', animationDelay: '1.5s' }}>
-                  <div className="text-black text-4xl opacity-30">
-                    <Car className="w-16 h-16 animate-pulse-custom" />
+              <div className="lg:order-1">
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #DE5121, #C9471D)' }}>
+                  <div className="text-white text-4xl opacity-20">
+                    <Car className="w-16 h-16" />
                   </div>
                 </div>
               </div>
@@ -201,15 +187,15 @@ function App() {
         </div>
         
         {/* Service 4 → Zone d'intervention : diagonale "\" */}
-        <DiagonalBackslash topColor="#000000" bottomColor="#FF6B35" type="section" />
+        <DiagonalBackslash topColor="#F6F6F6" bottomColor="#DE5121" type="section" />
         
-        {/* Zone d'intervention (gradient orange futuriste) */}
+        {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
         <ServiceArea />
         
         {/* Zone → Contact : diagonale "/" */}
-        <DiagonalSlash topColor="#FFB366" bottomColor="#000000" type="section" />
+        <DiagonalSlash topColor="#C9471D" bottomColor="#F6F6F6" type="section" />
         
-        {/* Contact (noir #000000) */}
+        {/* Contact (clair #F6F6F6) */}
         <Contact />
       </main>
       <Footer />

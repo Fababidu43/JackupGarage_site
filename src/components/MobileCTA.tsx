@@ -3,21 +3,21 @@ import { Phone, FileText } from 'lucide-react';
 
 const MobileCTA = () => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-black border-t border-orange-500/50 shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-gray-200 shadow-lg">
       <div className="flex">
         <a
           href="tel:+33123456789"
-          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm transition-all duration-300 hover-neon"
-          style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB366)' }}
+          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm"
+          style={{ background: '#DE5121' }}
         >
-          <Phone className="w-4 h-4 mr-2 animate-pulse-custom" />
+          <Phone className="w-4 h-4 mr-2" />
           APPELER
         </a>
         <a
           href="#contact"
-          className="flex-1 flex items-center justify-center py-4 bg-black text-orange-400 font-bold tracking-wide text-sm border-l border-orange-500/50 hover:bg-orange-500/20 transition-all duration-300"
+          className="flex-1 flex items-center justify-center py-4 bg-gray-900 text-white font-bold tracking-wide text-sm"
         >
-          <FileText className="w-4 h-4 mr-2 animate-pulse-custom" style={{ animationDelay: '0.5s' }} />
+          <FileText className="w-4 h-4 mr-2" />
           DEVIS
         </a>
       </div>

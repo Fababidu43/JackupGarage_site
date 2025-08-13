@@ -7,7 +7,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
-    // Effet de parallaxe pour l'image de fond
+    // Effet de parallaxe pour l'image de fond et les fonds dynamiques
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       
@@ -18,6 +18,17 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         const yPos = scrolled * speed;
         heroSection.style.backgroundPosition = `center ${yPos}px`;
       }
+      
+      // Parallaxe pour les fonds dynamiques
+      const dynamicBgs = document.querySelectorAll('.dynamic-bg-light, .dynamic-bg-dark, .dynamic-bg-service, .dynamic-bg-area, .dynamic-bg-contact');
+      dynamicBgs.forEach((element) => {
+        const speed = 0.2;
+        const yPos = scrolled * speed;
+        const bgElement = element.querySelector('::before') as HTMLElement;
+        if (bgElement) {
+          (element as HTMLElement).style.setProperty('--scroll-offset', `${yPos}px`);
+        }
+      });
       
       // Parallaxe pour les autres éléments
       const parallaxElements = document.querySelectorAll('.parallax-element');

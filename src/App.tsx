@@ -241,10 +241,10 @@ function App() {
         {/* FAQ (clair #F6F6F6) */}
         <FAQ />
         
-        {/* FAQ → Contact : diagonale "/" */}
-        <DiagonalSlash topColor="#F8F9FA" bottomColor="#F8F9FA" type="section" />
+        {/* FAQ → Contact : diagonale "\" pour créer une belle transition */}
+        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
         
-        {/* Contact (clair #F6F6F6) */}
+        {/* Contact (noir #0A0A0A) */}
         <Contact />
       </main>
       <Footer />

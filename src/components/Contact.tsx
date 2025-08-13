@@ -28,7 +28,7 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-12 lg:py-16 reveal-on-scroll tech-grid"
+      className="section relative py-8 lg:py-12 reveal-on-scroll tech-grid"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       {/* Éléments décoratifs futuristes */}
@@ -36,8 +36,8 @@ const Contact = () => {
       <div className="absolute bottom-12 right-12 w-12 h-12 border border-orange-400/30 rotate-45"></div>
       <div className="absolute top-1/3 right-1/4 w-8 h-8 bg-orange-500/10 rounded-full pulse-subtle"></div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        <div className="text-center mb-8 sm:mb-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 pulse-subtle shadow-lg hover-scale">
             <Phone className="w-6 h-6" />
           </div>

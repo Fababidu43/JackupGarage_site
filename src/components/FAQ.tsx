@@ -48,13 +48,13 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-8 lg:py-12 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
       {/* Éléments décoratifs */}
       <div className="absolute top-6 left-6 w-12 h-12 border border-orange-500/10 rounded-full animate-spin-slow"></div>
       <div className="absolute bottom-12 right-12 w-8 h-8 border border-orange-400/20 rotate-45"></div>
       
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-10">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 pulse-subtle shadow-lg hover-scale">
             <HelpCircle className="w-5 h-5" />
           </div>
@@ -96,7 +96,7 @@ const FAQ = () => {
           ))}
         </div>
 
-        <div className="text-center mt-8 sm:mt-10">
+        <div className="text-center mt-6 sm:mt-8">
           <p className="text-sm text-gray-600 font-tech mb-4">
             Vous avez d'autres questions ?
           </p>

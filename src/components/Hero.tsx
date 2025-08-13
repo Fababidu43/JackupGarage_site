@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -11,50 +11,57 @@ const Hero = () => {
 
   return (
     <section 
-      id="top" 
-      className="pt-28 pb-20 bg-brand-ink text-white bg-grid relative overflow-hidden"
+      id="hero"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: '#DE5121' }}
     >
-      {/* Dégradé radial orangé en coin */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-brand-orange/10 to-transparent opacity-30" />
-      
-      <div className="mx-auto max-w-6xl px-4 relative z-10">
-        <h1 className="font-display text-4xl md:text-6xl font-semibold leading-tight">
-          Mécanicien à domicile — Haute-Loire & Loire
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 leading-none tracking-tight uppercase">
+          Jack Up Garage
         </h1>
         
-        <p className="mt-6 text-white/80 max-w-2xl text-lg leading-relaxed">
-          Entretiens (vidange, freins) · Embrayage/volant moteur · Kits de distribution · Amortisseurs/suspensions/rotules.
+        <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light mb-8 tracking-wide uppercase">
+          Mécanicien à domicile
         </p>
-        
-        <div className="mt-8 flex flex-wrap gap-4">
+
+        <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto mb-8 leading-relaxed font-light">
+          Service professionnel de mécanique automobile à domicile dans la Haute-Loire (43) et la Loire (42). 
+          Intervention sur sol dur et plat uniquement.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-brand-orange text-black font-medium shadow-glow hover-allowed hover:bg-brand-orange2 focus-ring"
+            className="inline-flex items-center px-8 py-4 bg-white text-orange-500 font-bold text-lg hover:bg-gray-50 shadow-lg hover:shadow-xl rounded group"
+            style={{ color: '#DE5121' }}
           >
             Demander un devis
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="ml-3 w-5 h-5" />
           </button>
-          <a 
+          <a
             href="tel:+33123456789"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md ring-1 ring-white/25 hover-allowed hover:ring-white/60 focus-ring"
+            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-gray-900 rounded"
           >
-            <Phone className="w-4 h-4" />
+            <Phone className="mr-3 w-5 h-5" />
             Appeler
           </a>
         </div>
-        
-        <div className="mt-12 flex flex-wrap items-center gap-6 text-white/70 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-brand-amber rounded-full" />
-            <span>Sol dur et plat suffisant</span>
+
+        {/* Barre de preuves */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/90">
+          <div className="flex items-center">
+            <Shield className="w-5 h-5 mr-2" />
+            <span className="font-medium tracking-wide text-sm uppercase">RC Pro</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-brand-amber rounded-full" />
-            <span>Retour sous 12h</span>
+          <div className="hidden sm:block w-1 h-1 bg-white/50 rounded-full"></div>
+          <div className="flex items-center">
+            <FileText className="w-5 h-5 mr-2" />
+            <span className="font-medium tracking-wide text-sm uppercase">Devis gratuit</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-brand-amber rounded-full" />
-            <span>Devis gratuit</span>
+          <div className="hidden sm:block w-1 h-1 bg-white/50 rounded-full"></div>
+          <div className="flex items-center">
+            <Clock className="w-5 h-5 mr-2" />
+            <span className="font-medium tracking-wide text-sm uppercase">Réponse &lt; 12h</span>
           </div>
         </div>
       </div>

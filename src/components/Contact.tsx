@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Send, Phone, Mail, Clock } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Phone, Mail, Send, Clock } from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,75 +10,84 @@ const Contact = () => {
     email: '',
     registration: '',
     subject: '',
-    message: '',
-    hasFlatSurface: false
+    message: ''
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [e.target.name]: e.target.value
     });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Ici vous ajouterez l'envoi vers votre endpoint
   };
 
   return (
-    <section id="contact" className="py-20 bg-brand-steel text-white">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Informations de contact */}
+    <section 
+      id="contact" 
+      className="section relative py-12 lg:py-16"
+      style={{ background: '#F6F6F6' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase">
+            Contact
+          </h2>
+          <p className="text-lg font-semibold uppercase" style={{ color: '#DE5121' }}>
+            Réponse sous 12h par téléphone ou mail
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+          {/* Contact Info */}
           <div className="space-y-6">
-            <div>
-              <h2 className="font-display text-3xl mb-4">Demande de rendez-vous</h2>
-              <p className="text-white/80">
-                Remplissez le formulaire pour une intervention à domicile.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 p-4 bg-brand-ink/60 rounded-lg border border-brand-line">
-                <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-black" />
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Téléphone</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Téléphone</h3>
                   <a 
                     href="tel:+33123456789"
-                    className="text-brand-orange hover-allowed hover:text-brand-orange2"
+                    className="font-semibold hover:opacity-80"
+                    style={{ color: '#DE5121' }}
                   >
                     01 23 45 67 89
                   </a>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-3 p-4 bg-brand-ink/60 rounded-lg border border-brand-line">
-                <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-black" />
+            </div>
+
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Email</h3>
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Email</h3>
                   <a 
                     href="mailto:contact@jackupgarage.fr"
-                    className="text-brand-orange hover-allowed hover:text-brand-orange2"
+                    className="font-semibold hover:opacity-80"
+                    style={{ color: '#DE5121' }}
                   >
                     contact@jackupgarage.fr
                   </a>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-3 p-4 bg-brand-ink/60 rounded-lg border border-brand-line">
-                <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-black" />
+            </div>
+
+            <div className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="flex items-center mb-3">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#DE5121' }}>
+                  <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-semibold">Horaires</h3>
-                  <p className="text-white/70 text-sm">
+                  <h3 className="text-lg font-bold text-gray-900 tracking-wide uppercase">Horaires</h3>
+                  <p className="text-gray-700 font-light text-sm">
                     Lun - Sam: 8h - 18h<br />
                     Dimanche: Sur demande
                   </p>
@@ -86,114 +95,148 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          
-          {/* Formulaire */}
+
+          {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Prénom *
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    required
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                    style={{ '--focus-border-color': '#DE5121' } as React.CSSProperties}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Nom *
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    required
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label htmlFor="address" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                  Adresse d'intervention *
+                </label>
                 <input
+                  type="text"
+                  id="address"
+                  name="address"
                   required
-                  name="lastName"
-                  value={formData.lastName}
+                  value={formData.address}
                   onChange={handleChange}
-                  placeholder="Nom"
-                  className="bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
-                />
-                <input
-                  required
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="Prénom"
-                  className="bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
                 />
               </div>
-              
-              <input
-                required
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="Adresse complète d'intervention"
-                className="w-full bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
-              />
-              
-              <div className="grid sm:grid-cols-2 gap-4">
-                <input
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Téléphone *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label htmlFor="registration" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Immatriculation (facultatif)
+                  </label>
+                  <input
+                    type="text"
+                    id="registration"
+                    name="registration"
+                    value={formData.registration}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                    Objet *
+                  </label>
+                  <select
+                    id="subject"
+                    name="subject"
+                    required
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light"
+                  >
+                    <option value="">Sélectionner</option>
+                    <option value="entretien">Entretien / Vidange</option>
+                    <option value="embrayage">Embrayage / Volant moteur</option>
+                    <option value="distribution">Kit distribution</option>
+                    <option value="suspension">Suspensions / Amortisseurs</option>
+                    <option value="autre">Autre</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase">
+                  Description du problème *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
                   required
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  value={formData.message}
                   onChange={handleChange}
-                  placeholder="Téléphone"
-                  className="bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
-                />
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email"
-                  className="bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none resize-none rounded font-light"
+                  placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                 />
               </div>
-              
-              <input
-                name="registration"
-                value={formData.registration}
-                onChange={handleChange}
-                placeholder="Immatriculation (facultatif mais recommandé)"
-                className="w-full bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 focus-ring"
-              />
-              
-              <select
-                required
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="w-full bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white focus-ring"
-              >
-                <option value="">Objet de la demande</option>
-                <option value="entretien">Entretien / Vidange</option>
-                <option value="embrayage">Embrayage / Volant moteur</option>
-                <option value="distribution">Kit distribution</option>
-                <option value="suspension">Suspensions / Amortisseurs</option>
-                <option value="autre">Autre</option>
-              </select>
-              
-              <textarea
-                required
-                rows={5}
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Description détaillée du problème, symptômes, bruits anormaux..."
-                className="w-full bg-brand-ink/60 border border-brand-line rounded px-3 py-2 text-white placeholder-white/50 resize-none focus-ring"
-              />
-              
-              <label className="flex items-center gap-2 text-sm text-white/80">
-                <input
-                  type="checkbox"
-                  name="hasFlatSurface"
-                  checked={formData.hasFlatSurface}
-                  onChange={handleChange}
-                  className="accent-brand-orange focus-ring"
-                />
-                J'ai un sol dur et plat disponible
-              </label>
-              
+
               <button
                 type="submit"
-                className="w-full mt-6 px-6 py-3 rounded-md bg-brand-orange text-black font-medium shadow-glow hover-allowed hover:bg-brand-orange2 focus-ring flex items-center justify-center gap-2"
+                className="w-full text-white py-4 px-6 font-bold hover:opacity-90 shadow-lg flex items-center justify-center tracking-wide rounded uppercase"
+                style={{ background: '#DE5121' }}
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande
               </button>
-              
-              <p className="text-sm text-white/70 mt-4 text-center">
-                Retour par mail ou téléphone sous 12 h.
-              </p>
             </form>
           </div>
         </div>

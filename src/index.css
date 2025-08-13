@@ -2,55 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Grille futuriste discrète en arrière-plan */
-.bg-grid {
-  background-image:
-    radial-gradient(circle at 1px 1px, hsl(0 0% 100% / .04) 1px, transparent 0),
-    linear-gradient(to bottom, hsl(0 0% 100% / .03), transparent 40%);
-  background-size: 22px 22px, 100% 100%;
-}
-
-/* Underline animé pour liens */
-.link-underline {
-  position: relative; 
-  text-decoration: none;
-}
-.link-underline::after {
-  content: ""; 
-  position: absolute; 
-  left: 0; 
-  bottom: -2px; 
-  height: 2px; 
+/* === SÉPARATEURS DIAGONAUX - UN SEUL TRIANGLE === */
+.diag {
+  position: relative;
   width: 100%;
-  background: linear-gradient(90deg, hsl(24 100% 52%), hsl(38 100% 50%));
-  transform: scaleX(0); 
-  transform-origin: left; 
-  transition: transform .3s ease;
-}
-.link-underline:hover::after { 
-  transform: scaleX(1); 
+  height: var(--h, 7vh);   /* --h: 7vh sections, 5vh services */
+  pointer-events: none;
+  isolation: isolate;
+  z-index: 0;
+  background: var(--bottom-bg, #fff); /* couleur du dessous */
 }
 
-/* Focus rings visibles */
-.focus-ring:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px hsl(24 100% 52%);
+/* on DÉBORDE de 1px vers le haut pour recouvrir la jonction */
+.diag::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;                 /* <<< débordement vertical */
+  bottom: 0;
+  pointer-events: none;
+  background: var(--top-bg, #000); /* couleur du dessus */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* Suppression des animations existantes */
+/* "/"  — un seul triangle avec chevauchement généreux */
+.diag--slash::before {
+  clip-path: polygon(-3% -1%, 103% -1%, -3% 103%);  /* y négatifs autorisés */
+}
+
+/* "\"  — un seul triangle avec chevauchement généreux */
+.diag--backslash::before {
+  clip-path: polygon(-3% -1%, 103% -1%, 103% 103%);
+}
+
+/* hauteurs */
+.diag--section { --h: 7vh; }
+.diag--service { --h: 5vh; }
+
+/* sections au-dessus du séparateur */
+.section {
+  position: relative;
+  z-index: 1;
+  background-clip: border-box;
+}
+.section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  :root { 
+    --diag-h-section: 6vh;
+    --diag-h-service: 4vh;
+  }
+}
+
+/* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
 *, *::before, *::after {
+  /* Suppression de TOUTES les animations et transitions */
   animation: none !important;
   transition: none !important;
   transform: none !important;
 }
 
-/* Seuls les hovers et focus sont autorisés */
+/* Seuls les hovers instantanés sont autorisés */
 button:hover,
-a:hover,
-.hover-allowed:hover {
-  transition: all 0.3s ease !important;
+a:hover {
+  transition: none !important;
 }
 
-.focus-ring:focus {
-  transition: box-shadow 0.2s ease !important;
+/* Suppression des classes d'animation Tailwind */
+.animate-fade-in-up,
+.animate-fade-in,
+.animate-diagonal-appear,
+.animate-slide-in-left,
+.animate-slide-in-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }

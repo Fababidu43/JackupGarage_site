@@ -55,9 +55,11 @@ function App() {
               
               <div>
                 <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20">
-                  <div className="text-orange-400 text-4xl">
-                    <img src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Entretien moteur" className="w-24 h-24 object-cover rounded-lg opacity-80" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Vidange moteur - Entretien automobile" 
+                    className="w-full h-full object-cover rounded-lg opacity-90 hover:opacity-100 transition-opacity duration-300" 
+                  />
                 </div>
               </div>
             </div>
@@ -96,9 +98,11 @@ function App() {
               
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
-                  <div className="text-white text-4xl">
-                    <img src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Kit embrayage" className="w-24 h-24 object-cover rounded-lg opacity-90" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Kit embrayage et volant moteur" 
+                    className="w-full h-full object-cover rounded-lg opacity-95 hover:opacity-100 transition-opacity duration-300" 
+                  />
                 </div>
               </div>
             </div>
@@ -136,9 +140,11 @@ function App() {
               
               <div>
                 <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20">
-                  <div className="text-orange-400 text-4xl">
-                    <img src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Courroie distribution" className="w-24 h-24 object-cover rounded-lg opacity-80" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Kit de distribution - Courroie et galets" 
+                    className="w-full h-full object-cover rounded-lg opacity-90 hover:opacity-100 transition-opacity duration-300" 
+                  />
                 </div>
               </div>
             </div>
@@ -177,9 +183,11 @@ function App() {
               
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
-                  <div className="text-white text-4xl">
-                    <img src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Amortisseur" className="w-24 h-24 object-cover rounded-lg opacity-90" />
-                  </div>
+                  <img 
+                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Amortisseurs et suspensions automobile" 
+                    className="w-full h-full object-cover rounded-lg opacity-95 hover:opacity-100 transition-opacity duration-300" 
+                  />
                 </div>
               </div>
             </div>

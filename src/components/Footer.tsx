@@ -19,7 +19,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white tracking-wide uppercase">Jack Up Garage</h3>
-                <p className="text-gray-400 font-medium tracking-wide text-sm uppercase">Mécanicien à domicile</p>
+                <p className="text-orange-500 font-medium tracking-wide text-sm uppercase">Mécanicien à domicile</p>
               </div>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed font-light text-sm">
@@ -76,7 +76,7 @@ const Footer = () => {
             <h4 className="text-base font-bold text-white mb-4 tracking-wide uppercase">Contact</h4>
             <div className="space-y-3">
               <div className="flex items-center text-gray-400">
-                <Phone className="w-4 h-4 mr-2 text-white" />
+                <Phone className="w-4 h-4 mr-2 text-orange-500" />
                 <a 
                   href="tel:+33123456789"
                   className="font-light text-sm"
@@ -86,7 +86,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center text-gray-400">
-                <Mail className="w-4 h-4 mr-2 text-white" />
+                <Mail className="w-4 h-4 mr-2 text-orange-500" />
                 <a 
                   href="mailto:contact@jackupgarage.fr"
                   className="font-light text-sm"
@@ -98,7 +98,7 @@ const Footer = () => {
             </div>
             <div className="mt-4 p-3 bg-gray-900 rounded-lg">
               <p className="text-xs text-gray-300 font-light">
-                <span className="font-bold tracking-wide uppercase text-white">Réponse rapide :</span><br />
+                <span className="font-bold tracking-wide uppercase" style={{ color: '#DE5121' }}>Réponse rapide :</span><br />
                 Sous 12h par téléphone ou mail
               </p>
             </div>

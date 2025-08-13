@@ -55,7 +55,7 @@ const Header = () => {
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}
                 className="text-sm font-medium text-gray-700 tracking-wide uppercase"
-                style={{ '--hover-color': '#1a1a1a' } as React.CSSProperties}
+                style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
               >
                 {item.name}
               </button>
@@ -85,7 +85,7 @@ const Header = () => {
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
                   className="block w-full text-left px-4 py-2 text-gray-700 font-medium tracking-wide uppercase text-sm"
-                  style={{ '--hover-color': '#1a1a1a' } as React.CSSProperties}
+                  style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
                 >
                   {item.name}
                 </button>

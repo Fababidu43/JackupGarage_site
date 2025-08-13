@@ -22,7 +22,7 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden tech-grid mesh-parallax"
+      className="section relative text-white overflow-hidden tech-grid"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -40,7 +40,7 @@ const ServiceArea = () => {
           </div>
           
           {/* Badge Saint-Étienne */}
-          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-4 py-2 mb-6 fade-rise">
+          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-4 py-2 mb-6 pulse-subtle">
             <span className="text-yellow-300 font-medium text-sm font-tech">
               Saint-Étienne intra-muros : interventions limitées
             </span>
@@ -49,7 +49,7 @@ const ServiceArea = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Haute-Loire */}
-          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 pop-in-wave">
+          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 hover-scale border-glow subtle-glow animated-border">
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle">
                 <MapPin className="w-5 h-5" />
@@ -61,7 +61,7 @@ const ServiceArea = () => {
             
             <div className="text-white/80 leading-relaxed font-light text-sm font-tech">
               {communes43.slice(0, showAllCommunes43 ? communes43.length : 8).map((commune, index) => (
-                <span key={index} className="pop-in-wave" style={{ animationDelay: `${index * 50}ms` }}>
+                <span key={index}>
                   {commune}
                   {index < (showAllCommunes43 ? communes43.length - 1 : 7) && ', '}
                 </span>
@@ -71,7 +71,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 font-medium text-sm uppercase font-tech link-underline soft-glow accessible-focus"
+              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors font-medium text-sm uppercase font-tech underline-animate hover-lift"
             >
               {showAllCommunes43 ? (
                 <>
@@ -86,7 +86,7 @@ const ServiceArea = () => {
           </div>
 
           {/* Loire */}
-          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 pop-in-wave">
+          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20 hover-scale border-glow subtle-glow animated-border">
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle">
                 <MapPin className="w-5 h-5" />
@@ -98,7 +98,7 @@ const ServiceArea = () => {
             
             <div className="text-white/80 leading-relaxed font-light text-sm font-tech">
               {communes42.slice(0, showAllCommunes42 ? communes42.length : 8).map((commune, index) => (
-                <span key={index} className="pop-in-wave" style={{ animationDelay: `${index * 50}ms` }}>
+                <span key={index}>
                   {commune}
                   {index < (showAllCommunes42 ? communes42.length - 1 : 7) && ', '}
                 </span>
@@ -108,7 +108,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 font-medium text-sm uppercase font-tech link-underline soft-glow accessible-focus"
+              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors font-medium text-sm uppercase font-tech underline-animate hover-lift"
             >
               {showAllCommunes42 ? (
                 <>
@@ -125,7 +125,7 @@ const ServiceArea = () => {
 
         {/* Conditions d'intervention */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white p-6 rounded-lg shadow-lg border border-orange-500/20 slide-message">
+          <div className="bg-white p-6 rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow subtle-glow animated-border">
             <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-wide text-center uppercase font-futuristic hover-glow-text">
               Conditions d'intervention
             </h4>

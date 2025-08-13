@@ -3,7 +3,7 @@ import { Facebook, Instagram, Phone, Mail, Wrench } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 relative overflow-hidden tech-grid mesh-parallax">
+    <footer className="bg-black text-white py-12 relative overflow-hidden tech-grid">
       {/* Logo en filigrane */}
       <div className="absolute inset-0 flex items-center justify-center opacity-3">
         <Wrench className="w-48 h-48 text-orange-500 transform rotate-12" />
@@ -40,7 +40,7 @@ const Footer = () => {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg light-tilt soft-glow accessible-focus"
+                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -48,7 +48,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg light-tilt soft-glow accessible-focus"
+                className="w-10 h-10 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-colors glow-hover hover-scale"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -68,7 +68,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-gray-400 hover:text-orange-400 tracking-wide text-base font-light uppercase font-tech link-underline soft-glow accessible-focus"
+                    className="text-gray-400 hover:text-orange-400 tracking-wide text-base font-light uppercase font-tech underline-animate transition-colors hover-lift"
                   >
                     {link.name}
                   </a>

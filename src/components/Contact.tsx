@@ -101,60 +101,48 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 hover-scale border-glow subtle-glow animated-border">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <div className="floating-label">
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      required
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      placeholder=" "
-                      className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input accessible-focus"
-                    />
-                    <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 tracking-wide uppercase font-tech">
+                  <label htmlFor="firstName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
                     Prénom *
-                    </label>
-                    <div className="micro-check"></div>
-                  </div>
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    required
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                  />
                 </div>
                 <div>
-                  <div className="floating-label">
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      required
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder=" "
-                      className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input accessible-focus"
-                    />
-                    <label htmlFor="lastName" className="block text-sm font-bold text-gray-900 tracking-wide uppercase font-tech">
+                  <label htmlFor="lastName" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
                     Nom *
-                    </label>
-                    <div className="micro-check"></div>
-                  </div>
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    required
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                  />
                 </div>
               </div>
 
               <div className="mb-4">
-                <div className="floating-label">
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    required
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder=" "
-                    className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input accessible-focus"
-                  />
-                  <label htmlFor="address" className="block text-sm font-bold text-gray-900 tracking-wide uppercase font-tech">
+                <label htmlFor="address" className="block text-sm font-bold text-gray-900 mb-2 tracking-wide uppercase font-tech">
                   Adresse d'intervention *
-                  </label>
-                  <div className="micro-check"></div>
-                </div>
+                </label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  required
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 focus:outline-none rounded font-light font-tech form-input glow-focus border-glow"
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -256,13 +244,13 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech soft-glow accessible-focus"
+                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow"
               >
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande
               </button>
               
-              <p className="text-center text-sm text-gray-600 mt-4 font-tech slide-message">
+              <p className="text-center text-sm text-gray-600 mt-4 font-tech">
                 Retour par mail ou téléphone sous 12 h.
               </p>
             </form>

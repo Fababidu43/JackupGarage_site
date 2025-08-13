@@ -182,85 +182,29 @@
 }
 
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
-/* === ANIMATIONS DYNAMIQUES === */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+*, *::before, *::after {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(255, 107, 53, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.6); }
+/* Seuls les hovers instantanés sont autorisés */
+button:hover,
+a:hover,
+.glow-hover:hover,
+.underline-animate:hover::after,
+.btn-primary:hover,
+.btn-secondary:hover,
+.form-input:focus {
+  transition: all 0.3s ease !important;
 }
 
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.animate-fade-in-up,
+.animate-fade-in,
+.animate-diagonal-appear,
+.animate-slide-in-left,
+.animate-slide-in-right {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
 }
-
-@keyframes tech-scan {
-  0% { transform: translateX(-100%); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(100%); opacity: 0; }
-}
-
-/* === EFFETS DYNAMIQUES === */
-.float-animation {
-  animation: float 6s ease-in-out infinite;
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.gradient-bg {
-  background: linear-gradient(-45deg, #FF6B35, #FF8C42, #FFB347, #FF6B35);
-  background-size: 400% 400%;
-  animation: gradient-shift 4s ease infinite;
-}
-
-.tech-scan-effect {
-  position: relative;
-  overflow: hidden;
-}
-
-.tech-scan-effect::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
-  animation: tech-scan 3s ease-in-out infinite;
-  z-index: 1;
-}
-
-/* === PARTICULES FLOTTANTES === */
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(255, 107, 53, 0.6);
-  border-radius: 50%;
-  animation: float 8s ease-in-out infinite;
-}
-
-.particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-.particle:nth-child(2) { left: 20%; animation-delay: 1s; }
-.particle:nth-child(3) { left: 30%; animation-delay: 2s; }
-.particle:nth-child(4) { left: 40%; animation-delay: 3s; }
-.particle:nth-child(5) { left: 50%; animation-delay: 4s; }
-.particle:nth-child(6) { left: 60%; animation-delay: 5s; }
-.particle:nth-child(7) { left: 70%; animation-delay: 6s; }
-.particle:nth-child(8) { left: 80%; animation-delay: 7s; }
-.particle:nth-child(9) { left: 90%; animation-delay: 8s; }

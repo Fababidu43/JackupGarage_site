@@ -33,10 +33,10 @@ const Contact = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic tech-scan-effect">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight uppercase font-futuristic">
             Contact
           </h2>
-          <p className="text-lg font-semibold uppercase font-tech pulse-glow" style={{ color: '#FF6B35' }}>
+          <p className="text-lg font-semibold uppercase font-tech" style={{ color: '#FF6B35' }}>
             Réponse sous 12h par téléphone ou mail
           </p>
         </div>
@@ -46,7 +46,7 @@ const Contact = () => {
           <div className="space-y-6">
             <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-glow" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -64,7 +64,7 @@ const Contact = () => {
 
             <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-glow" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -82,7 +82,7 @@ const Contact = () => {
 
             <div className="bg-white p-6 shadow-lg rounded-lg border border-orange-500/10 glow-hover">
               <div className="flex items-center mb-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-glow" style={{ background: '#FF6B35' }}>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white mr-3" style={{ background: '#FF6B35' }}>
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
@@ -244,7 +244,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover gradient-bg tech-scan-effect"
+                className="w-full btn-primary py-4 px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover"
               >
                 <Send className="w-5 h-5 mr-2" />
                 Envoyer la demande

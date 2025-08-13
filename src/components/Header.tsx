@@ -123,7 +123,7 @@ const Header = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3 py-2 text-sm font-medium tracking-wide uppercase font-tech
+                  className={`relative px-3 py-2 text-xs lg:text-sm font-medium tracking-wide uppercase font-tech
                     transition-all duration-200 ease-out transform hover:translate-y-[-1px]
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
                     ${activeSection === item.id 
@@ -147,10 +147,10 @@ const Header = () => {
               {/* CTA Appeler Desktop */}
               <a
                 href="tel:+33123456789"
-                className="ml-4 px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
+                className="ml-2 lg:ml-4 px-4 lg:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
-                  font-tech uppercase tracking-wide text-sm"
+                  font-tech uppercase tracking-wide text-xs lg:text-sm"
               >
                 Appeler
               </a>

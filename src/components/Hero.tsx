@@ -59,30 +59,30 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
+        <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-4 tracking-wide uppercase font-futuristic pulse-subtle reveal-on-scroll scan-lines">
+        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic pulse-subtle reveal-on-scroll scan-lines">
           Haute-Loire & Loire (43–42)
         </div>
         
-        <p className="text-lg sm:text-xl text-white/80 font-light mb-8 tracking-wide font-tech reveal-on-scroll">
+        <p className="text-base sm:text-lg lg:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2">
           Entretien, freins, embrayage, distribution, suspensions.<br />
           <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 reveal-on-scroll">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-4">
           <button
             onClick={() => scrollToSection('contact')}
-            className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center px-8 py-4 btn-secondary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler
@@ -90,20 +90,20 @@ const Hero = () => {
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/80 reveal-on-scroll">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-6 text-white/80 reveal-on-scroll px-4">
           <div className="flex items-center">
             <Shield className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-sm uppercase font-tech">RC Pro</span>
+            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">RC Pro</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
+          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full lg:mx-2"></div>
           <div className="flex items-center">
             <FileText className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-sm uppercase font-tech">Devis gratuit</span>
+            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">Devis gratuit</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
+          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full lg:mx-2"></div>
           <div className="flex items-center">
             <Clock className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-sm uppercase font-tech">Réponse &lt; 12h</span>
+            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">Réponse < 12h</span>
           </div>
         </div>
       </div>

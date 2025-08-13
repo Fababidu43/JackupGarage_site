@@ -15,7 +15,7 @@ const Footer = () => {
           <div>
             <div className="flex items-baseline space-x-5 mb-6">
               <div 
-                className="w-32 h-24 rounded-lg flex items-center justify-center bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-2 cursor-pointer hover:brightness-125 hover:border-orange-500/40 hover:shadow-lg hover:shadow-orange-500/10 hover:scale-105 active:scale-95 transition-all duration-300 ease-out flex-shrink-0 group"
+                className="w-32 h-24 rounded-lg flex items-center justify-center bg-gradient-to-br from-orange-500/10 to-orange-600/5 border border-orange-500/20 p-2 cursor-pointer hover:brightness-110 transition-all duration-300 flex-shrink-0"
                 role="button"
                 aria-label="Jack Up Garage - Retour à l'accueil"
                 onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
@@ -23,7 +23,7 @@ const Footer = () => {
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
-                  className="max-h-20 w-auto object-contain filter brightness-110 group-hover:brightness-125 transition-all duration-300 ease-out"
+                  className="max-h-20 w-auto object-contain filter brightness-110"
                 />
               </div>
               <div>

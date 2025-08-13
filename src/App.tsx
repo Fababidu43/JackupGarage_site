@@ -20,22 +20,26 @@ function App() {
         <Hero />
         
         {/* Hero → Services : diagonale "/" */}
-        <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        <ScrollReveal direction="slide-diagonal" duration={1.2} delay={200}>
+          <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        </ScrollReveal>
         
         {/* Services intro (blanc #FFFFFF) */}
-        <ScrollReveal direction="fade" duration={0.8}>
+        <ScrollReveal direction="bounce" duration={1.0} delay={300}>
           <Services />
         </ScrollReveal>
         
         {/* Services → Service 1 : diagonale "\" */}
-        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        <ScrollReveal direction="rotate" duration={1.0} delay={100}>
+          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        </ScrollReveal>
         
         {/* Service 1 - Orange #DE5121 */}
-        <ScrollReveal direction="left" duration={0.9} delay={100}>
+        <ScrollReveal direction="slide-diagonal" duration={1.2} delay={200} distance={120}>
           <div className="section section--entretien py-8 lg:py-12 tech-grid" style={{ background: '#0A0A0A' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <ScrollReveal direction="left" duration={0.8} delay={200}>
+                <ScrollReveal direction="elastic" duration={1.0} delay={400}>
                   <div>
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
                       <Droplets className="w-10 h-10" />
@@ -76,14 +80,16 @@ function App() {
         </ScrollReveal>
 
         {/* Service 1 → Service 2 : diagonale "/" */}
-        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        <ScrollReveal direction="rotate" duration={1.0} delay={100}>
+          <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        </ScrollReveal>
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <ScrollReveal direction="right" duration={0.9} delay={100}>
+        <ScrollReveal direction="bounce" duration={1.3} delay={200} distance={100}>
           <div className="section py-8 lg:py-12" style={{ background: '#F8F9FA' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <ScrollReveal direction="right" duration={0.8} delay={200} className="lg:order-2">
+                <ScrollReveal direction="elastic" duration={1.0} delay={400} className="lg:order-2">
                   <div>
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35' }}>
                       <Zap className="w-10 h-10" />
@@ -125,14 +131,16 @@ function App() {
         </ScrollReveal>
 
         {/* Service 2 → Service 3 : diagonale "\" */}
-        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        <ScrollReveal direction="slide-diagonal" duration={1.2} delay={100}>
+          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
+        </ScrollReveal>
         
         {/* Service 3 - Orange #DE5121 */}
-        <ScrollReveal direction="left" duration={0.9} delay={100}>
+        <ScrollReveal direction="elastic" duration={1.4} delay={200} distance={140}>
           <div className="section py-8 lg:py-12 tech-grid" style={{ background: '#0A0A0A' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <ScrollReveal direction="left" duration={0.8} delay={200}>
+                <ScrollReveal direction="bounce" duration={1.0} delay={400}>
                   <div>
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
                       <Settings className="w-10 h-10" />
@@ -173,14 +181,16 @@ function App() {
         </ScrollReveal>
 
         {/* Service 3 → Service 4 : diagonale "/" */}
-        <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        <ScrollReveal direction="bounce" duration={1.1} delay={100}>
+          <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
+        </ScrollReveal>
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <ScrollReveal direction="right" duration={0.9} delay={100}>
+        <ScrollReveal direction="slide-diagonal" duration={1.3} delay={200} distance={110}>
           <div className="section py-8 lg:py-12" style={{ background: '#F8F9FA' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <ScrollReveal direction="right" duration={0.8} delay={200} className="lg:order-2">
+                <ScrollReveal direction="elastic" duration={1.0} delay={400} className="lg:order-2">
                   <div>
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center text-white mb-4 hover-scale pulse-subtle" style={{ background: '#FF6B35' }}>
                       <Car className="w-10 h-10" />
@@ -222,18 +232,22 @@ function App() {
         </ScrollReveal>
         
         {/* Service 4 → Zone d'intervention : diagonale "\" */}
-        <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
+        <ScrollReveal direction="elastic" duration={1.3} delay={100}>
+          <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
+        </ScrollReveal>
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <ScrollReveal direction="up" duration={1.0} delay={100}>
+        <ScrollReveal direction="bounce" duration={1.5} delay={200} distance={150}>
           <ServiceArea />
         </ScrollReveal>
         
         {/* Zone → Contact : diagonale "/" */}
-        <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        <ScrollReveal direction="slide-diagonal" duration={1.2} delay={100}>
+          <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        </ScrollReveal>
         
         {/* Contact (clair #F6F6F6) */}
-        <ScrollReveal direction="up" duration={1.0} delay={100}>
+        <ScrollReveal direction="elastic" duration={1.4} delay={200} distance={120}>
           <Contact />
         </ScrollReveal>
       </main>

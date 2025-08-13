@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Wrench } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,9 +36,11 @@ const Header = () => {
             className="flex items-center cursor-pointer"
             onClick={() => scrollToSection('hero')}
           >
-            <span className="text-xl font-bold text-gray-900 tracking-tight">
-              JACK UP GARAGE
-            </span>
+            <img 
+              src="/src/logo.png" 
+              alt="Jack Up Garage" 
+              className="h-10 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation - Style Solid State */}

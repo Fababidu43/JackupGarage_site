@@ -286,22 +286,6 @@
     transform: none !important;
   }
 
-/* === FOND DYNAMIQUE === */
-@media (prefers-reduced-motion: reduce) {
-  .dynamic-background * {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
-}
-
-/* Optimisation performance pour le fond dynamique */
-.dynamic-background {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
 /* === EFFETS FUTURISTES === */
 

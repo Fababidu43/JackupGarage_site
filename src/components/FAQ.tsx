@@ -15,27 +15,27 @@ const FAQ = () => {
   const faqItems = [
     {
       question: "Intervenez-vous vraiment à domicile ?",
-      answer: "Oui, nous nous déplaçons directement chez vous avec tout notre matériel professionnel. Il vous suffit d'avoir un sol dur et plat (garage, cour, parking)."
+      answer: "Oui, nous venons chez vous avec tout le matériel. Il faut juste un sol dur et plat."
     },
     {
       question: "Combien coûte un déplacement ?",
-      answer: "Le déplacement est gratuit dans notre zone d'intervention (43-42). Pour les embrayages, nous acceptons les déplacements plus longs avec un supplément kilométrique."
+      answer: "Gratuit dans les zones 43-42. Supplément kilométrique pour les embrayages longue distance."
     },
     {
       question: "Combien de temps dure une intervention ?",
-      answer: "Cela dépend du service : vidange (30-45min), freins (1-2h), embrayage (3-5h), distribution (4-6h). Nous vous donnons une estimation précise lors du devis."
+      answer: "Vidange 30-45min, freins 1-2h, embrayage 3-5h, distribution 4-6h."
     },
     {
       question: "Fournissez-vous les pièces ?",
-      answer: "Oui, nous fournissons toutes les pièces de qualité constructeur. Les prix sont inclus dans nos devis transparents."
+      answer: "Oui, pièces de qualité constructeur incluses dans le devis."
     },
     {
       question: "Êtes-vous assurés ?",
-      answer: "Absolument ! Nous disposons d'une assurance RC Professionnelle complète pour votre tranquillité d'esprit."
+      answer: "Oui, assurance RC Professionnelle complète."
     },
     {
       question: "Que se passe-t-il s'il pleut ?",
-      answer: "Nous reportons l'intervention en cas de mauvais temps pour des raisons de sécurité. Nous vous recontactons dès que possible."
+      answer: "Report en cas de pluie pour la sécurité. Nouveau RDV dès que possible."
     },
     {
       question: "Acceptez-vous tous les véhicules ?",
@@ -48,47 +48,46 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-12 lg:py-16 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+    <section id="faq" className="section py-8 lg:py-12 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
       {/* Éléments décoratifs */}
-      <div className="absolute top-10 left-10 w-20 h-20 border-2 border-orange-500/10 rounded-full animate-spin-slow"></div>
-      <div className="absolute bottom-20 right-20 w-12 h-12 border border-orange-400/20 rotate-45"></div>
-      <div className="absolute top-1/2 left-1/4 w-6 h-6 bg-orange-500/5 rounded-full"></div>
+      <div className="absolute top-6 left-6 w-12 h-12 border border-orange-500/10 rounded-full animate-spin-slow"></div>
+      <div className="absolute bottom-12 right-12 w-8 h-8 border border-orange-400/20 rotate-45"></div>
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-6 pulse-subtle shadow-lg hover-scale">
-            <HelpCircle className="w-6 h-6" />
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 pulse-subtle shadow-lg hover-scale">
+            <HelpCircle className="w-5 h-5" />
           </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 mb-3 sm:mb-4 tracking-tight uppercase font-futuristic hover-glow-text">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-2 sm:mb-3 tracking-tight uppercase font-futuristic hover-glow-text">
             Questions Fréquentes
           </h2>
-          <p className="text-base sm:text-lg font-semibold uppercase font-tech mb-2" style={{ color: '#FF6B35' }}>
+          <p className="text-sm sm:text-base font-semibold uppercase font-tech mb-2" style={{ color: '#FF6B35' }}>
             Toutes les réponses à vos questions
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
+          <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-3">
           {faqItems.map((item, index) => (
             <div 
               key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl border-2 border-orange-500/20 hover-scale border-glow subtle-glow animated-border overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-orange-500/40"
+              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow overflow-hidden transition-all duration-200 hover:shadow-xl hover:border-orange-500/40"
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-25 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500/50 group"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-25 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50 group"
               >
-                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 font-futuristic pr-4 group-hover:text-orange-600 transition-colors duration-300">
+                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic pr-3 group-hover:text-orange-600 transition-colors duration-200">
                   {item.question}
                 </h3>
-                <div className={`w-8 h-8 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>
-                  <ChevronDown className="w-5 h-5 text-orange-500 transition-transform duration-300" />
+                <div className={`w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>
+                  <ChevronDown className="w-4 h-4 text-orange-500 transition-transform duration-200" />
                 </div>
               </button>
               
               {openItems.includes(index) && (
-                <div className="px-6 sm:px-8 pb-5 sm:pb-6 border-t border-orange-500/20 bg-gradient-to-r from-orange-50/50 to-transparent">
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-700 font-tech leading-relaxed pt-4 sm:pt-5">
+                <div className="px-4 sm:px-6 pb-3 sm:pb-4 border-t border-orange-500/20 bg-gradient-to-r from-orange-50/50 to-transparent">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed pt-3 sm:pt-4">
                     {item.answer}
                   </p>
                 </div>
@@ -97,7 +96,7 @@ const FAQ = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12 sm:mt-16">
+        <div className="text-center mt-8 sm:mt-10">
           <p className="text-sm text-gray-600 font-tech mb-4">
             Vous avez d'autres questions ?
           </p>

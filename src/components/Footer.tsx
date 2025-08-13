@@ -14,12 +14,12 @@ const Footer = () => {
           {/* Jack Up Garage */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white" style={{ background: '#E67E22' }}>
                <Wrench className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-white tracking-wide uppercase">Jack Up Garage</h3>
-                <p className="text-orange-500 font-medium tracking-wide text-sm uppercase">Mécanicien à domicile</p>
+                <p className="font-medium tracking-wide text-sm uppercase" style={{ color: '#E67E22' }}>Mécanicien à domicile</p>
               </div>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed font-light text-sm">
@@ -76,7 +76,7 @@ const Footer = () => {
             <h4 className="text-base font-bold text-white mb-4 tracking-wide uppercase">Contact</h4>
             <div className="space-y-3">
               <div className="flex items-center text-gray-400">
-                <Phone className="w-4 h-4 mr-2 text-orange-500" />
+                <Phone className="w-4 h-4 mr-2" style={{ color: '#E67E22' }} />
                 <a 
                   href="tel:+33123456789"
                   className="font-light text-sm"
@@ -86,7 +86,7 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center text-gray-400">
-                <Mail className="w-4 h-4 mr-2 text-orange-500" />
+                <Mail className="w-4 h-4 mr-2" style={{ color: '#E67E22' }} />
                 <a 
                   href="mailto:contact@jackupgarage.fr"
                   className="font-light text-sm"
@@ -98,7 +98,7 @@ const Footer = () => {
             </div>
             <div className="mt-4 p-3 bg-gray-900 rounded-lg">
               <p className="text-xs text-gray-300 font-light">
-                <span className="font-bold tracking-wide uppercase" style={{ color: '#DE5121' }}>Réponse rapide :</span><br />
+                <span className="font-bold tracking-wide uppercase" style={{ color: '#E67E22' }}>Réponse rapide :</span><br />
                 Sous 12h par téléphone ou mail
               </p>
             </div>

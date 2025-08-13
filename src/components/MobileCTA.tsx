@@ -1,7 +1,11 @@
 import React from 'react';
 import { Phone, FileText } from 'lucide-react';
 
-const MobileCTA = () => {
+interface MobileCTAProps {
+  onQuoteClick: () => void;
+}
+
+const MobileCTA: React.FC<MobileCTAProps> = ({ onQuoteClick }) => {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-black border-t border-orange-500/20 shadow-lg safe-area-bottom">
       <div className="flex">
@@ -13,13 +17,13 @@ const MobileCTA = () => {
           <Phone className="w-4 h-4 mr-2" />
           APPELER
         </a>
-        <a
-          href="#contact"
+        <button
+          onClick={onQuoteClick}
           className="flex-1 flex items-center justify-center py-3 pb-safe bg-gray-900 text-white font-bold tracking-wide text-sm font-tech hover-scale"
         >
           <FileText className="w-4 h-4 mr-2" />
           DEVIS
-        </a>
+        </button>
       </div>
     </div>
   );

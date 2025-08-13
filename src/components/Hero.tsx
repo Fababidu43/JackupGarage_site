@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
 
-const Hero = () => {
+interface HeroProps {
+  onQuoteClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
     // Effet de parallaxe subtil
     const handleScroll = () => {
@@ -74,7 +78,7 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-4">
           <button
-            onClick={() => scrollToSection('contact')}
+            onClick={onQuoteClick}
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
           >
             Demander un devis

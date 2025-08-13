@@ -4,14 +4,18 @@ import { Droplets, Zap, Settings, Car, ArrowRight } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import FAQ from './components/FAQ';
 import ServiceArea from './components/ServiceArea';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
+import QuotePopup from './components/QuotePopup';
 
 function App() {
+  const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
+
   useEffect(() => {
     // Intersection Observer pour les animations au scroll
     const observerOptions = {
@@ -34,12 +38,20 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  const openQuotePopup = () => {
+    setIsQuotePopupOpen(true);
+  };
+
+  const closeQuotePopup = () => {
+    setIsQuotePopupOpen(false);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onQuoteClick={openQuotePopup} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}
-        <Hero />
+        <Hero onQuoteClick={openQuotePopup} />
         
         {/* Hero → Services : diagonale "/" */}
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
@@ -223,14 +235,21 @@ function App() {
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
         <ServiceArea />
         
-        {/* Zone → Contact : diagonale "/" */}
+        {/* Zone → FAQ : diagonale "/" */}
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
+        
+        {/* FAQ (clair #F6F6F6) */}
+        <FAQ />
+        
+        {/* Zone → Contact : diagonale "/" */}
+        <DiagonalSlash topColor="#F8F9FA" bottomColor="#F8F9FA" type="section" />
         
         {/* Contact (clair #F6F6F6) */}
         <Contact />
       </main>
       <Footer />
-      <MobileCTA />
+      <MobileCTA onQuoteClick={openQuotePopup} />
+      <QuotePopup isOpen={isQuotePopupOpen} onClose={closeQuotePopup} />
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Header = () => {
+interface HeaderProps {
+  onQuoteClick: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -146,13 +150,13 @@ const Header = () => {
               
               {/* CTA Appeler Desktop */}
               <a
-                href="tel:+33123456789"
-                className="ml-2 lg:ml-4 px-4 lg:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
+                onClick={onQuoteClick}
+                className="ml-2 lg:ml-4 px-4 lg:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                   font-tech uppercase tracking-wide text-xs lg:text-sm"
               >
-                Appeler
+                Devis
               </a>
             </div>
 
@@ -223,15 +227,18 @@ const Header = () => {
               
               {/* CTA identique au desktop */}
               <div className="p-4 border-t border-orange-500/20">
-                <a
-                  href="tel:+33123456789"
+                <button
+                  onClick={() => {
+                    onQuoteClick();
+                    setIsMenuOpen(false);
+                  }}
                   className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium 
                     rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                     hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                     font-tech uppercase tracking-wide text-sm"
                 >
-                  Appeler
-                </a>
+                  Devis Express
+                </button>
               </div>
             </div>
           </>

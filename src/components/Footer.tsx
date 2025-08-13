@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 footer-reveal ${isVisible ? 'revealed' : ''}`}
+      className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
     >
       {/* Grille tech subtile */}
       <div className="absolute inset-0 tech-grid opacity-20"></div>

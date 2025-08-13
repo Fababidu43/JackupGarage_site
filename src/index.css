@@ -508,3 +508,20 @@
     opacity: 0.7;
   }
 }
+
+/* === SAFE AREA POUR IPHONE === */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pb-safe {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* === CORRECTION FOOTER MOBILE === */
+@supports (-webkit-touch-callout: none) {
+  /* Styles spécifiques iOS */
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}

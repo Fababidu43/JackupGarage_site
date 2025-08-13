@@ -103,7 +103,7 @@ const Hero = () => {
           <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full lg:mx-2"></div>
           <div className="flex items-center">
             <Clock className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">Réponse < 12h</span>
+            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">{"Réponse < 12h"}</span>
           </div>
         </div>
       </div>

@@ -18,6 +18,9 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero />
         
+        {/* Hero → Services : diagonale "/" */}
+        <DiagonalSlash topColor="#DE5121" bottomColor="#FFFFFF" type="section" />
+        
         {/* Services intro (blanc #FFFFFF) */}
         <Services />
         

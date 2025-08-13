@@ -54,6 +54,43 @@
   clip-path: polygon(-3% -1%, 103% -1%, 103% 103%);
 }
 
+/* === RESPONSIVITÉ MOBILE POUR DIAGONALES === */
+@media (max-width: 768px) {
+  .diag {
+    --h: 4vh;
+  }
+  
+  .diag--service {
+    --h: 3vh;
+  }
+  
+  .diag--slash::before {
+    clip-path: polygon(-5% -2%, 105% -2%, -5% 105%);
+  }
+
+  .diag--backslash::before {
+    clip-path: polygon(-5% -2%, 105% -2%, 105% 105%);
+  }
+}
+
+@media (max-width: 480px) {
+  .diag {
+    --h: 3vh;
+  }
+  
+  .diag--service {
+    --h: 2vh;
+  }
+  
+  .diag--slash::before {
+    clip-path: polygon(-8% -3%, 108% -3%, -8% 108%);
+  }
+
+  .diag--backslash::before {
+    clip-path: polygon(-8% -3%, 108% -3%, 108% 108%);
+  }
+}
+
 .diag--section { --h: 7vh; }
 .diag--service { --h: 5vh; }
 

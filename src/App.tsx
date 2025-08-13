@@ -55,72 +55,17 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
         
-        {/* Trait Hero - commence à côté gauche de RC PRO */}
-        <div className="relative">
-          <svg 
-            className="absolute bottom-16 left-0 w-full h-32 pointer-events-none z-10"
-            viewBox="0 0 100 32"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 12 8 L 12 24 Q 12 28, 18 28 L 35 28"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="12" cy="8" r="1.5" fill="#FF6B35" opacity="0.8" />
-            <circle cx="35" cy="28" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
-        </div>
-        
         {/* Hero → Services : diagonale "/" */}
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
         
         {/* Services intro (blanc #FFFFFF) */}
-        <div className="relative">
-          {/* Trait Services - évite le titre, va vers la droite */}
-          <svg 
-            className="absolute top-8 left-0 w-full h-20 pointer-events-none z-10"
-            viewBox="0 0 100 20"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 35 0 L 60 0 Q 75 0, 75 8 L 75 20"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="75" cy="20" r="1.2" fill="#FF6B35" opacity="0.8" />
-          </svg>
-          <Services />
-        </div>
+        <Services />
         
         {/* Services → Service 1 : diagonale "\" */}
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-4 sm:py-6 lg:py-8 tech-grid slide-in-left relative" style={{ background: '#0A0A0A' }}>
-          {/* Trait Service 1 - évite le texte et l'image, descend au centre */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 75 0 L 75 25 Q 75 35, 65 40 L 45 55 Q 40 60, 40 70 L 40 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="45" cy="55" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="40" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
+        <div className="section section--entretien py-4 sm:py-6 lg:py-8 tech-grid slide-in-left" style={{ background: '#0A0A0A' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -162,24 +107,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right relative" style={{ background: '#F8F9FA' }}>
-          {/* Trait Service 2 - évite l'image à gauche, va vers la droite */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 40 0 L 40 20 Q 40 30, 50 35 L 70 50 Q 80 55, 80 65 L 80 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="70" cy="50" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="80" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
+        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -223,23 +151,6 @@ function App() {
         
         {/* Service 3 - Orange #DE5121 */}
         <div className="section py-4 sm:py-6 lg:py-8 tech-grid slide-in-left relative z-20" style={{ background: '#0A0A0A' }}>
-          {/* Trait Service 3 - évite le texte, descend vers la gauche */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 80 0 L 80 25 Q 80 35, 70 40 L 25 65 Q 15 70, 15 80 L 15 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="25" cy="65" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="15" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -281,24 +192,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right relative" style={{ background: '#F8F9FA' }}>
-          {/* Trait Service 4 - évite l'image à droite, va vers le centre */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 15 0 L 15 30 Q 15 40, 25 45 L 45 60 Q 50 65, 50 75 L 50 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="45" cy="60" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="50" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
+        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right" style={{ background: '#F8F9FA' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -341,76 +235,19 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <div className="relative">
-          {/* Trait Zone - évite les blocs de communes, reste à gauche */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 50 0 L 50 20 Q 50 30, 40 35 L 12 50 Q 8 55, 8 65 L 8 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="12" cy="50" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="8" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
-          <ServiceArea />
-        </div>
+        <ServiceArea />
         
         {/* Zone → FAQ : diagonale "/" */}
         <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
         
         {/* FAQ (clair #F6F6F6) */}
-        <div className="relative">
-          {/* Trait FAQ - évite les questions, reste à gauche */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 8 0 L 8 80 Q 8 90, 15 95 L 25 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="8" cy="40" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="25" cy="100" r="1.2" fill="#FF8C42" opacity="0.7" />
-          </svg>
-          <FAQ />
-        </div>
+        <FAQ />
         
         {/* FAQ → Contact : diagonale "\" pour créer une belle transition */}
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="section" />
         
         {/* Contact (noir #0A0A0A) */}
-        <div className="relative">
-          {/* Trait Contact - évite le formulaire, termine à droite */}
-          <svg 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none z-10"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 25 0 L 25 30 Q 25 40, 35 45 L 75 70 Q 85 75, 85 85 L 85 100"
-              stroke="#FF6B35"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="75" cy="70" r="1" fill="#FF6B35" opacity="0.8" />
-            <circle cx="85" cy="100" r="1.5" fill="#FF8C42" opacity="0.9" />
-          </svg>
-          <Contact />
-        </div>
+        <Contact />
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

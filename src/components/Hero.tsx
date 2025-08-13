@@ -7,11 +7,20 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
-    // Effet de parallaxe subtil
+    // Effet de parallaxe pour l'image de fond
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.parallax-element');
       
+      // Parallaxe pour l'image de fond du hero
+      const heroSection = document.getElementById('hero');
+      if (heroSection) {
+        const speed = 0.3; // Vitesse de parallaxe (plus c'est bas, plus c'est lent)
+        const yPos = scrolled * speed;
+        heroSection.style.backgroundPosition = `center ${yPos}px`;
+      }
+      
+      // Parallaxe pour les autres éléments
+      const parallaxElements = document.querySelectorAll('.parallax-element');
       parallaxElements.forEach((element) => {
         const speed = 0.5;
         const yPos = -(scrolled * speed);
@@ -39,7 +48,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-        `
+        `,
+        backgroundAttachment: 'fixed'
       }}
     >
       {/* Overlay mécanique avec grille tech */}

@@ -14,7 +14,7 @@ const Footer = () => {
           {/* Jack Up Garage */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: '#DE5121' }}>
                <Wrench className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -31,8 +31,7 @@ const Footer = () => {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white rounded-lg"
-                style={{ '--hover-bg': '#DE5121' } as React.CSSProperties}
+                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-orange-500 rounded-lg transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </a>
@@ -40,8 +39,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white rounded-lg"
-                style={{ '--hover-bg': '#DE5121' } as React.CSSProperties}
+                className="w-8 h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-orange-500 rounded-lg transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -61,8 +59,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a 
                     href={link.href}
-                    className="text-gray-400 tracking-wide text-sm font-light uppercase"
-                    style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
+                    className="text-gray-400 tracking-wide text-sm font-light uppercase hover:text-orange-500 transition-colors"
                   >
                     {link.name}
                   </a>
@@ -79,8 +76,7 @@ const Footer = () => {
                 <Phone className="w-4 h-4 mr-2 text-white" />
                 <a 
                   href="tel:+33123456789"
-                  className="font-light text-sm"
-                  style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
+                  className="font-light text-sm hover:text-orange-500 transition-colors"
                 >
                   01 23 45 67 89
                 </a>
@@ -89,8 +85,7 @@ const Footer = () => {
                 <Mail className="w-4 h-4 mr-2 text-white" />
                 <a 
                   href="mailto:contact@jackupgarage.fr"
-                  className="font-light text-sm"
-                  style={{ '--hover-color': '#DE5121' } as React.CSSProperties}
+                  className="font-light text-sm hover:text-orange-500 transition-colors"
                 >
                   contact@jackupgarage.fr
                 </a>

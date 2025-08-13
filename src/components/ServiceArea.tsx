@@ -22,32 +22,45 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #DE5121 0%, #C9471D 100%)' }}
+      className="section relative text-white overflow-hidden tech-grid"
+      style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 tracking-tight uppercase">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 tracking-tight uppercase font-futuristic">
             Zone d'intervention
           </h2>
-          <p className="text-lg sm:text-xl text-white/90 font-light">
-            Service disponible dans la Haute-Loire et la Loire
+          <div className="max-w-4xl mx-auto bg-orange-500/10 border border-orange-500/20 rounded-lg p-6 mb-8">
+            <p className="text-lg sm:text-xl text-orange-300 font-medium font-tech mb-2">
+              Secteurs 43–42. Nous n'avons besoin que d'un sol dur et plat.
+            </p>
+            <p className="text-base text-white/80 font-tech">
+              Embrayages : déplacement élargi sur demande (ex. Brioude).
+            </p>
+          </div>
+          
+          {/* Badge Saint-Étienne */}
+          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="text-yellow-300 font-medium text-sm font-tech">
+              Saint-Étienne intra-muros : interventions limitées
+            </span>
+          </div>
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
           {/* Haute-Loire */}
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase font-futuristic">
                 Haute-Loire (43)
               </h3>
             </div>
             
-            <div className="text-white/90 leading-relaxed font-light text-sm">
+            <div className="text-white/80 leading-relaxed font-light text-sm font-tech">
               {communes43.slice(0, showAllCommunes43 ? communes43.length : 8).map((commune, index) => (
                 <span key={index}>
                   {commune}
@@ -59,7 +72,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
+              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors font-medium text-sm uppercase font-tech underline-animate"
             >
               {showAllCommunes43 ? (
                 <>
@@ -74,17 +87,17 @@ const ServiceArea = () => {
           </div>
 
           {/* Loire */}
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+          <div className="bg-orange-500/10 backdrop-blur-sm p-6 rounded-lg border border-orange-500/20">
             <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-orange-500 mr-3">
+              <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center text-white mr-3">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold text-white tracking-wide uppercase">
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase font-futuristic">
                 Loire (42)
               </h3>
             </div>
             
-            <div className="text-white/90 leading-relaxed font-light text-sm">
+            <div className="text-white/80 leading-relaxed font-light text-sm font-tech">
               {communes42.slice(0, showAllCommunes42 ? communes42.length : 8).map((commune, index) => (
                 <span key={index}>
                   {commune}
@@ -96,7 +109,7 @@ const ServiceArea = () => {
             
             <button
               onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-              className="mt-3 inline-flex items-center text-white hover:text-white/80 transition-colors font-medium text-sm uppercase"
+              className="mt-3 inline-flex items-center text-orange-300 hover:text-orange-200 transition-colors font-medium text-sm uppercase font-tech underline-animate"
             >
               {showAllCommunes42 ? (
                 <>
@@ -113,14 +126,14 @@ const ServiceArea = () => {
 
         {/* Conditions d'intervention */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-wide text-center uppercase">
+          <div className="bg-white p-6 rounded-lg shadow-lg border border-orange-500/20">
+            <h4 className="text-xl font-bold text-gray-900 mb-3 tracking-wide text-center uppercase font-futuristic">
               Conditions d'intervention
             </h4>
-            <p className="text-base leading-relaxed mb-3 text-center font-light" style={{ color: '#5B6573' }}>
+            <p className="text-base leading-relaxed mb-3 text-center font-light font-tech" style={{ color: '#4A5568' }}>
               Intervention sur sol dur et plat uniquement pour des raisons de sécurité.
             </p>
-            <p className="text-sm leading-relaxed text-center font-light" style={{ color: '#5B6573' }}>
+            <p className="text-sm leading-relaxed text-center font-light font-tech" style={{ color: '#4A5568' }}>
               Pour les embrayages, possibilité de déplacement longue distance avec supplément kilométrique.
             </p>
           </div>

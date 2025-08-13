@@ -1,8 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 
 const Services = () => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.pageYOffset;
+      const servicesSection = document.querySelector('.geometric-bg--services');
+      if (servicesSection) {
+        const speed = 0.2;
+        const yPos = scrolled * speed;
+        (servicesSection as HTMLElement).style.setProperty('--scroll-y', `${yPos}px`);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="services" className="relative reveal-on-scroll">
+    <section id="services" className="relative reveal-on-scroll geometric-bg geometric-bg--services">
       {/* Titre Services sur fond blanc */}
       <div className="section py-6 sm:py-8 lg:py-10 scan-lines" style={{ background: '#F8F9FA' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

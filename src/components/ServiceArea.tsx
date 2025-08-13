@@ -5,21 +5,6 @@ const ServiceArea = () => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
   const [showAllCommunes42, setShowAllCommunes42] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const areaSection = document.querySelector('.geometric-bg--area');
-      if (areaSection) {
-        const speed = 0.25;
-        const yPos = scrolled * speed;
-        (areaSection as HTMLElement).style.setProperty('--scroll-y', `${yPos}px`);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
     "Sainte-Sigolène", "Retournac", "Bas-en-Basset", "Saint-Just-Malmont", "Dunières", 
@@ -37,7 +22,7 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden tech-grid reveal-on-scroll py-8 lg:py-12 geometric-bg geometric-bg--area"
+      className="section relative text-white overflow-hidden tech-grid reveal-on-scroll py-8 lg:py-12"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

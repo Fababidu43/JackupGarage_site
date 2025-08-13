@@ -4,21 +4,6 @@ import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 const FAQ = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const faqSection = document.querySelector('.geometric-bg--faq');
-      if (faqSection) {
-        const speed = 0.15;
-        const yPos = scrolled * speed;
-        (faqSection as HTMLElement).style.setProperty('--scroll-y', `${yPos}px`);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const toggleItem = (index: number) => {
     setOpenItems(prev => 
       prev.includes(index) 
@@ -63,7 +48,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll relative overflow-hidden geometric-bg geometric-bg--faq" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
       {/* Éléments décoratifs */}
       <div className="absolute top-6 left-6 w-12 h-12 border border-orange-500/10 rounded-full animate-spin-slow"></div>
       <div className="absolute bottom-12 right-12 w-8 h-8 border border-orange-400/20 rotate-45"></div>

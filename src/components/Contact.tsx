@@ -13,21 +13,6 @@ const Contact = () => {
     message: ''
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const contactSection = document.querySelector('.geometric-bg--contact');
-      if (contactSection) {
-        const speed = 0.3;
-        const yPos = scrolled * speed;
-        (contactSection as HTMLElement).style.setProperty('--scroll-y', `${yPos}px`);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
@@ -43,7 +28,7 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll tech-grid geometric-bg geometric-bg--contact"
+      className="section relative py-8 lg:py-12 reveal-on-scroll tech-grid"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
       {/* Éléments décoratifs futuristes */}

@@ -244,29 +244,3 @@
 }
 
 /* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
-*, *::before, *::after {
-  animation: none !important;
-  transition: none !important;
-  transform: none !important;
-}
-
-/* Seuls les hovers instantanés sont autorisés */
-button:hover,
-a:hover,
-.glow-hover:hover,
-.underline-animate:hover::after,
-.btn-primary:hover,
-.btn-secondary:hover,
-.form-input:focus {
-  transition: all 0.3s ease !important;
-}
-
-.animate-fade-in-up,
-.animate-fade-in,
-.animate-diagonal-appear,
-.animate-slide-in-left,
-.animate-slide-in-right {
-  animation: none !important;
-  opacity: 1 !important;
-  transform: none !important;
-}

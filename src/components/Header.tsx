@@ -101,25 +101,25 @@ const Header = () => {
             <div 
               className="flex items-center cursor-pointer group"
               onClick={() => scrollToSection('hero')}
-              style={{ marginLeft: '3px' }}
+              style={{ marginLeft: '8px' }}
             >
-              <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 py-1 
+              <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-3 py-2 
                 hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
                 transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                ${isScrolled ? 'w-36 h-12' : 'w-40 h-14'}`}
+                ${isScrolled ? 'w-28 h-12' : 'w-32 h-14'}`}
               >
                 <img 
                   src="/src/logo.png" 
                   alt="Jack Up Garage" 
-                  className={`w-auto h-full object-contain transition-all duration-300 ${
-                    isScrolled ? 'max-h-10' : 'max-h-12'
+                  className={`w-auto object-contain transition-all duration-300 ${
+                    isScrolled ? 'max-h-8' : 'max-h-10'
                   }`}
                 />
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8" style={{ marginRight: '3px' }}>
+            <div className="hidden md:flex items-center space-x-8" style={{ marginRight: '8px' }}>
               {navigationItems.map((item) => (
                 <button
                   key={item.name}
@@ -162,7 +162,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200
                 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded"
-              style={{ marginRight: '3px' }}
+              style={{ marginRight: '8px' }}
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >

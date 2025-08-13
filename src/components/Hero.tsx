@@ -90,7 +90,7 @@ const Hero = () => {
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 reveal-on-scroll">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-white/80 reveal-on-scroll">
           <div className="flex items-center">
             <Shield className="w-5 h-5 mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-sm uppercase font-tech">RC Pro</span>

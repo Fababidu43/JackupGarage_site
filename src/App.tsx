@@ -24,26 +24,8 @@ function App() {
       return;
     }
     
-    // Gestion des formes réactives au scroll
-    const handleScrollShapes = () => {
-      const shapes = document.querySelectorAll('.scroll-shapes');
-      shapes.forEach((shape) => {
-        const rect = shape.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2;
-        
-        if (isVisible) {
-          shape.classList.add('active');
-        } else {
-          shape.classList.remove('active');
-        }
-      });
-    };
-    
     // Système d'animation futuriste au scroll
     const handleFuturisticScroll = () => {
-      handleScrollShapes();
-      
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
       scrollDirectionRef.current = scrollDirection;
@@ -190,7 +172,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white overflow-hidden">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
           {/* Fond dynamique blanc */}
           <div className="dynamic-background-white">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -198,23 +180,6 @@ function App() {
             <div className="bg-layer-white bg-layer-particles-white"></div>
             <div className="bg-layer-white bg-layer-depth-white"></div>
             <div className="bg-layer-white bg-layer-metallic-white"></div>
-          </div>
-          
-          {/* Formes réactives au scroll */}
-          <div className="scroll-shapes shapes-white top-12 left-20">
-            <div className="shape-circle"></div>
-          </div>
-          <div className="scroll-shapes shapes-white top-24 right-16">
-            <div className="shape-square"></div>
-          </div>
-          <div className="scroll-shapes shapes-white bottom-20 left-12">
-            <div className="shape-triangle"></div>
-          </div>
-          <div className="scroll-shapes shapes-white top-40 right-32">
-            <div className="shape-line"></div>
-          </div>
-          <div className="scroll-shapes shapes-white bottom-12 right-8">
-            <div className="shape-dot"></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -295,7 +260,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white overflow-hidden">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
           {/* Fond dynamique blanc */}
           <div className="dynamic-background-white">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -303,23 +268,6 @@ function App() {
             <div className="bg-layer-white bg-layer-particles-white"></div>
             <div className="bg-layer-white bg-layer-depth-white"></div>
             <div className="bg-layer-white bg-layer-metallic-white"></div>
-          </div>
-          
-          {/* Formes réactives au scroll */}
-          <div className="scroll-shapes shapes-white top-16 left-24">
-            <div className="shape-circle"></div>
-          </div>
-          <div className="scroll-shapes shapes-white top-28 right-20">
-            <div className="shape-square"></div>
-          </div>
-          <div className="scroll-shapes shapes-white bottom-24 left-16">
-            <div className="shape-triangle"></div>
-          </div>
-          <div className="scroll-shapes shapes-white top-36 right-28">
-            <div className="shape-line"></div>
-          </div>
-          <div className="scroll-shapes shapes-white bottom-16 right-12">
-            <div className="shape-dot"></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">

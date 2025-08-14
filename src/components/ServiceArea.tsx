@@ -442,7 +442,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 font-futuristic">
-                    Vérificateur de Couverture
+                    🔍 Vérificateur de Couverture
                   </h3>
                 </div>
               

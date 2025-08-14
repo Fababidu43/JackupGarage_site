@@ -248,11 +248,7 @@
 
 /* Couche 2: Grille d'atelier uniforme */
 .bg-layer-tech {
-  background-image: 
-    linear-gradient(rgba(255, 107, 53, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
-  background-size: 60px 60px, 60px 60px;
-  animation: atelierGrid 25s linear infinite;
+  background: transparent;
 }
 
 @keyframes atelierGrid {
@@ -322,7 +318,7 @@
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .bg-layer-tech {
-    background-size: 40px 40px, 40px 40px;
+    background: transparent;
   }
   
   .bg-layer-depth {
@@ -371,11 +367,7 @@
 
 /* Couche 2: Grille d'atelier uniforme pour fond blanc */
 .bg-layer-tech-white {
-  background-image: 
-    linear-gradient(rgba(139, 69, 19, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 69, 19, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px, 60px 60px;
-  animation: atelierGrid 25s linear infinite;
+  background: transparent;
 }
 
 /* Couche 3: Grosses poussières d'atelier pour fond blanc */
@@ -412,7 +404,7 @@
 /* Responsive pour mobile - sections blanches */
 @media (max-width: 768px) {
   .bg-layer-tech-white {
-    background-size: 40px 40px, 40px 40px;
+    background: transparent;
   }
   
   .bg-layer-depth-white {

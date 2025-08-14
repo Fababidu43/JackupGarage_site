@@ -31,9 +31,6 @@ const Footer = () => {
       ref={footerRef}
       className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
     >
-      {/* Grille tech subtile */}
-      <div className="absolute inset-0 tech-grid opacity-20"></div>
-      
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
         {/* Layout horizontal compact */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">

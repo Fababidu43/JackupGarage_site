@@ -367,6 +367,24 @@
 .safe-area-inset-top {
   padding-top: env(safe-area-inset-top);
 }
+
+/* === COUPE DIAGONALE HERO === */
+.hero-diagonal-cut {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vh), 0 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
+  }
+}
 /* === CORRECTION FOOTER MOBILE === */
 @supports (-webkit-touch-callout: none) {
   /* Styles spécifiques iOS */

@@ -6,6 +6,21 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.getElementById('hero');
+      if (hero) {
+        // Effet parallaxe sur l'image de fond - mouvement vers le bas quand on scroll
+        const yPos = scrolled * 0.5; // Vitesse de parallaxe
+        hero.style.backgroundPosition = `center ${yPos}px`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -22,7 +37,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-        `
+        `,
+        backgroundAttachment: 'fixed'
       }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">

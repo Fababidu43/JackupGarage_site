@@ -116,15 +116,15 @@ function App() {
         </div>
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phares dynamiques */}
-          <div className="headlights-container">
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Phares dynamiques pour Entretiens */}
+          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-left"></div>
             <div className="headlight headlight-right"></div>
             <div className="headlight headlight-top-left"></div>
             <div className="headlight headlight-bottom-right"></div>
           </div>
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -203,15 +203,15 @@ function App() {
         </div>
 
         {/* Service 3 - Distribution */}
-        <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phares dynamiques */}
-          <div className="headlights-container">
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Phares dynamiques pour Distribution */}
+          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-left"></div>
             <div className="headlight headlight-right"></div>
             <div className="headlight headlight-top-right"></div>
             <div className="headlight headlight-bottom-left"></div>
           </div>
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -290,33 +290,31 @@ function App() {
         </div>
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <ServiceArea />
+        <div className="relative">
+          {/* Phares dynamiques pour Zone d'intervention */}
+          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
+            <div className="headlight headlight-left"></div>
+            <div className="headlight headlight-right"></div>
+            <div className="headlight headlight-top-left"></div>
+            <div className="headlight headlight-top-right"></div>
+          </div>
+          <ServiceArea />
+        </div>
         
         {/* FAQ (clair #F6F6F6) */}
         <FAQ />
         
         {/* Contact (noir #0A0A0A) */}
-        <Contact />
-        
-        {/* Phares pour la section Contact */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            document.addEventListener('DOMContentLoaded', function() {
-              const contactSection = document.getElementById('contact');
-              if (contactSection) {
-                const headlightsContainer = document.createElement('div');
-                headlightsContainer.className = 'headlights-container';
-                headlightsContainer.innerHTML = \`
-                  <div class="headlight headlight-left"></div>
-                  <div class="headlight headlight-right"></div>
-                  <div class="headlight headlight-top-left"></div>
-                  <div class="headlight headlight-top-right"></div>
-                \`;
-                contactSection.appendChild(headlightsContainer);
-              }
-            });
-          `
-        }} />
+        <div className="relative">
+          {/* Phares dynamiques pour Contact */}
+          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
+            <div className="headlight headlight-left"></div>
+            <div className="headlight headlight-right"></div>
+            <div className="headlight headlight-top-left"></div>
+            <div className="headlight headlight-top-right"></div>
+          </div>
+          <Contact />
+        </div>
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

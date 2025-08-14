@@ -539,6 +539,87 @@
   padding-top: env(safe-area-inset-top);
 }
 
+/* === VOITURE SUR DIAGONALES === */
+.diagonal-car {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  z-index: 20;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+}
+
+.diagonal-car.visible {
+  opacity: 1;
+}
+
+.diagonal-car::before {
+  content: '🚗';
+  position: absolute;
+  font-size: 24px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Voiture qui monte (scroll vers le haut) */
+.diagonal-car.going-up::before {
+  content: '🚙';
+  transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+/* Voiture qui descend (scroll vers le bas) */
+.diagonal-car.going-down::before {
+  content: '🚗';
+  transform: translate(-50%, -50%) rotate(15deg);
+}
+
+/* Positions pour diagonales slash (/) */
+.diagonal-car.slash {
+  /* Position calculée dynamiquement via JS */
+}
+
+/* Positions pour diagonales backslash (\) */
+.diagonal-car.backslash {
+  /* Position calculée dynamiquement via JS */
+}
+
+/* Animation de déplacement fluide */
+@keyframes carMove {
+  0% { transform: translateX(-20px) translateY(10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(20px) translateY(-10px); opacity: 0; }
+}
+
+.diagonal-car.animated {
+  animation: carMove 2s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .diagonal-car {
+    width: 30px;
+    height: 15px;
+  }
+  
+  .diagonal-car::before {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .diagonal-car {
+    width: 25px;
+    height: 12px;
+  }
+  
+  .diagonal-car::before {
+    font-size: 16px;
+  }
+}
 /* === COUPE DIAGONALE HERO === */
 .hero-diagonal-cut {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);

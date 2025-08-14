@@ -10,17 +10,10 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
-      const diagonal = document.querySelector('.hero-diagonal');
-      
       if (hero) {
         // Effet de zoom sur l'image de fond - grossit quand on scroll vers le bas
         const zoomFactor = 1 + (scrolled * 0.0005); // Facteur de zoom progressif
         hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
-        
-        // Synchroniser la diagonale avec le même effet de zoom
-        if (diagonal) {
-          (diagonal as HTMLElement).style.setProperty('--zoom-factor', zoomFactor.toString());
-        }
       }
     };
 

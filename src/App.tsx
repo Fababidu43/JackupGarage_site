@@ -58,7 +58,6 @@ function App() {
           topColor="url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')" 
           bottomColor="#F8F9FA" 
           type="section" 
-          className="hero-diagonal"
         />
         
         {/* Services intro (blanc #FFFFFF) */}

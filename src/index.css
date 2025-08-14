@@ -42,7 +42,7 @@
   bottom: 0;
   pointer-events: none;
   background: var(--top-bg, #000);
-  background-size: calc(100% * var(--zoom-factor, 1)) auto;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   -webkit-backface-visibility: hidden;

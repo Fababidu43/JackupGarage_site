@@ -437,6 +437,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               )}
             </div>
             </div>
+          </div>
 
           {/* Listes des communes (accordéons) */}
           {(showAllCommunes43 || showAllCommunes42) && (
@@ -493,6 +494,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               Demander un devis
             </button>
           </div>
+        </div>
       </div>
     </section>
   );

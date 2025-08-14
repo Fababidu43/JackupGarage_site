@@ -33,19 +33,12 @@ const Contact = () => {
     >
       {/* Formes mécaniques animées */}
       <div className="mechanical-shapes black-section">
-        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '12%', left: '5%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '25%', right: '6%' }}></div>
-        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '8%' }}></div>
-        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '50%', right: '10%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '35%', right: '4%' }}></div>
-        <div className="mechanical-shape piston-shape float-right" style={{ top: '65%', left: '12%' }}></div>
-        <div className="mechanical-shape socket-wrench-shape rotate-slow" style={{ top: '35%', left: '20%' }}></div>
-        <div className="mechanical-shape pliers-shape rotate-medium" style={{ bottom: '20%', right: '18%' }}></div>
-        <div className="mechanical-shape tire-shape float-up" style={{ top: '80%', left: '6%' }}></div>
-        <div className="mechanical-shape filter-shape rotate-reverse float-down" style={{ bottom: '50%', left: '15%' }}></div>
-        <div className="mechanical-shape battery-shape float-left" style={{ top: '40%', right: '20%' }}></div>
-        <div className="mechanical-shape exhaust-shape rotate-fast" style={{ bottom: '10%', left: '25%' }}></div>
-        <div className="mechanical-shape spark-plug-shape float-right" style={{ top: '20%', right: '15%' }}></div>
+        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '6%' }}></div>
+        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '30%', right: '8%' }}></div>
+        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '25%', left: '10%' }}></div>
+        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '55%', right: '12%' }}></div>
+        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '40%', right: '5%' }}></div>
+        <div className="mechanical-shape piston-shape float-right" style={{ top: '70%', left: '15%' }}></div>
       </div>
       
       <div className="relative z-10">

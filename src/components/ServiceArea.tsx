@@ -371,19 +371,13 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     >
       {/* Formes mécaniques animées */}
       <div className="mechanical-shapes black-section">
-        <div className="mechanical-shape gear-shape rotate-medium" style={{ top: '8%', left: '6%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-slow float-up" style={{ top: '20%', right: '8%' }}></div>
-        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '35%', left: '10%' }}></div>
-        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '50%', right: '6%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '25%', right: '15%' }}></div>
-        <div className="mechanical-shape piston-shape float-right" style={{ top: '35%', left: '4%' }}></div>
-        <div className="mechanical-shape oil-drop-shape rotate-medium" style={{ bottom: '45%', right: '3%' }}></div>
-        <div className="mechanical-shape socket-wrench-shape rotate-slow" style={{ top: '65%', left: '12%' }}></div>
-        <div className="mechanical-shape pliers-shape float-up" style={{ top: '15%', left: '18%' }}></div>
-        <div className="mechanical-shape tire-shape rotate-medium float-down" style={{ bottom: '15%', left: '8%' }}></div>
-        <div className="mechanical-shape filter-shape rotate-reverse" style={{ top: '75%', right: '12%' }}></div>
-        <div className="mechanical-shape battery-shape float-left" style={{ bottom: '60%', right: '10%' }}></div>
-        <div className="mechanical-shape exhaust-shape rotate-slow" style={{ top: '40%', right: '20%' }}></div>
+        <div className="mechanical-shape gear-shape rotate-medium" style={{ top: '10%', left: '8%' }}></div>
+        <div className="mechanical-shape wrench-shape rotate-slow float-up" style={{ top: '25%', right: '10%' }}></div>
+        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '12%' }}></div>
+        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '60%', right: '8%' }}></div>
+        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '20%', right: '18%' }}></div>
+        <div className="mechanical-shape piston-shape float-right" style={{ top: '45%', left: '6%' }}></div>
+        <div className="mechanical-shape oil-drop-shape rotate-medium" style={{ bottom: '50%', right: '5%' }}></div>
       </div>
       
       <div className="relative z-10">

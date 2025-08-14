@@ -56,6 +56,10 @@ const Footer = () => {
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
+                onError={(e) => {
+                  console.error('Footer logo failed to load:', e);
+                  e.currentTarget.style.display = 'none';
+                }}
               />
             </div>
           </div>

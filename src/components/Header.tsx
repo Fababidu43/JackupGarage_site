@@ -117,6 +117,10 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                   alt="Jack Up Garage" 
                   className="w-full h-full object-contain transition-all duration-300"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
+                  onError={(e) => {
+                    console.error('Logo failed to load:', e);
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
               </div>
             </div>

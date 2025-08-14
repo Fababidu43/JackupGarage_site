@@ -38,12 +38,8 @@ function App() {
     // Gestion des motifs réactifs au scroll
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
-      const lastScrollY = window.lastScrollY || 0;
-      const scrollDirection = scrollY > lastScrollY ? 'down' : 'up';
-      window.lastScrollY = scrollY;
       
       const patterns = document.querySelectorAll('.scroll-pattern');
-      const dynamicBackgrounds = document.querySelectorAll('.dynamic-background');
       
       patterns.forEach((pattern, index) => {
         const section = pattern.closest('.section');
@@ -71,33 +67,10 @@ function App() {
           }
         }
       });
-      
-      // Gestion des fonds dynamiques
-      dynamicBackgrounds.forEach((background) => {
-        // Supprimer les anciennes classes de direction
-        background.classList.remove('scroll-up', 'scroll-down');
-        
-        // Ajouter la nouvelle classe de direction
-        background.classList.add(`scroll-${scrollDirection}`);
-      });
-      
-      // Gestion des fonds dynamiques blancs
-      const dynamicBackgroundsWhite = document.querySelectorAll('.dynamic-background-white');
-      dynamicBackgroundsWhite.forEach((background) => {
-        // Supprimer les anciennes classes de direction
-        background.classList.remove('scroll-up', 'scroll-down');
-        
-        // Ajouter la nouvelle classe de direction
-        background.classList.add(`scroll-${scrollDirection}`);
-      });
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
-    
-    // Debug: vérifier que les fonds dynamiques sont bien détectés
-    console.log('Fonds dynamiques détectés:', document.querySelectorAll('.dynamic-background').length);
-    console.log('Fonds dynamiques blancs détectés:', document.querySelectorAll('.dynamic-background-white').length);
     
     return () => {
       observer.disconnect();

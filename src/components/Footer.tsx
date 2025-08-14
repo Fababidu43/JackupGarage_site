@@ -35,44 +35,28 @@ const Footer = () => {
         {/* Layout horizontal compact */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
           
-          {/* Logo + Nom compact */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Nom seulement */}
+          <div className="text-center lg:text-left">
+            <h3 className="text-base sm:text-lg font-bold text-white font-futuristic">Jack Up Garage</h3>
+            <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
+          </div>
+
+          {/* Logo super large centré */}
+          <div className="flex-1 flex justify-center">
             <div 
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center bg-white/95 border border-orange-500/30 p-1 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale"
+              className="w-32 h-24 sm:w-40 sm:h-28 lg:w-48 lg:h-32 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 
-                className="max-h-8 sm:max-h-10 w-auto object-contain"
+                className="w-full h-full object-contain"
               />
-            </div>
-            <div>
-              <h3 className="text-base sm:text-lg font-bold text-white font-futuristic">Jack Up Garage</h3>
-              <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
             </div>
           </div>
 
-          {/* Navigation horizontale */}
-          <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
-            {[
-              { name: 'Accueil', href: '#hero' },
-              { name: 'Services', href: '#services' },
-              { name: 'Zone', href: '#area' },
-              { name: 'Contact', href: '#contact' }
-            ].map((link) => (
-              <a 
-                key={link.name}
-                href={link.href}
-                className="text-gray-400 hover:text-orange-400 text-xs lg:text-sm font-tech uppercase tracking-wide underline-animate transition-colors hover-lift"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
           {/* Contact + Réseaux sociaux */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4 lg:justify-end">
             {/* Contact rapide */}
             <div className="flex items-center space-x-2 sm:space-x-3">
               <a 
@@ -116,24 +100,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Version mobile - Navigation */}
-        <nav className="md:hidden flex justify-center space-x-3 sm:space-x-4 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-800">
-          {[
-            { name: 'Accueil', href: '#hero' },
-            { name: 'Services', href: '#services' },
-            { name: 'Zone', href: '#area' },
-            { name: 'Contact', href: '#contact' }
-          ].map((link) => (
-            <a 
-              key={link.name}
-              href={link.href}
-              className="text-gray-400 hover:text-orange-400 text-xs font-tech uppercase tracking-wide underline-animate transition-colors min-h-[40px] flex items-center"
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
 
         {/* Copyright minimaliste */}
         <div className="text-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-800">

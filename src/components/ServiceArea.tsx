@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info, Map, DollarSign, Search } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info, Map, DollarSign, Search, Shield, Clock } from 'lucide-react';
 
 interface ServiceAreaProps {
   onQuoteClick: () => void;
@@ -348,16 +348,41 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     
     switch (coverageResult.status) {
       case 'covered':
-        return `✅ Nous intervenons à ${coverageResult.city} sans supplément.`;
+        return (
+          <span className="flex items-center gap-2">
+            <CheckCircle className="w-4 h-4 text-green-500" />
+            Nous intervenons à {coverageResult.city} sans supplément.
+          </span>
+        );
       case 'on-demand':
         const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
-        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
+        return (
+          <span className="flex items-center gap-2">
+            <DollarSign className="w-4 h-4 text-yellow-500" />
+            Zone élargie embrayage : supplément de {supplement} € TTC (distance : {distance} km).
+          </span>
+        );
       case 'quote-only':
-        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
+        return (
+          <span className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-orange-500" />
+            Hors zone standard. Contactez-nous pour un devis personnalisé.
+          </span>
+        );
       case 'limited-access':
-        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
+        return (
+          <span className="flex items-center gap-2">
+            <Info className="w-4 h-4 text-blue-500" />
+            Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.
+          </span>
+        );
       case 'out-of-zone':
-        return `🚫 Zone non desservie.`;
+        return (
+          <span className="flex items-center gap-2">
+            <XCircle className="w-4 h-4 text-red-500" />
+            Zone non desservie.
+          </span>
+        );
       default:
         return '';
     }

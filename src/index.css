@@ -764,7 +764,7 @@
 
 /* === COUPE DIAGONALE HERO === */
 .hero-diagonal-cut {
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8vh), 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);
 }
 
 /* === COUPES DIAGONALES INTÉGRÉES === */
@@ -796,7 +796,7 @@
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6vh), 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vh), 0 100%);
   }
   
   .diagonal-cut-top-slash {
@@ -826,7 +826,7 @@
 
 @media (max-width: 480px) {
   .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vh), 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
   }
   
   .diagonal-cut-top-slash {
@@ -858,10 +858,6 @@
   /* Styles spécifiques iOS */
   .min-h-screen {
     min-height: -webkit-fill-available;
-  }
-  
-  .h-screen {
-    height: -webkit-fill-available;
   }
 }
 

@@ -31,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   return (
     <section 
       id="hero"
-      className="section relative min-h-screen h-screen flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut"
+      className="section relative min-h-screen flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut"
       style={{ 
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 pb-20">
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>

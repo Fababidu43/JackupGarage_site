@@ -269,26 +269,8 @@
 
 /* Couche 3: Grosses poussières d'atelier */
 .bg-layer-particles {
-  background-image: 
-    /* Grosses étincelles dorées */
-    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 3px, transparent 6px),
-    radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.3) 2px, transparent 5px),
-    radial-gradient(circle at 40% 80%, rgba(255, 69, 0, 0.3) 4px, transparent 7px),
-    /* Grosses poussières métalliques */
-    radial-gradient(circle at 60% 20%, rgba(169, 169, 169, 0.2) 5px, transparent 8px),
-    radial-gradient(circle at 30% 60%, rgba(105, 105, 105, 0.15) 3px, transparent 6px),
-    radial-gradient(circle at 90% 40%, rgba(192, 192, 192, 0.2) 4px, transparent 7px);
-  background-size: 200px 200px, 250px 250px, 180px 180px, 300px 300px, 220px 220px, 280px 280px;
-  animation: atelierParticles 30s ease-in-out infinite;
-}
-
-@keyframes atelierParticles {
-  0%, 100% { 
-    transform: translateY(0px) translateX(0px);
-  }
-  50% { 
-    transform: translateY(-10px) translateX(5px);
-  }
+  /* Pas de particules - fond propre */
+  background: transparent;
 }
 
 /* Couche 4: Fumée d'atelier uniforme */
@@ -341,10 +323,6 @@
 @media (max-width: 768px) {
   .bg-layer-tech {
     background-size: 40px 40px, 40px 40px;
-  }
-  
-  .bg-layer-particles {
-    background-size: 150px 150px, 180px 180px, 130px 130px, 200px 200px, 160px 160px, 190px 190px;
   }
   
   .bg-layer-depth {
@@ -402,17 +380,8 @@
 
 /* Couche 3: Grosses poussières d'atelier pour fond blanc */
 .bg-layer-particles-white {
-  background-image: 
-    /* Grosses étincelles brunes */
-    radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.25) 3px, transparent 6px),
-    radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.2) 2px, transparent 5px),
-    radial-gradient(circle at 40% 80%, rgba(139, 69, 19, 0.2) 4px, transparent 7px),
-    /* Grosses poussières grises */
-    radial-gradient(circle at 60% 20%, rgba(105, 105, 105, 0.15) 5px, transparent 8px),
-    radial-gradient(circle at 30% 60%, rgba(128, 128, 128, 0.12) 3px, transparent 6px),
-    radial-gradient(circle at 90% 40%, rgba(105, 105, 105, 0.15) 4px, transparent 7px);
-  background-size: 200px 200px, 250px 250px, 180px 180px, 300px 300px, 220px 220px, 280px 280px;
-  animation: atelierParticles 30s ease-in-out infinite;
+  /* Pas de particules - fond propre */
+  background: transparent;
 }
 
 /* Couche 4: Fumée d'atelier uniforme pour fond blanc */
@@ -444,10 +413,6 @@
 @media (max-width: 768px) {
   .bg-layer-tech-white {
     background-size: 40px 40px, 40px 40px;
-  }
-  
-  .bg-layer-particles-white {
-    background-size: 150px 150px, 180px 180px, 130px 130px, 200px 200px, 160px 160px, 190px 190px;
   }
   
   .bg-layer-depth-white {
@@ -893,5 +858,268 @@
   /* Styles spécifiques iOS */
   .min-h-screen {
     min-height: -webkit-fill-available;
+  }
+}
+
+/* === CARTE INTERACTIVE ZONE D'INTERVENTION === */
+.interactive-map {
+  position: relative;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid rgba(255, 107, 53, 0.2);
+  transition: all 0.3s ease;
+}
+
+.interactive-map:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+}
+
+/* Carte SVG */
+.map-svg {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+}
+
+.map-department {
+  transition: all 0.25s ease;
+  cursor: pointer;
+  stroke-width: 2;
+}
+
+/* États des départements */
+.dept-covered {
+  fill: #10B981;
+  stroke: #059669;
+}
+
+.dept-covered:hover {
+  fill: #34D399;
+  stroke: #10B981;
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+}
+
+.dept-on-demand {
+  fill: #F59E0B;
+  stroke: #D97706;
+}
+
+.dept-on-demand:hover {
+  fill: #FBBF24;
+  stroke: #F59E0B;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.4));
+}
+
+.dept-limited {
+  fill: #3B82F6;
+  stroke: #2563EB;
+}
+
+.dept-limited:hover {
+  fill: #60A5FA;
+  stroke: #3B82F6;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+}
+
+.dept-out-of-zone {
+  fill: #6B7280;
+  stroke: #4B5563;
+}
+
+.dept-out-of-zone:hover {
+  fill: #9CA3AF;
+  stroke: #6B7280;
+}
+
+/* Vérificateur de couverture */
+.coverage-checker {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid rgba(255, 107, 53, 0.2);
+  transition: all 0.3s ease;
+}
+
+.coverage-checker:focus-within {
+  border-color: rgba(255, 107, 53, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.coverage-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.coverage-input:focus {
+  outline: none;
+  border-color: #FF6B35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* États de couverture */
+.coverage-result {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coverage-covered {
+  background: #D1FAE5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.coverage-on-demand {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.coverage-out-of-zone {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+/* Pills/badges */
+.condition-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 107, 53, 0.1);
+  color: #FF6B35;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.condition-pill.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #F59E0B;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.condition-pill.info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Toggle embrayage */
+.embrayage-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #E5E7EB;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.toggle-switch.active {
+  background: #FF6B35;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active::after {
+  transform: translateX(20px);
+}
+
+/* Encart département */
+.dept-info-card {
+  position: absolute;
+  background: white;
+  border: 2px solid #FF6B35;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 20;
+  min-width: 200px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+.dept-info-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dept-info-card h4 {
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 8px;
+}
+
+.dept-info-card .cities {
+  font-size: 14px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.dept-info-card .see-all {
+  color: #FF6B35;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .interactive-map,
+  .coverage-checker {
+    padding: 16px;
+  }
+  
+  .map-svg {
+    max-width: 300px;
+  }
+  
+  .dept-info-card {
+    min-width: 180px;
+    padding: 10px;
+  }
+  
+  .condition-pill {
+    font-size: 11px;
+    padding: 4px 8px;
   }
 }

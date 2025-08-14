@@ -67,7 +67,7 @@ const FAQ = () => {
           {faqItems.map((item, index) => (
             <div 
               key={index}
-              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow transition-all duration-200 hover:shadow-xl hover:border-orange-500/40 relative faq-question-line"
+              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow overflow-hidden transition-all duration-200 hover:shadow-xl hover:border-orange-500/40"
             >
               <button
                 onClick={() => toggleItem(index)}

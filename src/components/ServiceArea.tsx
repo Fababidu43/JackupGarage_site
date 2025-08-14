@@ -492,12 +492,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               )}
 
               {/* CTA contextuel */}
-              <button
-                onClick={onQuoteClick}
-                className="w-full mt-4 px-6 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition-colors duration-200 font-tech uppercase tracking-wide text-base hover-scale shadow-lg"
-              >
-                {getCTAText()}
-              </button>
             </div>
             </div>
           </div>

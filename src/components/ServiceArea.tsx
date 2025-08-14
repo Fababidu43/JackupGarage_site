@@ -493,7 +493,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               Demander un devis
             </button>
           </div>
-        </div>
       </div>
     </section>
   );

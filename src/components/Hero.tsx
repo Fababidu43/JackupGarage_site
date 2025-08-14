@@ -11,9 +11,9 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
       if (hero) {
-        // Effet parallaxe sur l'image de fond - mouvement vers le bas quand on scroll
-        const yPos = scrolled * 0.5; // Vitesse de parallaxe
-        hero.style.backgroundPosition = `center ${yPos}px`;
+        // Effet de zoom sur l'image de fond - grossit quand on scroll vers le bas
+        const zoomFactor = 1 + (scrolled * 0.0005); // Facteur de zoom progressif
+        hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
       }
     };
 
@@ -38,7 +38,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
         `,
-        backgroundAttachment: 'fixed'
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">

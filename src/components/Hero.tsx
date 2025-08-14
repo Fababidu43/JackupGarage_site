@@ -91,9 +91,6 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           </div>
         </div>
       </div>
-      
-      {/* Liseré diagonal pour transition */}
-      <div className="hero-edge"></div>
     </section>
   );
 };

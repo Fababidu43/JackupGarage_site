@@ -32,22 +32,8 @@ function App() {
     }, observerOptions);
 
     // Observer tous les éléments avec les classes d'animation
-    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right, .reveal-tilt');
+    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
     elementsToAnimate.forEach((el) => observer.observe(el));
-
-    // Micro-progression
-    const updateProgress = () => {
-      const scrolled = window.pageYOffset;
-      const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrolled / maxHeight) * 100;
-      
-      const progressLine = document.querySelector('.progress-line') as HTMLElement;
-      if (progressLine) {
-        progressLine.style.setProperty('--progress', `${Math.min(progress, 100)}%`);
-      }
-    };
-
-    window.addEventListener('scroll', updateProgress);
 
     return () => observer.disconnect();
   }, []);
@@ -62,9 +48,6 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Micro-progression */}
-      <div className="progress-line hidden lg:block"></div>
-      
       <Header onQuoteClick={openQuotePopup} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}
@@ -80,7 +63,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-4 sm:py-6 lg:py-8 slide-in-left carbon-mesh-bg reveal-tilt" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section section--entretien py-4 sm:py-6 lg:py-8 slide-in-left" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -106,7 +89,7 @@ function App() {
               </div>
               
               <div>
-                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0 photo-halo">
+                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0">
                   <img 
                     src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Vidange moteur - Entretien automobile" 
@@ -122,7 +105,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 2 - Blanc #FFFFFF */}
-        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right reveal-tilt" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -149,7 +132,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0 photo-halo" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
                   <img 
                     src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Kit embrayage et volant moteur" 
@@ -165,7 +148,7 @@ function App() {
         <DiagonalBackslash topColor="#F8F9FA" bottomColor="#0A0A0A" type="service" className="z-10" />
         
         {/* Service 3 - Orange #DE5121 */}
-        <div className="section py-4 sm:py-6 lg:py-8 slide-in-left relative z-20 carbon-mesh-bg reveal-tilt" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section py-4 sm:py-6 lg:py-8 slide-in-left relative z-20" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>
@@ -191,7 +174,7 @@ function App() {
               </div>
               
               <div>
-                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0 photo-halo">
+                <div className="aspect-square w-full max-w-xs mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0">
                   <img 
                     src="https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Kit de distribution - Courroie et galets" 
@@ -207,7 +190,7 @@ function App() {
         <DiagonalSlash topColor="#0A0A0A" bottomColor="#F8F9FA" type="service" />
         
         {/* Service 4 - Clair #F6F6F6 */}
-        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right reveal-tilt" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section py-4 sm:py-6 lg:py-8 slide-in-right" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div className="lg:order-2">
@@ -234,7 +217,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0 photo-halo" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
+                <div className="aspect-square w-full max-w-xs mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 mt-4 lg:mt-0" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
                   <img 
                     src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Amortisseurs et suspensions automobile" 

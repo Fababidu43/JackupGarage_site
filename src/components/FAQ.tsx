@@ -48,10 +48,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll relative" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
-      {/* Bandeau lumière */}
-      <div className="light-band"></div>
-      
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
@@ -70,7 +67,7 @@ const FAQ = () => {
           {faqItems.map((item, index) => (
             <div 
               key={index}
-              className={`accordion-item bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow overflow-hidden transition-all duration-200 hover:shadow-xl hover:border-orange-500/40 ${openItems.includes(index) ? 'open' : ''}`}
+              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow overflow-hidden transition-all duration-200 hover:shadow-xl hover:border-orange-500/40"
             >
               <button
                 onClick={() => toggleItem(index)}
@@ -79,8 +76,8 @@ const FAQ = () => {
                 <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic pr-3 group-hover:text-orange-600 transition-colors duration-200">
                   {item.question}
                 </h3>
-                <div className="w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-orange-500/20">
-                  <ChevronDown className={`w-4 h-4 text-orange-500 transition-transform duration-200 rotate-icon ${openItems.includes(index) ? 'open' : ''}`} />
+                <div className={`w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>
+                  <ChevronDown className="w-4 h-4 text-orange-500 transition-transform duration-200" />
                 </div>
               </button>
               

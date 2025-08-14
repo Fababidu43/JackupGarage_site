@@ -48,7 +48,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">

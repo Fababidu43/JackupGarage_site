@@ -373,16 +373,90 @@
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);
 }
 
+/* === COUPES DIAGONALES INTÉGRÉES === */
+.diagonal-cut-top-slash {
+  clip-path: polygon(0 5vh, 100% 0, 100% 100%, 0 100%);
+}
+
+.diagonal-cut-top-backslash {
+  clip-path: polygon(0 0, 100% 5vh, 100% 100%, 0 100%);
+}
+
+.diagonal-cut-bottom-slash {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 5vh), 0 100%);
+}
+
+.diagonal-cut-bottom-backslash {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vh));
+}
+
+/* Combinaisons pour sections avec coupes haut ET bas */
+.diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
+  clip-path: polygon(0 5vh, 100% 0, 100% 100%, 0 calc(100% - 5vh));
+}
+
+.diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
+  clip-path: polygon(0 0, 100% 5vh, 100% calc(100% - 5vh), 0 100%);
+}
+
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .hero-diagonal-cut {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 3vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 3vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 3vh));
+  }
+  
+  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 3vh, 100% 0, 100% 100%, 0 calc(100% - 3vh));
+  }
+  
+  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 3vh, 100% calc(100% - 3vh), 0 100%);
   }
 }
 
 @media (max-width: 480px) {
   .hero-diagonal-cut {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 2vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2vh));
+  }
+  
+  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 calc(100% - 2vh));
+  }
+  
+  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 2vh, 100% calc(100% - 2vh), 0 100%);
   }
 }
 /* === CORRECTION FOOTER MOBILE === */

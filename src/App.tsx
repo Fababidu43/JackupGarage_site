@@ -168,13 +168,6 @@ function App() {
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
-          {/* Trait traversant dynamique */}
-          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-0.5 overflow-hidden z-0">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-orange-500/30 to-transparent service-pulse"></div>
-            <div className="absolute left-1/4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-orange-500 rounded-full service-float opacity-70"></div>
-            <div className="absolute right-1/3 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-400 rounded-full service-float-reverse opacity-80"></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -254,13 +247,6 @@ function App() {
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
-          {/* Trait traversant dynamique */}
-          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-0.5 overflow-hidden z-0">
-            <div className="w-full h-full bg-gradient-to-r from-transparent via-orange-500/30 to-transparent service-pulse-delayed"></div>
-            <div className="absolute left-1/3 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-orange-500 rounded-full service-float-delayed opacity-70"></div>
-            <div className="absolute right-1/4 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-400 rounded-full service-float-reverse-delayed opacity-80"></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">

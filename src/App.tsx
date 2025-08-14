@@ -114,13 +114,10 @@ function App() {
         
         {/* Services intro (blanc #FFFFFF) */}
         <div className="relative">
-          <div className="scroll-pattern inset-0">
-            <div className="tech-grid-pattern"></div>
-          </div>
           <Services />
         </div>
         
-        {/* Service 1 - Orange #DE5121 */}
+        {/* Service 1 - Entretiens (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           {/* Phare dynamique pour Entretiens */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
@@ -164,7 +161,7 @@ function App() {
           </div>
         </div>
 
-        {/* Service 2 - Embrayage */}
+        {/* Service 2 - Embrayage (FOND BLANC) */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
@@ -204,7 +201,7 @@ function App() {
           </div>
         </div>
 
-        {/* Service 3 - Distribution */}
+        {/* Service 3 - Kit Distributions (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           {/* Phare dynamique pour Distribution */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
@@ -248,7 +245,7 @@ function App() {
           </div>
         </div>
 
-        {/* Service 4 - Suspensions */}
+        {/* Service 4 - Suspensions (FOND BLANC) */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
@@ -288,21 +285,21 @@ function App() {
           </div>
         </div>
         
-        {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
+        {/* Zone d'intervention (FOND NOIR) */}
         <div className="relative">
-          {/* Phare dynamique pour Zone d'intervention */}
+          {/* Phare dynamique pour Zone d'intervention - AJOUTÉ */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-main"></div>
           </div>
           <ServiceArea />
         </div>
         
-        {/* FAQ (clair #F6F6F6) */}
+        {/* FAQ (FOND BLANC) */}
         <FAQ />
         
-        {/* Contact (noir #0A0A0A) */}
+        {/* Contact (FOND NOIR) */}
         <div className="relative">
-          {/* Phare dynamique pour Contact */}
+          {/* Phare dynamique pour Contact - AJOUTÉ */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-main"></div>
           </div>

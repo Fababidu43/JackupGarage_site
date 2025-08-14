@@ -122,12 +122,9 @@ function App() {
         
         {/* Service 1 - Orange #DE5121 */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phares dynamiques pour Entretiens */}
+          {/* Phare dynamique pour Entretiens */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-left"></div>
-            <div className="headlight headlight-right"></div>
-            <div className="headlight headlight-top-left"></div>
-            <div className="headlight headlight-bottom-right"></div>
+            <div className="headlight headlight-main"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -209,12 +206,9 @@ function App() {
 
         {/* Service 3 - Distribution */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phares dynamiques pour Distribution */}
+          {/* Phare dynamique pour Distribution */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-left"></div>
-            <div className="headlight headlight-right"></div>
-            <div className="headlight headlight-top-right"></div>
-            <div className="headlight headlight-bottom-left"></div>
+            <div className="headlight headlight-main"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -296,12 +290,9 @@ function App() {
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
         <div className="relative">
-          {/* Phares dynamiques pour Zone d'intervention */}
+          {/* Phare dynamique pour Zone d'intervention */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-left"></div>
-            <div className="headlight headlight-right"></div>
-            <div className="headlight headlight-top-left"></div>
-            <div className="headlight headlight-top-right"></div>
+            <div className="headlight headlight-main"></div>
           </div>
           <ServiceArea />
         </div>
@@ -311,12 +302,9 @@ function App() {
         
         {/* Contact (noir #0A0A0A) */}
         <div className="relative">
-          {/* Phares dynamiques pour Contact */}
+          {/* Phare dynamique pour Contact */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-left"></div>
-            <div className="headlight headlight-right"></div>
-            <div className="headlight headlight-top-left"></div>
-            <div className="headlight headlight-top-right"></div>
+            <div className="headlight headlight-main"></div>
           </div>
           <Contact />
         </div>

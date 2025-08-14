@@ -217,119 +217,56 @@
 
 .headlight {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  filter: blur(20px);
-  background: radial-gradient(circle, rgba(255, 107, 53, 0.8) 0%, rgba(255, 140, 66, 0.4) 40%, transparent 70%);
+  filter: blur(30px);
+  background: radial-gradient(ellipse 300px 150px, rgba(255, 107, 53, 0.6) 0%, rgba(255, 140, 66, 0.3) 30%, transparent 70%);
   transform: scale(0.5);
+  border-radius: 50%;
 }
 
 .headlight.active {
   opacity: 1;
-  filter: blur(0px);
+  filter: blur(10px);
   transform: scale(1);
-  animation: headlightPulse 3s ease-in-out infinite;
+  animation: headlightBeam 4s ease-in-out infinite;
 }
 
-/* Positions des phares */
-.headlight-left {
-  left: -60px;
+/* Position unique du phare - côté gauche */
+.headlight-main {
+  left: -100px;
   top: 50%;
   transform: translateY(-50%) scale(0.5);
 }
 
-.headlight-left.active {
+.headlight-main.active {
   transform: translateY(-50%) scale(1);
 }
 
-.headlight-right {
-  right: -60px;
-  top: 50%;
-  transform: translateY(-50%) scale(0.5);
-}
-
-.headlight-right.active {
-  transform: translateY(-50%) scale(1);
-}
-
-.headlight-top-left {
-  left: 20%;
-  top: -60px;
-  transform: scale(0.5);
-}
-
-.headlight-top-left.active {
-  transform: scale(1);
-}
-
-.headlight-top-right {
-  right: 20%;
-  top: -60px;
-  transform: scale(0.5);
-}
-
-.headlight-top-right.active {
-  transform: scale(1);
-}
-
-.headlight-bottom-left {
-  left: 20%;
-  bottom: -60px;
-  transform: scale(0.5);
-}
-
-.headlight-bottom-left.active {
-  transform: scale(1);
-}
-
-.headlight-bottom-right {
-  right: 20%;
-  bottom: -60px;
-  transform: scale(0.5);
-}
-
-.headlight-bottom-right.active {
-  transform: scale(1);
-}
-
-/* Animation de pulsation */
-@keyframes headlightPulse {
+/* Animation de faisceau lumineux */
+@keyframes headlightBeam {
   0%, 100% { 
     opacity: 1;
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.6), 0 0 60px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.4), 0 0 100px rgba(255, 107, 53, 0.2), 0 0 200px rgba(255, 107, 53, 0.1);
   }
   50% { 
-    opacity: 0.7;
-    box-shadow: 0 0 50px rgba(255, 107, 53, 0.8), 0 0 100px rgba(255, 107, 53, 0.6);
+    opacity: 0.8;
+    box-shadow: 0 0 80px rgba(255, 107, 53, 0.6), 0 0 150px rgba(255, 107, 53, 0.4), 0 0 300px rgba(255, 107, 53, 0.2);
   }
 }
 
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .headlight {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(ellipse 200px 100px, rgba(255, 107, 53, 0.5) 0%, rgba(255, 140, 66, 0.2) 30%, transparent 70%);
   }
   
-  .headlight-left {
-    left: -40px;
-  }
-  
-  .headlight-right {
-    right: -40px;
-  }
-  
-  .headlight-top-left,
-  .headlight-top-right {
-    top: -40px;
-  }
-  
-  .headlight-bottom-left,
-  .headlight-bottom-right {
-    bottom: -40px;
+  .headlight-main {
+    left: -75px;
   }
 }
 /* === ANIMATIONS MÉCANIQUES === */

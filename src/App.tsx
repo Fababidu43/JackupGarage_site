@@ -172,7 +172,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white overflow-hidden">
           {/* Fond dynamique blanc */}
           <div className="dynamic-background-white">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -183,6 +183,16 @@ function App() {
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
+            {/* Éléments décoratifs embrayage */}
+            <div className="absolute top-8 left-8 w-20 h-20 bg-orange-500/3 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-12 right-12 w-16 h-16 bg-orange-500/4 rounded-full blur-xl"></div>
+            <div className="absolute top-1/2 left-4 w-1 h-8 bg-orange-500/20 rounded-full"></div>
+            <div className="absolute top-1/3 right-8 w-px h-12 bg-orange-500/15"></div>
+            
+            {/* Motifs techniques */}
+            <div className="absolute top-16 right-1/4 w-6 h-6 border-2 border-orange-500/10 rounded rotate-45"></div>
+            <div className="absolute bottom-20 left-1/3 w-4 h-4 border border-orange-500/15 rounded-full"></div>
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>
@@ -260,7 +270,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white overflow-hidden">
           {/* Fond dynamique blanc */}
           <div className="dynamic-background-white">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -271,6 +281,17 @@ function App() {
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
+            {/* Éléments décoratifs suspensions */}
+            <div className="absolute top-12 right-8 w-24 h-24 bg-orange-500/3 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-8 left-12 w-18 h-18 bg-orange-500/4 rounded-full blur-xl"></div>
+            <div className="absolute top-1/4 right-4 w-px h-16 bg-orange-500/20"></div>
+            <div className="absolute bottom-1/3 left-8 w-2 h-2 bg-orange-500/25 rounded-full animate-pulse"></div>
+            
+            {/* Lignes techniques */}
+            <div className="absolute top-20 left-1/4 w-12 h-px bg-orange-500/15"></div>
+            <div className="absolute bottom-16 right-1/3 w-8 h-px bg-orange-500/20"></div>
+            <div className="absolute top-1/2 left-1/2 w-3 h-3 border border-orange-500/10 rotate-45 transform -translate-x-1/2"></div>
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>

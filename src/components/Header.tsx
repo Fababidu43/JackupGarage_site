@@ -98,17 +98,19 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
         }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className={`flex justify-between items-center transition-all duration-300 ease-out ${
+            'h-16'
+          }`}>
             
-            {/* Logo - Responsive Sizes */}
+            {/* Logo */}
             <div 
               className="flex items-center cursor-pointer group"
               onClick={() => scrollToSection('hero')}
             >
-              <div className="bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 py-1 
+              <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 sm:px-3 py-1 sm:py-2 
                 hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
                 transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                w-20 h-10 sm:w-24 sm:h-12 md:w-28 md:h-14 lg:w-32 lg:h-16 flex-shrink-0"
+                w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
               >
                 <img 
                   src="/src/logo.png" 
@@ -147,15 +149,15 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               ))}
               
               {/* CTA Appeler Desktop */}
-              <button
+              <a
                 onClick={onQuoteClick}
-                className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium
+                className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                   font-tech uppercase tracking-wide text-xs xl:text-sm"
               >
                 Devis
-              </button>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -166,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -180,8 +182,8 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               onClick={() => setIsMenuOpen(false)}
             />
             
-            {/* Menu Panel - Mobile Optimized */}
-            <div className="fixed top-16 right-2 left-2 max-w-sm mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-md rounded-2xl shadow-2xl
+            {/* Menu Panel */}
+            <div className="fixed top-16 right-2 left-2 sm:right-4 sm:left-4 max-w-sm mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-md rounded-2xl shadow-2xl
               border-2 border-orange-500/40 z-40 lg:hidden transform transition-all duration-300 ease-out overflow-hidden"
             >
               
@@ -189,16 +191,16 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
               
               {/* Header avec croix */}
-              <div className="flex items-center justify-between p-4 border-b border-orange-500/30 bg-black/30">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-6 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center">
+              <div className="flex items-center justify-between p-5 border-b border-orange-500/30 bg-black/30">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center">
                     <img 
                       src="/src/logo.png" 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <span className="text-white font-bold text-sm font-futuristic uppercase tracking-wide">Navigation</span>
+                  <span className="text-white font-bold text-base font-futuristic uppercase tracking-wide">Navigation</span>
                 </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
@@ -206,17 +208,17 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2"
                   aria-label="Fermer le menu"
                 >
-                  <X size={16} />
+                  <X size={18} />
                 </button>
               </div>
               
-              {/* Navigation Links - Mobile Optimized */}
+              {/* Navigation Links identique au desktop */}
               <nav className="py-2">
                 {navigationItems.map((item, index) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-300 ease-out group
+                    className={`relative w-full px-5 py-4 text-left text-sm font-tech transition-all duration-300 ease-out group
                       hover:bg-gradient-to-r hover:from-orange-500/10 hover:to-orange-600/5
                       ${activeSection === item.id 
                         ? 'text-orange-400 bg-orange-500/10' 
@@ -238,14 +240,14 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                 ))}
               </nav>
               
-              {/* CTA Mobile Optimized */}
-              <div className="p-4 border-t border-orange-500/30 bg-black/20">
+              {/* CTA identique au desktop */}
+              <div className="p-5 border-t border-orange-500/30 bg-black/20">
                 <button
                   onClick={() => {
                     onQuoteClick();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold 
+                  className="w-full flex items-center justify-center px-4 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold 
                     rounded-xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95
                     hover:shadow-xl hover:shadow-orange-500/30 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                     font-futuristic uppercase tracking-wide text-sm relative overflow-hidden"

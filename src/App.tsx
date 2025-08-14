@@ -19,18 +19,13 @@ function App() {
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    // Désactiver complètement les animations sur mobile et tablette
-    if (window.innerWidth <= 1023) {
+    // Désactiver les animations sur mobile
+    if (window.innerWidth <= 768) {
       return;
     }
     
     // Système d'animation futuriste au scroll (desktop uniquement)
     const handleFuturisticScroll = () => {
-      // Double vérification pour s'assurer qu'on est sur desktop
-      if (window.innerWidth <= 1023) {
-        return;
-      }
-      
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
       scrollDirectionRef.current = scrollDirection;

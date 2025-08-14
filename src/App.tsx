@@ -35,7 +35,45 @@ function App() {
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
     elementsToAnimate.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Gestion des motifs réactifs au scroll
+    const handleScroll = () => {
+      const scrollY = window.pageYOffset;
+      const patterns = document.querySelectorAll('.scroll-pattern');
+      
+      patterns.forEach((pattern, index) => {
+        const section = pattern.closest('.section');
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isVisible) {
+            // Calculer l'intensité basée sur la position dans la viewport
+            const intensity = Math.max(0, Math.min(1, 1 - Math.abs(rect.top) / window.innerHeight));
+            
+            // Appliquer les transformations basées sur le scroll
+            const translateY = (scrollY * 0.1 * (index % 2 === 0 ? 1 : -1));
+            const rotate = scrollY * 0.05 * (index % 3 === 0 ? 1 : -1);
+            const scale = 1 + (intensity * 0.1);
+            
+            pattern.style.transform = `translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+            pattern.style.opacity = `${0.1 + (intensity * 0.1)}`;
+            
+            if (intensity > 0.3) {
+              pattern.classList.add('active');
+            } else {
+              pattern.classList.remove('active');
+            }
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const openQuotePopup = () => {
@@ -54,10 +92,18 @@ function App() {
         <Hero onQuoteClick={openQuotePopup} />
         
         {/* Services intro (blanc #FFFFFF) */}
-        <Services />
+        <div className="relative">
+          <div className="scroll-pattern inset-0">
+            <div className="tech-grid-pattern"></div>
+          </div>
+          <Services />
+        </div>
         
         {/* Service 1 - Orange #DE5121 */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          <div className="scroll-pattern inset-0">
+            <div className="hex-pattern"></div>
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -97,6 +143,9 @@ function App() {
 
         {/* Service 2 - Embrayage */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          <div className="scroll-pattern inset-0">
+            <div className="circuit-pattern"></div>
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -137,6 +186,9 @@ function App() {
 
         {/* Service 3 - Distribution */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          <div className="scroll-pattern inset-0">
+            <div className="gear-pattern"></div>
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -176,6 +228,9 @@ function App() {
 
         {/* Service 4 - Suspensions */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          <div className="scroll-pattern inset-0">
+            <div className="particles-pattern"></div>
+          </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -215,13 +270,28 @@ function App() {
         </div>
         
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
-        <ServiceArea />
+        <div className="relative">
+          <div className="scroll-pattern inset-0">
+            <div className="waves-pattern"></div>
+          </div>
+          <ServiceArea />
+        </div>
         
         {/* FAQ (clair #F6F6F6) */}
-        <FAQ />
+        <div className="relative">
+          <div className="scroll-pattern inset-0">
+            <div className="hex-pattern"></div>
+          </div>
+          <FAQ />
+        </div>
         
         {/* Contact (noir #0A0A0A) */}
-        <Contact />
+        <div className="relative">
+          <div className="scroll-pattern inset-0">
+            <div className="circuit-pattern"></div>
+          </div>
+          <Contact />
+        </div>
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

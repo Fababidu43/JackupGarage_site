@@ -253,21 +253,21 @@ Merci de me recontacter pour un devis !`;
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
       {/* Fond dynamique */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/10"></div>
         <div className="absolute inset-0 tech-grid opacity-20"></div>
       </div>
 
-      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto border border-orange-500/30">
+      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-lg max-h-[95vh] sm:max-h-[90vh] overflow-y-auto border border-orange-500/30">
         {/* Accent lumineux */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
         
         {/* Header futuriste */}
-        <div className="relative flex items-center justify-between p-6 border-b border-orange-500/20">
-          <div className="flex items-center gap-3">
-            <div className="w-24 h-24 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-3">
+        <div className="relative flex items-center justify-between p-4 sm:p-6 border-b border-orange-500/20">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-2 sm:p-3">
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 
@@ -275,30 +275,30 @@ Merci de me recontacter pour un devis !`;
               />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white font-futuristic tracking-wide">
+              <h3 className="text-lg sm:text-xl font-bold text-white font-futuristic tracking-wide">
                 DEVIS EXPRESS
               </h3>
-              <p className="text-orange-400 text-sm font-tech">Mécanicien à domicile</p>
+              <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200 hover-scale"
+            className="p-1.5 sm:p-2 text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200 hover-scale"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         </div>
 
         {/* Barre de progression futuriste */}
-        <div className="px-6 py-4 bg-black/50">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 bg-black/50">
           <div className="flex items-center justify-between text-xs text-orange-400 mb-3 font-tech uppercase tracking-wider">
             <span>Étape {step}/4</span>
             <span>{Math.round((step / 4) * 100)}%</span>
           </div>
-          <div className="relative w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+          <div className="relative w-full bg-gray-800 rounded-full h-1.5 sm:h-2 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-800"></div>
             <div 
-              className="bg-gradient-to-r from-orange-500 to-orange-400 h-2 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+              className="bg-gradient-to-r from-orange-500 to-orange-400 h-1.5 sm:h-2 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
               style={{ width: `${(step / 4) * 100}%` }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
@@ -307,15 +307,15 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Step 1: Service */}
           {step === 1 && (
             <div>
-              <h4 className="text-lg font-bold text-white mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Settings className="w-5 h-5 text-orange-400" />
+              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 font-futuristic tracking-wide flex items-center gap-2">
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 QUEL SERVICE VOUS INTÉRESSE ?
               </h4>
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {services.map((service) => (
                   <button
                     key={service.id}
@@ -323,7 +323,7 @@ Merci de me recontacter pour un devis !`;
                       setFormData({ ...formData, service: service.id });
                       nextStep();
                     }}
-                    className={`group relative p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
+                    className={`group relative p-3 sm:p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
                       formData.service === service.id 
                         ? 'border-orange-500 bg-orange-500/10' 
                         : 'border-gray-700 bg-gray-800/50'
@@ -331,15 +331,15 @@ Merci de me recontacter pour un devis !`;
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform duration-200`}>
                           {service.icon}
                         </div>
                         <div>
-                          <div className="font-medium text-white font-tech">{service.name}</div>
-                          <div className="text-sm text-orange-400 font-tech">Durée: {service.time}</div>
+                          <div className="font-medium text-white font-tech text-sm sm:text-base">{service.name}</div>
+                          <div className="text-xs sm:text-sm text-orange-400 font-tech">Durée: {service.time}</div>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                     {/* Effet de glow au hover */}
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -352,11 +352,11 @@ Merci de me recontacter pour un devis !`;
           {/* Step 2: Urgency */}
           {step === 2 && (
             <div>
-              <h4 className="text-lg font-bold text-white mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Clock className="w-5 h-5 text-orange-400" />
+              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 font-futuristic tracking-wide flex items-center gap-2">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 QUELLE EST L'URGENCE ?
               </h4>
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 {urgencies.map((urgency) => (
                   <button
                     key={urgency.id}
@@ -364,7 +364,7 @@ Merci de me recontacter pour un devis !`;
                       setFormData({ ...formData, urgency: urgency.id });
                       nextStep();
                     }}
-                    className={`group w-full p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
+                    className={`group w-full p-3 sm:p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
                       formData.urgency === urgency.id 
                         ? 'border-orange-500 bg-orange-500/10' 
                         : 'border-gray-700 bg-gray-800/50'
@@ -372,19 +372,19 @@ Merci de me recontacter pour un devis !`;
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${urgency.color} bg-gray-800`}>
+                        <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center ${urgency.color} bg-gray-800`}>
                           {urgency.icon}
                         </div>
-                        <span className="font-medium text-white font-tech">{urgency.name}</span>
+                        <span className="font-medium text-white font-tech text-sm sm:text-base">{urgency.name}</span>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </button>
                 ))}
               </div>
               <button
                 onClick={prevStep}
-                className="mt-6 text-sm text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
+                className="mt-4 sm:mt-6 text-xs sm:text-sm text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
                 ← Retour
               </button>
@@ -394,12 +394,12 @@ Merci de me recontacter pour un devis !`;
           {/* Step 3: Location */}
           {step === 3 && (
             <div>
-              <h4 className="text-lg font-bold text-white mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-orange-400" />
+              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 font-futuristic tracking-wide flex items-center gap-2">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 VOTRE VILLE OU CODE POSTAL
               </h4>
               
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
                   <input
                     id="location-input"
@@ -407,13 +407,13 @@ Merci de me recontacter pour un devis !`;
                     value={locationInput}
                     onChange={(e) => setLocationInput(e.target.value)}
                     placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                    className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-sm sm:text-base"
                   />
                 </div>
 
                 {/* Résultat de couverture */}
                 {locationStatus.status && (
-                  <div className={`p-4 rounded-xl font-medium text-sm border-2 transition-all duration-300 ${
+                  <div className={`p-3 sm:p-4 rounded-xl font-medium text-xs sm:text-sm border-2 transition-all duration-300 ${
                     locationStatus.status === 'covered' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
                     locationStatus.status === 'on-demand' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
                     locationStatus.status === 'quote-only' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
@@ -430,17 +430,17 @@ Merci de me recontacter pour un devis !`;
                 {formData.location && (
                   <button
                     onClick={nextStep}
-                    className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-sm sm:text-base"
                   >
                     Continuer
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 )}
               </div>
               
               <button
                 onClick={prevStep}
-                className="mt-6 text-sm text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
+                className="mt-4 sm:mt-6 text-xs sm:text-sm text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
                 ← Retour
               </button>
@@ -450,59 +450,59 @@ Merci de me recontacter pour un devis !`;
           {/* Step 4: Contact */}
           {step === 4 && (
             <div>
-              <h4 className="text-lg font-bold text-white mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Phone className="w-5 h-5 text-orange-400" />
+              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6 font-futuristic tracking-wide flex items-center gap-2">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-orange-400" />
                 VOS COORDONNÉES
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-orange-400 mb-2 font-tech uppercase tracking-wide">
+                  <label className="block text-xs sm:text-sm font-medium text-orange-400 mb-2 font-tech uppercase tracking-wide">
                     Votre nom *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-sm sm:text-base"
                     placeholder="Jean Dupont"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-orange-400 mb-2 font-tech uppercase tracking-wide">
+                  <label className="block text-xs sm:text-sm font-medium text-orange-400 mb-2 font-tech uppercase tracking-wide">
                     Votre téléphone *
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-sm sm:text-base"
                     placeholder="06 12 34 56 78"
                     required
                   />
                 </div>
               </div>
               
-              <div className="flex gap-3 mt-8">
+              <div className="flex gap-2 sm:gap-3 mt-6 sm:mt-8">
                 <button
                   onClick={prevStep}
-                  className="flex-1 px-4 py-3 border-2 border-gray-700 text-gray-300 rounded-xl hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium"
+                  className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-700 text-gray-300 rounded-xl hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium text-sm sm:text-base"
                 >
                   Retour
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={!formData.name || !formData.phone || !formData.location}
-                  className="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2"
+                  className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
-                  <CheckCircle className="w-4 h-4" />
+                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                   Envoyer
                 </button>
               </div>
               
-              <div className="mt-6 p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
-                <p className="text-center text-sm text-orange-300 font-tech flex items-center justify-center gap-2">
-                  <Clock className="w-4 h-4" />
+              <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
+                <p className="text-center text-xs sm:text-sm text-orange-300 font-tech flex items-center justify-center gap-2">
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                   Retour par mail ou téléphone sous 12h
                 </p>
               </div>

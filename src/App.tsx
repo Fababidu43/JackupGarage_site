@@ -156,10 +156,10 @@ function App() {
           {/* Formes mécaniques animées */}
           <div className="mechanical-shapes black-section">
             <div className="mechanical-shape oil-drop-shape float-up" style={{ top: '15%', left: '8%' }}></div>
-            <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '25%', right: '12%' }}></div>
+            <div className="mechanical-shape filter-shape rotate-slow" style={{ top: '25%', right: '12%' }}></div>
             <div className="mechanical-shape wrench-shape rotate-medium" style={{ bottom: '20%', left: '10%' }}></div>
             <div className="mechanical-shape bolt-shape float-down" style={{ top: '60%', right: '8%' }}></div>
-            <div className="mechanical-shape spring-shape rotate-reverse float-left" style={{ bottom: '30%', right: '18%' }}></div>
+            <div className="mechanical-shape battery-shape float-left" style={{ bottom: '30%', right: '18%' }}></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -204,11 +204,10 @@ function App() {
           {/* Formes mécaniques animées */}
           <div className="mechanical-shapes white-section">
             <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '8%' }}></div>
-            <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '25%', right: '12%' }}></div>
+            <div className="mechanical-shape socket-wrench-shape rotate-medium float-up" style={{ top: '25%', right: '12%' }}></div>
             <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '10%' }}></div>
-            <div className="mechanical-shape screwdriver-shape rotate-reverse" style={{ top: '55%', right: '8%' }}></div>
-            <div className="mechanical-shape hammer-shape rotate-fast float-left" style={{ bottom: '20%', right: '18%' }}></div>
-            <div className="mechanical-shape spring-shape float-right" style={{ top: '70%', left: '15%' }}></div>
+            <div className="mechanical-shape pliers-shape rotate-reverse" style={{ top: '55%', right: '8%' }}></div>
+            <div className="mechanical-shape spring-shape float-left" style={{ bottom: '20%', right: '18%' }}></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -258,7 +257,6 @@ function App() {
             <div className="mechanical-shape piston-shape rotate-fast float-down" style={{ bottom: '20%', left: '6%' }}></div>
             <div className="mechanical-shape bolt-shape float-left" style={{ top: '55%', right: '15%' }}></div>
             <div className="mechanical-shape wrench-shape rotate-slow" style={{ bottom: '35%', right: '5%' }}></div>
-            <div className="mechanical-shape brake-shape float-right" style={{ top: '75%', left: '20%' }}></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -304,11 +302,9 @@ function App() {
           <div className="mechanical-shapes white-section">
             <div className="mechanical-shape spring-shape rotate-slow float-up" style={{ top: '12%', left: '6%' }}></div>
             <div className="mechanical-shape brake-shape rotate-medium" style={{ top: '20%', right: '10%' }}></div>
-            <div className="mechanical-shape bolt-shape rotate-reverse float-down" style={{ bottom: '25%', left: '12%' }}></div>
-            <div className="mechanical-shape wrench-shape float-right" style={{ top: '50%', right: '8%' }}></div>
-            <div className="mechanical-shape piston-shape rotate-fast" style={{ bottom: '15%', right: '20%' }}></div>
-            <div className="mechanical-shape hammer-shape float-left" style={{ top: '65%', left: '18%' }}></div>
-            <div className="mechanical-shape screwdriver-shape rotate-medium" style={{ bottom: '35%', left: '25%' }}></div>
+            <div className="mechanical-shape tire-shape rotate-reverse float-down" style={{ bottom: '25%', left: '12%' }}></div>
+            <div className="mechanical-shape socket-wrench-shape float-right" style={{ top: '50%', right: '8%' }}></div>
+            <div className="mechanical-shape spark-plug-shape rotate-fast" style={{ bottom: '15%', right: '20%' }}></div>
           </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">

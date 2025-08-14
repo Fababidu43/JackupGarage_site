@@ -51,12 +51,16 @@ const FAQ = () => {
     <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
       {/* Formes mécaniques animées */}
       <div className="mechanical-shapes white-section">
-        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '12%', left: '5%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '20%', right: '8%' }}></div>
-        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '25%', left: '10%' }}></div>
-        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '50%', right: '6%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '15%', right: '15%' }}></div>
-        <div className="mechanical-shape piston-shape float-right" style={{ top: '70%', left: '12%' }}></div>
+        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '8%', left: '5%' }}></div>
+        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '15%', right: '8%' }}></div>
+        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '10%' }}></div>
+        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '40%', right: '6%' }}></div>
+        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '20%', right: '15%' }}></div>
+        <div className="mechanical-shape piston-shape float-right" style={{ top: '65%', left: '12%' }}></div>
+        <div className="mechanical-shape socket-wrench-shape rotate-slow" style={{ top: '25%', left: '18%' }}></div>
+        <div className="mechanical-shape pliers-shape rotate-medium float-up" style={{ bottom: '45%', right: '12%' }}></div>
+        <div className="mechanical-shape tire-shape float-down" style={{ top: '55%', left: '8%' }}></div>
+        <div className="mechanical-shape filter-shape rotate-reverse" style={{ bottom: '10%', left: '20%' }}></div>
       </div>
       
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

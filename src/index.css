@@ -431,6 +431,279 @@
   animation: spin-slow 20s linear infinite;
 }
 
+/* === FORMES MÉCANIQUES ANIMÉES === */
+.mechanical-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mechanical-shape {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+  transition: all 0.3s ease;
+}
+
+/* Types de formes */
+.gear-shape {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #FF6B35 30%, transparent 31%, transparent 40%, #FF6B35 41%, #FF6B35 59%, transparent 60%);
+  border-radius: 50%;
+  position: relative;
+}
+
+.gear-shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #FF6B35;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrench-shape {
+  width: 80px;
+  height: 20px;
+  background: linear-gradient(90deg, #FF6B35 0%, #FF6B35 70%, transparent 71%, transparent 80%, #FF6B35 81%);
+  border-radius: 10px;
+  position: relative;
+}
+
+.wrench-shape::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: -5px;
+  width: 30px;
+  height: 30px;
+  border: 3px solid #FF6B35;
+  border-radius: 50%;
+}
+
+.bolt-shape {
+  width: 30px;
+  height: 30px;
+  background: #FF6B35;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 70% 100%, 30% 100%, 0% 70%);
+}
+
+.spring-shape {
+  width: 40px;
+  height: 60px;
+  background: repeating-linear-gradient(
+    0deg,
+    #FF6B35 0px,
+    #FF6B35 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  border-radius: 20px;
+}
+
+.piston-shape {
+  width: 25px;
+  height: 70px;
+  background: linear-gradient(180deg, #FF6B35 0%, #FF6B35 60%, #FF8C42 61%, #FF8C42 100%);
+  border-radius: 12px;
+  position: relative;
+}
+
+.piston-shape::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -7px;
+  width: 40px;
+  height: 20px;
+  background: #FF6B35;
+  border-radius: 20px;
+}
+
+.brake-shape {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, transparent 35%, #FF6B35 36%, #FF6B35 64%, transparent 65%);
+  border-radius: 50%;
+  position: relative;
+}
+
+.brake-shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  background: #FF6B35;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.oil-drop-shape {
+  width: 30px;
+  height: 40px;
+  background: #FF6B35;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+}
+
+/* Animations de rotation */
+.rotate-slow {
+  animation: rotateSlow 15s linear infinite;
+}
+
+.rotate-medium {
+  animation: rotateMedium 10s linear infinite;
+}
+
+.rotate-fast {
+  animation: rotateFast 6s linear infinite;
+}
+
+.rotate-reverse {
+  animation: rotateReverse 12s linear infinite;
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateMedium {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateFast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Animations de flottement */
+.float-up {
+  animation: floatUp 8s ease-in-out infinite;
+}
+
+.float-down {
+  animation: floatDown 10s ease-in-out infinite;
+}
+
+.float-left {
+  animation: floatLeft 12s ease-in-out infinite;
+}
+
+.float-right {
+  animation: floatRight 14s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(20px); }
+}
+
+@keyframes floatLeft {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(-15px); }
+}
+
+@keyframes floatRight {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(15px); }
+}
+
+/* Couleurs pour sections blanches */
+.mechanical-shapes.white-section .mechanical-shape {
+  opacity: 0.08;
+}
+
+.mechanical-shapes.white-section .gear-shape {
+  background: radial-gradient(circle, #8B4513 30%, transparent 31%, transparent 40%, #8B4513 41%, #8B4513 59%, transparent 60%);
+}
+
+.mechanical-shapes.white-section .gear-shape::before {
+  background: #8B4513;
+}
+
+.mechanical-shapes.white-section .wrench-shape {
+  background: linear-gradient(90deg, #8B4513 0%, #8B4513 70%, transparent 71%, transparent 80%, #8B4513 81%);
+}
+
+.mechanical-shapes.white-section .wrench-shape::after {
+  border-color: #8B4513;
+}
+
+.mechanical-shapes.white-section .bolt-shape {
+  background: #8B4513;
+}
+
+.mechanical-shapes.white-section .spring-shape {
+  background: repeating-linear-gradient(
+    0deg,
+    #8B4513 0px,
+    #8B4513 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.mechanical-shapes.white-section .piston-shape {
+  background: linear-gradient(180deg, #8B4513 0%, #8B4513 60%, #A0522D 61%, #A0522D 100%);
+}
+
+.mechanical-shapes.white-section .piston-shape::before {
+  background: #8B4513;
+}
+
+.mechanical-shapes.white-section .brake-shape {
+  background: radial-gradient(circle, transparent 35%, #8B4513 36%, #8B4513 64%, transparent 65%);
+}
+
+.mechanical-shapes.white-section .brake-shape::before {
+  background: #8B4513;
+}
+
+.mechanical-shapes.white-section .oil-drop-shape {
+  background: #8B4513;
+}
+
+/* Couleurs pour sections noires */
+.mechanical-shapes.black-section .mechanical-shape {
+  opacity: 0.2;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .mechanical-shape {
+    transform: scale(0.7);
+    opacity: 0.1;
+  }
+  
+  .mechanical-shapes.white-section .mechanical-shape {
+    opacity: 0.05;
+  }
+  
+  .mechanical-shapes.black-section .mechanical-shape {
+    opacity: 0.15;
+  }
+}
+
 /* === ANIMATIONS FUTURISTES AU SCROLL === */
 .scroll-animate {
   opacity: 0;

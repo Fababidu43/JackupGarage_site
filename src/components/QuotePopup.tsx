@@ -259,7 +259,7 @@ Merci de me recontacter pour un devis !`;
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/10"></div>
       </div>
 
-      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-xl my-2 sm:my-4 border border-orange-500/30 max-h-[calc(100vh-1rem)] sm:max-h-[calc(100vh-2rem)] flex flex-col">
+      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-xl my-2 sm:my-4 border border-orange-500/30 max-h-[calc(100vh-1rem)] sm:max-h-[calc(100vh-2rem)] overflow-y-auto sm:overflow-hidden">
         {/* Accent lumineux */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
         
@@ -302,7 +302,7 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 lg:p-5 flex-1 min-h-0">
+        <div className="p-3 sm:p-4 lg:p-5 sm:overflow-y-auto sm:max-h-[calc(100vh-10rem)]">
           {/* Step 1: Service */}
           {step === 1 && (
             <div>

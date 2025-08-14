@@ -539,122 +539,85 @@
   padding-top: env(safe-area-inset-top);
 }
 
-/* === VOITURE UNIQUE SUR PARCOURS DIAGONAL === */
-.diagonal-journey-car {
-  position: fixed;
-  width: 50px;
-  height: 25px;
-  z-index: 30;
+/* === VOITURE SUR DIAGONALES === */
+.diagonal-car {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  z-index: 20;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   opacity: 0;
 }
 
-.diagonal-journey-car.visible {
+.diagonal-car.visible {
   opacity: 1;
 }
 
-.diagonal-journey-car::before {
+.diagonal-car::before {
   content: '🚗';
   position: absolute;
-  font-size: 28px;
+  font-size: 24px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
-  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* Voiture qui monte (scroll vers le haut) */
-.diagonal-journey-car.going-up::before {
+.diagonal-car.going-up::before {
   content: '🚙';
-}
-
-/* Voiture qui descend (scroll vers le bas) */
-.diagonal-journey-car.going-down::before {
-  content: '🚗';
-}
-
-/* Rotation selon la diagonale */
-.diagonal-journey-car.slash::before {
-  transform: translate(-50%, -50%) rotate(-20deg);
-}
-
-.diagonal-journey-car.backslash::before {
-  transform: translate(-50%, -50%) rotate(20deg);
-}
-
-/* Voiture qui monte sur slash */
-.diagonal-journey-car.slash.going-up::before {
-  transform: translate(-50%, -50%) rotate(-25deg);
-}
-
-/* Voiture qui descend sur slash */
-.diagonal-journey-car.slash.going-down::before {
   transform: translate(-50%, -50%) rotate(-15deg);
 }
 
-/* Voiture qui monte sur backslash */
-.diagonal-journey-car.backslash.going-up::before {
-  transform: translate(-50%, -50%) rotate(25deg);
-}
-
-/* Voiture qui descend sur backslash */
-.diagonal-journey-car.backslash.going-down::before {
+/* Voiture qui descend (scroll vers le bas) */
+.diagonal-car.going-down::before {
+  content: '🚗';
   transform: translate(-50%, -50%) rotate(15deg);
 }
 
-/* Animation d'entrée/sortie */
-@keyframes carEnter {
-  0% { 
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% { 
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Positions pour diagonales slash (/) */
+.diagonal-car.slash {
+  /* Position calculée dynamiquement via JS */
 }
 
-@keyframes carExit {
-  0% { 
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% { 
-    opacity: 0;
-    transform: scale(0.8);
-  }
+/* Positions pour diagonales backslash (\) */
+.diagonal-car.backslash {
+  /* Position calculée dynamiquement via JS */
 }
 
-.diagonal-journey-car.entering {
-  animation: carEnter 0.5s ease-out;
+/* Animation de déplacement fluide */
+@keyframes carMove {
+  0% { transform: translateX(-20px) translateY(10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(20px) translateY(-10px); opacity: 0; }
 }
 
-.diagonal-journey-car.exiting {
-  animation: carExit 0.5s ease-out;
+.diagonal-car.animated {
+  animation: carMove 2s ease-in-out;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .diagonal-journey-car {
-    width: 40px;
-    height: 20px;
+  .diagonal-car {
+    width: 30px;
+    height: 15px;
   }
   
-  .diagonal-journey-car::before {
-    font-size: 22px;
+  .diagonal-car::before {
+    font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
-  .diagonal-journey-car {
-    width: 35px;
-    height: 18px;
+  .diagonal-car {
+    width: 25px;
+    height: 12px;
   }
   
-  .diagonal-journey-car::before {
-    font-size: 20px;
+  .diagonal-car::before {
+    font-size: 16px;
   }
 }
 /* === COUPE DIAGONALE HERO === */

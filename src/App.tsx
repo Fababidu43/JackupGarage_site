@@ -73,10 +73,11 @@ function App() {
         const section = headlight.closest('.section');
         if (section) {
           const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+          const isVisible = rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
           
           if (isVisible) {
             headlight.classList.add('active');
+            console.log('Phare activé:', headlight.className);
           } else {
             headlight.classList.remove('active');
           }
@@ -86,6 +87,10 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
+    
+    // Debug: vérifier que les phares sont bien détectés
+    console.log('Phares détectés:', document.querySelectorAll('.headlight').length);
+    
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);

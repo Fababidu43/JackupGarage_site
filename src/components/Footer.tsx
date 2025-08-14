@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
 
           {/* Logo super large centré */}
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center items-center">
             <div 
               className="w-40 h-16 sm:w-48 sm:h-18 lg:w-56 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
@@ -102,8 +102,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright minimaliste */}
-        <div className="text-center mt-2 pt-2 border-t border-gray-800">
-          <p className="text-gray-500 text-xs font-tech text-center">
+        <div className="flex justify-center mt-2 pt-2 border-t border-gray-800">
+          <p className="text-gray-500 text-xs font-tech">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>
         </div>

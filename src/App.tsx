@@ -17,9 +17,6 @@ function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
 
   useEffect(() => {
-    let lastScrollY = window.pageYOffset;
-    let scrollDirection = 'down';
-    
     // Intersection Observer pour les animations au scroll
     const observerOptions = {
       threshold: 0.1,
@@ -38,84 +35,9 @@ function App() {
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
     elementsToAnimate.forEach((el) => observer.observe(el));
 
-    // Gestion du scroll et des voitures sur diagonales
+    // Gestion des motifs réactifs au scroll
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
-      
-      // Déterminer la direction du scroll
-      if (scrollY > lastScrollY) {
-        scrollDirection = 'down';
-      } else if (scrollY < lastScrollY) {
-        scrollDirection = 'up';
-      }
-      lastScrollY = scrollY;
-      
-      // Gérer les voitures sur les diagonales
-      const diagonals = document.querySelectorAll('.diagonal-cut-top-slash, .diagonal-cut-top-backslash, .diagonal-cut-bottom-slash, .diagonal-cut-bottom-backslash');
-      
-      diagonals.forEach((diagonal, index) => {
-        const rect = diagonal.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-          // Créer ou mettre à jour la voiture pour cette diagonale
-          let car = diagonal.querySelector('.diagonal-car');
-          if (!car) {
-            car = document.createElement('div');
-            car.className = 'diagonal-car';
-            diagonal.appendChild(car);
-          }
-          
-          // Déterminer le type de diagonale
-          const isSlash = diagonal.classList.contains('diagonal-cut-top-slash') || diagonal.classList.contains('diagonal-cut-bottom-slash');
-          const isTop = diagonal.classList.contains('diagonal-cut-top-slash') || diagonal.classList.contains('diagonal-cut-top-backslash');
-          
-          // Calculer la position de la voiture sur la diagonale
-          const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-          
-          let x, y;
-          if (isSlash) {
-            // Diagonale slash (/)
-            if (isTop) {
-              x = progress * 100; // De gauche à droite
-              y = (1 - progress) * 5; // De bas en haut de la diagonale
-            } else {
-              x = (1 - progress) * 100; // De droite à gauche
-              y = progress * 5; // De haut en bas de la diagonale
-            }
-            car.classList.add('slash');
-            car.classList.remove('backslash');
-          } else {
-            // Diagonale backslash (\)
-            if (isTop) {
-              x = (1 - progress) * 100; // De droite à gauche
-              y = (1 - progress) * 5; // De bas en haut de la diagonale
-            } else {
-              x = progress * 100; // De gauche à droite
-              y = progress * 5; // De haut en bas de la diagonale
-            }
-            car.classList.add('backslash');
-            car.classList.remove('slash');
-          }
-          
-          // Appliquer la position
-          car.style.left = `${x}%`;
-          car.style.top = `${y}vh`;
-          
-          // Appliquer la direction
-          car.classList.remove('going-up', 'going-down');
-          car.classList.add(scrollDirection === 'up' ? 'going-up' : 'going-down');
-          
-          // Rendre visible
-          car.classList.add('visible');
-        } else {
-          // Cacher la voiture si la section n'est pas visible
-          const car = diagonal.querySelector('.diagonal-car');
-          if (car) {
-            car.classList.remove('visible');
-          }
-        }
-      });
       const patterns = document.querySelectorAll('.scroll-pattern');
       
       patterns.forEach((pattern, index) => {

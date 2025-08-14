@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench } from 'lucide-react';
+import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info } from 'lucide-react';
+
+// Centre de référence : Monistrol-sur-Loire
+const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
+const STANDARD_RADIUS = 50; // km
+const EMBRAYAGE_RADIUS = 75; // km
+const SAINT_ETIENNE_EXCLUSION_RADIUS = 6; // km
+const SAINT_ETIENNE_COORDS = { lat: 45.4397, lng: 4.3872 };
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 
 const ServiceArea = () => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
@@ -7,11 +20,19 @@ const ServiceArea = () => {
   const [embrayageMode, setEmbrayageMode] = useState(false);
   const [coverageInput, setCoverageInput] = useState('');
   const [coverageResult, setCoverageResult] = useState<{
-    status: 'covered' | 'on-demand' | 'out-of-zone' | null;
+    status: 'covered' | 'on-demand' | 'out-of-zone' | 'limited-access' | null;
     city: string;
+    distance?: number;
   }>({ status: null, city: '' });
-  const [hoveredDept, setHoveredDept] = useState<string | null>(null);
-  const [deptInfoPosition, setDeptInfoPosition] = useState({ x: 0, y: 0 });
+  
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstance = useRef<any>(null);
+  const autocompleteRef = useRef<any>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const standardCircleRef = useRef<any>(null);
+  const embrayageCircleRef = useRef<any>(null);
+  const exclusionCircleRef = useRef<any>(null);
+  const markerRef = useRef<any>(null);
 
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
@@ -27,69 +48,290 @@ const ServiceArea = () => {
     "Charlieu", "Feurs", "Boën-sur-Lignon", "Andrézieux-Bouthéon", "Saint-Just-Saint-Rambert"
   ];
 
-  // Vérification de couverture
-  const checkCoverage = (input: string) => {
-    const city = input.trim();
-    if (!city) {
-      setCoverageResult({ status: null, city: '' });
+  // Calculer la distance entre deux points
+  const calculateDistance = (point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
+    if (window.google && window.google.maps && window.google.maps.geometry) {
+      const latLng1 = new window.google.maps.LatLng(point1.lat, point1.lng);
+      const latLng2 = new window.google.maps.LatLng(point2.lat, point2.lng);
+      return window.google.maps.geometry.spherical.computeDistanceBetween(latLng1, latLng2) / 1000; // en km
+    }
+    return 0;
+  };
+
+  // Vérifier la couverture d'un point
+  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
+    const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
+    const distanceFromSaintEtienne = calculateDistance(coords, SAINT_ETIENNE_COORDS);
+    
+    // Vérifier si c'est dans la zone d'exclusion de Saint-Étienne
+    if (distanceFromSaintEtienne <= SAINT_ETIENNE_EXCLUSION_RADIUS) {
+      setCoverageResult({ 
+        status: 'limited-access', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
       return;
     }
 
-    const allCommunes = [...communes43, ...communes42];
-    const found = allCommunes.find(commune => 
-      commune.toLowerCase().includes(city.toLowerCase()) ||
-      city.toLowerCase().includes(commune.toLowerCase())
-    );
-
-    if (found) {
-      if (found === "Saint-Étienne") {
-        setCoverageResult({ status: 'on-demand', city: found });
-      } else {
-        setCoverageResult({ status: 'covered', city: found });
-      }
-    } else if (embrayageMode) {
-      setCoverageResult({ status: 'on-demand', city: city });
+    // Vérifier la couverture selon les rayons
+    if (distanceFromCenter <= STANDARD_RADIUS) {
+      setCoverageResult({ 
+        status: 'covered', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else if (embrayageMode && distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      setCoverageResult({ 
+        status: 'on-demand', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      setCoverageResult({ 
+        status: 'on-demand', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
     } else {
-      setCoverageResult({ status: 'out-of-zone', city: city });
+      setCoverageResult({ 
+        status: 'out-of-zone', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
     }
   };
 
+  // Initialiser Google Maps
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      checkCoverage(coverageInput);
-    }, 300);
-    return () => clearTimeout(timeoutId);
-  }, [coverageInput, embrayageMode]);
+    const initMap = () => {
+      if (!window.google || !mapRef.current) return;
 
-  const handleDeptHover = (deptId: string, event: React.MouseEvent) => {
-    setHoveredDept(deptId);
-    const rect = event.currentTarget.getBoundingClientRect();
-    setDeptInfoPosition({
-      x: rect.left + rect.width / 2,
-      y: rect.top - 10
-    });
-  };
+      // Créer la carte
+      mapInstance.current = new window.google.maps.Map(mapRef.current, {
+        center: CENTER_COORDS,
+        zoom: 9,
+        styles: [
+          { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+          {
+            featureType: "administrative.locality",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }]
+          },
+          {
+            featureType: "poi",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }]
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry",
+            stylers: [{ color: "#263c3f" }]
+          },
+          {
+            featureType: "poi.park",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#6b9a76" }]
+          },
+          {
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [{ color: "#38414e" }]
+          },
+          {
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#212a37" }]
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#9ca5b3" }]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry",
+            stylers: [{ color: "#746855" }]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#1f2835" }]
+          },
+          {
+            featureType: "road.highway",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#f3d19c" }]
+          },
+          {
+            featureType: "transit",
+            elementType: "geometry",
+            stylers: [{ color: "#2f3948" }]
+          },
+          {
+            featureType: "transit.station",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#d59563" }]
+          },
+          {
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [{ color: "#17263c" }]
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#515c6d" }]
+          },
+          {
+            featureType: "water",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#17263c" }]
+          }
+        ],
+        disableDefaultUI: true,
+        zoomControl: true,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false
+      });
 
-  const getDeptInfo = (deptId: string) => {
-    switch (deptId) {
-      case '43':
-        return {
-          name: 'Haute-Loire (43)',
-          status: 'covered',
-          cities: communes43.slice(0, 4).join(', ') + '...',
-          count: communes43.length
-        };
-      case '42':
-        return {
-          name: 'Loire (42)',
-          status: 'covered',
-          cities: communes42.slice(0, 4).join(', ') + '...',
-          count: communes42.length
-        };
-      default:
-        return null;
+      // Cercle standard (50km)
+      standardCircleRef.current = new window.google.maps.Circle({
+        strokeColor: '#10B981',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#10B981',
+        fillOpacity: 0.15,
+        map: mapInstance.current,
+        center: CENTER_COORDS,
+        radius: STANDARD_RADIUS * 1000 // en mètres
+      });
+
+      // Cercle embrayage (75km) - initialement caché
+      embrayageCircleRef.current = new window.google.maps.Circle({
+        strokeColor: '#F59E0B',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#F59E0B',
+        fillOpacity: 0.1,
+        map: null, // Caché par défaut
+        center: CENTER_COORDS,
+        radius: EMBRAYAGE_RADIUS * 1000
+      });
+
+      // Zone d'exclusion Saint-Étienne
+      exclusionCircleRef.current = new window.google.maps.Circle({
+        strokeColor: '#EF4444',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#EF4444',
+        fillOpacity: 0.2,
+        map: mapInstance.current,
+        center: SAINT_ETIENNE_COORDS,
+        radius: SAINT_ETIENNE_EXCLUSION_RADIUS * 1000
+      });
+
+      // Marqueur centre
+      new window.google.maps.Marker({
+        position: CENTER_COORDS,
+        map: mapInstance.current,
+        title: 'Monistrol-sur-Loire - Centre d\'intervention',
+        icon: {
+          path: window.google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: '#FF6B35',
+          fillOpacity: 1,
+          strokeColor: '#ffffff',
+          strokeWeight: 2
+        }
+      });
+
+      // Autocomplete
+      if (inputRef.current) {
+        autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
+          componentRestrictions: { country: 'fr' },
+          fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
+        });
+
+        autocompleteRef.current.addListener('place_changed', () => {
+          const place = autocompleteRef.current.getPlace();
+          
+          if (!place.geometry || !place.geometry.location) {
+            setCoverageResult({ status: null, city: '' });
+            return;
+          }
+
+          const coords = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          };
+
+          // Vérifier si c'est dans les départements 42/43
+          const postalCode = place.address_components?.find((component: any) => 
+            component.types.includes('postal_code')
+          )?.long_name;
+
+          const isDept4243 = postalCode && (postalCode.startsWith('42') || postalCode.startsWith('43'));
+          
+          if (!isDept4243 && !embrayageMode) {
+            setCoverageResult({ 
+              status: 'out-of-zone', 
+              city: place.name || place.formatted_address,
+              distance: calculateDistance(coords, CENTER_COORDS)
+            });
+          } else {
+            checkCoverage(coords, place.name || place.formatted_address);
+          }
+
+          // Ajouter/déplacer le marqueur
+          if (markerRef.current) {
+            markerRef.current.setMap(null);
+          }
+
+          markerRef.current = new window.google.maps.Marker({
+            position: coords,
+            map: mapInstance.current,
+            title: place.name,
+            animation: window.google.maps.Animation.DROP
+          });
+
+          // Centrer la carte sur le lieu
+          mapInstance.current.panTo(coords);
+          mapInstance.current.setZoom(11);
+        });
+      }
+    };
+
+    // Attendre que Google Maps soit chargé
+    if (window.google) {
+      initMap();
+    } else {
+      const checkGoogle = setInterval(() => {
+        if (window.google) {
+          clearInterval(checkGoogle);
+          initMap();
+        }
+      }, 100);
     }
-  };
+  }, []);
+
+  // Gérer le toggle embrayage
+  useEffect(() => {
+    if (embrayageCircleRef.current) {
+      embrayageCircleRef.current.setMap(embrayageMode ? mapInstance.current : null);
+    }
+    
+    // Recalculer la couverture si une recherche est active
+    if (coverageResult.city && markerRef.current) {
+      const coords = {
+        lat: markerRef.current.getPosition().lat(),
+        lng: markerRef.current.getPosition().lng()
+      };
+      checkCoverage(coords, coverageResult.city);
+    }
+  }, [embrayageMode]);
 
   const getCTAText = () => {
     switch (coverageResult.status) {
@@ -97,10 +339,27 @@ const ServiceArea = () => {
         return 'Demander un devis';
       case 'on-demand':
         return 'Demander un devis (déplacement long)';
+      case 'limited-access':
+        return 'Nous contacter (conditions d\'accès)';
       case 'out-of-zone':
         return 'Nous contacter';
       default:
         return 'Demander un devis';
+    }
+  };
+
+  const getStatusMessage = () => {
+    switch (coverageResult.status) {
+      case 'covered':
+        return `✅ C'est bon : nous intervenons à ${coverageResult.city}.`;
+      case 'on-demand':
+        return `⚠️ Sur demande (embrayage / déplacement long).`;
+      case 'limited-access':
+        return `ⓘ Saint-Étienne intra-muros : accès limité (au cas par cas).`;
+      case 'out-of-zone':
+        return `🚫 Hors zone standard. Contactez-nous pour un devis embrayage.`;
+      default:
+        return '';
     }
   };
 
@@ -114,7 +373,6 @@ const ServiceArea = () => {
       <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
         <div className="bg-layer bg-layer-gradient"></div>
         <div className="bg-layer bg-layer-tech"></div>
-        <div className="bg-layer bg-layer-particles"></div>
         <div className="bg-layer bg-layer-depth"></div>
         <div className="bg-layer bg-layer-metallic"></div>
       </div>
@@ -127,7 +385,7 @@ const ServiceArea = () => {
               Zone d'intervention
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-orange-300 font-medium font-tech mb-4">
-              Nous couvrons la Loire (42) et la Haute-Loire (43)
+              Loire (42) et Haute-Loire (43). Sol dur et plat uniquement.
             </p>
             
             {/* Pills de conditions */}
@@ -137,7 +395,7 @@ const ServiceArea = () => {
                 Sol dur et plat uniquement
               </div>
               <div className="condition-pill info">
-                <MapPin className="w-3 h-3" />
+                <Info className="w-3 h-3" />
                 Saint-Étienne : accès limité
               </div>
             </div>
@@ -164,72 +422,33 @@ const ServiceArea = () => {
           {/* Grille principale : Carte + Vérificateur */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8">
             
-            {/* Carte Interactive */}
+            {/* Carte Interactive Google Maps */}
             <div className="interactive-map">
               <h3 className="text-lg font-bold text-white mb-4 text-center font-futuristic">
                 Carte de Couverture
               </h3>
               
-              {/* SVG Carte simplifiée */}
-              <svg className="map-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                {/* Haute-Loire (43) */}
-                <path
-                  d="M50 50 L200 50 L200 150 L50 150 Z"
-                  className={`map-department ${embrayageMode ? 'dept-on-demand' : 'dept-covered'}`}
-                  onMouseEnter={(e) => handleDeptHover('43', e)}
-                  onMouseLeave={() => setHoveredDept(null)}
-                  onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-                />
-                <text x="125" y="100" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
-                  43
-                </text>
-                <text x="125" y="115" textAnchor="middle" fill="white" fontSize="10">
-                  Haute-Loire
-                </text>
-
-                {/* Loire (42) */}
-                <path
-                  d="M200 100 L350 100 L350 250 L200 250 Z"
-                  className="map-department dept-covered"
-                  onMouseEnter={(e) => handleDeptHover('42', e)}
-                  onMouseLeave={() => setHoveredDept(null)}
-                  onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-                />
-                <text x="275" y="175" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
-                  42
-                </text>
-                <text x="275" y="190" textAnchor="middle" fill="white" fontSize="10">
-                  Loire
-                </text>
-
-                {/* Saint-Étienne (zone spéciale) */}
-                <circle
-                  cx="275"
-                  cy="200"
-                  r="15"
-                  className="map-department dept-limited"
-                  onMouseEnter={(e) => handleDeptHover('saint-etienne', e)}
-                  onMouseLeave={() => setHoveredDept(null)}
-                />
-                <text x="275" y="205" textAnchor="middle" fill="white" fontSize="8">
-                  St-É
-                </text>
-              </svg>
+              {/* Conteneur de la carte */}
+              <div 
+                ref={mapRef}
+                className="w-full h-80 rounded-lg border border-orange-500/20 overflow-hidden"
+                style={{ minHeight: '320px' }}
+              />
 
               {/* Légende */}
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 bg-green-500 rounded"></div>
-                  <span className="text-white">Zone couverte</span>
+                  <span className="text-white">Zone couverte (50km)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                  <div className="w-4 h-4 bg-red-500 rounded"></div>
                   <span className="text-white">Accès limité</span>
                 </div>
                 {embrayageMode && (
                   <div className="flex items-center gap-2 col-span-2">
                     <div className="w-4 h-4 bg-yellow-500 rounded"></div>
-                    <span className="text-white">Zone élargie (embrayage)</span>
+                    <span className="text-white">Zone élargie embrayage (75km)</span>
                   </div>
                 )}
               </div>
@@ -246,6 +465,7 @@ const ServiceArea = () => {
                   Votre ville ou code postal
                 </label>
                 <input
+                  ref={inputRef}
                   type="text"
                   value={coverageInput}
                   onChange={(e) => setCoverageInput(e.target.value)}
@@ -257,23 +477,11 @@ const ServiceArea = () => {
               {/* Résultat de couverture */}
               {coverageResult.status && (
                 <div className={`coverage-result coverage-${coverageResult.status}`}>
-                  {coverageResult.status === 'covered' && (
-                    <>
-                      <CheckCircle className="w-5 h-5" />
-                      <span>✅ C'est bon : nous intervenons à {coverageResult.city}.</span>
-                    </>
-                  )}
-                  {coverageResult.status === 'on-demand' && (
-                    <>
-                      <AlertTriangle className="w-5 h-5" />
-                      <span>⚠️ Possible sur demande (embrayage / déplacement long).</span>
-                    </>
-                  )}
-                  {coverageResult.status === 'out-of-zone' && (
-                    <>
-                      <XCircle className="w-5 h-5" />
-                      <span>⛔ Hors zone standard. Contactez-nous pour un devis embrayage.</span>
-                    </>
+                  <span>{getStatusMessage()}</span>
+                  {coverageResult.distance && (
+                    <div className="text-xs mt-1 opacity-75">
+                      Distance: {Math.round(coverageResult.distance)} km
+                    </div>
                   )}
                 </div>
               )}
@@ -368,36 +576,6 @@ const ServiceArea = () => {
           </div>
         </div>
       </div>
-
-      {/* Encart d'information département (hover) */}
-      {hoveredDept && (
-        <div
-          className="dept-info-card visible"
-          style={{
-            position: 'fixed',
-            left: deptInfoPosition.x - 100,
-            top: deptInfoPosition.y - 80,
-            zIndex: 50
-          }}
-        >
-          {getDeptInfo(hoveredDept) && (
-            <>
-              <h4>{getDeptInfo(hoveredDept)!.name}</h4>
-              <div className="cities">{getDeptInfo(hoveredDept)!.cities}</div>
-              <div className="see-all">
-                Voir toutes les {getDeptInfo(hoveredDept)!.count} villes
-              </div>
-            </>
-          )}
-          {hoveredDept === 'saint-etienne' && (
-            <>
-              <h4>Saint-Étienne</h4>
-              <div className="cities">Interventions limitées intra-muros</div>
-              <div className="see-all">Contactez-nous pour plus d'infos</div>
-            </>
-          )}
-        </div>
-      )}
     </section>
   );
 };

@@ -61,120 +61,54 @@ const FAQ = () => {
               className="relative reveal-on-scroll"
               style={{ animationDelay: `${index * 0.15}s` }}
             >
-              {/* Trait gauche - Extension complète */}
+              {/* Trait gauche - Simplifié */}
               <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 -translate-x-full overflow-hidden">
-                {/* Trait principal avec dégradé moderne */}
                 <div 
-                  className="w-full h-full bg-gradient-to-r from-transparent via-orange-500/20 to-orange-500/60 animate-pulse"
+                  className="w-full h-full bg-gradient-to-r from-transparent via-orange-500/30 to-orange-500/50"
                   style={{
-                    animation: `perfectPulse 4s ease-in-out infinite ${index * 0.5}s`,
-                    background: 'linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.1) 20%, rgba(255, 107, 53, 0.4) 50%, rgba(255, 107, 53, 0.6) 80%, rgba(255, 107, 53, 0.3) 100%)',
-                    boxShadow: '0 0 12px rgba(255, 107, 53, 0.4), 0 0 24px rgba(255, 107, 53, 0.2)'
+                    animation: `simplePulse 4s ease-in-out infinite ${index * 0.5}s`
                   }}
                 ></div>
                 
-                {/* Effet de brillance qui traverse */}
                 <div 
-                  className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                  className="absolute left-1/4 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-400 rounded-full opacity-80"
                   style={{
-                    animation: `perfectShine 5s ease-in-out infinite ${index * 0.7}s`,
-                    filter: 'blur(1px)'
-                  }}
-                ></div>
-                
-                {/* Points lumineux flottants */}
-                <div 
-                  className="absolute left-1/4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-orange-400 rounded-full"
-                  style={{
-                    boxShadow: '0 0 8px rgba(255, 107, 53, 0.8), 0 0 16px rgba(255, 107, 53, 0.4)',
-                    animation: `perfectFloat 3s ease-in-out infinite ${index * 0.4}s`
-                  }}
-                ></div>
-                <div 
-                  className="absolute right-1/4 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-300 rounded-full"
-                  style={{
-                    boxShadow: '0 0 6px rgba(255, 107, 53, 0.6)',
-                    animation: `perfectFloat 3s ease-in-out infinite ${index * 0.4 + 1.5}s`
+                    animation: `simpleFloat 3s ease-in-out infinite ${index * 0.4}s`
                   }}
                 ></div>
               </div>
               
-              {/* Trait droit - Symétrique parfait */}
+              {/* Trait droit - Simplifié */}
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 translate-x-full overflow-hidden">
-                {/* Trait principal symétrique */}
                 <div 
-                  className="w-full h-full bg-gradient-to-l from-transparent via-orange-500/20 to-orange-500/60 animate-pulse"
+                  className="w-full h-full bg-gradient-to-l from-transparent via-orange-500/30 to-orange-500/50"
                   style={{
-                    animation: `perfectPulse 4s ease-in-out infinite ${index * 0.5 + 2}s`,
-                    background: 'linear-gradient(270deg, transparent 0%, rgba(255, 107, 53, 0.1) 20%, rgba(255, 107, 53, 0.4) 50%, rgba(255, 107, 53, 0.6) 80%, rgba(255, 107, 53, 0.3) 100%)',
-                    boxShadow: '0 0 12px rgba(255, 107, 53, 0.4), 0 0 24px rgba(255, 107, 53, 0.2)'
+                    animation: `simplePulse 4s ease-in-out infinite ${index * 0.5 + 2}s`
                   }}
                 ></div>
                 
-                {/* Brillance symétrique */}
                 <div 
-                  className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-transparent via-white/50 to-transparent"
+                  className="absolute right-1/4 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-400 rounded-full opacity-80"
                   style={{
-                    animation: `perfectShineReverse 5s ease-in-out infinite ${index * 0.7 + 2.5}s`,
-                    filter: 'blur(1px)'
-                  }}
-                ></div>
-                
-                {/* Points lumineux symétriques */}
-                <div 
-                  className="absolute right-1/4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-orange-400 rounded-full"
-                  style={{
-                    boxShadow: '0 0 8px rgba(255, 107, 53, 0.8), 0 0 16px rgba(255, 107, 53, 0.4)',
-                    animation: `perfectFloat 3s ease-in-out infinite ${index * 0.4 + 0.75}s`
-                  }}
-                ></div>
-                <div 
-                  className="absolute left-1/4 top-1/2 transform -translate-y-1/2 w-1 h-1 bg-orange-300 rounded-full"
-                  style={{
-                    boxShadow: '0 0 6px rgba(255, 107, 53, 0.6)',
-                    animation: `perfectFloat 3s ease-in-out infinite ${index * 0.4 + 2.25}s`
+                    animation: `simpleFloat 3s ease-in-out infinite ${index * 0.4 + 1}s`
                   }}
                 ></div>
               </div>
               
-              {/* Effet lumineux qui traverse tout l'encadrement */}
-              <div 
-                className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl"
-                style={{ zIndex: 15 }}
-              >
-                <div 
-                  className="absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0"
-                  style={{
-                    animation: `perfectLightSweep 6s ease-in-out infinite ${index * 0.8}s`,
-                    filter: 'blur(2px)'
-                  }}
-                ></div>
-              </div>
-              
-              {/* Contenu de la FAQ avec animations parfaites */}
-              <div className="bg-white/98 backdrop-blur-sm rounded-xl shadow-2xl border-2 border-orange-500/30 hover-scale border-glow overflow-hidden transition-all duration-500 hover:shadow-3xl hover:border-orange-500/60 relative z-10 group">
-                {/* Accent décoratif animé en haut */}
-                <div 
-                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500/30 via-orange-500/60 to-orange-500/30"
-                  style={{
-                    animation: `perfectAccent 3s ease-in-out infinite ${index * 0.3}s`
-                  }}
-                ></div>
+              {/* Contenu de la FAQ */}
+              <div className="bg-white/98 backdrop-blur-sm rounded-xl shadow-lg border border-orange-500/20 hover:border-orange-500/40 overflow-hidden transition-all duration-300 hover:shadow-xl relative z-10 group">
+                {/* Accent décoratif */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500/20 via-orange-500/40 to-orange-500/20"></div>
                 
-                {/* Question avec effet hover */}
-                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-orange-50/60 to-white/90 border-b border-orange-500/25 group-hover:from-orange-50/80 group-hover:to-white transition-all duration-300">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic hover-glow-text flex items-center gap-3 group-hover:text-gray-800 transition-colors duration-300">
-                    <div 
-                      className="w-2.5 h-2.5 bg-orange-500 rounded-full shadow-lg shadow-orange-500/60"
-                      style={{
-                        animation: `perfectDot 2s ease-in-out infinite ${index * 0.25}s`
-                      }}
-                    ></div>
+                {/* Question */}
+                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-orange-50/40 to-white/80 border-b border-orange-500/15 group-hover:from-orange-50/60 group-hover:to-white transition-all duration-300">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic flex items-center gap-3 group-hover:text-gray-800 transition-colors duration-300">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full shadow-sm"></div>
                     {item.question}
                   </h3>
                 </div>
                 
-                {/* Réponse toujours visible avec animation */}
+                {/* Réponse */}
                 <div className="px-4 sm:px-6 py-4 sm:py-5 bg-white/95 group-hover:bg-white transition-all duration-300">
                   <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
                     {item.question === "Combien coûte un déplacement ?" ? (
@@ -193,26 +127,17 @@ const FAQ = () => {
                     )}
                   </p>
                 </div>
-                
-                {/* Effet de glow au hover */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Séparateur de section avec animation parfaite */}
+        {/* Séparateur de section */}
         <div className="relative mt-12 mb-8">
-          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent"></div>
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
           <div className="relative z-10 flex justify-center">
-            <div className="bg-white px-8 py-3 rounded-full border-2 border-orange-500/40 shadow-xl hover:border-orange-500/60 transition-all duration-300 hover:shadow-2xl">
-              <div 
-                className="w-4 h-4 bg-orange-500 rounded-full"
-                style={{
-                  animation: 'perfectCenterPulse 2s ease-in-out infinite',
-                  boxShadow: '0 0 12px rgba(255, 107, 53, 0.6), 0 0 24px rgba(255, 107, 53, 0.3)'
-                }}
-              ></div>
+            <div className="bg-white px-8 py-3 rounded-full border border-orange-500/30 shadow-lg hover:border-orange-500/50 transition-all duration-300">
+              <div className="w-3 h-3 bg-orange-500 rounded-full opacity-80"></div>
             </div>
           </div>
         </div>
@@ -223,7 +148,7 @@ const FAQ = () => {
           </p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-600 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover-scale shadow-lg hover:shadow-xl hover:shadow-orange-500/25"
+            className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-600 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover:shadow-lg hover:shadow-orange-500/25"
           >
             Nous Contacter
           </button>

@@ -7,16 +7,12 @@ interface MobileCTAProps {
 
 const MobileCTA: React.FC<MobileCTAProps> = ({ onQuoteClick }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-black border-t border-orange-500/20 shadow-2xl" 
-         style={{ 
-           paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-           transform: 'translateZ(0)',
-           backfaceVisibility: 'hidden'
-         }}>
+    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-black border-t border-orange-500/20 shadow-lg" 
+         style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
       <div className="flex">
         <a
           href="tel:+33123456789"
-          className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm font-tech active:bg-orange-600 transition-colors duration-200"
+          className="flex-1 flex items-center justify-center py-3 text-white font-bold tracking-wide text-sm font-tech hover-scale"
           style={{ background: '#FF6B35' }}
         >
           <Phone className="w-4 h-4 mr-2" />
@@ -24,7 +20,7 @@ const MobileCTA: React.FC<MobileCTAProps> = ({ onQuoteClick }) => {
         </a>
         <button
           onClick={onQuoteClick}
-          className="flex-1 flex items-center justify-center py-4 bg-gray-900 text-white font-bold tracking-wide text-sm font-tech active:bg-gray-800 transition-colors duration-200"
+          className="flex-1 flex items-center justify-center py-3 bg-gray-900 text-white font-bold tracking-wide text-sm font-tech hover-scale"
         >
           <FileText className="w-4 h-4 mr-2" />
           DEVIS

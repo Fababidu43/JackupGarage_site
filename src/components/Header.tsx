@@ -112,9 +112,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                 transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
                 w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
               >
-                <div className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic text-center leading-tight">
-                  JACK UP<br />GARAGE
-                </div>
+                <img 
+                  src="/src/logo.png" 
+                  alt="Jack Up Garage" 
+                  className="w-full h-full object-contain transition-all duration-300"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                />
               </div>
             </div>
 

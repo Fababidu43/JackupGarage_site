@@ -51,9 +51,12 @@ const Footer = () => {
               className="w-24 h-10 sm:w-32 sm:h-12 lg:w-40 lg:h-16 xl:w-48 xl:h-18 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-1 sm:p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <div className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic text-center leading-tight">
-                JACK UP<br />GARAGE
-              </div>
+              <img 
+                src="/src/logo.png" 
+                alt="Jack Up Garage" 
+                className="w-full h-full object-contain"
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
+              />
             </div>
           </div>
 

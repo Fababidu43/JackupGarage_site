@@ -61,11 +61,68 @@ const FAQ = () => {
               className="relative reveal-on-scroll"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Trait gauche qui s'étend */}
-              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-r from-orange-500/60 via-orange-500/30 to-transparent -translate-x-full"></div>
+              {/* Trait spécifique pour chaque question */}
+              {index === 0 && (
+                <>
+                  {/* Style 1: Trait simple horizontal complet */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-r from-orange-500/70 via-orange-500/40 to-orange-500/70 -translate-x-full"></div>
+                </>
+              )}
               
-              {/* Trait droit qui s'étend */}
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-l from-orange-500/60 via-orange-500/30 to-transparent translate-x-full"></div>
+              {index === 1 && (
+                <>
+                  {/* Style 2: Double trait avec espacement */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-y-1 w-screen h-0.5 bg-gradient-to-r from-orange-500/60 via-orange-500/30 to-transparent -translate-x-full"></div>
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 translate-y-1 w-screen h-0.5 bg-gradient-to-r from-transparent via-orange-500/30 to-orange-500/60 -translate-x-full"></div>
+                </>
+              )}
+              
+              {index === 2 && (
+                <>
+                  {/* Style 3: Trait pointillé simulé */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 -translate-x-full" 
+                       style={{background: 'repeating-linear-gradient(90deg, #FF6B35 0px, #FF6B35 20px, transparent 20px, transparent 40px)'}}>
+                  </div>
+                </>
+              )}
+              
+              {index === 3 && (
+                <>
+                  {/* Style 4: Trait avec épaississement au centre */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-1 bg-gradient-to-r from-orange-500/50 via-orange-500/80 to-orange-500/50 -translate-x-full rounded-full"></div>
+                </>
+              )}
+              
+              {index === 4 && (
+                <>
+                  {/* Style 5: Trait avec dégradé inversé */}
+                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-l from-orange-500/70 via-orange-500/40 to-orange-500/70 translate-x-full"></div>
+                </>
+              )}
+              
+              {index === 5 && (
+                <>
+                  {/* Style 6: Triple trait fin */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-y-2 w-screen h-px bg-gradient-to-r from-orange-500/40 via-orange-500/20 to-transparent -translate-x-full"></div>
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-px bg-gradient-to-r from-orange-500/60 via-orange-500/40 to-orange-500/60 -translate-x-full"></div>
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 translate-y-2 w-screen h-px bg-gradient-to-r from-transparent via-orange-500/20 to-orange-500/40 -translate-x-full"></div>
+                </>
+              )}
+              
+              {index === 6 && (
+                <>
+                  {/* Style 7: Trait avec effet de lueur */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-r from-orange-500/60 via-orange-500/30 to-transparent -translate-x-full shadow-lg shadow-orange-500/20"></div>
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-2 bg-gradient-to-r from-orange-500/10 via-orange-500/5 to-transparent -translate-x-full blur-sm"></div>
+                </>
+              )}
+              
+              {index === 7 && (
+                <>
+                  {/* Style 8: Trait diagonal simulé avec segments */}
+                  <div className="absolute left-0 top-1/2 transform -translate-y-1/2 rotate-1 w-screen h-0.5 bg-gradient-to-r from-orange-500/50 via-orange-500/30 to-orange-500/50 -translate-x-full origin-left"></div>
+                </>
+              )}
               
               {/* Contenu de la FAQ */}
               <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border-2 border-orange-500/30 hover-scale border-glow overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-orange-500/50 relative z-10">

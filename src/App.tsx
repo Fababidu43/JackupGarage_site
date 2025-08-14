@@ -53,9 +53,6 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
         
-        {/* Hero → Services : diagonale "/" */}
-        <DiagonalSlash topColor="#1A1A1A" bottomColor="#F8F9FA" type="section" />
-        
         {/* Services intro (blanc #FFFFFF) */}
         <Services />
         

@@ -44,13 +44,14 @@ const Footer = () => {
           {/* Logo super large centré */}
           <div className="flex-1 flex justify-center items-center">
             <div 
-              className="w-32 h-12 sm:w-40 sm:h-16 lg:w-48 lg:h-18 xl:w-56 xl:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
+              className="w-24 h-10 sm:w-32 sm:h-12 lg:w-40 lg:h-16 xl:w-48 xl:h-18 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-1 sm:p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
+                style={{ maxWidth: '100%', maxHeight: '100%' }}
               />
             </div>
           </div>

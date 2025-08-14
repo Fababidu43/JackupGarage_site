@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle } from 'lucide-react';
+import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle, ArrowLeft } from 'lucide-react';
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
@@ -378,7 +378,8 @@ Merci de me recontacter pour un devis !`;
                 onClick={prevStep}
                 className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
-                ← Retour
+                <ArrowLeft className="w-3 h-3" />
+                Retour
               </button>
             </div>
           )}
@@ -434,7 +435,8 @@ Merci de me recontacter pour un devis !`;
                 onClick={prevStep}
                 className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
-                ← Retour
+                <ArrowLeft className="w-3 h-3" />
+                Retour
               </button>
             </div>
           )}
@@ -480,6 +482,7 @@ Merci de me recontacter pour un devis !`;
                   onClick={prevStep}
                   className="flex-1 px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 border-2 border-gray-700 text-gray-300 rounded-xl hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium text-xs sm:text-sm lg:text-base"
                 >
+                  <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
                   Retour
                 </button>
                 <button

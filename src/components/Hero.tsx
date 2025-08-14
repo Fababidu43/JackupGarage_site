@@ -33,14 +33,15 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       id="hero"
       className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut"
       style={{ 
-        minHeight: '110vh',
+        minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
         `,
         backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed'
       }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">

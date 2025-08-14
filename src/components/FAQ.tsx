@@ -19,7 +19,7 @@ const FAQ = () => {
     },
     {
       question: "Combien coûte un déplacement ?",
-      answer: "Gratuit dans les zones 43-42. Supplément kilométrique pour les embrayages longue distance."
+      answer: "Gratuit dans un rayon de 50 km autour de Monistrol-sur-Loire (départements 43-42). Pour les embrayages, zone élargie jusqu'à 75 km avec supplément de 1€/km au-delà de 50 km. Voir notre zone d'intervention complète."
     },
     {
       question: "Combien de temps dure une intervention ?",

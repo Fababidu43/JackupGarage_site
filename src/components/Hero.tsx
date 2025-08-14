@@ -6,51 +6,6 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
-  useEffect(() => {
-    // Effets de parallaxe dynamiques
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      
-      // Parallaxe pour l'image de fond du hero
-      const heroSection = document.getElementById('hero');
-      if (heroSection) {
-        const speed = 0.3; // Vitesse de parallaxe (plus c'est bas, plus c'est lent)
-        const yPos = scrolled * speed;
-        heroSection.style.backgroundPosition = `center ${yPos}px`;
-      }
-      
-      // Parallaxe pour tous les fonds dynamiques
-      const dynamicBgs = document.querySelectorAll('.dynamic-bg');
-      dynamicBgs.forEach((element, index) => {
-        const speed = 0.1 + (index * 0.05); // Vitesses différentes
-        const yPos = -(scrolled * speed);
-        const bgElement = element.querySelector('::before') as HTMLElement;
-        if (bgElement) {
-          (element as HTMLElement).style.setProperty('--parallax-y', `${yPos}px`);
-        }
-      });
-      
-      // Parallaxe pour les éléments décoratifs
-      const parallaxElements = document.querySelectorAll('.parallax-element');
-      parallaxElements.forEach((element) => {
-        const speed = 0.5;
-        const yPos = -(scrolled * speed);
-        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
-      });
-      
-      // Parallaxe pour les couches de profondeur
-      const parallaxLayers = document.querySelectorAll('.parallax-layer');
-      parallaxLayers.forEach((layer, index) => {
-        const speed = 0.2 + (index * 0.1);
-        const yPos = scrolled * speed;
-        (layer as HTMLElement).style.transform = `translateY(${yPos}px)`;
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -67,38 +22,15 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
           url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-        `,
-        backgroundAttachment: 'fixed'
+        `
       }}
     >
-      {/* Couches de parallaxe avec effets dynamiques */}
-      <div className="parallax-layer parallax-slow tech-grid-animated opacity-20"></div>
-      <div className="parallax-layer parallax-medium particle-bg opacity-30"></div>
-      <div className="parallax-layer parallax-fast energy-bg opacity-10"></div>
-      
-      {/* Particules flottantes */}
-      <div className="floating-particles">
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-      </div>
-      
-      {/* Éléments mécaniques flottants */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-16 h-16 border-2 border-orange-500/20 rounded-full animate-spin-slow"></div>
-        <div className="absolute top-40 right-20 w-8 h-8 border border-orange-400/30 rotate-45"></div>
-        <div className="absolute bottom-32 left-1/4 w-12 h-12 border-2 border-orange-500/15 rounded-lg rotate-12"></div>
-        <div className="absolute bottom-20 right-1/3 w-6 h-6 bg-orange-500/10 rounded-full"></div>
-      </div>
-      
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic pulse-subtle reveal-on-scroll scan-lines">
+        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
           Haute-Loire & Loire (43–42)
         </div>
         

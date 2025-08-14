@@ -22,20 +22,15 @@ const ServiceArea = () => {
   return (
     <section 
       id="area" 
-      className="section relative text-white overflow-hidden dynamic-bg tech-grid-animated reveal-on-scroll py-8 lg:py-12"
+      className="section relative text-white overflow-hidden reveal-on-scroll py-8 lg:py-12"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Couches de parallaxe sombres */}
-      <div className="parallax-layer parallax-slow energy-bg opacity-40"></div>
-      <div className="parallax-layer parallax-medium particle-bg opacity-25"></div>
-      <div className="parallax-layer parallax-fast opacity-15" style={{ background: 'radial-gradient(ellipse at 70% 30%, rgba(255, 107, 53, 0.1) 0%, transparent 60%)' }}></div>
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic hover-glow-text subtle-glow scan-lines">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
             Zone d'intervention
           </h2>
-          <div className="max-w-4xl mx-auto bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 hover-scale border-glow subtle-glow animated-border">
+          <div className="max-w-4xl mx-auto bg-orange-500/10 border border-orange-500/20 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
             <p className="text-base sm:text-lg lg:text-xl text-orange-300 font-medium font-tech mb-2">
               Secteurs 43–42. Nous n'avons besoin que d'un sol dur et plat.
             </p>
@@ -45,7 +40,7 @@ const ServiceArea = () => {
           </div>
           
           {/* Badge Saint-Étienne */}
-          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6 pulse-subtle">
+          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
             <span className="text-yellow-300 font-medium text-xs sm:text-sm font-tech text-center">
               Saint-Étienne intra-muros : interventions limitées
             </span>

@@ -50,72 +50,9 @@ function App() {
       }
       lastScrollY = scrollY;
       
-      // Gérer les voitures sur les diagonales
-      const diagonals = document.querySelectorAll('.diagonal-cut-top-slash, .diagonal-cut-top-backslash, .diagonal-cut-bottom-slash, .diagonal-cut-bottom-backslash');
+      // Gérer la voiture unique sur le parcours diagonal
+      manageSingleCarJourney(scrollY, scrollDirection);
       
-      diagonals.forEach((diagonal, index) => {
-        const rect = diagonal.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        
-        if (isVisible) {
-          // Créer ou mettre à jour la voiture pour cette diagonale
-          let car = diagonal.querySelector('.diagonal-car');
-          if (!car) {
-            car = document.createElement('div');
-            car.className = 'diagonal-car';
-            diagonal.appendChild(car);
-          }
-          
-          // Déterminer le type de diagonale
-          const isSlash = diagonal.classList.contains('diagonal-cut-top-slash') || diagonal.classList.contains('diagonal-cut-bottom-slash');
-          const isTop = diagonal.classList.contains('diagonal-cut-top-slash') || diagonal.classList.contains('diagonal-cut-top-backslash');
-          
-          // Calculer la position de la voiture sur la diagonale
-          const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-          
-          let x, y;
-          if (isSlash) {
-            // Diagonale slash (/)
-            if (isTop) {
-              x = progress * 100; // De gauche à droite
-              y = (1 - progress) * 5; // De bas en haut de la diagonale
-            } else {
-              x = (1 - progress) * 100; // De droite à gauche
-              y = progress * 5; // De haut en bas de la diagonale
-            }
-            car.classList.add('slash');
-            car.classList.remove('backslash');
-          } else {
-            // Diagonale backslash (\)
-            if (isTop) {
-              x = (1 - progress) * 100; // De droite à gauche
-              y = (1 - progress) * 5; // De bas en haut de la diagonale
-            } else {
-              x = progress * 100; // De gauche à droite
-              y = progress * 5; // De haut en bas de la diagonale
-            }
-            car.classList.add('backslash');
-            car.classList.remove('slash');
-          }
-          
-          // Appliquer la position
-          car.style.left = `${x}%`;
-          car.style.top = `${y}vh`;
-          
-          // Appliquer la direction
-          car.classList.remove('going-up', 'going-down');
-          car.classList.add(scrollDirection === 'up' ? 'going-up' : 'going-down');
-          
-          // Rendre visible
-          car.classList.add('visible');
-        } else {
-          // Cacher la voiture si la section n'est pas visible
-          const car = diagonal.querySelector('.diagonal-car');
-          if (car) {
-            car.classList.remove('visible');
-          }
-        }
-      });
       const patterns = document.querySelectorAll('.scroll-pattern');
       
       patterns.forEach((pattern, index) => {
@@ -144,6 +81,83 @@ function App() {
           }
         }
       });
+    };
+
+    // Fonction pour gérer la voiture unique sur le parcours diagonal
+    const manageSingleCarJourney = (scrollY: number, direction: string) => {
+      // Créer la voiture si elle n'existe pas
+      let car = document.querySelector('.diagonal-journey-car') as HTMLElement;
+      if (!car) {
+        car = document.createElement('div');
+        car.className = 'diagonal-journey-car';
+        document.body.appendChild(car);
+      }
+
+      // Définir toutes les diagonales dans l'ordre du parcours
+      const diagonalSections = [
+        { selector: '.diagonal-cut-bottom-slash', type: 'slash', position: 'bottom' }, // Hero
+        { selector: '.diagonal-cut-top-backslash.diagonal-cut-bottom-slash', type: 'backslash', position: 'top' }, // Entretiens
+        { selector: '.diagonal-cut-top-slash.diagonal-cut-bottom-backslash', type: 'slash', position: 'top' }, // Embrayage
+        { selector: '.diagonal-cut-top-backslash.diagonal-cut-bottom-slash', type: 'backslash', position: 'top' }, // Distribution
+        { selector: '.diagonal-cut-top-slash.diagonal-cut-bottom-backslash', type: 'slash', position: 'top' }, // Suspensions
+        { selector: '.diagonal-cut-top-backslash.diagonal-cut-bottom-slash', type: 'backslash', position: 'top' }, // Zone
+        { selector: '.diagonal-cut-top-slash.diagonal-cut-bottom-backslash', type: 'slash', position: 'top' }, // FAQ
+        { selector: '.diagonal-cut-top-backslash', type: 'backslash', position: 'top' } // Contact
+      ];
+
+      let currentDiagonal = null;
+      let carPosition = { x: 0, y: 0 };
+      let isVisible = false;
+
+      // Trouver la diagonale actuellement visible
+      for (const diagonalInfo of diagonalSections) {
+        const element = document.querySelector(diagonalInfo.selector);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const sectionHeight = rect.height;
+          const diagonalHeight = window.innerWidth > 768 ? window.innerHeight * 0.05 : window.innerWidth > 480 ? window.innerHeight * 0.03 : window.innerHeight * 0.02;
+          
+          // Vérifier si on est dans la zone de la diagonale
+          let diagonalTop, diagonalBottom;
+          if (diagonalInfo.position === 'top') {
+            diagonalTop = rect.top;
+            diagonalBottom = rect.top + diagonalHeight;
+          } else {
+            diagonalTop = rect.bottom - diagonalHeight;
+            diagonalBottom = rect.bottom;
+          }
+
+          if (diagonalTop <= window.innerHeight * 0.6 && diagonalBottom >= window.innerHeight * 0.4) {
+            currentDiagonal = diagonalInfo;
+            isVisible = true;
+
+            // Calculer la position sur la diagonale
+            const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.5 - diagonalTop) / diagonalHeight));
+            
+            if (diagonalInfo.type === 'slash') {
+              // Diagonale slash (/) - de gauche à droite en descendant
+              carPosition.x = progress * window.innerWidth;
+              carPosition.y = diagonalTop + (progress * diagonalHeight);
+            } else {
+              // Diagonale backslash (\) - de droite à gauche en descendant
+              carPosition.x = window.innerWidth - (progress * window.innerWidth);
+              carPosition.y = diagonalTop + (progress * diagonalHeight);
+            }
+            break;
+          }
+        }
+      }
+
+      // Appliquer la position et les styles
+      if (isVisible && currentDiagonal) {
+        car.style.left = `${carPosition.x}px`;
+        car.style.top = `${carPosition.y}px`;
+        
+        // Appliquer les classes de style
+        car.className = `diagonal-journey-car visible ${currentDiagonal.type} ${direction === 'up' ? 'going-up' : 'going-down'}`;
+      } else {
+        car.classList.remove('visible');
+      }
     };
 
     window.addEventListener('scroll', handleScroll);

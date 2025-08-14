@@ -140,12 +140,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                   
                   {/* Soulignement animé */}
                   <span className={`absolute bottom-0 left-0 h-0.5 bg-orange-500 transition-all duration-300 ease-out
-                    ${activeSection === item.id ? 'w-full' : 'w-0'}`} />
-                  
-                  {/* Soulignement au hover pour les éléments non actifs */}
-                  {activeSection !== item.id && (
-                    <span className="absolute bottom-0 left-0 h-0.5 bg-orange-500 w-0 hover:w-full transition-all duration-300 ease-out" />
-                  )}
+                    ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                   
                   {/* Indicateur section active */}
                   {activeSection === item.id && (

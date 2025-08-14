@@ -61,6 +61,7 @@ const Footer = () => {
             {[
               { name: 'Accueil', href: '#hero' },
               { name: 'Services', href: '#services' },
+              { name: 'FAQ', href: '#faq' },
               { name: 'Zone', href: '#area' },
               { name: 'Contact', href: '#contact' }
             ].map((link) => (
@@ -125,6 +126,7 @@ const Footer = () => {
           {[
             { name: 'Accueil', href: '#hero' },
             { name: 'Services', href: '#services' },
+            { name: 'FAQ', href: '#faq' },
             { name: 'Zone', href: '#area' },
             { name: 'Contact', href: '#contact' }
           ].map((link) => (

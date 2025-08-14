@@ -28,8 +28,7 @@ const Contact = () => {
   return (
     <section 
       id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll"
-      style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
+      className="section relative py-8 lg:py-12 reveal-on-scroll scroll-gradient-dark"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">

@@ -125,7 +125,7 @@ function App() {
                 </p>
                 
                 <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-400 hover:text-orange-300 font-tech transition-colors hover-lift underline-animate"
                 >
                   Demander un devis
@@ -173,7 +173,7 @@ function App() {
                 </p>
                 
                 <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide hover:opacity-80 font-tech transition-colors hover-lift underline-animate"
                   style={{ color: '#FF6B35' }}
                 >
@@ -222,7 +222,7 @@ function App() {
                 </p>
                 
                 <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-400 hover:text-orange-300 font-tech transition-colors hover-lift underline-animate"
                 >
                   Demander un devis
@@ -270,7 +270,7 @@ function App() {
                 </p>
                 
                 <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide hover:opacity-80 font-tech transition-colors hover-lift underline-animate"
                   style={{ color: '#FF6B35' }}
                 >

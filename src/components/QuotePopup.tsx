@@ -266,6 +266,9 @@ Merci de me recontacter pour un devis !`;
         {/* Header futuriste */}
         <div className="relative flex items-center justify-between p-3 sm:p-4 lg:p-5 border-b border-orange-500/20">
           <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center text-white shadow-lg">
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5" />
+            </div>
             <div>
               <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-futuristic tracking-wide">
                 DEVIS EXPRESS

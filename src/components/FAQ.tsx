@@ -19,7 +19,7 @@ const FAQ = () => {
     },
     {
       question: "Combien coûte un déplacement ?",
-      answer: "Gratuit dans un rayon de 50 km autour de Monistrol-sur-Loire (départements 43-42). Pour les embrayages, zone élargie jusqu'à 75 km avec supplément de 1€/km au-delà de 50 km. Voir notre zone d'intervention complète."
+      answer: "Gratuit dans les zones 43-42. Supplément kilométrique pour les embrayages longue distance."
     },
     {
       question: "Combien de temps dure une intervention ?",
@@ -93,21 +93,9 @@ const FAQ = () => {
               
               {openItems.includes(index) && (
                 <div className="px-4 sm:px-6 pb-3 sm:pb-4 border-t border-orange-500/20 bg-gradient-to-r from-orange-50/50 to-transparent">
-                  <div className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed pt-3 sm:pt-4">
-                    {index === 1 ? ( // Question sur les coûts de déplacement
-                      <div>
-                        <p className="mb-3">{item.answer}</p>
-                        <button
-                          onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
-                          className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium underline transition-colors duration-200"
-                        >
-                          → Voir la zone d'intervention complète
-                        </button>
-                      </div>
-                    ) : (
-                      <p>{item.answer}</p>
-                    )}
-                  </div>
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed pt-3 sm:pt-4">
+                    {item.answer}
+                  </p>
                 </div>
               )}
             </div>

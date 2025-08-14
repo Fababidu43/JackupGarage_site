@@ -39,6 +39,7 @@ function App() {
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
       const patterns = document.querySelectorAll('.scroll-pattern');
+      const headlights = document.querySelectorAll('.headlight');
       
       patterns.forEach((pattern, index) => {
         const section = pattern.closest('.section');
@@ -63,6 +64,21 @@ function App() {
             } else {
               pattern.classList.remove('active');
             }
+          }
+        }
+      });
+      
+      // Gestion des phares dynamiques
+      headlights.forEach((headlight) => {
+        const section = headlight.closest('.section');
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+          
+          if (isVisible) {
+            headlight.classList.add('active');
+          } else {
+            headlight.classList.remove('active');
           }
         }
       });
@@ -101,6 +117,14 @@ function App() {
         
         {/* Service 1 - Orange #DE5121 */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Phares dynamiques */}
+          <div className="headlights-container">
+            <div className="headlight headlight-left"></div>
+            <div className="headlight headlight-right"></div>
+            <div className="headlight headlight-top-left"></div>
+            <div className="headlight headlight-bottom-right"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -180,6 +204,14 @@ function App() {
 
         {/* Service 3 - Distribution */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          {/* Phares dynamiques */}
+          <div className="headlights-container">
+            <div className="headlight headlight-left"></div>
+            <div className="headlight headlight-right"></div>
+            <div className="headlight headlight-top-right"></div>
+            <div className="headlight headlight-bottom-left"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -265,6 +297,26 @@ function App() {
         
         {/* Contact (noir #0A0A0A) */}
         <Contact />
+        
+        {/* Phares pour la section Contact */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.addEventListener('DOMContentLoaded', function() {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                const headlightsContainer = document.createElement('div');
+                headlightsContainer.className = 'headlights-container';
+                headlightsContainer.innerHTML = \`
+                  <div class="headlight headlight-left"></div>
+                  <div class="headlight headlight-right"></div>
+                  <div class="headlight headlight-top-left"></div>
+                  <div class="headlight headlight-top-right"></div>
+                \`;
+                contactSection.appendChild(headlightsContainer);
+              }
+            });
+          `
+        }} />
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

@@ -47,28 +47,6 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundAttachment: 'fixed'
       }}
     >
-      {/* Formes mécaniques animées */}
-      <div className="mechanical-shapes hero-shapes">
-        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '10%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '25%', right: '15%' }}></div>
-        <div className="mechanical-shape bolt-shape rotate-fast" style={{ bottom: '30%', left: '8%' }}></div>
-        <div className="mechanical-shape spring-shape float-down" style={{ top: '40%', right: '8%' }}></div>
-        <div className="mechanical-shape piston-shape rotate-reverse float-left" style={{ bottom: '20%', right: '20%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-medium" style={{ top: '60%', left: '15%' }}></div>
-        <div className="mechanical-shape oil-drop-shape float-right" style={{ bottom: '40%', left: '25%' }}></div>
-      </div>
-      
-      {/* Formes mécaniques animées */}
-      <div className="mechanical-shapes hero-shapes">
-        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '10%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '25%', right: '15%' }}></div>
-        <div className="mechanical-shape bolt-shape rotate-fast" style={{ bottom: '30%', left: '8%' }}></div>
-        <div className="mechanical-shape spring-shape float-down" style={{ top: '40%', right: '8%' }}></div>
-        <div className="mechanical-shape piston-shape rotate-reverse float-left" style={{ bottom: '20%', right: '20%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-medium" style={{ top: '60%', left: '15%' }}></div>
-        <div className="mechanical-shape oil-drop-shape float-right" style={{ bottom: '40%', left: '25%' }}></div>
-      </div>
-      
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text">Mécanicien à domicile</span>

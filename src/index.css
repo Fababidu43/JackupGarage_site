@@ -443,16 +443,23 @@
 .mechanical-shape {
   position: absolute;
   pointer-events: none;
-  opacity: 0.15;
+  opacity: 0.12;
   transition: all 0.3s ease;
+  will-change: transform, opacity;
+}
+
+/* Interaction avec le scroll */
+.mechanical-shape.scroll-visible {
+  opacity: 0.25;
+  transform: scale(1.1);
 }
 
 /* Types de formes */
 .gear-shape {
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle, #FF6B35 30%, transparent 31%, transparent 40%, #FF6B35 41%, #FF6B35 59%, transparent 60%);
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #8B4513;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   position: relative;
 }
 
@@ -461,57 +468,90 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px;
-  height: 20px;
-  background: #FF6B35;
+  width: 15px;
+  height: 15px;
+  background: #8B4513;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
 .wrench-shape {
-  width: 80px;
-  height: 20px;
-  background: linear-gradient(90deg, #FF6B35 0%, #FF6B35 70%, transparent 71%, transparent 80%, #FF6B35 81%);
-  border-radius: 10px;
+  width: 70px;
+  height: 15px;
+  background: #8B4513;
+  border-radius: 8px;
   position: relative;
 }
 
 .wrench-shape::after {
   content: '';
   position: absolute;
-  right: -10px;
-  top: -5px;
-  width: 30px;
-  height: 30px;
-  border: 3px solid #FF6B35;
+  right: -8px;
+  top: -8px;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #8B4513;
   border-radius: 50%;
 }
 
 .bolt-shape {
-  width: 30px;
-  height: 30px;
-  background: #FF6B35;
+  width: 25px;
+  height: 25px;
+  background: #8B4513;
   clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 70% 100%, 30% 100%, 0% 70%);
+  position: relative;
+}
+
+.bolt-shape::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #A0522D;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .spring-shape {
-  width: 40px;
-  height: 60px;
+  width: 35px;
+  height: 50px;
   background: repeating-linear-gradient(
     0deg,
-    #FF6B35 0px,
-    #FF6B35 4px,
+    #8B4513 0px,
+    #8B4513 3px,
     transparent 4px,
-    transparent 8px
+    transparent 7px
   );
-  border-radius: 20px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.spring-shape::before,
+.spring-shape::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 40px;
+  height: 3px;
+  background: #8B4513;
+  transform: translateX(-50%);
+}
+
+.spring-shape::before {
+  top: -2px;
+}
+
+.spring-shape::after {
+  bottom: -2px;
 }
 
 .piston-shape {
-  width: 25px;
-  height: 70px;
-  background: linear-gradient(180deg, #FF6B35 0%, #FF6B35 60%, #FF8C42 61%, #FF8C42 100%);
-  border-radius: 12px;
+  width: 20px;
+  height: 60px;
+  background: linear-gradient(180deg, #8B4513 0%, #8B4513 60%, #A0522D 61%, #A0522D 100%);
+  border-radius: 10px;
   position: relative;
 }
 
@@ -519,17 +559,17 @@
   content: '';
   position: absolute;
   top: -10px;
-  left: -7px;
-  width: 40px;
-  height: 20px;
-  background: #FF6B35;
-  border-radius: 20px;
+  left: -5px;
+  width: 30px;
+  height: 15px;
+  background: #8B4513;
+  border-radius: 15px;
 }
 
 .brake-shape {
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle, transparent 35%, #FF6B35 36%, #FF6B35 64%, transparent 65%);
+  width: 45px;
+  height: 45px;
+  background: radial-gradient(circle, transparent 35%, #8B4513 36%, #8B4513 64%, transparent 65%);
   border-radius: 50%;
   position: relative;
 }
@@ -539,36 +579,76 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 15px;
-  height: 15px;
-  background: #FF6B35;
+  width: 12px;
+  height: 12px;
+  background: #8B4513;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
 .oil-drop-shape {
-  width: 30px;
-  height: 40px;
-  background: #FF6B35;
+  width: 25px;
+  height: 35px;
+  background: #8B4513;
   border-radius: 50% 50% 50% 0;
   transform: rotate(-45deg);
 }
 
+/* Nouvelles formes d'outils */
+.screwdriver-shape {
+  width: 60px;
+  height: 8px;
+  background: linear-gradient(90deg, #8B4513 0%, #8B4513 70%, #A0522D 71%, #A0522D 100%);
+  border-radius: 4px;
+  position: relative;
+}
+
+.screwdriver-shape::before {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  width: 15px;
+  height: 16px;
+  background: #A0522D;
+  border-radius: 8px;
+}
+
+.hammer-shape {
+  width: 50px;
+  height: 12px;
+  background: #8B4513;
+  border-radius: 6px;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.hammer-shape::before {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: -10px;
+  width: 25px;
+  height: 32px;
+  background: #A0522D;
+  border-radius: 4px;
+}
+
 /* Animations de rotation */
 .rotate-slow {
-  animation: rotateSlow 15s linear infinite;
+  animation: rotateSlow 12s linear infinite;
 }
 
 .rotate-medium {
-  animation: rotateMedium 10s linear infinite;
+  animation: rotateMedium 8s linear infinite;
 }
 
 .rotate-fast {
-  animation: rotateFast 6s linear infinite;
+  animation: rotateFast 5s linear infinite;
 }
 
 .rotate-reverse {
-  animation: rotateReverse 12s linear infinite;
+  animation: rotateReverse 10s linear infinite;
 }
 
 @keyframes rotateSlow {
@@ -593,114 +673,80 @@
 
 /* Animations de flottement */
 .float-up {
-  animation: floatUp 8s ease-in-out infinite;
+  animation: floatUp 6s ease-in-out infinite;
 }
 
 .float-down {
-  animation: floatDown 10s ease-in-out infinite;
+  animation: floatDown 8s ease-in-out infinite;
 }
 
 .float-left {
-  animation: floatLeft 12s ease-in-out infinite;
+  animation: floatLeft 10s ease-in-out infinite;
 }
 
 .float-right {
-  animation: floatRight 14s ease-in-out infinite;
+  animation: floatRight 12s ease-in-out infinite;
 }
 
 @keyframes floatUp {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes floatDown {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(20px); }
+  50% { transform: translateY(15px); }
 }
 
 @keyframes floatLeft {
   0%, 100% { transform: translateX(0px); }
-  50% { transform: translateX(-15px); }
+  50% { transform: translateX(-12px); }
 }
 
 @keyframes floatRight {
   0%, 100% { transform: translateX(0px); }
-  50% { transform: translateX(15px); }
+  50% { transform: translateX(12px); }
 }
 
-/* Couleurs pour sections blanches */
-.mechanical-shapes.white-section .mechanical-shape {
-  opacity: 0.08;
+/* Couleurs pour sections noires - Orange */
+.mechanical-shapes.black-section .mechanical-shape,
+.mechanical-shapes.black-section .gear-shape,
+.mechanical-shapes.black-section .wrench-shape,
+.mechanical-shapes.black-section .bolt-shape,
+.mechanical-shapes.black-section .spring-shape,
+.mechanical-shapes.black-section .piston-shape,
+.mechanical-shapes.black-section .brake-shape,
+.mechanical-shapes.black-section .oil-drop-shape,
+.mechanical-shapes.black-section .screwdriver-shape,
+.mechanical-shapes.black-section .hammer-shape {
+  background: #FF6B35 !important;
+  opacity: 0.15;
 }
 
-.mechanical-shapes.white-section .gear-shape {
-  background: radial-gradient(circle, #8B4513 30%, transparent 31%, transparent 40%, #8B4513 41%, #8B4513 59%, transparent 60%);
+.mechanical-shapes.black-section .gear-shape::before,
+.mechanical-shapes.black-section .bolt-shape::before,
+.mechanical-shapes.black-section .piston-shape::before,
+.mechanical-shapes.black-section .brake-shape::before,
+.mechanical-shapes.black-section .spring-shape::before,
+.mechanical-shapes.black-section .spring-shape::after,
+.mechanical-shapes.black-section .screwdriver-shape::before,
+.mechanical-shapes.black-section .hammer-shape::before {
+  background: #FF6B35 !important;
 }
 
-.mechanical-shapes.white-section .gear-shape::before {
-  background: #8B4513;
-}
-
-.mechanical-shapes.white-section .wrench-shape {
-  background: linear-gradient(90deg, #8B4513 0%, #8B4513 70%, transparent 71%, transparent 80%, #8B4513 81%);
-}
-
-.mechanical-shapes.white-section .wrench-shape::after {
-  border-color: #8B4513;
-}
-
-.mechanical-shapes.white-section .bolt-shape {
-  background: #8B4513;
-}
-
-.mechanical-shapes.white-section .spring-shape {
-  background: repeating-linear-gradient(
-    0deg,
-    #8B4513 0px,
-    #8B4513 4px,
-    transparent 4px,
-    transparent 8px
-  );
-}
-
-.mechanical-shapes.white-section .piston-shape {
-  background: linear-gradient(180deg, #8B4513 0%, #8B4513 60%, #A0522D 61%, #A0522D 100%);
-}
-
-.mechanical-shapes.white-section .piston-shape::before {
-  background: #8B4513;
-}
-
-.mechanical-shapes.white-section .brake-shape {
-  background: radial-gradient(circle, transparent 35%, #8B4513 36%, #8B4513 64%, transparent 65%);
-}
-
-.mechanical-shapes.white-section .brake-shape::before {
-  background: #8B4513;
-}
-
-.mechanical-shapes.white-section .oil-drop-shape {
-  background: #8B4513;
-}
-
-/* Couleurs pour sections noires */
-.mechanical-shapes.black-section .mechanical-shape {
-  opacity: 0.2;
+.mechanical-shapes.black-section .wrench-shape::after {
+  border-color: #FF6B35 !important;
 }
 
 /* Responsive mobile */
 @media (max-width: 768px) {
   .mechanical-shape {
     transform: scale(0.7);
-    opacity: 0.1;
-  }
-  
-  .mechanical-shapes.white-section .mechanical-shape {
-    opacity: 0.05;
+    opacity: 0.08;
   }
   
   .mechanical-shapes.black-section .mechanical-shape {
-    opacity: 0.15;
+    opacity: 0.12;
   }
 }
 

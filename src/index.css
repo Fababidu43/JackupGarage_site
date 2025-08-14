@@ -42,6 +42,9 @@
   bottom: 0;
   pointer-events: none;
   background: var(--top-bg, #000);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

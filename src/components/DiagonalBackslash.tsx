@@ -12,15 +12,20 @@ const DiagonalBackslash: React.FC<DiagonalBackslashProps> = ({
   bottomColor, 
   type = 'section', 
   className = '' 
-}) => (
-  <div
-    className={`diag diag--backslash diag--${type} ${className}`}
-    style={{
-      background: bottomColor,
-      ['--top-bg' as any]: topColor,
-      ['--bottom-bg' as any]: bottomColor
-    }}
-  />
-);
+}) => {
+  // Vérifier si topColor est une URL d'image
+  const isImageUrl = topColor.startsWith('url(');
+  
+  return (
+    <div
+      className={`diag diag--backslash diag--${type} ${className}`}
+      style={{
+        background: bottomColor,
+        ['--top-bg' as any]: isImageUrl ? topColor : topColor,
+        ['--bottom-bg' as any]: bottomColor
+      }}
+    />
+  );
+};
 
 export default DiagonalBackslash;

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info } from 'lucide-react';
 
+interface ServiceAreaProps {
+  onQuoteClick: () => void;
+}
+
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 50; // km
@@ -14,7 +18,7 @@ declare global {
   }
 }
 
-const ServiceArea = () => {
+const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
   const [showAllCommunes42, setShowAllCommunes42] = useState(false);
   const [embrayageMode, setEmbrayageMode] = useState(false);
@@ -420,48 +424,44 @@ const ServiceArea = () => {
           </div>
 
           {/* Grille principale : Carte + Vérificateur */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8">
+          <div className="space-y-6 sm:space-y-8 mb-8">
             
-            {/* Carte Interactive Google Maps */}
-            <div className="interactive-map">
-              <h3 className="text-lg font-bold text-white mb-4 text-center font-futuristic">
-                Carte de Couverture
-              </h3>
-              
-              {/* Conteneur de la carte */}
+            {/* Carte Interactive Google Maps - Pleine largeur */}
+            <div className="w-full">
               <div 
                 ref={mapRef}
-                className="w-full h-80 rounded-lg border border-orange-500/20 overflow-hidden"
-                style={{ minHeight: '320px' }}
+                className="w-full h-96 rounded-lg border border-orange-500/20 overflow-hidden shadow-xl"
+                style={{ minHeight: '400px' }}
               />
 
-              {/* Légende */}
-              <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+              {/* Légende compacte */}
+              <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs">
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-green-500 rounded"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <span className="text-white">Zone couverte (50km)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-red-500 rounded"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                   <span className="text-white">Accès limité</span>
                 </div>
                 {embrayageMode && (
-                  <div className="flex items-center gap-2 col-span-2">
-                    <div className="w-4 h-4 bg-yellow-500 rounded"></div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                     <span className="text-white">Zone élargie embrayage (75km)</span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Vérificateur de Couverture */}
-            <div className="coverage-checker">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 text-center font-futuristic">
+            {/* Vérificateur de Couverture - Compact */}
+            <div className="max-w-md mx-auto">
+              <div className="bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-xl border border-orange-500/30">
+              <h3 className="text-base font-bold text-gray-900 mb-3 text-center font-futuristic">
                 Vérificateur de Couverture
               </h3>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs font-medium text-gray-700 mb-2">
                   Votre ville ou code postal
                 </label>
                 <input
@@ -470,16 +470,21 @@ const ServiceArea = () => {
                   value={coverageInput}
                   onChange={(e) => setCoverageInput(e.target.value)}
                   placeholder="Ex: Le Puy-en-Velay, 43000..."
-                  className="coverage-input"
+                  className="w-full px-3 py-2 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-tech text-sm transition-all duration-200"
                 />
               </div>
 
               {/* Résultat de couverture */}
               {coverageResult.status && (
-                <div className={`coverage-result coverage-${coverageResult.status}`}>
+                <div className={`mt-3 p-3 rounded-lg font-medium text-sm flex items-center gap-2 ${
+                  coverageResult.status === 'covered' ? 'bg-green-100 text-green-800 border border-green-200' :
+                  coverageResult.status === 'on-demand' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' :
+                  coverageResult.status === 'limited-access' ? 'bg-blue-100 text-blue-800 border border-blue-200' :
+                  'bg-red-100 text-red-800 border border-red-200'
+                }`}>
                   <span>{getStatusMessage()}</span>
                   {coverageResult.distance && (
-                    <div className="text-xs mt-1 opacity-75">
+                    <div className="text-xs opacity-75">
                       Distance: {Math.round(coverageResult.distance)} km
                     </div>
                   )}
@@ -488,35 +493,13 @@ const ServiceArea = () => {
 
               {/* CTA contextuel */}
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full mt-4 px-6 py-3 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors duration-200 font-tech uppercase tracking-wide text-sm hover-scale"
+                onClick={onQuoteClick}
+                className="w-full mt-4 px-6 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition-colors duration-200 font-tech uppercase tracking-wide text-base hover-scale shadow-lg"
               >
                 {getCTAText()}
               </button>
             </div>
-          </div>
-
-          {/* Pills de raccourcis */}
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            <button
-              onClick={() => setShowAllCommunes43(!showAllCommunes43)}
-              className="condition-pill cursor-pointer hover:bg-orange-500/20 transition-colors"
-            >
-              Haute-Loire (43)
-            </button>
-            <button
-              onClick={() => setShowAllCommunes42(!showAllCommunes42)}
-              className="condition-pill cursor-pointer hover:bg-orange-500/20 transition-colors"
-            >
-              Loire (42)
-            </button>
-            <button
-              onClick={() => setEmbrayageMode(!embrayageMode)}
-              className="condition-pill warning cursor-pointer hover:bg-yellow-500/20 transition-colors"
-            >
-              <Wrench className="w-3 h-3" />
-              Embrayage : zone élargie
-            </button>
+            </div>
           </div>
 
           {/* Listes des communes (accordéons) */}
@@ -567,7 +550,7 @@ const ServiceArea = () => {
           {/* CTA principal */}
           <div className="text-center">
             <button
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={onQuoteClick}
               className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
             >
               Demander un devis

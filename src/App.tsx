@@ -293,7 +293,7 @@ function App() {
         </div>
         
         {/* Zone d'intervention (FOND NOIR) */}
-        <ServiceArea />
+        <ServiceArea onQuoteClick={openQuotePopup} />
         
         {/* FAQ (FOND BLANC) */}
         <FAQ />

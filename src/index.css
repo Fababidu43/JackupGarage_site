@@ -1295,6 +1295,21 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  /* Espace pour le CTA mobile */
+  padding-bottom: 80px;
+}
+
+/* Responsive padding pour le CTA mobile */
+@media (max-width: 768px) {
+  #root {
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding-bottom: 85px;
+  }
 }
 
 /* Empêcher le débordement horizontal */

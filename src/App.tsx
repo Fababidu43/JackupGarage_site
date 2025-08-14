@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Droplets, Zap, Settings, Car, ArrowRight } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -15,8 +15,68 @@ import QuotePopup from './components/QuotePopup';
 
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
+  const scrollDirectionRef = useRef<'up' | 'down'>('down');
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
+    // Système d'animation futuriste au scroll
+    const handleFuturisticScroll = () => {
+      const currentScrollY = window.pageYOffset;
+      const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
+      scrollDirectionRef.current = scrollDirection;
+      lastScrollYRef.current = currentScrollY;
+
+      // Sélectionner toutes les sections animées
+      const animatedSections = document.querySelectorAll('.scroll-animate');
+      
+      animatedSections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const sectionTop = rect.top;
+        const sectionBottom = rect.bottom;
+        
+        // Calculer si la section est visible
+        const isVisible = sectionTop < windowHeight * 0.8 && sectionBottom > windowHeight * 0.2;
+        
+        // Supprimer toutes les classes d'animation
+        section.classList.remove(
+          'slide-in-from-left', 'slide-in-from-right', 'slide-in-from-bottom', 'slide-in-from-top',
+          'slide-out-to-left', 'slide-out-to-right', 'slide-out-to-bottom', 'slide-out-to-top',
+          'visible'
+        );
+        
+        if (isVisible) {
+          // Section visible - animation d'entrée
+          section.classList.add('visible');
+          
+          // Déterminer l'animation d'entrée selon l'index et la direction
+          if (scrollDirection === 'down') {
+            if (index % 4 === 0) section.classList.add('slide-in-from-left');
+            else if (index % 4 === 1) section.classList.add('slide-in-from-right');
+            else if (index % 4 === 2) section.classList.add('slide-in-from-bottom');
+            else section.classList.add('slide-in-from-top');
+          } else {
+            // Scroll vers le haut - animations inversées
+            if (index % 4 === 0) section.classList.add('slide-in-from-right');
+            else if (index % 4 === 1) section.classList.add('slide-in-from-left');
+            else if (index % 4 === 2) section.classList.add('slide-in-from-top');
+            else section.classList.add('slide-in-from-bottom');
+          }
+        } else {
+          // Section non visible - animation de sortie
+          if (sectionTop > windowHeight) {
+            // Section en dessous - sortie vers le bas
+            if (index % 2 === 0) section.classList.add('slide-out-to-bottom');
+            else section.classList.add('slide-out-to-right');
+          } else {
+            // Section au dessus - sortie vers le haut
+            if (index % 2 === 0) section.classList.add('slide-out-to-top');
+            else section.classList.add('slide-out-to-left');
+          }
+        }
+      });
+    };
+
     // Intersection Observer pour les animations au scroll
     const observerOptions = {
       threshold: 0.1,
@@ -35,46 +95,13 @@ function App() {
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
     elementsToAnimate.forEach((el) => observer.observe(el));
 
-    // Gestion des motifs réactifs au scroll
-    const handleScroll = () => {
-      const scrollY = window.pageYOffset;
-      
-      const patterns = document.querySelectorAll('.scroll-pattern');
-      
-      patterns.forEach((pattern, index) => {
-        const section = pattern.closest('.section');
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-          
-          if (isVisible) {
-            // Calculer l'intensité basée sur la position dans la viewport
-            const intensity = Math.max(0, Math.min(1, 1 - Math.abs(rect.top) / window.innerHeight));
-            
-            // Appliquer les transformations basées sur le scroll
-            const translateY = (scrollY * 0.1 * (index % 2 === 0 ? 1 : -1));
-            const rotate = scrollY * 0.05 * (index % 3 === 0 ? 1 : -1);
-            const scale = 1 + (intensity * 0.1);
-            
-            pattern.style.transform = `translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`;
-            pattern.style.opacity = `${0.1 + (intensity * 0.1)}`;
-            
-            if (intensity > 0.3) {
-              pattern.classList.add('active');
-            } else {
-              pattern.classList.remove('active');
-            }
-          }
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+    // Ajouter les event listeners
+    window.addEventListener('scroll', handleFuturisticScroll, { passive: true });
+    handleFuturisticScroll(); // Initial call
     
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleFuturisticScroll);
     };
   }, []);
 
@@ -95,11 +122,13 @@ function App() {
         
         {/* Services intro (blanc #FFFFFF) */}
         <div className="relative">
-          <Services />
+          <div className="scroll-animate services-effect">
+            <Services />
+          </div>
         </div>
         
         {/* Service 1 - Entretiens (FOND NOIR) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -138,7 +167,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -178,7 +207,7 @@ function App() {
         </div>
 
         {/* Service 3 - Kit Distributions (FOND NOIR) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -217,7 +246,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -257,13 +286,19 @@ function App() {
         </div>
         
         {/* Zone d'intervention (FOND NOIR) */}
-        <ServiceArea onQuoteClick={openQuotePopup} />
+        <div className="scroll-animate">
+          <ServiceArea onQuoteClick={openQuotePopup} />
+        </div>
         
         {/* FAQ (FOND BLANC) */}
-        <FAQ />
+        <div className="scroll-animate">
+          <FAQ />
+        </div>
         
         {/* Contact (FOND NOIR) */}
-        <Contact />
+        <div className="scroll-animate contact-effect">
+          <Contact />
+        </div>
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

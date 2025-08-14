@@ -431,6 +431,107 @@
   animation: spin-slow 20s linear infinite;
 }
 
+/* === ANIMATIONS FUTURISTES AU SCROLL === */
+.scroll-animate {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+}
+
+/* Animations d'entrée */
+.scroll-animate.slide-in-from-left {
+  transform: translateX(-100px) rotateY(-15deg);
+  opacity: 0;
+}
+
+.scroll-animate.slide-in-from-right {
+  transform: translateX(100px) rotateY(15deg);
+  opacity: 0;
+}
+
+.scroll-animate.slide-in-from-bottom {
+  transform: translateY(80px) scale(0.95);
+  opacity: 0;
+}
+
+.scroll-animate.slide-in-from-top {
+  transform: translateY(-80px) scale(0.95);
+  opacity: 0;
+}
+
+/* États visibles */
+.scroll-animate.visible {
+  transform: translateX(0) translateY(0) rotateY(0deg) scale(1);
+  opacity: 1;
+}
+
+/* Animations de sortie */
+.scroll-animate.slide-out-to-left {
+  transform: translateX(-100px) rotateY(-15deg) scale(0.9);
+  opacity: 0;
+}
+
+.scroll-animate.slide-out-to-right {
+  transform: translateX(100px) rotateY(15deg) scale(0.9);
+  opacity: 0;
+}
+
+.scroll-animate.slide-out-to-top {
+  transform: translateY(-80px) scale(0.9);
+  opacity: 0;
+}
+
+.scroll-animate.slide-out-to-bottom {
+  transform: translateY(80px) scale(0.9);
+  opacity: 0;
+}
+
+/* Effets spéciaux pour sections importantes */
+.scroll-animate.hero-effect {
+  transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scroll-animate.services-effect {
+  transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-animate.contact-effect {
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Effets de glow futuristes */
+.scroll-animate.visible.glow-effect {
+  box-shadow: 0 0 30px rgba(255, 107, 53, 0.1);
+}
+
+/* Responsive - réduire les effets sur mobile */
+@media (max-width: 768px) {
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-out-to-left {
+    transform: translateX(-50px) scale(0.95);
+  }
+  
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-out-to-right {
+    transform: translateX(50px) scale(0.95);
+  }
+  
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-out-to-bottom {
+    transform: translateY(40px) scale(0.98);
+  }
+  
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-top {
+    transform: translateY(-40px) scale(0.98);
+  }
+}
+
+/* Performance optimizations */
+.scroll-animate {
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
 /* === BOUTONS FUTURISTES === */
 .btn-primary {
   background: linear-gradient(135deg, var(--orange-primary), var(--orange-glow));

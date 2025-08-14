@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   return (
     <section 
       id="hero"
-      className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut"
+      className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut scroll-animate hero-effect"
       style={{ 
         minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
         background: window.innerWidth <= 768 

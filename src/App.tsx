@@ -29,6 +29,25 @@ function App() {
       // Sélectionner toutes les sections animées
       const animatedSections = document.querySelectorAll('.scroll-animate');
       
+      // Adapter les seuils selon la taille d'écran
+      const windowWidth = window.innerWidth;
+      let visibilityThreshold = 0.8;
+      let exitThreshold = 0.2;
+      
+      if (windowWidth <= 480) {
+        // Petits mobiles - seuils plus permissifs
+        visibilityThreshold = 0.9;
+        exitThreshold = 0.1;
+      } else if (windowWidth <= 768) {
+        // Mobiles - seuils modérés
+        visibilityThreshold = 0.85;
+        exitThreshold = 0.15;
+      } else if (windowWidth <= 1024) {
+        // Tablettes - seuils standards
+        visibilityThreshold = 0.8;
+        exitThreshold = 0.2;
+      }
+      
       animatedSections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
         const windowHeight = window.innerHeight;
@@ -36,7 +55,7 @@ function App() {
         const sectionBottom = rect.bottom;
         
         // Calculer si la section est visible
-        const isVisible = sectionTop < windowHeight * 0.8 && sectionBottom > windowHeight * 0.2;
+        const isVisible = sectionTop < windowHeight * visibilityThreshold && sectionBottom > windowHeight * exitThreshold;
         
         // Supprimer toutes les classes d'animation
         section.classList.remove(
@@ -49,18 +68,40 @@ function App() {
           // Section visible - animation d'entrée
           section.classList.add('visible');
           
-          // Déterminer l'animation d'entrée selon l'index et la direction
-          if (scrollDirection === 'down') {
-            if (index % 4 === 0) section.classList.add('slide-in-from-left');
-            else if (index % 4 === 1) section.classList.add('slide-in-from-right');
-            else if (index % 4 === 2) section.classList.add('slide-in-from-bottom');
-            else section.classList.add('slide-in-from-top');
+          // Adapter les animations selon la taille d'écran
+          if (windowWidth <= 480) {
+            // Petits mobiles - animations simples
+            if (scrollDirection === 'down') {
+              if (index % 2 === 0) section.classList.add('slide-in-from-left');
+              else section.classList.add('slide-in-from-right');
+            } else {
+              if (index % 2 === 0) section.classList.add('slide-in-from-right');
+              else section.classList.add('slide-in-from-left');
+            }
+          } else if (windowWidth <= 768) {
+            // Mobiles - animations modérées
+            if (scrollDirection === 'down') {
+              if (index % 3 === 0) section.classList.add('slide-in-from-left');
+              else if (index % 3 === 1) section.classList.add('slide-in-from-right');
+              else section.classList.add('slide-in-from-bottom');
+            } else {
+              if (index % 3 === 0) section.classList.add('slide-in-from-right');
+              else if (index % 3 === 1) section.classList.add('slide-in-from-left');
+              else section.classList.add('slide-in-from-top');
+            }
           } else {
-            // Scroll vers le haut - animations inversées
-            if (index % 4 === 0) section.classList.add('slide-in-from-right');
-            else if (index % 4 === 1) section.classList.add('slide-in-from-left');
-            else if (index % 4 === 2) section.classList.add('slide-in-from-top');
-            else section.classList.add('slide-in-from-bottom');
+            // Tablettes et desktop - animations complètes
+            if (scrollDirection === 'down') {
+              if (index % 4 === 0) section.classList.add('slide-in-from-left');
+              else if (index % 4 === 1) section.classList.add('slide-in-from-right');
+              else if (index % 4 === 2) section.classList.add('slide-in-from-bottom');
+              else section.classList.add('slide-in-from-top');
+            } else {
+              if (index % 4 === 0) section.classList.add('slide-in-from-right');
+              else if (index % 4 === 1) section.classList.add('slide-in-from-left');
+              else if (index % 4 === 2) section.classList.add('slide-in-from-top');
+              else section.classList.add('slide-in-from-bottom');
+            }
           }
         } else {
           // Section non visible - animation de sortie

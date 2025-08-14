@@ -4,7 +4,24 @@ import { MapPin, ChevronDown, ChevronUp } from 'lucide-react';
 const ServiceArea = () => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
   const [showAllCommunes42, setShowAllCommunes42] = useState(false);
+  const [stickyBadgeVisible, setStickyBadgeVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+        const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+        
+        // Badge sticky visible pendant 200-300px de scroll dans la section
+        setStickyBadgeVisible(isInView && scrollProgress > 0.2 && scrollProgress < 0.8);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
     "Sainte-Sigolène", "Retournac", "Bas-en-Basset", "Saint-Just-Malmont", "Dunières", 
@@ -21,10 +38,21 @@ const ServiceArea = () => {
 
   return (
     <section 
+      ref={sectionRef}
       id="area" 
-      className="section relative text-white overflow-hidden reveal-on-scroll py-8 lg:py-12"
-      style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
+      className="section relative text-white overflow-hidden reveal-on-scroll py-8 lg:py-12 topo-bg"
     >
+      {/* Badge sticky Saint-Étienne */}
+      <div className={`sticky-badge ${stickyBadgeVisible ? 'visible' : 'hidden'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-4 py-2 backdrop-blur-sm">
+            <span className="text-yellow-300 font-medium text-sm font-tech">
+              📍 Saint-Étienne intra-muros : interventions limitées
+            </span>
+          </div>
+        </div>
+      </div>
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
@@ -39,7 +67,7 @@ const ServiceArea = () => {
             </p>
           </div>
           
-          {/* Badge Saint-Étienne */}
+          {/* Badge Saint-Étienne statique */}
           <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/30 rounded-full px-3 sm:px-4 py-2 mb-4 sm:mb-6">
             <span className="text-yellow-300 font-medium text-xs sm:text-sm font-tech text-center">
               Saint-Étienne intra-muros : interventions limitées

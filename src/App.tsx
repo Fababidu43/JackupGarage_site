@@ -19,36 +19,12 @@ function App() {
   const lastScrollYRef = useRef(0);
 
   useEffect(() => {
-    // Désactiver les animations sur mobile
-    if (window.innerWidth <= 768) {
-      return;
-    }
-    
-    // Interaction des formes mécaniques avec le scroll
-    const handleMechanicalShapesScroll = () => {
-      const shapes = document.querySelectorAll('.mechanical-shape');
-      shapes.forEach((shape) => {
-        const rect = shape.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2;
-        
-        if (isVisible) {
-          shape.classList.add('scroll-visible');
-        } else {
-          shape.classList.remove('scroll-visible');
-        }
-      });
-    };
-    
     // Système d'animation futuriste au scroll
     const handleFuturisticScroll = () => {
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
       scrollDirectionRef.current = scrollDirection;
       lastScrollYRef.current = currentScrollY;
-
-      // Appeler l'interaction des formes mécaniques
-      handleMechanicalShapesScroll();
 
       // Sélectionner toutes les sections animées
       const animatedSections = document.querySelectorAll('.scroll-animate');
@@ -153,15 +129,6 @@ function App() {
         
         {/* Service 1 - Entretiens (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Formes mécaniques animées */}
-          <div className="mechanical-shapes black-section">
-            <div className="mechanical-shape oil-drop-shape float-up" style={{ top: '15%', left: '8%' }}></div>
-            <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '25%', right: '12%' }}></div>
-            <div className="mechanical-shape wrench-shape rotate-medium" style={{ bottom: '20%', left: '10%' }}></div>
-            <div className="mechanical-shape bolt-shape float-down" style={{ top: '60%', right: '8%' }}></div>
-            <div className="mechanical-shape spring-shape rotate-reverse float-left" style={{ bottom: '30%', right: '18%' }}></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -201,16 +168,6 @@ function App() {
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
-          {/* Formes mécaniques animées */}
-          <div className="mechanical-shapes white-section">
-            <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '8%' }}></div>
-            <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '25%', right: '12%' }}></div>
-            <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '10%' }}></div>
-            <div className="mechanical-shape screwdriver-shape rotate-reverse" style={{ top: '55%', right: '8%' }}></div>
-            <div className="mechanical-shape hammer-shape rotate-fast float-left" style={{ bottom: '20%', right: '18%' }}></div>
-            <div className="mechanical-shape spring-shape float-right" style={{ top: '70%', left: '15%' }}></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -251,16 +208,6 @@ function App() {
 
         {/* Service 3 - Kit Distributions (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Formes mécaniques animées */}
-          <div className="mechanical-shapes black-section">
-            <div className="mechanical-shape gear-shape rotate-medium" style={{ top: '10%', left: '12%' }}></div>
-            <div className="mechanical-shape spring-shape rotate-reverse float-up" style={{ top: '30%', right: '8%' }}></div>
-            <div className="mechanical-shape piston-shape rotate-fast float-down" style={{ bottom: '20%', left: '6%' }}></div>
-            <div className="mechanical-shape bolt-shape float-left" style={{ top: '55%', right: '15%' }}></div>
-            <div className="mechanical-shape wrench-shape rotate-slow" style={{ bottom: '35%', right: '5%' }}></div>
-            <div className="mechanical-shape brake-shape float-right" style={{ top: '75%', left: '20%' }}></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -300,17 +247,6 @@ function App() {
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
-          {/* Formes mécaniques animées */}
-          <div className="mechanical-shapes white-section">
-            <div className="mechanical-shape spring-shape rotate-slow float-up" style={{ top: '12%', left: '6%' }}></div>
-            <div className="mechanical-shape brake-shape rotate-medium" style={{ top: '20%', right: '10%' }}></div>
-            <div className="mechanical-shape bolt-shape rotate-reverse float-down" style={{ bottom: '25%', left: '12%' }}></div>
-            <div className="mechanical-shape wrench-shape float-right" style={{ top: '50%', right: '8%' }}></div>
-            <div className="mechanical-shape piston-shape rotate-fast" style={{ bottom: '15%', right: '20%' }}></div>
-            <div className="mechanical-shape hammer-shape float-left" style={{ top: '65%', left: '18%' }}></div>
-            <div className="mechanical-shape screwdriver-shape rotate-medium" style={{ bottom: '35%', left: '25%' }}></div>
-          </div>
-          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">

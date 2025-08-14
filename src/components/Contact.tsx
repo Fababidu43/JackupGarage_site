@@ -31,16 +31,6 @@ const Contact = () => {
       className="section relative py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-backslash"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Formes mécaniques animées */}
-      <div className="mechanical-shapes black-section">
-        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '6%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-medium float-up" style={{ top: '30%', right: '8%' }}></div>
-        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '25%', left: '10%' }}></div>
-        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '55%', right: '12%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '40%', right: '5%' }}></div>
-        <div className="mechanical-shape piston-shape float-right" style={{ top: '70%', left: '15%' }}></div>
-      </div>
-      
       <div className="relative z-10">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8">

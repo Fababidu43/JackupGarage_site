@@ -369,17 +369,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       className="section relative text-white overflow-hidden reveal-on-scroll py-8 lg:py-12 diagonal-cut-top-backslash diagonal-cut-bottom-slash"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Formes mécaniques animées */}
-      <div className="mechanical-shapes black-section">
-        <div className="mechanical-shape gear-shape rotate-medium" style={{ top: '10%', left: '8%' }}></div>
-        <div className="mechanical-shape wrench-shape rotate-slow float-up" style={{ top: '25%', right: '10%' }}></div>
-        <div className="mechanical-shape bolt-shape float-down" style={{ bottom: '30%', left: '12%' }}></div>
-        <div className="mechanical-shape spring-shape rotate-reverse" style={{ top: '60%', right: '8%' }}></div>
-        <div className="mechanical-shape brake-shape rotate-fast float-left" style={{ bottom: '20%', right: '18%' }}></div>
-        <div className="mechanical-shape piston-shape float-right" style={{ top: '45%', left: '6%' }}></div>
-        <div className="mechanical-shape oil-drop-shape rotate-medium" style={{ bottom: '50%', right: '5%' }}></div>
-      </div>
-      
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}

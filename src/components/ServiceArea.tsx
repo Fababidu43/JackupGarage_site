@@ -266,7 +266,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         autocompleteRef.current.addListener('place_changed', () => {
           const place = autocompleteRef.current.getPlace();
           
-          if (!place.geometry || !place.geometry.location) {
+          if (!place || !place.geometry || !place.geometry.location) {
             setCoverageResult({ status: null, city: '' });
             return;
           }

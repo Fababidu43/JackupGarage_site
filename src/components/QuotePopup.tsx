@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle } from 'lucide-react';
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
@@ -142,41 +142,16 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     
     switch (locationStatus.status) {
       case 'covered':
-        return (
-          <span className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 text-green-500" />
-            Nous intervenons à {locationStatus.city} sans supplément.
-          </span>
-        );
+        return `✅ Nous intervenons à ${locationStatus.city} sans supplément.`;
       case 'on-demand':
         const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
-        return (
-          <span className="flex items-center gap-2">
-            <DollarSign className="w-4 h-4 text-yellow-500" />
-            Zone élargie embrayage : supplément de {supplement} € TTC (distance : {distance} km).
-          </span>
-        );
+        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
       case 'quote-only':
-        return (
-          <span className="flex items-center gap-2">
-            <AlertTriangle className="w-4 h-4 text-orange-500" />
-            Hors zone standard. Contactez-nous pour un devis personnalisé.
-          </span>
-        );
+        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
       case 'limited-access':
-        return (
-          <span className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-blue-500" />
-            Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.
-          </span>
-        );
+        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
       case 'out-of-zone':
-        return (
-          <span className="flex items-center gap-2">
-            <XCircle className="w-4 h-4 text-red-500" />
-            Zone non desservie.
-          </span>
-        );
+        return `🚫 Zone non desservie.`;
       default:
         return '';
     }
@@ -403,8 +378,7 @@ Merci de me recontacter pour un devis !`;
                 onClick={prevStep}
                 className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
-                <ArrowLeft className="w-3 h-3" />
-                Retour
+                ← Retour
               </button>
             </div>
           )}
@@ -460,8 +434,7 @@ Merci de me recontacter pour un devis !`;
                 onClick={prevStep}
                 className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
-                <ArrowLeft className="w-3 h-3" />
-                Retour
+                ← Retour
               </button>
             </div>
           )}
@@ -507,7 +480,6 @@ Merci de me recontacter pour un devis !`;
                   onClick={prevStep}
                   className="flex-1 px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 border-2 border-gray-700 text-gray-300 rounded-xl hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium text-xs sm:text-sm lg:text-base"
                 >
-                  <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
                   Retour
                 </button>
                 <button

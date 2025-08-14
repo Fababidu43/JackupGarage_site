@@ -1288,13 +1288,21 @@ html, body {
   /* Améliorer le scroll sur mobile */
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  /* Forcer l'affichage complet sur mobile */
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow-x: hidden;
   position: relative;
+  /* Assurer que le contenu prend toute la hauteur */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Empêcher le débordement horizontal */
@@ -1348,6 +1356,20 @@ img {
     font-size: 16px !important;
     transform: none !important;
   }
+  
+  /* Assurer que la barre CTA mobile reste en bas */
+  body {
+    padding-bottom: 60px; /* Hauteur de la barre CTA */
+  }
+  
+  /* Forcer le positionnement de la barre CTA */
+  .fixed.bottom-0 {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+  }
 }
 
 /* Correction viewport mobile */
@@ -1367,6 +1389,13 @@ img {
   
   #root {
     min-height: -webkit-fill-available;
+  }
+  
+  /* Assurer que la barre CTA reste visible sur iOS */
+  @media screen and (max-width: 768px) {
+    .fixed.bottom-0 {
+      bottom: env(safe-area-inset-bottom, 0px) !important;
+    }
   }
 }
 

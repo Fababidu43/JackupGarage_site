@@ -119,9 +119,11 @@ function App() {
         
         {/* Service 1 - Entretiens (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phare dynamique pour Entretiens */}
+          {/* Phares dynamiques pour Entretiens - Éclairage complet */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-main"></div>
+            <div className="headlight headlight-secondary"></div>
+            <div className="headlight headlight-center"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -203,9 +205,11 @@ function App() {
 
         {/* Service 3 - Kit Distributions (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phare dynamique pour Distribution */}
+          {/* Phares dynamiques pour Distribution - Éclairage complet */}
           <div className="headlights-container absolute inset-0 pointer-events-none z-0">
             <div className="headlight headlight-main"></div>
+            <div className="headlight headlight-secondary"></div>
+            <div className="headlight headlight-center"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">

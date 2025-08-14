@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 
 const FAQ = () => {
-  const [openItems, setOpenItems] = useState<number[]>([]);
-
-  const toggleItem = (index: number) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
-  };
 
   const faqItems = [
     {
@@ -63,17 +54,65 @@ const FAQ = () => {
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-8">
           {faqItems.map((item, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg border border-orange-500/20 hover-scale border-glow overflow-hidden transition-all duration-200 hover:shadow-xl hover:border-orange-500/40"
+              className="relative reveal-on-scroll"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <button
-                onClick={() => toggleItem(index)}
-                className="w-full px-4 sm:px-6 py-3 sm:py-4 text-left flex items-center justify-between hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-25 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50 group"
-              >
-                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic pr-3 group-hover:text-orange-600 transition-colors duration-200">
+              {/* Trait gauche qui s'étend */}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-r from-orange-500/60 via-orange-500/30 to-transparent -translate-x-full"></div>
+              
+              {/* Trait droit qui s'étend */}
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-screen h-0.5 bg-gradient-to-l from-orange-500/60 via-orange-500/30 to-transparent translate-x-full"></div>
+              
+              {/* Contenu de la FAQ */}
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border-2 border-orange-500/30 hover-scale border-glow overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-orange-500/50 relative z-10">
+                {/* Question */}
+                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-orange-50/50 to-white border-b border-orange-500/20">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic hover-glow-text flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full shadow-lg shadow-orange-500/50"></div>
+                    {item.question}
+                  </h3>
+                </div>
+                
+                {/* Réponse toujours visible */}
+                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-white">
+                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed">
+                    {item.question === "Combien coûte un déplacement ?" ? (
+                      <>
+                        Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km.{' '}
+                        <button
+                          onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
+                          className="text-orange-500 hover:text-orange-600 underline font-medium"
+                        >
+                          Voir notre zone d'intervention
+                        </button>
+                        {' '}pour plus de détails.
+                      </>
+                    ) : (
+                      item.answer
+                    )}
+                  </p>
+                </div>
+                
+                {/* Petit accent décoratif */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500/20 via-orange-500/40 to-orange-500/20"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Traits décoratifs de section */}
+        <div className="relative mt-12 mb-8">
+          <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-px bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+          <div className="relative z-10 flex justify-center">
+            <div className="bg-white px-6 py-2 rounded-full border-2 border-orange-500/30 shadow-lg">
+              <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
                   {item.question}
                 </h3>
                 <div className={`w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>

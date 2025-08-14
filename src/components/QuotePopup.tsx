@@ -266,7 +266,7 @@ Merci de me recontacter pour un devis !`;
         {/* Header futuriste */}
         <div className="relative flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-orange-500/20">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-1.5 sm:p-2 lg:p-3">
+            <div className="w-16 h-12 sm:w-20 sm:h-16 lg:w-24 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-1.5 sm:p-2 lg:p-3">
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 

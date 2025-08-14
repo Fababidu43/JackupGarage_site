@@ -21,7 +21,6 @@ declare global {
 const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
   const [showAllCommunes42, setShowAllCommunes42] = useState(false);
-  const [embrayageMode, setEmbrayageMode] = useState(false);
   const [coverageInput, setCoverageInput] = useState('');
   const [coverageResult, setCoverageResult] = useState<{
     status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | 'limited-access' | null;
@@ -224,7 +223,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         strokeWeight: 2,
         fillColor: '#F59E0B',
         fillOpacity: 0.1,
-        map: null, // Caché par défaut
+        map: mapInstance.current, // Affiché par défaut
         center: CENTER_COORDS,
         radius: EMBRAYAGE_RADIUS * 1000
       });
@@ -283,7 +282,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
           const isDept4243 = postalCode && (postalCode.startsWith('42') || postalCode.startsWith('43'));
           
-          if (!isDept4243 && !embrayageMode) {
+          if (!isDept4243) {
             setCoverageResult({ 
               status: 'out-of-zone', 
               city: place.name || place.formatted_address,
@@ -324,22 +323,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       }, 100);
     }
   }, []);
-
-  // Gérer le toggle embrayage
-  useEffect(() => {
-    if (embrayageCircleRef.current) {
-      embrayageCircleRef.current.setMap(embrayageMode ? mapInstance.current : null);
-    }
-    
-    // Recalculer la couverture si une recherche est active
-    if (coverageResult.city && markerRef.current) {
-      const coords = {
-        lat: markerRef.current.getPosition().lat(),
-        lng: markerRef.current.getPosition().lng()
-      };
-      checkCoverage(coords, coverageResult.city);
-    }
-  }, [embrayageMode]);
 
   const getCTAText = () => {
     switch (coverageResult.status) {
@@ -413,24 +396,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             </div>
           </div>
 
-          {/* Toggle Embrayage */}
-          <div className="text-center mb-8">
-            <div 
-              className="embrayage-toggle inline-flex items-center cursor-pointer bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-orange-500/30 hover:bg-white/20 transition-all duration-200"
-              onClick={() => setEmbrayageMode(!embrayageMode)}
-            >
-              <div className={`toggle-switch ${embrayageMode ? 'active' : ''}`}></div>
-              <span className="text-white font-tech text-sm font-medium ml-3">
-                Besoin d'un embrayage ? Afficher la zone élargie
-              </span>
-            </div>
-            {embrayageMode && (
-              <p className="text-orange-300 text-sm font-tech mt-3 bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
-                💰 Supplément : 1,00 € TTC/km au-delà de 50 km
-              </p>
-            )}
-          </div>
-
           {/* Carte + Vérificateur */}
           <div className="space-y-8 sm:space-y-10 mb-12">
             
@@ -440,6 +405,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <h3 className="text-xl font-bold text-white mb-4 font-futuristic text-center">
                   🗺️ Carte Interactive
                 </h3>
+                <div className="text-center mb-4">
+                  <p className="text-orange-300 text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
+                    💰 Zone élargie embrayage : Supplément 1,00 € TTC/km au-delà de 50 km
+                  </p>
+                </div>
               <div 
                 ref={mapRef}
                   className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
@@ -452,16 +422,14 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
                     <span className="text-white font-medium">Zone couverte (0-50km)</span>
                   </div>
+                  <div className="flex items-center gap-2 bg-yellow-500/20 px-3 py-2 rounded-full">
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                    <span className="text-white font-medium">Zone élargie (50-75km)</span>
+                  </div>
                   <div className="flex items-center gap-2 bg-red-500/20 px-3 py-2 rounded-full">
                     <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
                     <span className="text-white font-medium">Accès limité</span>
                   </div>
-                  {embrayageMode && (
-                    <div className="flex items-center gap-2 bg-yellow-500/20 px-3 py-2 rounded-full">
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-                      <span className="text-white font-medium">Zone élargie (50-75km)</span>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

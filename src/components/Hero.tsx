@@ -37,20 +37,14 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut scroll-animate hero-effect"
       style={{ 
         minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
-        background: window.innerWidth <= 768 
-          ? `
-            linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-            url('https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200&fit=crop') center top/cover,
-            radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-          `
-          : `
-            linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-            url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center top/cover,
-            radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-          `,
+        background: `
+          linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
+          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center top/cover,
+          radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
+        `,
         backgroundPosition: 'center top',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed'
+        backgroundAttachment: 'fixed'
       }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16">

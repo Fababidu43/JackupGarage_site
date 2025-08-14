@@ -19,7 +19,7 @@ const FAQ = () => {
     },
     {
       question: "Combien coûte un déplacement ?",
-      answer: "Gratuit dans les zones 43-42. Supplément kilométrique pour les embrayages longue distance."
+      answer: "Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km. Voir notre zone d'intervention pour plus de détails."
     },
     {
       question: "Combien de temps dure une intervention ?",

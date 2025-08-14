@@ -196,7 +196,10 @@ function App() {
         {/* Service 3 - Distribution */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="scroll-pattern absolute inset-0">
-            <div className="gear-pattern"></div>
+            <div className="hex-pattern"></div>
+          </div>
+          <div className="scroll-pattern inset-0">
+            <div className="hex-pattern"></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
@@ -284,10 +287,10 @@ function App() {
         {/* Zone d'intervention (gradient #DE5121 → #C9471D) */}
         <div className="relative">
           <div className="scroll-pattern absolute inset-0">
-            <div className="waves-pattern"></div>
+            <div className="hex-pattern"></div>
           </div>
           <div className="scroll-pattern inset-0">
-            <div className="waves-pattern"></div>
+            <div className="hex-pattern"></div>
           </div>
           <ServiceArea />
         </div>
@@ -306,10 +309,10 @@ function App() {
         {/* Contact (noir #0A0A0A) */}
         <div className="relative">
           <div className="scroll-pattern absolute inset-0">
-            <div className="circuit-pattern"></div>
+            <div className="hex-pattern"></div>
           </div>
           <div className="scroll-pattern inset-0">
-            <div className="circuit-pattern"></div>
+            <div className="hex-pattern"></div>
           </div>
           <Contact />
         </div>

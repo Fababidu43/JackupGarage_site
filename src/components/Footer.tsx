@@ -33,7 +33,7 @@ const Footer = () => {
     >
       {/* Motif réactif au scroll */}
       <div className="scroll-pattern absolute inset-0">
-        <div className="gear-pattern"></div>
+        <div className="hex-pattern"></div>
       </div>
       
       {/* Grille tech subtile */}

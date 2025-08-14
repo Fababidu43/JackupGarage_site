@@ -22,7 +22,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
       setScrollProgress(Math.min(progress, 100));
       
       // Scroll spy pour section active
-      const sections = ['hero', 'services', 'area', 'contact'];
       const sections = ['hero', 'services', 'area', 'faq', 'contact'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);

@@ -103,7 +103,7 @@ const Footer = () => {
 
         {/* Copyright minimaliste */}
         <div className="text-center mt-2 pt-2 border-t border-gray-800">
-          <p className="text-gray-500 text-xs font-tech">
+          <p className="text-gray-500 text-xs font-tech text-center">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>
         </div>

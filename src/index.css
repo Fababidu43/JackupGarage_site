@@ -527,6 +527,106 @@
   }
 }
 
+/* Tablettes - effets intermédiaires */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-out-to-left {
+    transform: translateX(-75px) rotateY(-10deg) scale(0.97);
+  }
+  
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-out-to-right {
+    transform: translateX(75px) rotateY(10deg) scale(0.97);
+  }
+  
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-out-to-bottom {
+    transform: translateY(60px) scale(0.96);
+  }
+  
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-top {
+    transform: translateY(-60px) scale(0.96);
+  }
+  
+  .scroll-animate {
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .scroll-animate.hero-effect {
+    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .scroll-animate.services-effect {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .scroll-animate.contact-effect {
+    transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Ordinateurs portables - effets complets mais modérés */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-out-to-left {
+    transform: translateX(-85px) rotateY(-12deg) scale(0.96);
+  }
+  
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-out-to-right {
+    transform: translateX(85px) rotateY(12deg) scale(0.96);
+  }
+  
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-out-to-bottom {
+    transform: translateY(70px) scale(0.96);
+  }
+  
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-top {
+    transform: translateY(-70px) scale(0.96);
+  }
+  
+  .scroll-animate {
+    transition: all 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .scroll-animate.hero-effect {
+    transition: all 1.1s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .scroll-animate.services-effect {
+    transition: all 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .scroll-animate.contact-effect {
+    transition: all 0.95s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Grands écrans - effets complets */
+@media (min-width: 1441px) {
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-out-to-left {
+    transform: translateX(-100px) rotateY(-15deg);
+  }
+  
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-out-to-right {
+    transform: translateX(100px) rotateY(15deg);
+  }
+  
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-out-to-bottom {
+    transform: translateY(80px) scale(0.95);
+  }
+  
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-top {
+    transform: translateY(-80px) scale(0.95);
+  }
+}
 /* Performance optimizations */
 .scroll-animate {
   backface-visibility: hidden;

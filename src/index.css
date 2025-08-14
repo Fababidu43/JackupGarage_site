@@ -1276,6 +1276,17 @@
 }
 
 /* === CORRECTIONS MOBILES CRITIQUES === */
+/* Espace pour le CTA mobile fixe */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+  
+  main {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -1367,6 +1378,11 @@ img {
   
   #root {
     min-height: -webkit-fill-available;
+  }
+  
+  /* Correction pour le CTA mobile sur iOS */
+  body {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
   }
 }
 

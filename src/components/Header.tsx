@@ -113,7 +113,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                 w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
               >
                 <img 
-                  src="/src/logo.png" 
+                  src="/logo.png" 
                   alt="Jack Up Garage" 
                   className="w-full h-full object-contain transition-all duration-300"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}

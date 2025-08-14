@@ -52,7 +52,7 @@ const Footer = () => {
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
-                src="/src/logo.png" 
+                src="/logo.png" 
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}

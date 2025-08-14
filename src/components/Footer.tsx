@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react';
+import logo from '../logo.png';
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +53,7 @@ const Footer = () => {
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
-                src="/logo.png" 
+                src={logo} 
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}

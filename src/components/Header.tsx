@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logo from '../logo.png';
 
 interface HeaderProps {
   onQuoteClick: () => void;
@@ -113,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                 w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
               >
                 <img 
-                  src="/logo.png" 
+                  src={logo} 
                   alt="Jack Up Garage" 
                   className="w-full h-full object-contain transition-all duration-300"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
@@ -198,7 +199,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center">
                     <img 
-                      src="/src/logo.png" 
+                      src={logo} 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
                     />

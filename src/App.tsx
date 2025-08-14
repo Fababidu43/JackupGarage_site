@@ -57,7 +57,7 @@ function App() {
         <Services />
         
         {/* Service 1 - Orange #DE5121 */}
-        <div className="section section--entretien py-4 sm:py-6 lg:py-8 slide-in-left diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section section--entretien py-4 sm:py-6 lg:py-8 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div>

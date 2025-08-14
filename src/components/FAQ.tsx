@@ -135,6 +135,20 @@ const FAQ = () => {
                 ></div>
               </div>
               
+              {/* Effet lumineux qui traverse tout */}
+              <div 
+                className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl"
+                style={{ zIndex: 15 }}
+              >
+                <div 
+                  className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0"
+                  style={{
+                    animation: `lightSweep 4s ease-in-out infinite ${index * 0.6}s`,
+                    filter: 'blur(1px)'
+                  }}
+                ></div>
+              </div>
+              
               {/* Contenu de la FAQ */}
               <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border-2 border-orange-500/30 hover-scale border-glow overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-orange-500/50 relative z-10">
                 {/* Question */}

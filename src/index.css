@@ -154,6 +154,28 @@
   }
 }
 
+/* === EFFET LUMINEUX QUI TRAVERSE === */
+@keyframes lightSweep {
+  0% { 
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  10% { 
+    opacity: 0.6;
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(50vw);
+  }
+  90% { 
+    opacity: 0.4;
+  }
+  100% { 
+    transform: translateX(calc(100vw + 100px));
+    opacity: 0;
+  }
+}
+
 /* === ANIMATIONS ÉLÉGANTES POUR FAQ === */
 @keyframes elegantPulse {
   0%, 100% { 

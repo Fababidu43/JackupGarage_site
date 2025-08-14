@@ -138,7 +138,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -217,7 +217,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">

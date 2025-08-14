@@ -54,7 +54,7 @@ function App() {
         <Hero onQuoteClick={openQuotePopup} />
         
         {/* Hero → Services : diagonale "\" avec image de fond */}
-        <DiagonalSlash 
+        <DiagonalBackslash 
           topColor="url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')" 
           bottomColor="#F8F9FA" 
           type="section" 

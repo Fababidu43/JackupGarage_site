@@ -24,7 +24,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const [embrayageMode, setEmbrayageMode] = useState(false);
   const [coverageInput, setCoverageInput] = useState('');
   const [coverageResult, setCoverageResult] = useState<{
-    status: 'covered' | 'on-demand' | 'out-of-zone' | 'limited-access' | null;
+    status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | 'limited-access' | null;
     city: string;
     distance?: number;
   }>({ status: null, city: '' });
@@ -67,7 +67,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromSaintEtienne = calculateDistance(coords, SAINT_ETIENNE_COORDS);
     
-    // Vérifier si c'est dans la zone d'exclusion de Saint-Étienne
+    // Cas particulier Saint-Étienne intra-muros
     if (distanceFromSaintEtienne <= SAINT_ETIENNE_EXCLUSION_RADIUS) {
       setCoverageResult({ 
         status: 'limited-access', 
@@ -77,26 +77,30 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       return;
     }
 
-    // Vérifier la couverture selon les rayons
+    // Calcul de la couverture selon les distances
     if (distanceFromCenter <= STANDARD_RADIUS) {
+      // Zone standard 0-50km
       setCoverageResult({ 
         status: 'covered', 
         city: placeName,
         distance: distanceFromCenter 
       });
-    } else if (embrayageMode && distanceFromCenter <= EMBRAYAGE_RADIUS) {
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      // Zone élargie 50-75km
       setCoverageResult({ 
         status: 'on-demand', 
         city: placeName,
         distance: distanceFromCenter 
       });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+    } else if (distanceFromCenter <= 90) {
+      // Hors zone standard 75-90km
       setCoverageResult({ 
-        status: 'on-demand', 
+        status: 'quote-only', 
         city: placeName,
         distance: distanceFromCenter 
       });
     } else {
+      // Non desservi >90km
       setCoverageResult({ 
         status: 'out-of-zone', 
         city: placeName,
@@ -342,7 +346,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return 'Demander un devis';
       case 'on-demand':
-        return 'Demander un devis (déplacement long)';
+        return 'Demander un devis (avec supplément)';
+      case 'quote-only':
+        return 'Demander un devis personnalisé';
       case 'limited-access':
         return 'Nous contacter (conditions d\'accès)';
       case 'out-of-zone':
@@ -353,15 +359,22 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   };
 
   const getStatusMessage = () => {
+    if (!coverageResult.distance) return '';
+    
+    const distance = Math.round(coverageResult.distance);
+    
     switch (coverageResult.status) {
       case 'covered':
-        return `✅ C'est bon : nous intervenons à ${coverageResult.city}.`;
+        return `✅ Nous intervenons à ${coverageResult.city} sans supplément.`;
       case 'on-demand':
-        return `⚠️ Sur demande (embrayage / déplacement long).`;
+        const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
+        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
+      case 'quote-only':
+        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
       case 'limited-access':
-        return `ⓘ Saint-Étienne intra-muros : accès limité (au cas par cas).`;
+        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
       case 'out-of-zone':
-        return `🚫 Hors zone standard. Contactez-nous pour un devis embrayage.`;
+        return `🚫 Zone non desservie.`;
       default:
         return '';
     }
@@ -384,21 +397,24 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl">
+              <MapPin className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
               Zone d'intervention
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-orange-300 font-medium font-tech mb-4">
+            <p className="text-lg sm:text-xl lg:text-2xl text-orange-300 font-medium font-tech mb-6">
               Loire (42) et Haute-Loire (43). Sol dur et plat uniquement.
             </p>
             
             {/* Pills de conditions */}
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
-              <div className="condition-pill">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              <div className="condition-pill text-sm">
                 <Home className="w-3 h-3" />
                 Sol dur et plat uniquement
               </div>
-              <div className="condition-pill info">
+              <div className="condition-pill info text-sm">
                 <Info className="w-3 h-3" />
                 Saint-Étienne : accès limité
               </div>
@@ -406,62 +422,72 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           </div>
 
           {/* Toggle Embrayage */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-8">
             <div 
-              className="embrayage-toggle inline-flex items-center cursor-pointer"
+              className="embrayage-toggle inline-flex items-center cursor-pointer bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-orange-500/30 hover:bg-white/20 transition-all duration-200"
               onClick={() => setEmbrayageMode(!embrayageMode)}
             >
               <div className={`toggle-switch ${embrayageMode ? 'active' : ''}`}></div>
-              <span className="text-white font-tech text-sm">
+              <span className="text-white font-tech text-sm font-medium ml-3">
                 Besoin d'un embrayage ? Afficher la zone élargie
               </span>
             </div>
             {embrayageMode && (
-              <p className="text-orange-300 text-sm font-tech mt-2">
-                Déplacement longue distance : supplément kilométrique
+              <p className="text-orange-300 text-sm font-tech mt-3 bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
+                💰 Supplément : 1,00 € TTC/km au-delà de 50 km
               </p>
             )}
           </div>
 
-          {/* Grille principale : Carte + Vérificateur */}
-          <div className="space-y-6 sm:space-y-8 mb-8">
+          {/* Carte + Vérificateur */}
+          <div className="space-y-8 sm:space-y-10 mb-12">
             
-            {/* Carte Interactive Google Maps - Pleine largeur */}
+            {/* Carte Interactive Google Maps */}
             <div className="w-full">
+              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
+                <h3 className="text-xl font-bold text-white mb-4 font-futuristic text-center">
+                  🗺️ Carte Interactive
+                </h3>
               <div 
                 ref={mapRef}
-                className="w-full h-96 rounded-lg border border-orange-500/20 overflow-hidden shadow-xl"
-                style={{ minHeight: '400px' }}
+                  className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
+                  style={{ minHeight: '400px' }}
               />
 
-              {/* Légende compacte */}
-              <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-white">Zone couverte (50km)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-white">Accès limité</span>
-                </div>
-                {embrayageMode && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <span className="text-white">Zone élargie embrayage (75km)</span>
+                {/* Légende élégante */}
+                <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm">
+                  <div className="flex items-center gap-2 bg-green-500/20 px-3 py-2 rounded-full">
+                    <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
+                    <span className="text-white font-medium">Zone couverte (0-50km)</span>
                   </div>
-                )}
+                  <div className="flex items-center gap-2 bg-red-500/20 px-3 py-2 rounded-full">
+                    <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+                    <span className="text-white font-medium">Accès limité</span>
+                  </div>
+                  {embrayageMode && (
+                    <div className="flex items-center gap-2 bg-yellow-500/20 px-3 py-2 rounded-full">
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                      <span className="text-white font-medium">Zone élargie (50-75km)</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Vérificateur de Couverture - Compact */}
+            {/* Vérificateur de Couverture */}
             <div className="max-w-md mx-auto">
-              <div className="bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-xl border border-orange-500/30">
-              <h3 className="text-base font-bold text-gray-900 mb-3 text-center font-futuristic">
-                Vérificateur de Couverture
-              </h3>
+              <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl border-2 border-orange-500/40 hover:border-orange-500/60 transition-all duration-300">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3 shadow-lg">
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 font-futuristic">
+                    🔍 Vérificateur de Couverture
+                  </h3>
+                </div>
               
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-3 font-tech">
                   Votre ville ou code postal
                 </label>
                 <input
@@ -469,29 +495,25 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   type="text"
                   value={coverageInput}
                   onChange={(e) => setCoverageInput(e.target.value)}
-                  placeholder="Ex: Le Puy-en-Velay, 43000..."
-                  className="w-full px-3 py-2 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-tech text-sm transition-all duration-200"
+                  placeholder="Ex: Monistrol-sur-Loire, 43120..."
+                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
                 />
               </div>
 
               {/* Résultat de couverture */}
               {coverageResult.status && (
-                <div className={`mt-3 p-3 rounded-lg font-medium text-sm flex items-center gap-2 ${
-                  coverageResult.status === 'covered' ? 'bg-green-100 text-green-800 border border-green-200' :
-                  coverageResult.status === 'on-demand' ? 'bg-yellow-100 text-yellow-800 border border-yellow-200' :
-                  coverageResult.status === 'limited-access' ? 'bg-blue-100 text-blue-800 border border-blue-200' :
-                  'bg-red-100 text-red-800 border border-red-200'
+                <div className={`mt-4 p-4 rounded-xl font-medium text-sm border-2 transition-all duration-300 ${
+                  coverageResult.status === 'covered' ? 'bg-green-50 text-green-800 border-green-300 shadow-green-100' :
+                  coverageResult.status === 'on-demand' ? 'bg-yellow-50 text-yellow-800 border-yellow-300 shadow-yellow-100' :
+                  coverageResult.status === 'quote-only' ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-orange-100' :
+                  coverageResult.status === 'limited-access' ? 'bg-blue-50 text-blue-800 border-blue-300 shadow-blue-100' :
+                  'bg-red-50 text-red-800 border-red-300 shadow-red-100'
                 }`}>
-                  <span>{getStatusMessage()}</span>
-                  {coverageResult.distance && (
-                    <div className="text-xs opacity-75">
-                      Distance: {Math.round(coverageResult.distance)} km
-                    </div>
-                  )}
+                  <div className="font-tech leading-relaxed">
+                    {getStatusMessage()}
+                  </div>
                 </div>
               )}
-
-              {/* CTA contextuel */}
             </div>
             </div>
           </div>
@@ -545,10 +567,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           <div className="text-center">
             <button
               onClick={onQuoteClick}
-              className="inline-flex items-center px-8 py-4 btn-primary rounded-lg text-lg font-tech glow-hover hover-scale morph-button subtle-glow"
+              className="inline-flex items-center px-10 py-5 btn-primary rounded-2xl text-xl font-tech glow-hover hover-scale morph-button subtle-glow shadow-2xl"
             >
+              <MapPin className="mr-3 w-6 h-6" />
               Demander un devis
-              <MapPin className="ml-3 w-5 h-5" />
             </button>
           </div>
         </div>

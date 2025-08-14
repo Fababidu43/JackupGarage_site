@@ -508,114 +508,22 @@
 @media (max-width: 768px) {
   .scroll-animate.slide-in-from-left,
   .scroll-animate.slide-out-to-left {
-    transform: translateX(-30px) scale(0.97);
+    transform: translateX(-50px) scale(0.95);
   }
   
   .scroll-animate.slide-in-from-right,
   .scroll-animate.slide-out-to-right {
-    transform: translateX(30px) scale(0.97);
+    transform: translateX(50px) scale(0.95);
   }
   
   .scroll-animate.slide-in-from-bottom,
   .scroll-animate.slide-out-to-bottom {
-    transform: translateY(25px) scale(0.98);
+    transform: translateY(40px) scale(0.98);
   }
   
   .scroll-animate.slide-in-from-top,
   .scroll-animate.slide-out-to-top {
-    transform: translateY(-25px) scale(0.98);
-  }
-}
-
-/* Tablettes (768px - 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .scroll-animate.slide-in-from-left,
-  .scroll-animate.slide-out-to-left {
-    transform: translateX(-70px) rotateY(-10deg) scale(0.96);
-  }
-  
-  .scroll-animate.slide-in-from-right,
-  .scroll-animate.slide-out-to-right {
-    transform: translateX(70px) rotateY(10deg) scale(0.96);
-  }
-  
-  .scroll-animate.slide-in-from-bottom,
-  .scroll-animate.slide-out-to-bottom {
-    transform: translateY(60px) scale(0.96);
-  }
-  
-  .scroll-animate.slide-in-from-top,
-  .scroll-animate.slide-out-to-top {
-    transform: translateY(-60px) scale(0.96);
-  }
-  
-  /* Transitions adaptées tablettes */
-  .scroll-animate {
-    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  
-  .scroll-animate.hero-effect {
-    transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-}
-
-/* Petits mobiles (max 480px) */
-@media (max-width: 480px) {
-  .scroll-animate.slide-in-from-left,
-  .scroll-animate.slide-out-to-left {
-    transform: translateX(-20px) scale(0.98);
-  }
-  
-  .scroll-animate.slide-in-from-right,
-  .scroll-animate.slide-out-to-right {
-    transform: translateX(20px) scale(0.98);
-  }
-  
-  .scroll-animate.slide-in-from-bottom,
-  .scroll-animate.slide-out-to-bottom {
-    transform: translateY(15px) scale(0.99);
-  }
-  
-  .scroll-animate.slide-in-from-top,
-  .scroll-animate.slide-out-to-top {
-    transform: translateY(-15px) scale(0.99);
-  }
-  
-  /* Transitions plus rapides sur petits écrans */
-  .scroll-animate {
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  
-  .scroll-animate.hero-effect {
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-}
-
-/* Grands écrans (1440px+) */
-@media (min-width: 1440px) {
-  .scroll-animate.slide-in-from-left,
-  .scroll-animate.slide-out-to-left {
-    transform: translateX(-120px) rotateY(-20deg) scale(0.93);
-  }
-  
-  .scroll-animate.slide-in-from-right,
-  .scroll-animate.slide-out-to-right {
-    transform: translateX(120px) rotateY(20deg) scale(0.93);
-  }
-  
-  .scroll-animate.slide-in-from-bottom,
-  .scroll-animate.slide-out-to-bottom {
-    transform: translateY(100px) scale(0.93);
-  }
-  
-  .scroll-animate.slide-in-from-top,
-  .scroll-animate.slide-out-to-top {
-    transform: translateY(-100px) scale(0.93);
-  }
-  
-  /* Effets plus prononcés sur grands écrans */
-  .scroll-animate.visible.glow-effect {
-    box-shadow: 0 0 40px rgba(255, 107, 53, 0.15);
+    transform: translateY(-40px) scale(0.98);
   }
 }
 

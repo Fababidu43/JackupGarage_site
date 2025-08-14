@@ -31,15 +31,6 @@ const Contact = () => {
       className="section relative py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-backslash"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Fond dynamique pour Contact */}
-      <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
-        <div className="bg-layer bg-layer-gradient"></div>
-        <div className="bg-layer bg-layer-tech"></div>
-        <div className="bg-layer bg-layer-particles"></div>
-        <div className="bg-layer bg-layer-depth"></div>
-        <div className="bg-layer bg-layer-metallic"></div>
-      </div>
-      
       <div className="relative z-10">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8">

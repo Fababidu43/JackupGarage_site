@@ -386,14 +386,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       className="section relative text-white overflow-hidden reveal-on-scroll py-8 lg:py-12 diagonal-cut-top-backslash diagonal-cut-bottom-slash"
       style={{ background: 'linear-gradient(to bottom, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Fond dynamique pour Zone d'intervention */}
-      <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
-        <div className="bg-layer bg-layer-gradient"></div>
-        <div className="bg-layer bg-layer-tech"></div>
-        <div className="bg-layer bg-layer-depth"></div>
-        <div className="bg-layer bg-layer-metallic"></div>
-      </div>
-      
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}

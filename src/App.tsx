@@ -147,7 +147,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           {/* Fond dynamique pour Embrayage */}
           <div className="dynamic-background-white absolute inset-0 pointer-events-none z-0">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -244,7 +244,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           {/* Fond dynamique pour Suspensions */}
           <div className="dynamic-background-white absolute inset-0 pointer-events-none z-0">
             <div className="bg-layer-white bg-layer-gradient-white"></div>
@@ -293,33 +293,13 @@ function App() {
         </div>
         
         {/* Zone d'intervention (FOND NOIR) */}
-        <div className="relative">
-          {/* Fond dynamique pour Zone d'intervention */}
-          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
-            <div className="bg-layer bg-layer-gradient"></div>
-            <div className="bg-layer bg-layer-tech"></div>
-            <div className="bg-layer bg-layer-particles"></div>
-            <div className="bg-layer bg-layer-depth"></div>
-            <div className="bg-layer bg-layer-metallic"></div>
-          </div>
-          <ServiceArea />
-        </div>
+        <ServiceArea />
         
         {/* FAQ (FOND BLANC) */}
         <FAQ />
         
         {/* Contact (FOND NOIR) */}
-        <div className="relative">
-          {/* Fond dynamique pour Contact */}
-          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
-            <div className="bg-layer bg-layer-gradient"></div>
-            <div className="bg-layer bg-layer-tech"></div>
-            <div className="bg-layer bg-layer-particles"></div>
-            <div className="bg-layer bg-layer-depth"></div>
-            <div className="bg-layer bg-layer-metallic"></div>
-          </div>
-          <Contact />
-        </div>
+        <Contact />
       </main>
       <Footer />
       <MobileCTA onQuoteClick={openQuotePopup} />

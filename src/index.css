@@ -1196,6 +1196,68 @@
   }
 }
 
+/* === LIGNES DYNAMIQUES FAQ === */
+.faq-question-line {
+  position: relative;
+  overflow: visible;
+}
+
+.faq-question-line::before,
+.faq-question-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+  transform: translateY(-50%);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  z-index: 10;
+}
+
+.faq-question-line::before {
+  left: -20px;
+  width: 0;
+  background: linear-gradient(90deg, #FF6B35, transparent);
+}
+
+.faq-question-line::after {
+  right: -20px;
+  width: 0;
+  background: linear-gradient(90deg, transparent, #FF6B35);
+}
+
+.faq-question-line:hover::before,
+.faq-question-line:hover::after {
+  width: 40px;
+  opacity: 0.8;
+}
+
+/* Animation de pulsation pour les lignes */
+@keyframes linePulse {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: translateY(-50%) scaleX(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-50%) scaleX(1.1);
+  }
+}
+
+.faq-question-line:hover::before,
+.faq-question-line:hover::after {
+  animation: linePulse 2s ease-in-out infinite;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .faq-question-line::before,
+  .faq-question-line::after {
+    display: none;
+  }
+}
+
 /* === SAFE AREA POUR IPHONE === */
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);

@@ -29,26 +29,26 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className={`bg-black text-white py-3 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
+      className={`bg-black text-white py-4 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
       style={{ 
-        minHeight: '120px',
+        minHeight: '140px',
         paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'
       }}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
-        {/* Layout horizontal compact */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px] pb-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+        {/* Layout Mobile First */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 min-h-[100px] pb-4">
           
-          {/* Nom seulement */}
-          <div className="text-center lg:text-left">
+          {/* Nom et description */}
+          <div className="text-center lg:text-left order-2 lg:order-1">
             <h3 className="text-sm sm:text-base font-bold text-white font-futuristic">Jack Up Garage</h3>
             <p className="text-orange-400 text-xs font-tech">Mécanicien à domicile</p>
           </div>
 
-          {/* Logo super large centré */}
-          <div className="flex-1 flex justify-center items-center">
+          {/* Logo centré - Mobile Optimized */}
+          <div className="flex-1 flex justify-center items-center order-1 lg:order-2">
             <div 
-              className="w-24 h-10 sm:w-32 sm:h-12 lg:w-40 lg:h-16 xl:w-48 xl:h-18 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-1 sm:p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
+              className="w-20 h-8 xs:w-24 xs:h-10 sm:w-28 sm:h-12 md:w-32 md:h-14 lg:w-36 lg:h-16 xl:w-40 xl:h-18 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-1 sm:p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
@@ -60,8 +60,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Contact + Réseaux sociaux */}
-          <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 lg:justify-end">
+          {/* Contact + Réseaux sociaux - Mobile Optimized */}
+          <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 lg:justify-end order-3">
             {/* Contact rapide */}
             <div className="flex items-center space-x-1 sm:space-x-2">
               <a 
@@ -69,8 +69,8 @@ const Footer = () => {
                 className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
               >
                 <Phone className="w-3 h-3 mr-0.5 sm:mr-1" />
-                <span className="text-xs font-tech hidden sm:inline">01 23 45 67 89</span>
-                <span className="text-xs font-tech sm:hidden">Tel</span>
+                <span className="text-xs font-tech hidden xs:inline">01 23 45 67 89</span>
+                <span className="text-xs font-tech xs:hidden">Tel</span>
               </a>
               <div className="w-0.5 h-3 bg-gray-700"></div>
               <a 
@@ -86,7 +86,7 @@ const Footer = () => {
             {/* Séparateur */}
             <div className="w-0.5 h-4 bg-gray-700"></div>
 
-            {/* Réseaux sociaux */}
+            {/* Réseaux sociaux - Mobile Optimized */}
             <div className="flex space-x-1 sm:space-x-2">
               <a 
                 href="https://facebook.com" 
@@ -108,7 +108,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright minimaliste */}
+        {/* Copyright - Mobile Optimized */}
         <div className="mt-2 pt-2 pb-2 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-xs font-tech">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)

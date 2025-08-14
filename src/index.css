@@ -22,11 +22,11 @@
   background-size: 20px 20px;
 }
 
-/* === SÉPARATEURS DIAGONAUX - UN SEUL TRIANGLE === */
+/* === SÉPARATEURS DIAGONAUX - DESKTOP FIRST === */
 .diag {
   position: relative;
   width: 100%;
-  height: var(--h, 7vh);
+  height: 7vh;
   pointer-events: none;
   isolation: isolate;
   z-index: 0;
@@ -57,43 +57,6 @@
   clip-path: polygon(-3% -1%, 103% -1%, 103% 103%);
 }
 
-/* === RESPONSIVITÉ MOBILE POUR DIAGONALES === */
-@media (max-width: 768px) {
-  .diag {
-    --h: 3vh;
-  }
-  
-  .diag--service {
-    --h: 2vh;
-  }
-  
-  .diag--slash::before {
-    clip-path: polygon(-6% -2%, 106% -2%, -6% 106%);
-  }
-
-  .diag--backslash::before {
-    clip-path: polygon(-6% -2%, 106% -2%, 106% 106%);
-  }
-}
-
-@media (max-width: 480px) {
-  .diag {
-    --h: 2vh;
-  }
-  
-  .diag--service {
-    --h: 1.5vh;
-  }
-  
-  .diag--slash::before {
-    clip-path: polygon(-4% -1%, 104% -1%, -4% 104%);
-  }
-
-  .diag--backslash::before {
-    clip-path: polygon(-4% -1%, 104% -1%, 104% 104%);
-  }
-}
-
 .diag--section { --h: 7vh; }
 .diag--service { --h: 5vh; }
 
@@ -103,27 +66,6 @@
   background-clip: border-box;
 }
 
-/* === ANIMATIONS POUR TRAITS FAQ === */
-/* === ANIMATIONS SIMPLIFIÉES POUR FAQ === */
-@keyframes simplePulse {
-  0%, 100% { 
-    opacity: 0.5;
-  }
-  50% { 
-    opacity: 0.8;
-  }
-}
-
-@keyframes simpleFloat {
-  0%, 100% { 
-    opacity: 0.6;
-    transform: translateY(-50%) scale(1);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateY(-50%) scale(1.2);
-  }
-}
 /* === TYPOGRAPHIES FUTURISTES === */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -136,7 +78,7 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* === MICRO-INTERACTIONS === */
+/* === MICRO-INTERACTIONS DESKTOP === */
 .glow-hover {
   transition: all 0.3s ease;
 }
@@ -146,7 +88,6 @@
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
-/* === NOUVEAUX DYNAMISMES SOBRES === */
 .hover-lift {
   transition: transform 0.2s ease;
 }
@@ -227,8 +168,7 @@
   text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
 }
 
-/* === SYSTÈME DE PHARES DYNAMIQUES === */
-/* === FOND DYNAMIQUE AVEC SCROLL === */
+/* === FOND DYNAMIQUE DESKTOP === */
 .dynamic-background {
   position: absolute;
   inset: 0;
@@ -238,13 +178,11 @@
   opacity: 1;
 }
 
-/* Couches de fond dynamique */
 .bg-layer {
   position: absolute;
   inset: 0;
 }
 
-/* Couche 1: Dégradé atelier unifié */
 .bg-layer-gradient {
   background: linear-gradient(
     135deg,
@@ -267,30 +205,14 @@
   }
 }
 
-/* Couche 2: Grille d'atelier uniforme */
 .bg-layer-tech {
   background: transparent;
 }
 
-@keyframes atelierGrid {
-  0% { 
-    background-position: 0 0; 
-  }
-  50% { 
-    background-position: 30px 30px; 
-  }
-  100% { 
-    background-position: 60px 60px; 
-  }
-}
-
-/* Couche 3: Grosses poussières d'atelier */
 .bg-layer-particles {
-  /* Pas de particules - fond propre */
   background: transparent;
 }
 
-/* Couche 4: Fumée d'atelier uniforme */
 .bg-layer-depth {
   background: radial-gradient(
     ellipse 60% 40% at 50% 50%,
@@ -310,7 +232,6 @@
   }
 }
 
-/* Couche 5: Reflets métalliques uniformes */
 .bg-layer-metallic {
   background: linear-gradient(
     45deg,
@@ -336,26 +257,6 @@
   }
 }
 
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .bg-layer-tech {
-    background: transparent;
-  }
-  
-  .bg-layer-depth {
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 50%,
-      rgba(128, 128, 128, 0.05) 0%,
-      rgba(169, 169, 169, 0.03) 40%,
-      transparent 70%
-    );
-  }
-  
-  .bg-layer-metallic {
-    background-size: 300px 300px;
-  }
-}
-
 /* === FOND DYNAMIQUE POUR SECTIONS BLANCHES === */
 .dynamic-background-white {
   position: absolute;
@@ -366,13 +267,11 @@
   opacity: 1;
 }
 
-/* Couches de fond dynamique pour sections blanches */
 .bg-layer-white {
   position: absolute;
   inset: 0;
 }
 
-/* Couche 1: Dégradé atelier unifié pour fond blanc */
 .bg-layer-gradient-white {
   background: linear-gradient(
     135deg,
@@ -386,18 +285,14 @@
   animation: atelierFlow 15s ease-in-out infinite;
 }
 
-/* Couche 2: Grille d'atelier uniforme pour fond blanc */
 .bg-layer-tech-white {
   background: transparent;
 }
 
-/* Couche 3: Grosses poussières d'atelier pour fond blanc */
 .bg-layer-particles-white {
-  /* Pas de particules - fond propre */
   background: transparent;
 }
 
-/* Couche 4: Fumée d'atelier uniforme pour fond blanc */
 .bg-layer-depth-white {
   background: radial-gradient(
     ellipse 60% 40% at 50% 50%,
@@ -408,7 +303,6 @@
   animation: atelierSmoke 20s ease-in-out infinite;
 }
 
-/* Couche 5: Reflets métalliques uniformes pour fond blanc */
 .bg-layer-metallic-white {
   background: linear-gradient(
     45deg,
@@ -420,26 +314,6 @@
   );
   background-size: 400px 400px;
   animation: atelierReflection 35s linear infinite;
-}
-
-/* Responsive pour mobile - sections blanches */
-@media (max-width: 768px) {
-  .bg-layer-tech-white {
-    background: transparent;
-  }
-  
-  .bg-layer-depth-white {
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 50%,
-      rgba(105, 105, 105, 0.03) 0%,
-      rgba(128, 128, 128, 0.02) 40%,
-      transparent 70%
-    );
-  }
-  
-  .bg-layer-metallic-white {
-    background-size: 300px 300px;
-  }
 }
 
 /* === ANIMATIONS MÉCANIQUES === */
@@ -469,7 +343,6 @@
   will-change: transform, opacity;
 }
 
-/* Interaction avec le scroll */
 .mechanical-shape.scroll-visible {
   opacity: 0.25;
   transform: scale(1.1);
@@ -615,7 +488,6 @@
   transform: rotate(-45deg);
 }
 
-/* Nouvelles formes d'outils */
 .screwdriver-shape {
   width: 60px;
   height: 8px;
@@ -759,18 +631,6 @@
   border-color: #FF6B35 !important;
 }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .mechanical-shape {
-    transform: scale(0.7);
-    opacity: 0.08;
-  }
-  
-  .mechanical-shapes.black-section .mechanical-shape {
-    opacity: 0.12;
-  }
-}
-
 /* === ANIMATIONS FUTURISTES AU SCROLL === */
 .scroll-animate {
   opacity: 0;
@@ -778,7 +638,6 @@
   will-change: transform, opacity;
 }
 
-/* Animations d'entrée */
 .scroll-animate.slide-in-from-left {
   transform: translateX(-100px) rotateY(-15deg);
   opacity: 0;
@@ -799,13 +658,11 @@
   opacity: 0;
 }
 
-/* États visibles */
 .scroll-animate.visible {
   transform: translateX(0) translateY(0) rotateY(0deg) scale(1);
   opacity: 1;
 }
 
-/* Animations de sortie */
 .scroll-animate.slide-out-to-left {
   transform: translateX(-100px) rotateY(-15deg) scale(0.9);
   opacity: 0;
@@ -826,7 +683,6 @@
   opacity: 0;
 }
 
-/* Effets spéciaux pour sections importantes */
 .scroll-animate.hero-effect {
   transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -839,112 +695,8 @@
   transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Effets de glow futuristes */
 .scroll-animate.visible.glow-effect {
   box-shadow: 0 0 30px rgba(255, 107, 53, 0.1);
-}
-
-/* Responsive - réduire les effets sur mobile */
-@media (max-width: 768px) {
-  .scroll-animate.slide-in-from-left,
-  .scroll-animate.slide-out-to-left {
-    transform: translateX(-50px) scale(0.95);
-  }
-  
-  .scroll-animate.slide-in-from-right,
-  .scroll-animate.slide-out-to-right {
-    transform: translateX(50px) scale(0.95);
-  }
-  
-  .scroll-animate.slide-in-from-bottom,
-  .scroll-animate.slide-out-to-bottom {
-    transform: translateY(40px) scale(0.98);
-  }
-  
-  .scroll-animate.slide-in-from-top,
-  .scroll-animate.slide-out-to-top {
-    transform: translateY(-40px) scale(0.98);
-  }
-}
-
-/* === DÉSACTIVATION COMPLÈTE DES ANIMATIONS SUR MOBILE === */
-@media (max-width: 768px) {
-  .scroll-animate {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-  
-  .scroll-animate.slide-in-from-left,
-  .scroll-animate.slide-in-from-right,
-  .scroll-animate.slide-in-from-bottom,
-  .scroll-animate.slide-in-from-top,
-  .scroll-animate.slide-out-to-left,
-  .scroll-animate.slide-out-to-right,
-  .scroll-animate.slide-out-to-bottom,
-  .scroll-animate.slide-out-to-top,
-  .scroll-animate.visible {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-  
-  .scroll-animate.hero-effect,
-  .scroll-animate.services-effect,
-  .scroll-animate.contact-effect {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-  
-  .hover-scale,
-  .hover-lift,
-  .pulse-subtle,
-  .hover-glow-text {
-    transform: none !important;
-    transition: none !important;
-    animation: none !important;
-  }
-  
-  /* Désactiver tous les effets de fond dynamiques sur mobile */
-  .dynamic-background,
-  .dynamic-background-white,
-  .bg-layer,
-  .bg-layer-white,
-  .bg-layer-gradient,
-  .bg-layer-gradient-white,
-  .bg-layer-tech,
-  .bg-layer-tech-white,
-  .bg-layer-particles,
-  .bg-layer-particles-white,
-  .bg-layer-depth,
-  .bg-layer-depth-white,
-  .bg-layer-metallic,
-  .bg-layer-metallic-white {
-    display: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-  
-  /* Désactiver les formes mécaniques sur mobile */
-  .mechanical-shapes,
-  .mechanical-shape {
-    display: none !important;
-  }
-  
-  /* Désactiver les motifs de scroll sur mobile */
-  .scroll-pattern,
-  .tech-grid-pattern,
-  .hex-pattern,
-  .circuit-pattern,
-  .gear-pattern,
-  .particles-pattern,
-  .waves-pattern {
-    display: none !important;
-  }
 }
 
 /* Performance optimizations */
@@ -952,6 +704,7 @@
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
 /* === BOUTONS FUTURISTES === */
 .btn-primary {
   background: linear-gradient(135deg, var(--orange-primary), var(--orange-glow));
@@ -1003,29 +756,6 @@
   color: #888;
 }
 
-  .reveal-on-scroll,
-  .slide-in-left,
-  .slide-in-right,
-  .hover-scale,
-  .hover-lift,
-  .pulse-subtle,
-  .animate-spin-slow,
-  .floating-particles .particle,
-  .scan-lines::before,
-  .circuit-bg {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-  }
-  
-  .reveal-on-scroll,
-  .slide-in-left,
-  .slide-in-right {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-/* === DÉSACTIVATION COMPLÈTE DU DYNAMIQUE === */
 /* Effet de révélation au scroll */
 .reveal-on-scroll {
   opacity: 0;
@@ -1038,7 +768,6 @@
   transform: translateY(0);
 }
 
-/* Animation spéciale pour le footer */
 .footer-reveal {
   opacity: 0;
   transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -1048,7 +777,6 @@
   opacity: 1;
 }
 
-/* Effet de slide latéral */
 .slide-in-left {
   opacity: 0;
   transform: translateX(-50px);
@@ -1080,7 +808,6 @@
   transition: all 0.3s ease;
 }
 
-/* Motif grille tech */
 .tech-grid-pattern {
   background-image: 
     linear-gradient(rgba(255, 107, 53, 0.1) 1px, transparent 1px),
@@ -1096,7 +823,6 @@
   100% { background-position: 40px 40px; }
 }
 
-/* Motif hexagonal */
 .hex-pattern {
   background-image: 
     radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.1) 2px, transparent 2px);
@@ -1111,7 +837,6 @@
   50% { transform: translateY(-10px); }
 }
 
-/* Motif circuit */
 .circuit-pattern {
   background-image: 
     linear-gradient(90deg, transparent 24%, rgba(255, 107, 53, 0.1) 25%, rgba(255, 107, 53, 0.1) 26%, transparent 27%, transparent 74%, rgba(255, 107, 53, 0.1) 75%, rgba(255, 107, 53, 0.1) 76%, transparent 77%),
@@ -1127,7 +852,6 @@
   50% { opacity: 0.15; }
 }
 
-/* Motif engrenages */
 .gear-pattern {
   background-image: 
     radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.08) 20%, transparent 21%),
@@ -1143,7 +867,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Motif particules flottantes */
 .particles-pattern {
   width: 100%;
   height: 100%;
@@ -1193,7 +916,6 @@
   }
 }
 
-/* Motif ondes */
 .waves-pattern {
   background-image: 
     radial-gradient(ellipse at center, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
@@ -1214,194 +936,16 @@
   }
 }
 
-/* Réactivité au scroll */
 .scroll-pattern.active {
   opacity: 0.2;
   transform: scale(1.05);
 }
 
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .tech-grid-pattern {
-    background-size: 20px 20px;
-  }
-  
-  .hex-pattern {
-    background-size: 20px 20px;
-  }
-  
-  .circuit-pattern {
-    background-size: 30px 30px;
-  }
-  
-  .gear-pattern {
-    background-size: 40px 40px;
-  }
-  
-  .waves-pattern {
-    background-size: 60px 30px;
-  }
-}
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .reveal-on-scroll {
-    transform: translateY(20px);
-  }
-  
-  .slide-in-left, .slide-in-right {
-    transform: translateX(0);
-    opacity: 0.7;
-  }
-}
-
-/* === SAFE AREA POUR IPHONE === */
-.safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.pb-safe {
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-}
-
-.pt-safe {
-  padding-top: calc(1rem + env(safe-area-inset-top));
-}
-
-.safe-area-inset-right {
-  padding-right: env(safe-area-inset-right);
-}
-
-.safe-area-inset-top {
-  padding-top: env(safe-area-inset-top);
-}
-
-/* === CORRECTIONS MOBILES CRITIQUES === */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  /* Améliorer le scroll sur mobile */
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-}
-
-#root {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Empêcher le débordement horizontal */
-.section {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-/* Conteneurs responsifs */
-.max-w-7xl {
-  max-width: 100%;
-  margin: 0 auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .max-w-7xl {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .max-w-7xl {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    max-width: 80rem;
-  }
-}
-
-/* Correction des images débordantes */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Correction des grilles responsives */
-.grid {
-  width: 100%;
-}
-
-/* Empêcher le zoom sur les inputs iOS */
-@media screen and (max-width: 768px) {
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  textarea,
-  select {
-    font-size: 16px !important;
-    transform: none !important;
-  }
-}
-
-/* Correction viewport mobile */
-@supports (-webkit-touch-callout: none) {
-  .min-h-screen {
-    min-height: -webkit-fill-available;
-  }
-  
-  body {
-    min-height: -webkit-fill-available;
-  }
-  
-  /* Correction spécifique pour le scroll iOS */
-  html {
-    height: -webkit-fill-available;
-  }
-  
-  #root {
-    min-height: -webkit-fill-available;
-  }
-}
-
-/* Correction des débordements sur très petits écrans */
-@media (max-width: 320px) {
-  .px-4 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  
-  .gap-4 {
-    gap: 0.75rem;
-  }
-  
-  .text-3xl {
-    font-size: 1.5rem;
-  }
-  
-  .text-4xl {
-    font-size: 1.75rem;
-  }
-  
-  /* Forcer l'affichage complet du contenu */
-  .section {
-    min-height: auto !important;
-    padding-bottom: 2rem !important;
-  }
-}
-
-/* === COUPE DIAGONALE HERO === */
+/* === COUPES DIAGONALES INTÉGRÉES === */
 .hero-diagonal-cut {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);
 }
 
-/* === COUPES DIAGONALES INTÉGRÉES === */
 .diagonal-cut-top-slash {
   clip-path: polygon(0 5vh, 100% 0, 100% 100%, 0 100%);
 }
@@ -1418,163 +962,12 @@ img {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vh));
 }
 
-/* Combinaisons pour sections avec coupes haut ET bas */
 .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
   clip-path: polygon(0 5vh, 100% 0, 100% 100%, 0 calc(100% - 5vh));
 }
 
 .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
   clip-path: polygon(0 0, 100% 5vh, 100% calc(100% - 5vh), 0 100%);
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
-  }
-  
-  .diagonal-cut-top-slash {
-    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-top-backslash {
-    clip-path: polygon(0 0, 100% 2vh, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vh), 0 100%);
-  }
-  
-  .diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2vh));
-  }
-  
-  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 calc(100% - 2vh));
-  }
-  
-  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 2vh, 100% calc(100% - 2vh), 0 100%);
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vh), 0 100%);
-  }
-  
-  .diagonal-cut-top-slash {
-    clip-path: polygon(0 1.5vh, 100% 0, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-top-backslash {
-    clip-path: polygon(0 0, 100% 1.5vh, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5vh), 0 100%);
-  }
-  
-  .diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1.5vh));
-  }
-  
-  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 1.5vh, 100% 0, 100% 100%, 0 calc(100% - 1.5vh));
-  }
-  
-  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 1.5vh, 100% calc(100% - 1.5vh), 0 100%);
-  }
-}
-
-/* === AMÉLIORATIONS RESPONSIVE SUPPLÉMENTAIRES === */
-
-/* Très petits écrans */
-@media (max-width: 320px) {
-  .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1vh), 0 100%);
-  }
-  
-  .diagonal-cut-top-slash {
-    clip-path: polygon(0 1vh, 100% 0, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-top-backslash {
-    clip-path: polygon(0 0, 100% 1vh, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1vh), 0 100%);
-  }
-  
-  .diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1vh));
-  }
-}
-
-/* Tablettes portrait */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .hero-diagonal-cut {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6vh), 0 100%);
-  }
-  
-  .diagonal-cut-top-slash {
-    clip-path: polygon(0 4vh, 100% 0, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-top-backslash {
-    clip-path: polygon(0 0, 100% 4vh, 100% 100%, 0 100%);
-  }
-  
-  .diagonal-cut-bottom-slash {
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vh), 0 100%);
-  }
-  
-  .diagonal-cut-bottom-backslash {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4vh));
-  }
-}
-
-/* Optimisations pour les écrans tactiles */
-@media (hover: none) and (pointer: coarse) {
-  .hover-scale:hover,
-  .hover-lift:hover,
-  .glow-hover:hover {
-    transform: none;
-  }
-  
-  .btn-primary,
-  .btn-secondary {
-    min-height: 48px;
-    padding: 12px 24px;
-  }
-  
-  input, select, textarea {
-    font-size: 16px; /* Évite le zoom sur iOS */
-  }
-}
-
-/* Amélioration de la lisibilité sur petits écrans */
-@media (max-width: 480px) {
-  .text-xs { font-size: 0.75rem; }
-  .text-sm { font-size: 0.875rem; }
-  .text-base { font-size: 1rem; }
-  .text-lg { font-size: 1.125rem; }
-  .text-xl { font-size: 1.25rem; }
-  
-  /* Espacement réduit pour mobile */
-  .space-y-6 > * + * { margin-top: 1rem; }
-  .space-y-8 > * + * { margin-top: 1.5rem; }
-  .gap-6 { gap: 1rem; }
-  .gap-8 { gap: 1.5rem; }
-}
-/* === CORRECTION FOOTER MOBILE === */
-@supports (-webkit-touch-callout: none) {
-  /* Styles spécifiques iOS */
-  .min-h-screen {
-    min-height: -webkit-fill-available;
-  }
 }
 
 /* === CARTE INTERACTIVE ZONE D'INTERVENTION === */
@@ -1592,7 +985,6 @@ img {
   box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
 }
 
-/* Carte SVG */
 .map-svg {
   width: 100%;
   height: auto;
@@ -1607,7 +999,6 @@ img {
   stroke-width: 2;
 }
 
-/* États des départements */
 .dept-covered {
   fill: #10B981;
   stroke: #059669;
@@ -1651,7 +1042,6 @@ img {
   stroke: #6B7280;
 }
 
-/* Vérificateur de couverture */
 .coverage-checker {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
@@ -1680,7 +1070,6 @@ img {
   box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
-/* États de couverture */
 .coverage-result {
   margin-top: 12px;
   padding: 12px 16px;
@@ -1709,7 +1098,6 @@ img {
   border: 1px solid #FECACA;
 }
 
-/* Pills/badges */
 .condition-pill {
   display: inline-flex;
   align-items: center;
@@ -1737,7 +1125,6 @@ img {
   border-color: rgba(59, 130, 246, 0.3);
 }
 
-/* Toggle embrayage */
 .embrayage-toggle {
   display: flex;
   align-items: center;
@@ -1777,7 +1164,6 @@ img {
   transform: translateX(20px);
 }
 
-/* Encart département */
 .dept-info-card {
   position: absolute;
   background: white;
@@ -1818,8 +1204,243 @@ img {
   cursor: pointer;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* === ANIMATIONS SIMPLIFIÉES POUR FAQ === */
+@keyframes simplePulse {
+  0%, 100% { 
+    opacity: 0.5;
+  }
+  50% { 
+    opacity: 0.8;
+  }
+}
+
+@keyframes simpleFloat {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: translateY(-50%) scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+/* === BASE RESPONSIVE SYSTEM === */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.section {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.max-w-7xl {
+  max-width: 100%;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.grid {
+  width: 100%;
+}
+
+/* === MOBILE RESPONSIVE BREAKPOINTS === */
+
+/* Tablettes (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .max-w-7xl {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .diag {
+    height: 6vh;
+  }
+  
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 4vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 4vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 4vh));
+  }
+}
+
+/* Mobile Large (481px - 767px) */
+@media (max-width: 767px) {
+  .diag {
+    height: 3vh;
+  }
+  
+  .diag--service {
+    height: 2vh;
+  }
+  
+  .diag--slash::before {
+    clip-path: polygon(-6% -2%, 106% -2%, -6% 106%);
+  }
+
+  .diag--backslash::before {
+    clip-path: polygon(-6% -2%, 106% -2%, 106% 106%);
+  }
+  
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 2vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2vh));
+  }
+  
+  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 2vh, 100% 0, 100% 100%, 0 calc(100% - 2vh));
+  }
+  
+  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 2vh, 100% calc(100% - 2vh), 0 100%);
+  }
+  
+  /* Réduire les animations sur mobile */
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-out-to-left {
+    transform: translateX(-30px) scale(0.98);
+  }
+  
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-out-to-right {
+    transform: translateX(30px) scale(0.98);
+  }
+  
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-out-to-bottom {
+    transform: translateY(30px) scale(0.98);
+  }
+  
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-top {
+    transform: translateY(-30px) scale(0.98);
+  }
+  
+  .mechanical-shape {
+    transform: scale(0.7);
+    opacity: 0.08;
+  }
+  
+  .mechanical-shapes.black-section .mechanical-shape {
+    opacity: 0.12;
+  }
+  
+  .bg-layer-tech {
+    background-size: 20px 20px;
+  }
+  
+  .bg-layer-depth {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(128, 128, 128, 0.05) 0%,
+      rgba(169, 169, 169, 0.03) 40%,
+      transparent 70%
+    );
+  }
+  
+  .bg-layer-metallic {
+    background-size: 300px 300px;
+  }
+  
+  .bg-layer-tech-white {
+    background-size: 20px 20px;
+  }
+  
+  .bg-layer-depth-white {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      rgba(105, 105, 105, 0.03) 0%,
+      rgba(128, 128, 128, 0.02) 40%,
+      transparent 70%
+    );
+  }
+  
+  .bg-layer-metallic-white {
+    background-size: 300px 300px;
+  }
+  
+  .tech-grid-pattern {
+    background-size: 20px 20px;
+  }
+  
+  .hex-pattern {
+    background-size: 20px 20px;
+  }
+  
+  .circuit-pattern {
+    background-size: 30px 30px;
+  }
+  
+  .gear-pattern {
+    background-size: 40px 40px;
+  }
+  
+  .waves-pattern {
+    background-size: 60px 30px;
+  }
+  
+  .reveal-on-scroll {
+    transform: translateY(20px);
+  }
+  
+  .slide-in-left, .slide-in-right {
+    transform: translateX(0);
+    opacity: 0.7;
+  }
+  
   .interactive-map,
   .coverage-checker {
     padding: 16px;
@@ -1837,5 +1458,176 @@ img {
   .condition-pill {
     font-size: 11px;
     padding: 4px 8px;
+  }
+}
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+  .diag {
+    height: 2vh;
+  }
+  
+  .diag--service {
+    height: 1.5vh;
+  }
+  
+  .diag--slash::before {
+    clip-path: polygon(-4% -1%, 104% -1%, -4% 104%);
+  }
+
+  .diag--backslash::before {
+    clip-path: polygon(-4% -1%, 104% -1%, 104% 104%);
+  }
+  
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 1.5vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 1.5vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.5vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1.5vh));
+  }
+  
+  .diagonal-cut-top-slash.diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 1.5vh, 100% 0, 100% 100%, 0 calc(100% - 1.5vh));
+  }
+  
+  .diagonal-cut-top-backslash.diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 1.5vh, 100% calc(100% - 1.5vh), 0 100%);
+  }
+  
+  .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .gap-4 {
+    gap: 0.75rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-4xl {
+    font-size: 1.75rem;
+  }
+  
+  .section {
+    min-height: auto !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .text-xs { font-size: 0.75rem; }
+  .text-sm { font-size: 0.875rem; }
+  .text-base { font-size: 1rem; }
+  .text-lg { font-size: 1.125rem; }
+  .text-xl { font-size: 1.25rem; }
+  
+  .space-y-6 > * + * { margin-top: 1rem; }
+  .space-y-8 > * + * { margin-top: 1.5rem; }
+  .gap-6 { gap: 1rem; }
+  .gap-8 { gap: 1.5rem; }
+}
+
+/* Mobile Extra Small (< 320px) */
+@media (max-width: 320px) {
+  .hero-diagonal-cut {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1vh), 0 100%);
+  }
+  
+  .diagonal-cut-top-slash {
+    clip-path: polygon(0 1vh, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-top-backslash {
+    clip-path: polygon(0 0, 100% 1vh, 100% 100%, 0 100%);
+  }
+  
+  .diagonal-cut-bottom-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1vh), 0 100%);
+  }
+  
+  .diagonal-cut-bottom-backslash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1vh));
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .max-w-7xl {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 80rem;
+  }
+}
+
+/* === OPTIMISATIONS POUR ÉCRANS TACTILES === */
+@media (hover: none) and (pointer: coarse) {
+  .hover-scale:hover,
+  .hover-lift:hover,
+  .glow-hover:hover {
+    transform: none;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+    padding: 12px 24px;
+  }
+  
+  input, select, textarea {
+    font-size: 16px; /* Évite le zoom sur iOS */
+  }
+}
+
+/* === SAFE AREA POUR IPHONE === */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pb-safe {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: calc(1rem + env(safe-area-inset-top));
+}
+
+.safe-area-inset-right {
+  padding-right: env(safe-area-inset-right);
+}
+
+.safe-area-inset-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* === SUPPORT iOS SAFARI === */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+  
+  body {
+    min-height: -webkit-fill-available;
+  }
+  
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  #root {
+    min-height: -webkit-fill-available;
   }
 }

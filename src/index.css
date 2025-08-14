@@ -1304,6 +1304,37 @@ img {
 
 /* Mobile Large (481px - 767px) */
 @media (max-width: 767px) {
+  /* Désactiver toutes les animations de scroll sur mobile */
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+  
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-left,
+  .scroll-animate.slide-out-to-right,
+  .scroll-animate.slide-out-to-top,
+  .scroll-animate.slide-out-to-bottom {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .scroll-animate.visible {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .scroll-animate.hero-effect,
+  .scroll-animate.services-effect,
+  .scroll-animate.contact-effect {
+    transition: none !important;
+  }
+  
   .diag {
     height: 3vh;
   }

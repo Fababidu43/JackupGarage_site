@@ -80,6 +80,16 @@ function App() {
         // Ajouter la nouvelle classe de direction
         background.classList.add(`scroll-${scrollDirection}`);
       });
+      
+      // Gestion des fonds dynamiques blancs
+      const dynamicBackgroundsWhite = document.querySelectorAll('.dynamic-background-white');
+      dynamicBackgroundsWhite.forEach((background) => {
+        // Supprimer les anciennes classes de direction
+        background.classList.remove('scroll-up', 'scroll-down');
+        
+        // Ajouter la nouvelle classe de direction
+        background.classList.add(`scroll-${scrollDirection}`);
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -87,6 +97,7 @@ function App() {
     
     // Debug: vérifier que les fonds dynamiques sont bien détectés
     console.log('Fonds dynamiques détectés:', document.querySelectorAll('.dynamic-background').length);
+    console.log('Fonds dynamiques blancs détectés:', document.querySelectorAll('.dynamic-background-white').length);
     
     return () => {
       observer.disconnect();
@@ -164,6 +175,15 @@ function App() {
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          {/* Fond dynamique pour Embrayage */}
+          <div className="dynamic-background-white absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer-white bg-layer-gradient-white"></div>
+            <div className="bg-layer-white bg-layer-tech-white"></div>
+            <div className="bg-layer-white bg-layer-particles-white"></div>
+            <div className="bg-layer-white bg-layer-depth-white"></div>
+            <div className="bg-layer-white bg-layer-metallic-white"></div>
+          </div>
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -252,6 +272,15 @@ function App() {
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
+          {/* Fond dynamique pour Suspensions */}
+          <div className="dynamic-background-white absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer-white bg-layer-gradient-white"></div>
+            <div className="bg-layer-white bg-layer-tech-white"></div>
+            <div className="bg-layer-white bg-layer-particles-white"></div>
+            <div className="bg-layer-white bg-layer-depth-white"></div>
+            <div className="bg-layer-white bg-layer-metallic-white"></div>
+          </div>
+
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">

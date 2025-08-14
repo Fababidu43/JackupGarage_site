@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin } from 'lucide-react';
+import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle } from 'lucide-react';
+
+// Centre de référence : Monistrol-sur-Loire
+const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
+const STANDARD_RADIUS = 50; // km
+const EMBRAYAGE_RADIUS = 75; // km
+const SAINT_ETIENNE_EXCLUSION_RADIUS = 6; // km
+const SAINT_ETIENNE_COORDS = { lat: 45.4397, lng: 4.3872 };
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 
 interface QuotePopupProps {
   isOpen: boolean;
@@ -11,10 +24,138 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     service: '',
     urgency: '',
-    location: '',
+    location: '', // Maintenant utilisé pour stocker le nom de la ville
     phone: '',
     name: ''
   });
+  const [locationStatus, setLocationStatus] = useState<{
+    status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | 'limited-access' | null;
+    city: string;
+    distance?: number;
+  }>({ status: null, city: '' });
+  const [locationInput, setLocationInput] = useState('');
+
+  // Calculer la distance entre deux points
+  const calculateDistance = (point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
+    if (window.google && window.google.maps && window.google.maps.geometry) {
+      const latLng1 = new window.google.maps.LatLng(point1.lat, point1.lng);
+      const latLng2 = new window.google.maps.LatLng(point2.lat, point2.lng);
+      return window.google.maps.geometry.spherical.computeDistanceBetween(latLng1, latLng2) / 1000; // en km
+    }
+    return 0;
+  };
+
+  // Vérifier la couverture d'un point
+  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
+    const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
+    const distanceFromSaintEtienne = calculateDistance(coords, SAINT_ETIENNE_COORDS);
+    
+    // Cas particulier Saint-Étienne intra-muros
+    if (distanceFromSaintEtienne <= SAINT_ETIENNE_EXCLUSION_RADIUS) {
+      setLocationStatus({ 
+        status: 'limited-access', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+      return;
+    }
+
+    // Calcul de la couverture selon les distances
+    if (distanceFromCenter <= STANDARD_RADIUS) {
+      setLocationStatus({ 
+        status: 'covered', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      setLocationStatus({ 
+        status: 'on-demand', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else if (distanceFromCenter <= 90) {
+      setLocationStatus({ 
+        status: 'quote-only', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else {
+      setLocationStatus({ 
+        status: 'out-of-zone', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    }
+  };
+
+  // Initialiser l'autocomplete Google Places
+  React.useEffect(() => {
+    if (!isOpen || step !== 3) return;
+
+    const initAutocomplete = () => {
+      const input = document.getElementById('location-input') as HTMLInputElement;
+      if (!input || !window.google) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(input, {
+        componentRestrictions: { country: 'fr' },
+        fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
+      });
+
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        
+        if (!place || !place.geometry || !place.geometry.location) {
+          setLocationStatus({ status: null, city: '' });
+          return;
+        }
+
+        const coords = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng()
+        };
+
+        const placeName = place.name || place.formatted_address || '';
+        setFormData({ ...formData, location: placeName });
+        checkCoverage(coords, placeName);
+      });
+    };
+
+    // Attendre que Google Maps soit chargé
+    if (window.google) {
+      initAutocomplete();
+    } else {
+      const checkGoogle = setInterval(() => {
+        if (window.google) {
+          clearInterval(checkGoogle);
+          initAutocomplete();
+        }
+      }, 100);
+      
+      return () => clearInterval(checkGoogle);
+    }
+  }, [isOpen, step, formData]);
+
+  const getLocationStatusMessage = () => {
+    if (!locationStatus.distance) return '';
+    
+    const distance = Math.round(locationStatus.distance);
+    
+    switch (locationStatus.status) {
+      case 'covered':
+        return `✅ Nous intervenons à ${locationStatus.city} sans supplément.`;
+      case 'on-demand':
+        const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
+        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
+      case 'quote-only':
+        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
+      case 'limited-access':
+        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
+      case 'out-of-zone':
+        return `🚫 Zone non desservie.`;
+      default:
+        return '';
+    }
+  };
 
   const services = [
     { 
@@ -67,19 +208,13 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     { id: 'tres-urgent', name: 'Urgent (2-3 jours)', icon: <Phone className="w-5 h-5" />, color: 'text-red-600' }
   ];
 
-  const locations = [
-    { id: '43', name: 'Haute-Loire (43)', icon: <MapPin className="w-5 h-5" /> },
-    { id: '42', name: 'Loire (42)', icon: <MapPin className="w-5 h-5" /> },
-    { id: 'autre', name: 'Autre département', icon: <MapPin className="w-5 h-5" /> }
-  ];
-
   const handleSubmit = () => {
     // Créer le message WhatsApp ou SMS
     const message = `🚗 DEMANDE DE DEVIS JACK UP GARAGE
     
 Service: ${services.find(s => s.id === formData.service)?.name}
 Urgence: ${urgencies.find(u => u.id === formData.urgency)?.name}
-Zone: ${locations.find(l => l.id === formData.location)?.name}
+Ville: ${formData.location}
 Nom: ${formData.name}
 Téléphone: ${formData.phone}
 
@@ -103,6 +238,8 @@ Merci de me recontacter pour un devis !`;
     onClose();
     setStep(1);
     setFormData({ service: '', urgency: '', location: '', phone: '', name: '' });
+    setLocationStatus({ status: null, city: '' });
+    setLocationInput('');
   };
 
   const nextStep = () => {
@@ -131,7 +268,11 @@ Merci de me recontacter pour un devis !`;
         <div className="relative flex items-center justify-between p-6 border-b border-orange-500/20">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
-              <Wrench className="w-5 h-5 text-white" />
+              <img 
+                src="/src/logo.png" 
+                alt="Jack Up Garage" 
+                className="w-6 h-6 object-contain"
+              />
             </div>
             <div>
               <h3 className="text-xl font-bold text-white font-futuristic tracking-wide">
@@ -255,34 +396,48 @@ Merci de me recontacter pour un devis !`;
             <div>
               <h4 className="text-lg font-bold text-white mb-6 font-futuristic tracking-wide flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-orange-400" />
-                OÙ ÊTES-VOUS SITUÉ ?
+                VOTRE VILLE OU CODE POSTAL
               </h4>
-              <div className="space-y-3">
-                {locations.map((location) => (
-                  <button
-                    key={location.id}
-                    onClick={() => {
-                      setFormData({ ...formData, location: location.id });
-                      nextStep();
-                    }}
-                    className={`group w-full p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
-                      formData.location === location.id 
-                        ? 'border-orange-500 bg-orange-500/10' 
-                        : 'border-gray-700 bg-gray-800/50'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-orange-400 bg-gray-800">
-                          {location.icon}
-                        </div>
-                        <span className="font-medium text-white font-tech">{location.name}</span>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
+              
+              <div className="space-y-4">
+                <div>
+                  <input
+                    id="location-input"
+                    type="text"
+                    value={locationInput}
+                    onChange={(e) => setLocationInput(e.target.value)}
+                    placeholder="Ex: Monistrol-sur-Loire, 43120..."
+                    className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600"
+                  />
+                </div>
+
+                {/* Résultat de couverture */}
+                {locationStatus.status && (
+                  <div className={`p-4 rounded-xl font-medium text-sm border-2 transition-all duration-300 ${
+                    locationStatus.status === 'covered' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
+                    locationStatus.status === 'on-demand' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
+                    locationStatus.status === 'quote-only' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
+                    locationStatus.status === 'limited-access' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
+                    'bg-red-500/20 text-red-300 border-red-500/30'
+                  }`}>
+                    <div className="font-tech leading-relaxed">
+                      {getLocationStatusMessage()}
                     </div>
+                  </div>
+                )}
+
+                {/* Bouton continuer */}
+                {formData.location && (
+                  <button
+                    onClick={nextStep}
+                    className="w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2"
+                  >
+                    Continuer
+                    <ArrowRight className="w-4 h-4" />
                   </button>
-                ))}
+                )}
               </div>
+              
               <button
                 onClick={prevStep}
                 className="mt-6 text-sm text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
@@ -337,7 +492,7 @@ Merci de me recontacter pour un devis !`;
                 </button>
                 <button
                   onClick={handleSubmit}
-                  disabled={!formData.name || !formData.phone}
+                  disabled={!formData.name || !formData.phone || !formData.location}
                   className="flex-1 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2"
                 >
                   <CheckCircle className="w-4 h-4" />

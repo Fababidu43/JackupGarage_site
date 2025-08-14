@@ -21,6 +21,11 @@ function App() {
   useEffect(() => {
     // Système d'animation futuriste au scroll
     const handleFuturisticScroll = () => {
+      // Désactiver les animations sur très petits écrans
+      if (window.innerWidth <= 1024 && window.innerHeight <= 600) {
+        return;
+      }
+      
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
       scrollDirectionRef.current = scrollDirection;
@@ -35,8 +40,10 @@ function App() {
         const sectionTop = rect.top;
         const sectionBottom = rect.bottom;
         
-        // Calculer si la section est visible
-        const isVisible = sectionTop < windowHeight * 0.8 && sectionBottom > windowHeight * 0.2;
+        // Calculer si la section est visible - seuils adaptés selon la taille d'écran
+        const topThreshold = window.innerWidth <= 1024 ? 0.9 : 0.8;
+        const bottomThreshold = window.innerWidth <= 1024 ? 0.1 : 0.2;
+        const isVisible = sectionTop < windowHeight * topThreshold && sectionBottom > windowHeight * bottomThreshold;
         
         // Supprimer toutes les classes d'animation
         section.classList.remove(

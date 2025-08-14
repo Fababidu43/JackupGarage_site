@@ -26,24 +26,6 @@ function App() {
       scrollDirectionRef.current = scrollDirection;
       lastScrollYRef.current = currentScrollY;
 
-      // Adapter les seuils selon la taille d'écran
-      const windowWidth = window.innerWidth;
-      let visibilityThreshold = 0.8;
-      let exitThreshold = 0.2;
-      
-      if (windowWidth <= 768) {
-        // Mobile - seuils plus permissifs
-        visibilityThreshold = 0.9;
-        exitThreshold = 0.1;
-      } else if (windowWidth <= 1024) {
-        // Tablette - seuils intermédiaires
-        visibilityThreshold = 0.85;
-        exitThreshold = 0.15;
-      } else if (windowWidth <= 1440) {
-        // Portable - seuils standards
-        visibilityThreshold = 0.8;
-        exitThreshold = 0.2;
-      }
       // Sélectionner toutes les sections animées
       const animatedSections = document.querySelectorAll('.scroll-animate');
       
@@ -54,7 +36,7 @@ function App() {
         const sectionBottom = rect.bottom;
         
         // Calculer si la section est visible
-        const isVisible = sectionTop < windowHeight * visibilityThreshold && sectionBottom > windowHeight * exitThreshold;
+        const isVisible = sectionTop < windowHeight * 0.8 && sectionBottom > windowHeight * 0.2;
         
         // Supprimer toutes les classes d'animation
         section.classList.remove(

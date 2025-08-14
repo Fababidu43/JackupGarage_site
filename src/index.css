@@ -527,6 +527,49 @@
   }
 }
 
+/* === DÉSACTIVATION COMPLÈTE DES ANIMATIONS SUR MOBILE === */
+@media (max-width: 768px) {
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .scroll-animate.slide-in-from-left,
+  .scroll-animate.slide-in-from-right,
+  .scroll-animate.slide-in-from-bottom,
+  .scroll-animate.slide-in-from-top,
+  .scroll-animate.slide-out-to-left,
+  .scroll-animate.slide-out-to-right,
+  .scroll-animate.slide-out-to-bottom,
+  .scroll-animate.slide-out-to-top,
+  .scroll-animate.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .scroll-animate.hero-effect,
+  .scroll-animate.services-effect,
+  .scroll-animate.contact-effect {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .hover-scale,
+  .hover-lift,
+  .pulse-subtle,
+  .hover-glow-text {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 /* Performance optimizations */
 .scroll-animate {
   backface-visibility: hidden;

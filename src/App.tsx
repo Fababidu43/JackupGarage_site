@@ -94,10 +94,10 @@ function App() {
         {/* Services intro (blanc #FFFFFF) */}
         <div className="relative">
           <div className="scroll-pattern absolute inset-0">
-            <div className="tech-grid-pattern"></div>
+            <div className="diagonal-lines-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
-            <div className="tech-grid-pattern"></div>
+          <div className="scroll-pattern absolute inset-0">
+            <div className="diagonal-lines-pattern"></div>
           </div>
           <Services />
         </div>
@@ -107,7 +107,7 @@ function App() {
           <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
+          <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -150,10 +150,10 @@ function App() {
         {/* Service 2 - Embrayage */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="scroll-pattern absolute inset-0">
-            <div className="circuit-pattern"></div>
+            <div className="dots-grid-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
-            <div className="circuit-pattern"></div>
+          <div className="scroll-pattern absolute inset-0">
+            <div className="dots-grid-pattern"></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
@@ -198,7 +198,7 @@ function App() {
           <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
+          <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -241,10 +241,10 @@ function App() {
         {/* Service 4 - Suspensions */}
         <div className="section py-8 sm:py-12 lg:py-16 slide-in-right diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)' }}>
           <div className="scroll-pattern absolute inset-0">
-            <div className="particles-pattern"></div>
+            <div className="wave-lines-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
-            <div className="particles-pattern"></div>
+          <div className="scroll-pattern absolute inset-0">
+            <div className="wave-lines-pattern"></div>
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
@@ -289,7 +289,7 @@ function App() {
           <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
+          <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
           <ServiceArea />
@@ -298,10 +298,10 @@ function App() {
         {/* FAQ (clair #F6F6F6) */}
         <div className="relative">
           <div className="scroll-pattern absolute inset-0">
-            <div className="hex-pattern"></div>
+            <div className="diamond-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
-            <div className="hex-pattern"></div>
+          <div className="scroll-pattern absolute inset-0">
+            <div className="diamond-pattern"></div>
           </div>
           <FAQ />
         </div>
@@ -311,7 +311,7 @@ function App() {
           <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
-          <div className="scroll-pattern inset-0">
+          <div className="scroll-pattern absolute inset-0">
             <div className="hex-pattern"></div>
           </div>
           <Contact />

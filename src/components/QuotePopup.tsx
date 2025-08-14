@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle } from 'lucide-react';
+import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle, FileText } from 'lucide-react';
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };

@@ -31,11 +31,6 @@ const Contact = () => {
       className="section relative py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-backslash"
       style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
     >
-      {/* Phare dynamique pour Contact */}
-      <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-        <div className="headlight headlight-main"></div>
-      </div>
-      
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">

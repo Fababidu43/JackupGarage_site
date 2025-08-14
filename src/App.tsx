@@ -39,7 +39,7 @@ function App() {
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
       const patterns = document.querySelectorAll('.scroll-pattern');
-      const headlights = document.querySelectorAll('.headlight');
+      const dynamicBackgrounds = document.querySelectorAll('.dynamic-background');
       
       patterns.forEach((pattern, index) => {
         const section = pattern.closest('.section');
@@ -68,18 +68,25 @@ function App() {
         }
       });
       
-      // Gestion des phares dynamiques
-      headlights.forEach((headlight) => {
-        const section = headlight.closest('.section');
+      // Gestion des fonds dynamiques
+      dynamicBackgrounds.forEach((background) => {
+        const section = background.closest('.section');
         if (section) {
           const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight * 0.9 && rect.bottom > window.innerHeight * 0.1;
+          const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+          const intensity = Math.max(0, Math.min(1, 1 - Math.abs(rect.top) / window.innerHeight));
           
           if (isVisible) {
-            headlight.classList.add('active');
-            console.log('Phare activé:', headlight.className);
+            background.classList.add('active');
+            
+            // Ajouter classe d'intensité basée sur le scroll
+            if (intensity > 0.5) {
+              background.classList.add('scroll-active');
+            } else {
+              background.classList.remove('scroll-active');
+            }
           } else {
-            headlight.classList.remove('active');
+            background.classList.remove('active', 'scroll-active');
           }
         }
       });
@@ -88,8 +95,8 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
     
-    // Debug: vérifier que les phares sont bien détectés
-    console.log('Phares détectés:', document.querySelectorAll('.headlight').length);
+    // Debug: vérifier que les fonds dynamiques sont bien détectés
+    console.log('Fonds dynamiques détectés:', document.querySelectorAll('.dynamic-background').length);
     
     return () => {
       observer.disconnect();
@@ -119,9 +126,12 @@ function App() {
         
         {/* Service 1 - Entretiens (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phare dynamique pour Entretiens */}
-          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-main"></div>
+          {/* Fond dynamique pour Entretiens */}
+          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer bg-layer-gradient"></div>
+            <div className="bg-layer bg-layer-tech"></div>
+            <div className="bg-layer bg-layer-particles"></div>
+            <div className="bg-layer bg-layer-depth"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -203,9 +213,12 @@ function App() {
 
         {/* Service 3 - Kit Distributions (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 slide-in-left diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
-          {/* Phare dynamique pour Distribution */}
-          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-main"></div>
+          {/* Fond dynamique pour Distribution */}
+          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer bg-layer-gradient"></div>
+            <div className="bg-layer bg-layer-tech"></div>
+            <div className="bg-layer bg-layer-particles"></div>
+            <div className="bg-layer bg-layer-depth"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -287,9 +300,12 @@ function App() {
         
         {/* Zone d'intervention (FOND NOIR) */}
         <div className="relative">
-          {/* Phare dynamique pour Zone d'intervention - AJOUTÉ */}
-          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-main"></div>
+          {/* Fond dynamique pour Zone d'intervention */}
+          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer bg-layer-gradient"></div>
+            <div className="bg-layer bg-layer-tech"></div>
+            <div className="bg-layer bg-layer-particles"></div>
+            <div className="bg-layer bg-layer-depth"></div>
           </div>
           <ServiceArea />
         </div>
@@ -299,9 +315,12 @@ function App() {
         
         {/* Contact (FOND NOIR) */}
         <div className="relative">
-          {/* Phare dynamique pour Contact - AJOUTÉ */}
-          <div className="headlights-container absolute inset-0 pointer-events-none z-0">
-            <div className="headlight headlight-main"></div>
+          {/* Fond dynamique pour Contact */}
+          <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
+            <div className="bg-layer bg-layer-gradient"></div>
+            <div className="bg-layer bg-layer-tech"></div>
+            <div className="bg-layer bg-layer-particles"></div>
+            <div className="bg-layer bg-layer-depth"></div>
           </div>
           <Contact />
         </div>

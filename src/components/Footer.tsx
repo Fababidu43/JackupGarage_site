@@ -31,11 +31,6 @@ const Footer = () => {
       ref={footerRef}
       className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
     >
-      {/* Motif réactif au scroll */}
-      <div className="scroll-pattern absolute inset-0">
-        <div className="hex-pattern"></div>
-      </div>
-      
       {/* Grille tech subtile */}
       <div className="absolute inset-0 tech-grid opacity-20"></div>
       

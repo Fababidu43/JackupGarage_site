@@ -363,10 +363,8 @@
 /* Motif hexagonal */
 .hex-pattern {
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.15) 3px, transparent 4px),
-    radial-gradient(circle at 75% 75%, rgba(255, 107, 53, 0.12) 2px, transparent 3px),
-    radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.08) 1px, transparent 2px);
-  background-size: 40px 40px, 60px 60px, 80px 80px;
+    radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px;
   width: 100%;
   height: 100%;
   animation: hexFloat 15s ease-in-out infinite;
@@ -456,103 +454,6 @@
   75% { 
     transform: translateY(-30px) translateX(15px);
     opacity: 0.7;
-  }
-}
-
-/* === NOUVEAUX MOTIFS POUR FONDS BLANCS === */
-
-/* Motif lignes diagonales pour fonds blancs */
-.diagonal-lines-pattern {
-  background-image: 
-    linear-gradient(45deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px),
-    linear-gradient(-45deg, rgba(255, 107, 53, 0.04) 1px, transparent 1px);
-  background-size: 30px 30px, 30px 30px;
-  width: 100%;
-  height: 100%;
-  animation: diagonalMove 20s linear infinite;
-}
-
-@keyframes diagonalMove {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 30px 30px, -30px -30px; }
-}
-
-/* Motif points en grille pour fonds blancs */
-.dots-grid-pattern {
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.08) 1.5px, transparent 2px);
-  background-size: 25px 25px;
-  width: 100%;
-  height: 100%;
-  animation: dotsFloat 12s ease-in-out infinite;
-}
-
-@keyframes dotsFloat {
-  0%, 100% { 
-    transform: translateY(0px) scale(1);
-    opacity: 0.08;
-  }
-  50% { 
-    transform: translateY(-5px) scale(1.05);
-    opacity: 0.12;
-  }
-}
-
-/* Motif vagues pour fonds blancs */
-.wave-lines-pattern {
-  background-image: 
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 20px,
-      rgba(255, 107, 53, 0.05) 21px,
-      rgba(255, 107, 53, 0.05) 22px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 40px,
-      rgba(255, 107, 53, 0.03) 41px,
-      rgba(255, 107, 53, 0.03) 42px
-    );
-  width: 100%;
-  height: 100%;
-  animation: waveMove 18s ease-in-out infinite;
-}
-
-@keyframes waveMove {
-  0%, 100% { 
-    background-position: 0 0, 0 0;
-    transform: skewY(0deg);
-  }
-  50% { 
-    background-position: 0 10px, 20px 0;
-    transform: skewY(0.5deg);
-  }
-}
-
-/* Motif losanges pour fonds blancs */
-.diamond-pattern {
-  background-image: 
-    linear-gradient(45deg, rgba(255, 107, 53, 0.06) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(255, 107, 53, 0.06) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(255, 107, 53, 0.04) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(255, 107, 53, 0.04) 75%);
-  background-size: 50px 50px;
-  background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
-  width: 100%;
-  height: 100%;
-  animation: diamondShift 16s ease-in-out infinite;
-}
-
-@keyframes diamondShift {
-  0%, 100% { 
-    background-position: 0 0, 0 25px, 25px -25px, -25px 0px;
-    transform: rotate(0deg);
-  }
-  50% { 
-    background-position: 25px 25px, 25px 50px, 50px 0px, 0px 25px;
-    transform: rotate(0.5deg);
   }
 }
 

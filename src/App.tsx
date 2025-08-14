@@ -291,7 +291,7 @@ function App() {
         </div>
         
         {/* FAQ (FOND BLANC) */}
-        <div className="scroll-animate">
+        <div id="faq" className="scroll-animate">
           <FAQ />
         </div>
         

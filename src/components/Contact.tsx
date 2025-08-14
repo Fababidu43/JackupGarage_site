@@ -37,6 +37,7 @@ const Contact = () => {
         <div className="bg-layer bg-layer-tech"></div>
         <div className="bg-layer bg-layer-particles"></div>
         <div className="bg-layer bg-layer-depth"></div>
+        <div className="bg-layer bg-layer-metallic"></div>
       </div>
       
       <div className="relative z-10">

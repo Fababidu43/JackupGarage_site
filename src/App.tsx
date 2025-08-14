@@ -38,6 +38,10 @@ function App() {
     // Gestion des motifs réactifs au scroll
     const handleScroll = () => {
       const scrollY = window.pageYOffset;
+      const lastScrollY = window.lastScrollY || 0;
+      const scrollDirection = scrollY > lastScrollY ? 'down' : 'up';
+      window.lastScrollY = scrollY;
+      
       const patterns = document.querySelectorAll('.scroll-pattern');
       const dynamicBackgrounds = document.querySelectorAll('.dynamic-background');
       
@@ -70,25 +74,11 @@ function App() {
       
       // Gestion des fonds dynamiques
       dynamicBackgrounds.forEach((background) => {
-        const section = background.closest('.section');
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
-          const intensity = Math.max(0, Math.min(1, 1 - Math.abs(rect.top) / window.innerHeight));
-          
-          if (isVisible) {
-            background.classList.add('active');
-            
-            // Ajouter classe d'intensité basée sur le scroll
-            if (intensity > 0.5) {
-              background.classList.add('scroll-active');
-            } else {
-              background.classList.remove('scroll-active');
-            }
-          } else {
-            background.classList.remove('active', 'scroll-active');
-          }
-        }
+        // Supprimer les anciennes classes de direction
+        background.classList.remove('scroll-up', 'scroll-down');
+        
+        // Ajouter la nouvelle classe de direction
+        background.classList.add(`scroll-${scrollDirection}`);
       });
     };
 
@@ -132,6 +122,7 @@ function App() {
             <div className="bg-layer bg-layer-tech"></div>
             <div className="bg-layer bg-layer-particles"></div>
             <div className="bg-layer bg-layer-depth"></div>
+            <div className="bg-layer bg-layer-metallic"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -219,6 +210,7 @@ function App() {
             <div className="bg-layer bg-layer-tech"></div>
             <div className="bg-layer bg-layer-particles"></div>
             <div className="bg-layer bg-layer-depth"></div>
+            <div className="bg-layer bg-layer-metallic"></div>
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
@@ -306,6 +298,7 @@ function App() {
             <div className="bg-layer bg-layer-tech"></div>
             <div className="bg-layer bg-layer-particles"></div>
             <div className="bg-layer bg-layer-depth"></div>
+            <div className="bg-layer bg-layer-metallic"></div>
           </div>
           <ServiceArea />
         </div>
@@ -321,6 +314,7 @@ function App() {
             <div className="bg-layer bg-layer-tech"></div>
             <div className="bg-layer bg-layer-particles"></div>
             <div className="bg-layer bg-layer-depth"></div>
+            <div className="bg-layer bg-layer-metallic"></div>
           </div>
           <Contact />
         </div>

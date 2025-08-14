@@ -52,13 +52,12 @@ const Footer = () => {
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
-                src="/src/logo.png" 
+                src="/logo.png" 
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
                 onError={(e) => {
-                  console.error('Footer logo failed to load:', e);
-                  e.currentTarget.style.display = 'none';
+                  console.error('Footer logo failed to load');
                 }}
               />
             </div>

@@ -193,8 +193,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               {/* Header avec croix */}
               <div className="flex items-center justify-between p-5 border-b border-orange-500/30 bg-black/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-8 h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center">
+                    <img 
+                      src="/src/logo.png" 
+                      alt="Jack Up Garage" 
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <span className="text-white font-bold text-base font-futuristic uppercase tracking-wide">Navigation</span>
                 </div>

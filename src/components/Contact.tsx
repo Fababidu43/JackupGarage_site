@@ -48,9 +48,9 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
             {/* Contact Info */}
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-6">
               <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
-                <div className="flex items-center mb-2 sm:mb-3">
+                <div className="flex items-center mb-2">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                     <Phone className="w-5 h-5" />
                   </div>
@@ -68,7 +68,7 @@ const Contact = () => {
               </div>
 
               <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
-                <div className="flex items-center mb-2 sm:mb-3">
+                <div className="flex items-center mb-2">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                     <Mail className="w-5 h-5" />
                   </div>
@@ -86,7 +86,7 @@ const Contact = () => {
               </div>
 
               <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
-                <div className="flex items-center mb-2 sm:mb-3">
+                <div className="flex items-center mb-2">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white mr-3 pulse-subtle" style={{ background: '#FF6B35' }}>
                     <Clock className="w-5 h-5" />
                   </div>
@@ -116,7 +116,7 @@ const Contact = () => {
                       required
                       value={formData.firstName}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     />
                   </div>
                   <div>
@@ -130,7 +130,7 @@ const Contact = () => {
                       required
                       value={formData.lastName}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -146,7 +146,7 @@ const Contact = () => {
                     required
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                   />
                 </div>
 
@@ -162,7 +162,7 @@ const Contact = () => {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     />
                   </div>
                   <div>
@@ -176,7 +176,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -192,7 +192,7 @@ const Contact = () => {
                       name="registration"
                       value={formData.registration}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     />
                   </div>
                   <div>
@@ -205,7 +205,7 @@ const Contact = () => {
                       required
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[44px] transition-all duration-200"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded font-light font-tech glow-focus text-sm min-h-[44px] transition-all duration-200"
                     >
                       <option value="">Sélectionner</option>
                       <option value="entretien">Entretien / Vidange</option>
@@ -228,7 +228,7 @@ const Contact = () => {
                     required
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus text-sm sm:text-base min-h-[80px] transition-all duration-200"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white/95 border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none resize-none rounded font-light font-tech glow-focus text-sm min-h-[80px] transition-all duration-200"
                     placeholder="Décrivez les symptômes, bruits anormaux, ou tout autre détail utile..."
                   />
                 </div>
@@ -249,7 +249,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full btn-primary py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow text-sm sm:text-base min-h-[48px]"
+                  className="w-full btn-primary py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow text-sm min-h-[48px]"
                 >
                   <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Envoyer la demande

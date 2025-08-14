@@ -52,26 +52,26 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <span className="hover-glow-text">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
+        <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
           Haute-Loire & Loire (43–42)
         </div>
         
-        <p className="text-base sm:text-lg lg:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2">
+        <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto">
           Entretien, freins, embrayage, distribution, suspensions.<br />
           <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-2 sm:px-4">
           <button
             onClick={onQuoteClick}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto"
           >
             Demander un devis
             <ArrowRight className="ml-3 w-5 h-5" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-base sm:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px]"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto"
           >
             <Phone className="mr-3 w-5 h-5" />
             Appeler
@@ -79,20 +79,20 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-6 text-white/80 reveal-on-scroll px-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 text-white/80 reveal-on-scroll px-2 sm:px-4">
           <div className="flex items-center">
-            <Shield className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">RC Pro</span>
+            <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
+            <span className="font-medium tracking-wide text-xs uppercase font-tech">RC Pro</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full lg:mx-2"></div>
+          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
           <div className="flex items-center">
-            <FileText className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">Devis gratuit</span>
+            <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
+            <span className="font-medium tracking-wide text-xs uppercase font-tech">Devis gratuit</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full lg:mx-2"></div>
+          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
           <div className="flex items-center">
-            <Clock className="w-5 h-5 mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-xs sm:text-sm uppercase font-tech">{"Réponse < 12h"}</span>
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
+            <span className="font-medium tracking-wide text-xs uppercase font-tech">{"Réponse < 12h"}</span>
           </div>
         </div>
       </div>

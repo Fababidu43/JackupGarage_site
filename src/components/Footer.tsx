@@ -33,7 +33,7 @@ const Footer = () => {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         {/* Layout horizontal compact */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px]">
           
           {/* Nom seulement */}
           <div className="text-center lg:text-left">
@@ -44,7 +44,7 @@ const Footer = () => {
           {/* Logo super large centré */}
           <div className="flex-1 flex justify-center items-center">
             <div 
-              className="w-40 h-16 sm:w-48 sm:h-18 lg:w-56 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
+              className="w-32 h-12 sm:w-40 sm:h-16 lg:w-48 lg:h-18 xl:w-56 xl:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
@@ -56,23 +56,25 @@ const Footer = () => {
           </div>
 
           {/* Contact + Réseaux sociaux */}
-          <div className="flex items-center space-x-3 sm:space-x-4 lg:justify-end">
+          <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 lg:justify-end">
             {/* Contact rapide */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <a 
                 href="tel:+33123456789"
                 className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
               >
-                <Phone className="w-3 h-3 mr-1" />
-                <span className="text-xs font-tech">01 23 45 67 89</span>
+                <Phone className="w-3 h-3 mr-0.5 sm:mr-1" />
+                <span className="text-xs font-tech hidden sm:inline">01 23 45 67 89</span>
+                <span className="text-xs font-tech sm:hidden">Tel</span>
               </a>
               <div className="w-0.5 h-3 bg-gray-700"></div>
               <a 
                 href="mailto:contact@jackupgarage.fr"
                 className="flex items-center text-gray-400 hover:text-orange-400 transition-colors hover-lift"
               >
-                <Mail className="w-3 h-3 mr-1" />
-                <span className="text-xs font-tech">Email</span>
+                <Mail className="w-3 h-3 mr-0.5 sm:mr-1" />
+                <span className="text-xs font-tech hidden sm:inline">Email</span>
+                <span className="text-xs font-tech sm:hidden">Mail</span>
               </a>
             </div>
 
@@ -80,12 +82,12 @@ const Footer = () => {
             <div className="w-0.5 h-4 bg-gray-700"></div>
 
             {/* Réseaux sociaux */}
-            <div className="flex space-x-2">
+            <div className="flex space-x-1 sm:space-x-2">
               <a 
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
+                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
                 <Facebook className="w-3 h-3" />
               </a>
@@ -93,7 +95,7 @@ const Footer = () => {
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
+                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
                 <Instagram className="w-3 h-3" />
               </a>
@@ -102,7 +104,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright minimaliste */}
-        <div className="mt-2 pt-2 border-t border-gray-800">
+        <div className="mt-2 pt-2 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-xs font-tech">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>

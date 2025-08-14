@@ -384,13 +384,13 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             </p>
             
             {/* Pills de conditions */}
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <div className="condition-pill text-sm">
-                <Home className="w-3 h-3" />
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mb-6 sm:mb-8 px-2">
+              <div className="condition-pill text-xs sm:text-sm">
+                <Home className="w-3 h-3 sm:w-4 sm:h-4" />
                 Sol dur et plat uniquement
               </div>
-              <div className="condition-pill info text-sm">
-                <Info className="w-3 h-3" />
+              <div className="condition-pill info text-xs sm:text-sm">
+                <Info className="w-3 h-3 sm:w-4 sm:h-4" />
                 Saint-Étienne : accès limité
               </div>
             </div>
@@ -401,13 +401,13 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             
             {/* Carte Interactive Google Maps */}
             <div className="w-full">
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
-                <h3 className="text-xl font-bold text-white mb-4 font-futuristic text-center">
-                  <MapIcon className="w-6 h-6 inline-block mr-2 text-orange-400" />
+              <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 font-futuristic text-center">
+                  <MapIcon className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
                   Carte Interactive
                 </h3>
-                <div className="text-center mb-4">
-                  <p className="text-orange-300 text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
+                <div className="text-center mb-3 sm:mb-4 px-2">
+                  <p className="text-orange-300 text-xs sm:text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-lg inline-block">
                     Zone élargie embrayage : Supplément 1,00 € TTC/km au-delà de 50 km
                   </p>
                 </div>
@@ -418,38 +418,38 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               />
 
                 {/* Légende élégante */}
-                <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm">
-                  <div className="flex items-center gap-2 bg-green-500/20 px-3 py-2 rounded-full">
+                <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
+                  <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium">Zone couverte (0-50km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-50km)</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-yellow-500/20 px-3 py-2 rounded-full">
+                  <div className="flex items-center gap-1 sm:gap-2 bg-yellow-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium">Zone élargie (50-75km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (50-75km)</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-red-500/20 px-3 py-2 rounded-full">
+                  <div className="flex items-center gap-1 sm:gap-2 bg-red-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium">Accès limité</span>
+                    <span className="text-white font-medium whitespace-nowrap">Accès limité</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Vérificateur de Couverture */}
-            <div className="max-w-md mx-auto">
-              <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl border-2 border-orange-500/40 hover:border-orange-500/60 transition-all duration-300">
-                <div className="text-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-3 shadow-lg">
-                    <MapPin className="w-6 h-6" />
+            <div className="max-w-sm sm:max-w-md mx-auto px-2 sm:px-0">
+              <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-2xl border-2 border-orange-500/40 hover:border-orange-500/60 transition-all duration-300">
+                <div className="text-center mb-3 sm:mb-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3 shadow-lg">
+                    <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 font-futuristic">
-                    <Search className="w-5 h-5 inline-block mr-2 text-orange-500" />
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic">
+                    <Search className="w-4 h-4 sm:w-5 sm:h-5 inline-block mr-2 text-orange-500" />
                     Vérificateur de Couverture
                   </h3>
                 </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 font-tech">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3 font-tech">
                   Votre ville ou code postal
                 </label>
                 <input
@@ -458,13 +458,13 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   value={coverageInput}
                   onChange={(e) => setCoverageInput(e.target.value)}
                   placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
                 />
               </div>
 
               {/* Résultat de couverture */}
               {coverageResult.status && (
-                <div className={`mt-4 p-4 rounded-xl font-medium text-sm border-2 transition-all duration-300 ${
+                <div className={`mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl font-medium text-xs sm:text-sm border-2 transition-all duration-300 ${
                   coverageResult.status === 'covered' ? 'bg-green-50 text-green-800 border-green-300 shadow-green-100' :
                   coverageResult.status === 'on-demand' ? 'bg-yellow-50 text-yellow-800 border-yellow-300 shadow-yellow-100' :
                   coverageResult.status === 'quote-only' ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-orange-100' :
@@ -529,9 +529,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           <div className="text-center">
             <button
               onClick={onQuoteClick}
-              className="inline-flex items-center px-10 py-5 btn-primary rounded-2xl text-xl font-tech glow-hover hover-scale morph-button subtle-glow shadow-2xl"
+              className="inline-flex items-center px-6 sm:px-8 lg:px-10 py-4 sm:py-5 btn-primary rounded-2xl text-lg sm:text-xl font-tech glow-hover hover-scale morph-button subtle-glow shadow-2xl w-full sm:w-auto max-w-sm sm:max-w-none mx-auto"
             >
-              <MapPin className="mr-3 w-6 h-6" />
+              <MapPin className="mr-2 sm:mr-3 w-5 h-5 sm:w-6 sm:h-6" />
               Demander un devis
             </button>
           </div>

@@ -123,12 +123,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               {navigationItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3 py-2 text-xs lg:text-sm font-medium tracking-wide uppercase font-tech
+                  className={`relative px-2 lg:px-3 py-2 text-xs xl:text-sm font-medium tracking-wide uppercase font-tech
                     transition-all duration-200 ease-out transform hover:translate-y-[-1px]
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
                     ${activeSection === item.id 
@@ -152,10 +152,10 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
               {/* CTA Appeler Desktop */}
               <a
                 onClick={onQuoteClick}
-                className="ml-2 lg:ml-4 px-4 lg:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
+                className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
-                  font-tech uppercase tracking-wide text-xs lg:text-sm"
+                  font-tech uppercase tracking-wide text-xs xl:text-sm"
               >
                 Devis
               </a>
@@ -164,7 +164,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200
+              className="lg:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200
                 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded"
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
@@ -179,13 +179,14 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
           <>
             {/* Backdrop */}
             <div 
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"
               onClick={() => setIsMenuOpen(false)}
             />
             
             {/* Menu Panel */}
-            <div className="fixed top-16 right-4 left-4 max-w-sm mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-md rounded-2xl shadow-2xl
-              border-2 border-orange-500/40 z-40 md:hidden transform transition-all duration-300 ease-out overflow-hidden">
+            <div className="fixed top-16 right-2 left-2 sm:right-4 sm:left-4 max-w-sm mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-md rounded-2xl shadow-2xl
+              border-2 border-orange-500/40 z-40 lg:hidden transform transition-all duration-300 ease-out overflow-hidden"
+            >
               
               {/* Accent lumineux en haut */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>

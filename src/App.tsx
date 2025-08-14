@@ -24,8 +24,26 @@ function App() {
       return;
     }
     
+    // Gestion des formes réactives au scroll
+    const handleScrollShapes = () => {
+      const shapes = document.querySelectorAll('.scroll-shapes');
+      shapes.forEach((shape) => {
+        const rect = shape.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2;
+        
+        if (isVisible) {
+          shape.classList.add('active');
+        } else {
+          shape.classList.remove('active');
+        }
+      });
+    };
+    
     // Système d'animation futuriste au scroll
     const handleFuturisticScroll = () => {
+      handleScrollShapes();
+      
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY > lastScrollYRef.current ? 'down' : 'up';
       scrollDirectionRef.current = scrollDirection;
@@ -182,17 +200,24 @@ function App() {
             <div className="bg-layer-white bg-layer-metallic-white"></div>
           </div>
           
+          {/* Formes réactives au scroll */}
+          <div className="scroll-shapes shapes-white top-12 left-20">
+            <div className="shape-circle"></div>
+          </div>
+          <div className="scroll-shapes shapes-white top-24 right-16">
+            <div className="shape-square"></div>
+          </div>
+          <div className="scroll-shapes shapes-white bottom-20 left-12">
+            <div className="shape-triangle"></div>
+          </div>
+          <div className="scroll-shapes shapes-white top-40 right-32">
+            <div className="shape-line"></div>
+          </div>
+          <div className="scroll-shapes shapes-white bottom-12 right-8">
+            <div className="shape-dot"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
-            {/* Éléments décoratifs embrayage */}
-            <div className="absolute top-8 left-8 w-20 h-20 bg-orange-500/3 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-12 right-12 w-16 h-16 bg-orange-500/4 rounded-full blur-xl"></div>
-            <div className="absolute top-1/2 left-4 w-1 h-8 bg-orange-500/20 rounded-full"></div>
-            <div className="absolute top-1/3 right-8 w-px h-12 bg-orange-500/15"></div>
-            
-            {/* Motifs techniques */}
-            <div className="absolute top-16 right-1/4 w-6 h-6 border-2 border-orange-500/10 rounded rotate-45"></div>
-            <div className="absolute bottom-20 left-1/3 w-4 h-4 border border-orange-500/15 rounded-full"></div>
-            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>
@@ -280,18 +305,24 @@ function App() {
             <div className="bg-layer-white bg-layer-metallic-white"></div>
           </div>
           
+          {/* Formes réactives au scroll */}
+          <div className="scroll-shapes shapes-white top-16 left-24">
+            <div className="shape-circle"></div>
+          </div>
+          <div className="scroll-shapes shapes-white top-28 right-20">
+            <div className="shape-square"></div>
+          </div>
+          <div className="scroll-shapes shapes-white bottom-24 left-16">
+            <div className="shape-triangle"></div>
+          </div>
+          <div className="scroll-shapes shapes-white top-36 right-28">
+            <div className="shape-line"></div>
+          </div>
+          <div className="scroll-shapes shapes-white bottom-16 right-12">
+            <div className="shape-dot"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
-            {/* Éléments décoratifs suspensions */}
-            <div className="absolute top-12 right-8 w-24 h-24 bg-orange-500/3 rounded-full blur-2xl"></div>
-            <div className="absolute bottom-8 left-12 w-18 h-18 bg-orange-500/4 rounded-full blur-xl"></div>
-            <div className="absolute top-1/4 right-4 w-px h-16 bg-orange-500/20"></div>
-            <div className="absolute bottom-1/3 left-8 w-2 h-2 bg-orange-500/25 rounded-full animate-pulse"></div>
-            
-            {/* Lignes techniques */}
-            <div className="absolute top-20 left-1/4 w-12 h-px bg-orange-500/15"></div>
-            <div className="absolute bottom-16 right-1/3 w-8 h-px bg-orange-500/20"></div>
-            <div className="absolute top-1/2 left-1/2 w-3 h-3 border border-orange-500/10 rotate-45 transform -translate-x-1/2"></div>
-            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>

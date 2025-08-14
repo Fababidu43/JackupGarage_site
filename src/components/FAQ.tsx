@@ -58,17 +58,24 @@ const FAQ = () => {
         <div className="bg-layer-white bg-layer-metallic-white"></div>
       </div>
       
+      {/* Formes réactives au scroll */}
+      <div className="scroll-shapes shapes-white top-12 left-16">
+        <div className="shape-circle"></div>
+      </div>
+      <div className="scroll-shapes shapes-white top-20 right-12">
+        <div className="shape-square"></div>
+      </div>
+      <div className="scroll-shapes shapes-white bottom-16 left-8">
+        <div className="shape-triangle"></div>
+      </div>
+      <div className="scroll-shapes shapes-white top-32 right-24">
+        <div className="shape-line"></div>
+      </div>
+      <div className="scroll-shapes shapes-white bottom-8 right-32">
+        <div className="shape-dot"></div>
+      </div>
+      
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Éléments décoratifs FAQ */}
-        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent rounded-full"></div>
-        <div className="absolute top-1/4 -left-8 w-12 h-12 bg-orange-500/3 rounded-full blur-lg"></div>
-        <div className="absolute top-3/4 -right-8 w-16 h-16 bg-orange-500/3 rounded-full blur-xl"></div>
-        
-        {/* Motif géométrique subtil */}
-        <div className="absolute top-12 left-4 w-4 h-4 border border-orange-500/10 rotate-45"></div>
-        <div className="absolute top-32 right-8 w-3 h-3 border border-orange-500/15 rotate-12"></div>
-        <div className="absolute bottom-24 left-12 w-2 h-2 bg-orange-500/20 rounded-full"></div>
-        
         <div className="relative z-10">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
@@ -80,19 +87,8 @@ const FAQ = () => {
           <p className="text-sm sm:text-base font-semibold uppercase font-tech mb-2" style={{ color: '#FF6B35' }}>
             Toutes les réponses à vos questions
           </p>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
         </div>
 
-        {/* Séparateur décoratif */}
-        <div className="flex items-center justify-center mb-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-px bg-orange-500/30"></div>
-            <div className="w-2 h-2 bg-orange-500/40 rounded-full"></div>
-            <div className="w-12 h-px bg-orange-500/30"></div>
-            <div className="w-1 h-1 bg-orange-500/50 rounded-full"></div>
-            <div className="w-8 h-px bg-orange-500/30"></div>
-          </div>
-        </div>
 
         <div className="space-y-3">
           {faqItems.map((item, index) => (

@@ -403,12 +403,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             <div className="w-full">
               <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
                 <h3 className="text-xl font-bold text-white mb-4 font-futuristic text-center">
-                  <Map className="w-6 h-6 inline-block mr-2 text-orange-400" />
+                  <FileText className="w-6 h-6 inline-block mr-2 text-orange-400" />
                   Carte Interactive
                 </h3>
                 <div className="text-center mb-4">
                   <p className="text-orange-300 text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-4 py-2 rounded-lg inline-block">
-                    <DollarSign className="w-4 h-4 inline-block mr-1" />
+                    <FileText className="w-4 h-4 inline-block mr-1" />
                     Zone élargie embrayage : Supplément 1,00 € TTC/km au-delà de 50 km
                   </p>
                 </div>

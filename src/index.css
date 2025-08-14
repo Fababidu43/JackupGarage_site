@@ -217,26 +217,26 @@
 
 .headlight {
   position: absolute;
-  width: 400px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   opacity: 0;
   transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  filter: blur(40px);
-  background: radial-gradient(ellipse 800px 400px, rgba(255, 107, 53, 0.8) 0%, rgba(255, 140, 66, 0.5) 20%, rgba(255, 180, 100, 0.3) 40%, transparent 80%);
+  filter: blur(30px);
+  background: radial-gradient(ellipse 300px 150px, rgba(255, 107, 53, 0.6) 0%, rgba(255, 140, 66, 0.3) 30%, transparent 70%);
   transform: scale(0.5);
-  border-radius: 40%;
+  border-radius: 50%;
 }
 
 .headlight.active {
   opacity: 1;
-  filter: blur(20px);
+  filter: blur(10px);
   transform: scale(1);
-  animation: headlightBeam 6s ease-in-out infinite;
+  animation: headlightBeam 4s ease-in-out infinite;
 }
 
-/* Position du phare principal - côté gauche étendu */
+/* Position unique du phare - côté gauche */
 .headlight-main {
-  left: -200px;
+  left: -100px;
   top: 50%;
   transform: translateY(-50%) scale(0.5);
 }
@@ -245,72 +245,28 @@
   transform: translateY(-50%) scale(1);
 }
 
-/* Phare secondaire pour couvrir toute la largeur */
-.headlight-secondary {
-  right: -200px;
-  top: 50%;
-  transform: translateY(-50%) scale(0.5);
-  animation-delay: 0.5s;
-}
-
-.headlight-secondary.active {
-  transform: translateY(-50%) scale(1);
-}
-
-/* Phare central pour l'effet de convergence */
-.headlight-center {
-  left: 50%;
-  top: -100px;
-  transform: translateX(-50%) scale(0.5);
-  width: 600px;
-  height: 200px;
-  background: radial-gradient(ellipse 1000px 300px, rgba(255, 107, 53, 0.4) 0%, rgba(255, 140, 66, 0.2) 30%, transparent 70%);
-  animation-delay: 1s;
-}
-
-.headlight-center.active {
-  transform: translateX(-50%) scale(1);
-}
 /* Animation de faisceau lumineux */
 @keyframes headlightBeam {
   0%, 100% { 
     opacity: 1;
-    box-shadow: 
-      0 0 100px rgba(255, 107, 53, 0.6), 
-      0 0 200px rgba(255, 107, 53, 0.4), 
-      0 0 400px rgba(255, 107, 53, 0.2),
-      0 0 800px rgba(255, 107, 53, 0.1);
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.4), 0 0 100px rgba(255, 107, 53, 0.2), 0 0 200px rgba(255, 107, 53, 0.1);
   }
   50% { 
-    opacity: 0.9;
-    box-shadow: 
-      0 0 150px rgba(255, 107, 53, 0.8), 
-      0 0 300px rgba(255, 107, 53, 0.6), 
-      0 0 600px rgba(255, 107, 53, 0.4),
-      0 0 1200px rgba(255, 107, 53, 0.2);
+    opacity: 0.8;
+    box-shadow: 0 0 80px rgba(255, 107, 53, 0.6), 0 0 150px rgba(255, 107, 53, 0.4), 0 0 300px rgba(255, 107, 53, 0.2);
   }
 }
 
 /* Responsive pour mobile */
 @media (max-width: 768px) {
   .headlight {
-    width: 250px;
-    height: 200px;
-    background: radial-gradient(ellipse 400px 200px, rgba(255, 107, 53, 0.7) 0%, rgba(255, 140, 66, 0.4) 30%, transparent 70%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(ellipse 200px 100px, rgba(255, 107, 53, 0.5) 0%, rgba(255, 140, 66, 0.2) 30%, transparent 70%);
   }
   
   .headlight-main {
-    left: -125px;
-  }
-  
-  .headlight-secondary {
-    right: -125px;
-  }
-  
-  .headlight-center {
-    width: 300px;
-    height: 150px;
-    top: -50px;
+    left: -75px;
   }
 }
 /* === ANIMATIONS MÉCANIQUES === */

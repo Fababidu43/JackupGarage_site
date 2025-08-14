@@ -113,36 +113,6 @@ const FAQ = () => {
             </div>
           </div>
         </div>
-                  {item.question}
-                </h3>
-                <div className={`w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:bg-orange-500/20 ${openItems.includes(index) ? 'rotate-180' : ''}`}>
-                  <ChevronDown className="w-4 h-4 text-orange-500 transition-transform duration-200" />
-                </div>
-              </button>
-              
-              {openItems.includes(index) && (
-                <div className="px-4 sm:px-6 pb-3 sm:pb-4 border-t border-orange-500/20 bg-gradient-to-r from-orange-50/50 to-transparent">
-                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed pt-3 sm:pt-4">
-                    {item.question === "Combien coûte un déplacement ?" ? (
-                      <>
-                        Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km.{' '}
-                        <button
-                          onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
-                          className="text-orange-500 hover:text-orange-600 underline font-medium"
-                        >
-                          Voir notre zone d'intervention
-                        </button>
-                        {' '}pour plus de détails.
-                      </>
-                    ) : (
-                      item.answer
-                    )}
-                  </p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
 
         <div className="text-center mt-6 sm:mt-8">
           <p className="text-sm text-gray-600 font-tech mb-4">

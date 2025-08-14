@@ -8,6 +8,9 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
     const handleScroll = () => {
+      // Désactiver l'effet de zoom sur mobile
+      if (window.innerWidth <= 768) return;
+      
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
       if (hero) {

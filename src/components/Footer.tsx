@@ -30,10 +30,14 @@ const Footer = () => {
     <footer 
       ref={footerRef}
       className={`bg-black text-white py-3 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
+      style={{ 
+        minHeight: '120px',
+        paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'
+      }}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         {/* Layout horizontal compact */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px] pb-4">
           
           {/* Nom seulement */}
           <div className="text-center lg:text-left">
@@ -105,7 +109,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright minimaliste */}
-        <div className="mt-2 pt-2 border-t border-gray-800 text-center">
+        <div className="mt-2 pt-2 pb-2 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-xs font-tech">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>

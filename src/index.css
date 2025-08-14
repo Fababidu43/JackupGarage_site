@@ -908,6 +908,43 @@
     transition: none !important;
     animation: none !important;
   }
+  
+  /* Désactiver tous les effets de fond dynamiques sur mobile */
+  .dynamic-background,
+  .dynamic-background-white,
+  .bg-layer,
+  .bg-layer-white,
+  .bg-layer-gradient,
+  .bg-layer-gradient-white,
+  .bg-layer-tech,
+  .bg-layer-tech-white,
+  .bg-layer-particles,
+  .bg-layer-particles-white,
+  .bg-layer-depth,
+  .bg-layer-depth-white,
+  .bg-layer-metallic,
+  .bg-layer-metallic-white {
+    display: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  /* Désactiver les formes mécaniques sur mobile */
+  .mechanical-shapes,
+  .mechanical-shape {
+    display: none !important;
+  }
+  
+  /* Désactiver les motifs de scroll sur mobile */
+  .scroll-pattern,
+  .tech-grid-pattern,
+  .hex-pattern,
+  .circuit-pattern,
+  .gear-pattern,
+  .particles-pattern,
+  .waves-pattern {
+    display: none !important;
+  }
 }
 
 /* Performance optimizations */
@@ -1248,12 +1285,16 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
+  /* Améliorer le scroll sur mobile */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Empêcher le débordement horizontal */
@@ -1318,6 +1359,15 @@ img {
   body {
     min-height: -webkit-fill-available;
   }
+  
+  /* Correction spécifique pour le scroll iOS */
+  html {
+    height: -webkit-fill-available;
+  }
+  
+  #root {
+    min-height: -webkit-fill-available;
+  }
 }
 
 /* Correction des débordements sur très petits écrans */
@@ -1337,6 +1387,12 @@ img {
   
   .text-4xl {
     font-size: 1.75rem;
+  }
+  
+  /* Forcer l'affichage complet du contenu */
+  .section {
+    min-height: auto !important;
+    padding-bottom: 2rem !important;
   }
 }
 

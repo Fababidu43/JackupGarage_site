@@ -364,52 +364,6 @@
 .safe-area-inset-top {
   padding-top: env(safe-area-inset-top);
 }
-
-/* === DÉGRADÉS ANIMÉS AU SCROLL === */
-.scroll-gradient-light {
-  background: linear-gradient(135deg, 
-    #F8F9FA 0%, 
-    #FFFFFF 25%, 
-    #F5F7FA 50%, 
-    #FFFFFF 75%, 
-    #F8F9FA 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientShift 15s ease infinite;
-}
-
-.scroll-gradient-dark {
-  background: linear-gradient(135deg, 
-    #0F0F19 0%, 
-    #1A1A23 25%, 
-    #0A0A14 50%, 
-    #1F1F28 75%, 
-    #0F0F19 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientShift 20s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* === EFFET SCROLL SUR LES DÉGRADÉS === */
-@media (prefers-reduced-motion: no-preference) {
-  .scroll-gradient-light,
-  .scroll-gradient-dark {
-    transition: background-position 0.3s ease-out;
-  }
-}
-
 /* === CORRECTION FOOTER MOBILE === */
 @supports (-webkit-touch-callout: none) {
   /* Styles spécifiques iOS */

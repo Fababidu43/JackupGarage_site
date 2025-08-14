@@ -259,14 +259,14 @@ Merci de me recontacter pour un devis !`;
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/10"></div>
       </div>
 
-      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md lg:max-w-lg my-4 sm:my-8 border border-orange-500/30 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto sm:overflow-hidden">
+      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-xl my-2 sm:my-4 border border-orange-500/30 max-h-[calc(100vh-1rem)] sm:max-h-[calc(100vh-2rem)] overflow-y-auto sm:overflow-hidden">
         {/* Accent lumineux */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
         
         {/* Header futuriste */}
-        <div className="relative flex items-center justify-between p-3 sm:p-4 lg:p-6 border-b border-orange-500/20">
+        <div className="relative flex items-center justify-between p-3 sm:p-4 lg:p-5 border-b border-orange-500/20">
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-16 h-12 sm:w-20 sm:h-16 lg:w-24 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-1.5 sm:p-2 lg:p-3">
+            <div className="w-20 h-10 sm:w-24 sm:h-12 lg:w-28 lg:h-14 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center shadow-lg p-1.5 sm:p-2 lg:p-3">
               <img 
                 src="/src/logo.png" 
                 alt="Jack Up Garage" 
@@ -289,7 +289,7 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Barre de progression futuriste */}
-        <div className="px-3 sm:px-4 lg:px-6 py-2 sm:py-3 lg:py-4 bg-black/50">
+        <div className="px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-black/50">
           <div className="flex items-center justify-between text-xs text-orange-400 mb-3 font-tech uppercase tracking-wider">
             <span>Étape {step}/4</span>
             <span>{Math.round((step / 4) * 100)}%</span>
@@ -306,7 +306,7 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 lg:p-6 sm:overflow-y-auto sm:max-h-[calc(100vh-12rem)]">
+        <div className="p-3 sm:p-4 lg:p-5 sm:overflow-y-auto sm:max-h-[calc(100vh-10rem)]">
           {/* Step 1: Service */}
           {step === 1 && (
             <div>

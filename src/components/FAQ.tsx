@@ -48,7 +48,16 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+      {/* Fond dynamique blanc */}
+      <div className="dynamic-background-white">
+        <div className="bg-layer-white bg-layer-gradient-white"></div>
+        <div className="bg-layer-white bg-layer-tech-white"></div>
+        <div className="bg-layer-white bg-layer-particles-white"></div>
+        <div className="bg-layer-white bg-layer-depth-white"></div>
+        <div className="bg-layer-white bg-layer-metallic-white"></div>
+      </div>
+      
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative z-10">
         <div className="text-center mb-6 sm:mb-8">

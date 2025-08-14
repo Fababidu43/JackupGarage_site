@@ -172,7 +172,16 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+          {/* Fond dynamique blanc */}
+          <div className="dynamic-background-white">
+            <div className="bg-layer-white bg-layer-gradient-white"></div>
+            <div className="bg-layer-white bg-layer-tech-white"></div>
+            <div className="bg-layer-white bg-layer-particles-white"></div>
+            <div className="bg-layer-white bg-layer-depth-white"></div>
+            <div className="bg-layer-white bg-layer-metallic-white"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -251,7 +260,16 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+          {/* Fond dynamique blanc */}
+          <div className="dynamic-background-white">
+            <div className="bg-layer-white bg-layer-gradient-white"></div>
+            <div className="bg-layer-white bg-layer-tech-white"></div>
+            <div className="bg-layer-white bg-layer-particles-white"></div>
+            <div className="bg-layer-white bg-layer-depth-white"></div>
+            <div className="bg-layer-white bg-layer-metallic-white"></div>
+          </div>
+          
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">

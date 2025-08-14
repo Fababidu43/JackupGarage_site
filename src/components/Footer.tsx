@@ -29,22 +29,22 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className={`bg-black text-white py-6 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
+      className={`bg-black text-white py-3 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         {/* Layout horizontal compact */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3">
           
           {/* Nom seulement */}
           <div className="text-center lg:text-left">
-            <h3 className="text-base sm:text-lg font-bold text-white font-futuristic">Jack Up Garage</h3>
-            <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
+            <h3 className="text-sm sm:text-base font-bold text-white font-futuristic">Jack Up Garage</h3>
+            <p className="text-orange-400 text-xs font-tech">Mécanicien à domicile</p>
           </div>
 
           {/* Logo super large centré */}
           <div className="flex-1 flex justify-center">
             <div 
-              className="w-32 h-24 sm:w-40 sm:h-28 lg:w-48 lg:h-32 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
+              className="w-40 h-16 sm:w-48 sm:h-18 lg:w-56 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
@@ -58,26 +58,26 @@ const Footer = () => {
           {/* Contact + Réseaux sociaux */}
           <div className="flex items-center space-x-3 sm:space-x-4 lg:justify-end">
             {/* Contact rapide */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="flex items-center space-x-2">
               <a 
                 href="tel:+33123456789"
                 className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
               >
-                <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                <span className="text-xs sm:text-sm font-tech">01 23 45 67 89</span>
+                <Phone className="w-3 h-3 mr-1" />
+                <span className="text-xs font-tech">01 23 45 67 89</span>
               </a>
-              <div className="w-0.5 h-3 sm:w-1 sm:h-4 bg-gray-700"></div>
+              <div className="w-0.5 h-3 bg-gray-700"></div>
               <a 
                 href="mailto:contact@jackupgarage.fr"
                 className="flex items-center text-gray-400 hover:text-orange-400 transition-colors hover-lift"
               >
-                <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                <span className="text-xs sm:text-sm font-tech">Email</span>
+                <Mail className="w-3 h-3 mr-1" />
+                <span className="text-xs font-tech">Email</span>
               </a>
             </div>
 
             {/* Séparateur */}
-            <div className="w-0.5 h-4 sm:w-1 sm:h-6 bg-gray-700"></div>
+            <div className="w-0.5 h-4 bg-gray-700"></div>
 
             {/* Réseaux sociaux */}
             <div className="flex space-x-2">
@@ -87,7 +87,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
-                <Facebook className="w-3 h-3 sm:w-4 sm:h-4" />
+                <Facebook className="w-3 h-3" />
               </a>
               <a 
                 href="https://instagram.com" 
@@ -95,14 +95,14 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="w-7 h-7 sm:w-8 sm:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
               >
-                <Instagram className="w-3 h-3 sm:w-4 sm:h-4" />
+                <Instagram className="w-3 h-3" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Copyright minimaliste */}
-        <div className="text-center mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-800">
+        <div className="text-center mt-2 pt-2 border-t border-gray-800">
           <p className="text-gray-500 text-xs font-tech">
             © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
           </p>

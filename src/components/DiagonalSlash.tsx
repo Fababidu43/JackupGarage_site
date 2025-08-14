@@ -12,17 +12,20 @@ const DiagonalSlash: React.FC<DiagonalSlashProps> = ({
   bottomColor, 
   type = 'section', 
   className = '' 
-}) => (
+}) => {
+  // Vérifier si topColor est une URL d'image
+  const isImageUrl = topColor.startsWith('url(');
+  
+  return (
   <div
     className={`diag diag--slash diag--${type} ${className}`}
     style={{
-      // fond = bottomColor (plus d'::after)
       background: bottomColor,
-      // triangle = topColor
       ['--top-bg' as any]: topColor,
       ['--bottom-bg' as any]: bottomColor
     }}
   />
-);
+  );
+};
 
 export default DiagonalSlash;

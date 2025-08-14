@@ -26,12 +26,21 @@ const Contact = () => {
   };
 
   return (
-    <section 
-      id="contact" 
-      className="section relative py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-backslash"
-      style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
-    >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative">
+      {/* Fond dynamique pour Contact */}
+      <div className="dynamic-background absolute inset-0 pointer-events-none z-0">
+        <div className="bg-layer bg-layer-gradient"></div>
+        <div className="bg-layer bg-layer-tech"></div>
+        <div className="bg-layer bg-layer-particles"></div>
+        <div className="bg-layer bg-layer-depth"></div>
+      </div>
+      
+      <section 
+        id="contact" 
+        className="section relative py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-backslash z-10"
+        style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}
+      >
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
             <Phone className="w-6 h-6" />
@@ -260,8 +269,9 @@ const Contact = () => {
             </form>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 };
 

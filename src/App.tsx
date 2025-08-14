@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
+import HeroDiagonal from './components/HeroDiagonal';
 import QuotePopup from './components/QuotePopup';
 
 function App() {
@@ -53,12 +54,8 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
         
-        {/* Hero → Services : diagonale "\" avec image de fond */}
-        <DiagonalSlash 
-          topColor="url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')" 
-          bottomColor="#F8F9FA" 
-          type="section" 
-        />
+        {/* Hero → Services : diagonale spéciale avec continuité d'image */}
+        <HeroDiagonal bottomColor="#F8F9FA" />
         
         {/* Services intro (blanc #FFFFFF) */}
         <Services />

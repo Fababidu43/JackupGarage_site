@@ -8,14 +8,19 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
     const handleScroll = () => {
-      // Désactiver l'effet de zoom sur mobile et tablette
-      if (window.innerWidth <= 1024) return;
-      
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
       if (hero) {
         // Effet de zoom sur l'image de fond - grossit quand on scroll vers le bas
-        const zoomFactor = 1 + (scrolled * 0.0005); // Facteur de zoom progressif
+        // Facteur adapté selon la taille d'écran
+        let zoomMultiplier = 0.0005; // Desktop
+        if (window.innerWidth <= 768) {
+          zoomMultiplier = 0.0003; // Mobile - effet plus subtil
+        } else if (window.innerWidth <= 1024) {
+          zoomMultiplier = 0.0004; // Tablette - effet intermédiaire
+        }
+        
+        const zoomFactor = 1 + (scrolled * zoomMultiplier);
         hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
       }
     };

@@ -1416,18 +1416,19 @@ img {
 }
 
 /* Responsive pour l'image de fond du hero */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
+  .hero-diagonal-cut {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center 30% !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
   .hero-diagonal-cut {
     background-attachment: scroll !important;
     background-size: cover !important;
     background-position: center center !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-diagonal-cut {
-    background-size: cover !important;
-    background-position: center 30% !important;
   }
 }
 

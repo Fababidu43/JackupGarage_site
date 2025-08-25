@@ -311,7 +311,7 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-2 sm:p-3 lg:p-4 min-h-0">
+        <div className="flex-1 overflow-y-auto px-2 pt-2 pb-0 sm:p-3 lg:p-4 min-h-0">
           {/* Step 1: Service */}
           {step === 1 && (
             <div>

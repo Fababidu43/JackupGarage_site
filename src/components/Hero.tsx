@@ -11,8 +11,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
       if (hero) {
-        // Effet de zoom sur l'image de fond - grossit quand on scroll vers le bas
-        // Facteur adapté selon la taille d'écran
+        // Effet de zoom sur l'image de fond
         let zoomMultiplier = 0.0005; // Desktop
         if (window.innerWidth <= 768) {
           zoomMultiplier = 0.0003; // Mobile - effet plus subtil
@@ -22,10 +21,33 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         
         const zoomFactor = 1 + (scrolled * zoomMultiplier);
         hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
+        
+        // Effet de parallaxe subtil sur le contenu
+        const heroContent = hero.querySelector('.hero-content');
+        if (heroContent) {
+          const parallaxOffset = scrolled * 0.3;
+          heroContent.style.transform = `translateY(${parallaxOffset}px)`;
+        }
+        
+        // Effet de fade progressif
+        const opacity = Math.max(0.3, 1 - (scrolled / (window.innerHeight * 0.8)));
+        if (heroContent) {
+          heroContent.style.opacity = opacity.toString();
+        }
       }
     };
 
+    // Effet d'apparition progressive au chargement
+    const hero = document.getElementById('hero');
+    if (hero) {
+      const heroContent = hero.querySelector('.hero-content');
+      if (heroContent) {
+        heroContent.classList.add('hero-loaded');
+      }
+    }
+
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Appel initial
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -52,53 +74,70 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundAttachment: window.innerWidth <= 1024 ? 'scroll' : 'fixed'
       }}
     >
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full">
+      {/* Overlay dynamique avec effet de respiration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 animate-pulse-slow opacity-60"></div>
+      
+      {/* Particules flottantes subtiles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="floating-particle particle-1"></div>
+        <div className="floating-particle particle-2"></div>
+        <div className="floating-particle particle-3"></div>
+      </div>
+      
+      <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
-          <span className="hover-glow-text">Mécanicien à domicile</span>
+          <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>
         
-        <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
+        <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll animate-slide-in-up">
           Haute-Loire & Loire (43–42)
         </div>
         
-        <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto">
+        <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">
           Entretien, freins, embrayage, distribution, suspensions.<br />
-          <span className="text-orange-300 hover-glow-text">Nous venons chez vous.</span>
+          <span className="text-orange-300 hover-glow-text animate-text-shimmer">Nous venons chez vous.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-2 sm:px-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-2 sm:px-4 animate-buttons-appear">
           <button
             onClick={onQuoteClick}
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button group"
           >
-            Demander un devis
-            <ArrowRight className="ml-3 w-5 h-5" />
+            <span className="group-hover:animate-bounce-x">Demander un devis</span>
+            <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
           <a
             href="tel:+33123456789"
-            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto"
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button-secondary group"
           >
-            <Phone className="mr-3 w-5 h-5" />
-            Appeler
+            <Phone className="mr-3 w-5 h-5 group-hover:animate-ring transition-transform duration-300" />
+            <span className="group-hover:animate-bounce-x">Appeler</span>
           </a>
         </div>
 
         {/* Barre de preuves */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 text-white/80 reveal-on-scroll px-2 sm:px-4">
-          <div className="flex items-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 text-white/80 reveal-on-scroll px-2 sm:px-4 animate-badges-appear">
+          <div className="flex items-center animate-badge-float-1">
             <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">RC Pro</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
-          <div className="flex items-center">
+          <div className="flex items-center animate-badge-float-2">
             <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">Devis gratuit</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
-          <div className="flex items-center">
+          <div className="flex items-center animate-badge-float-3">
             <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">{"Réponse < 12h"}</span>
           </div>
+        </div>
+      </div>
+      
+      {/* Indicateur de scroll animé */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-orange-400 rounded-full mt-2 animate-scroll-indicator"></div>
         </div>
       </div>
     </section>

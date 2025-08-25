@@ -254,20 +254,20 @@ Merci de me recontacter pour un devis !`;
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-1 sm:p-2 lg:p-4">
       {/* Fond dynamique */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/10"></div>
       </div>
 
-      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg lg:max-w-xl my-2 sm:my-4 border border-orange-500/30 max-h-[calc(100vh-1rem)] sm:max-h-[calc(100vh-2rem)] overflow-y-auto sm:overflow-hidden">
+      <div className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 rounded-xl lg:rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl border border-orange-500/30 max-h-[98vh] sm:max-h-[95vh] lg:max-h-[90vh] overflow-hidden flex flex-col">
         {/* Accent lumineux */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
         
         {/* Header futuriste */}
-        <div className="relative flex items-center justify-between p-3 sm:p-4 lg:p-5 border-b border-orange-500/20">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-12 h-6 sm:w-16 sm:h-8 lg:w-20 lg:h-10 bg-white/95 border border-orange-500/30 rounded-lg flex items-center justify-center p-1 shadow-lg">
+        <div className="relative flex items-center justify-between p-2 sm:p-3 lg:p-4 border-b border-orange-500/20 flex-shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2">
+            <div className="w-10 h-5 sm:w-12 sm:h-6 lg:w-16 lg:h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center p-0.5 sm:p-1 shadow-lg">
               <img 
                 src={logo} 
                 alt="Jack Up Garage" 
@@ -279,30 +279,30 @@ Merci de me recontacter pour un devis !`;
               />
             </div>
             <div>
-              <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-futuristic tracking-wide">
+              <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white font-futuristic tracking-wide">
                 DEVIS EXPRESS
               </h3>
-              <p className="text-orange-400 text-xs sm:text-sm lg:text-base font-tech">Mécanicien à domicile</p>
+              <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 sm:p-1.5 lg:p-2 text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200 hover-scale"
+            className="p-1 sm:p-1.5 text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200 hover-scale flex-shrink-0"
           >
-            <X className="w-4 h-4 sm:w-5 sm:h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Barre de progression futuriste */}
-        <div className="px-3 sm:px-4 lg:px-5 py-2 sm:py-3 bg-black/50">
-          <div className="flex items-center justify-between text-xs text-orange-400 mb-3 font-tech uppercase tracking-wider">
+        <div className="px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 bg-black/50 flex-shrink-0">
+          <div className="flex items-center justify-between text-xs text-orange-400 mb-2 font-tech uppercase tracking-wider">
             <span>Étape {step}/4</span>
             <span>{Math.round((step / 4) * 100)}%</span>
           </div>
-          <div className="relative w-full bg-gray-800 rounded-full h-1 sm:h-1.5 lg:h-2 overflow-hidden">
+          <div className="relative w-full bg-gray-800 rounded-full h-1 sm:h-1.5 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-800"></div>
             <div 
-              className="bg-gradient-to-r from-orange-500 to-orange-400 h-1 sm:h-1.5 lg:h-2 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+              className="bg-gradient-to-r from-orange-500 to-orange-400 h-1 sm:h-1.5 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
               style={{ width: `${(step / 4) * 100}%` }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
@@ -311,15 +311,15 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Content */}
-        <div className="p-3 sm:p-4 lg:p-5 sm:overflow-y-auto sm:max-h-[calc(100vh-10rem)]">
+        <div className="flex-1 overflow-y-auto p-2 sm:p-3 lg:p-4 min-h-0">
           {/* Step 1: Service */}
           {step === 1 && (
             <div>
-              <h4 className="text-sm sm:text-base lg:text-lg font-bold text-white mb-3 sm:mb-4 lg:mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Settings className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400" />
+              <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
+                <Settings className="w-4 h-4 text-orange-400" />
                 QUEL SERVICE VOUS INTÉRESSE ?
               </h4>
-              <div className="grid grid-cols-1 gap-1.5 sm:gap-2 lg:gap-3">
+              <div className="grid grid-cols-1 gap-1.5 sm:gap-2">
                 {services.map((service) => (
                   <button
                     key={service.id}
@@ -327,7 +327,7 @@ Merci de me recontacter pour un devis !`;
                       setFormData({ ...formData, service: service.id });
                       nextStep();
                     }}
-                    className={`group relative p-2 sm:p-3 lg:p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
+                    className={`group relative p-2 sm:p-3 rounded-lg border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
                       formData.service === service.id 
                         ? 'border-orange-500 bg-orange-500/10' 
                         : 'border-gray-700 bg-gray-800/50'
@@ -335,15 +335,15 @@ Merci de me recontacter pour un devis !`;
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-lg flex items-center justify-center text-white bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                        <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-white bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 transition-transform duration-200`}>
                           {service.icon}
                         </div>
                         <div>
-                          <div className="font-medium text-white font-tech text-xs sm:text-sm lg:text-base">{service.name}</div>
+                          <div className="font-medium text-white font-tech text-xs sm:text-sm">{service.name}</div>
                           <div className="text-xs text-orange-400 font-tech">Durée: {service.time}</div>
                         </div>
                       </div>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                     {/* Effet de glow au hover */}
                     <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -356,11 +356,11 @@ Merci de me recontacter pour un devis !`;
           {/* Step 2: Urgency */}
           {step === 2 && (
             <div>
-              <h4 className="text-sm sm:text-base lg:text-lg font-bold text-white mb-3 sm:mb-4 lg:mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Clock className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400" />
+              <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
+                <Clock className="w-4 h-4 text-orange-400" />
                 QUELLE EST L'URGENCE ?
               </h4>
-              <div className="space-y-1.5 sm:space-y-2 lg:space-y-3">
+              <div className="space-y-1.5 sm:space-y-2">
                 {urgencies.map((urgency) => (
                   <button
                     key={urgency.id}
@@ -368,7 +368,7 @@ Merci de me recontacter pour un devis !`;
                       setFormData({ ...formData, urgency: urgency.id });
                       nextStep();
                     }}
-                    className={`group w-full p-2 sm:p-3 lg:p-4 rounded-xl border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
+                    className={`group w-full p-2 sm:p-3 rounded-lg border-2 text-left transition-all duration-300 hover:border-orange-500 hover:bg-orange-500/5 hover-scale ${
                       formData.urgency === urgency.id 
                         ? 'border-orange-500 bg-orange-500/10' 
                         : 'border-gray-700 bg-gray-800/50'
@@ -376,19 +376,19 @@ Merci de me recontacter pour un devis !`;
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-lg flex items-center justify-center ${urgency.color} bg-gray-800`}>
+                        <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${urgency.color} bg-gray-800`}>
                           {urgency.icon}
                         </div>
-                        <span className="font-medium text-white font-tech text-xs sm:text-sm lg:text-base">{urgency.name}</span>
+                        <span className="font-medium text-white font-tech text-xs sm:text-sm">{urgency.name}</span>
                       </div>
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
+                      <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />
                     </div>
                   </button>
                 ))}
               </div>
               <button
                 onClick={prevStep}
-                className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
+                className="mt-2 sm:mt-3 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
                 ← Retour
               </button>
@@ -398,12 +398,12 @@ Merci de me recontacter pour un devis !`;
           {/* Step 3: Location */}
           {step === 3 && (
             <div>
-              <h4 className="text-sm sm:text-base lg:text-lg font-bold text-white mb-3 sm:mb-4 lg:mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400" />
+              <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-orange-400" />
                 VOTRE VILLE OU CODE POSTAL
               </h4>
               
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+              <div className="space-y-2 sm:space-y-3">
                 <div>
                   <input
                     id="location-input"
@@ -411,13 +411,13 @@ Merci de me recontacter pour un devis !`;
                     value={locationInput}
                     onChange={(e) => setLocationInput(e.target.value)}
                     placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                    className="w-full px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm lg:text-base"
+                    className="w-full px-2 sm:px-3 py-2 sm:py-2.5 bg-gray-800/50 border-2 border-gray-700 text-white rounded-lg focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm"
                   />
                 </div>
 
                 {/* Résultat de couverture */}
                 {locationStatus.status && (
-                  <div className={`p-2 sm:p-3 lg:p-4 rounded-xl font-medium text-xs border-2 transition-all duration-300 ${
+                  <div className={`p-2 sm:p-3 rounded-lg font-medium text-xs border-2 transition-all duration-300 ${
                     locationStatus.status === 'covered' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
                     locationStatus.status === 'on-demand' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
                     locationStatus.status === 'quote-only' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
@@ -434,17 +434,17 @@ Merci de me recontacter pour un devis !`;
                 {formData.location && (
                   <button
                     onClick={nextStep}
-                    className="w-full px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base"
+                    className="w-full px-2 sm:px-3 py-2 sm:py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-xs sm:text-sm"
                   >
                     Continuer
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 )}
               </div>
               
               <button
                 onClick={prevStep}
-                className="mt-3 sm:mt-4 lg:mt-6 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
+                className="mt-2 sm:mt-3 text-xs text-orange-400 hover:text-orange-300 font-tech flex items-center gap-1 hover-lift"
               >
                 ← Retour
               </button>
@@ -454,59 +454,59 @@ Merci de me recontacter pour un devis !`;
           {/* Step 4: Contact */}
           {step === 4 && (
             <div>
-              <h4 className="text-sm sm:text-base lg:text-lg font-bold text-white mb-3 sm:mb-4 lg:mb-6 font-futuristic tracking-wide flex items-center gap-2">
-                <Phone className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-orange-400" />
+              <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
+                <Phone className="w-4 h-4 text-orange-400" />
                 VOS COORDONNÉES
               </h4>
-              <div className="space-y-2 sm:space-y-3 lg:space-y-4">
+              <div className="space-y-2 sm:space-y-3">
                 <div>
-                  <label className="block text-xs font-medium text-orange-400 mb-1 sm:mb-2 font-tech uppercase tracking-wide">
+                  <label className="block text-xs font-medium text-orange-400 mb-1 font-tech uppercase tracking-wide">
                     Votre nom *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm lg:text-base"
+                    className="w-full px-2 sm:px-3 py-2 sm:py-2.5 bg-gray-800/50 border-2 border-gray-700 text-white rounded-lg focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm"
                     placeholder="Jean Dupont"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-orange-400 mb-1 sm:mb-2 font-tech uppercase tracking-wide">
+                  <label className="block text-xs font-medium text-orange-400 mb-1 font-tech uppercase tracking-wide">
                     Votre téléphone *
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-gray-800/50 border-2 border-gray-700 text-white rounded-xl focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm lg:text-base"
+                    className="w-full px-2 sm:px-3 py-2 sm:py-2.5 bg-gray-800/50 border-2 border-gray-700 text-white rounded-lg focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm"
                     placeholder="06 12 34 56 78"
                     required
                   />
                 </div>
               </div>
               
-              <div className="flex gap-2 mt-4 sm:mt-6 lg:mt-8">
+              <div className="flex gap-2 mt-3 sm:mt-4">
                 <button
                   onClick={prevStep}
-                  className="flex-1 px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 border-2 border-gray-700 text-gray-300 rounded-xl hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium text-xs sm:text-sm lg:text-base"
+                  className="flex-1 px-2 sm:px-3 py-2 sm:py-2.5 border-2 border-gray-700 text-gray-300 rounded-lg hover:bg-gray-800/50 hover:border-gray-600 transition-all duration-200 font-tech font-medium text-xs sm:text-sm"
                 >
                   Retour
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={!formData.name || !formData.phone || !formData.location}
-                  className="flex-1 px-2 sm:px-3 lg:px-4 py-2 sm:py-2.5 lg:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base"
+                  className="flex-1 px-2 sm:px-3 py-2 sm:py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-xs sm:text-sm"
                 >
-                  <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
+                  <CheckCircle className="w-4 h-4" />
                   Envoyer
                 </button>
               </div>
               
-              <div className="mt-3 sm:mt-4 lg:mt-6 p-2 sm:p-3 lg:p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
-                <p className="text-center text-xs text-orange-300 font-tech flex items-center justify-center gap-2">
-                  <Clock className="w-3 h-3" />
+              <div className="mt-2 sm:mt-3 p-2 sm:p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg">
+                <p className="text-center text-xs text-orange-300 font-tech flex items-center justify-center gap-1">
+                  <Clock className="w-3 h-3 flex-shrink-0" />
                   Retour par mail ou téléphone sous 12h
                 </p>
               </div>
@@ -515,7 +515,7 @@ Merci de me recontacter pour un devis !`;
         </div>
 
         {/* Footer avec effet lumineux */}
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent flex-shrink-0"></div>
       </div>
     </div>
   );

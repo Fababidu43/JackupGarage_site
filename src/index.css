@@ -1281,11 +1281,6 @@
   body {
     padding-bottom: calc(70px + env(safe-area-inset-bottom));
   }
-  
-  main {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
-  }
-}
 
 * {
   box-sizing: border-box;

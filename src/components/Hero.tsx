@@ -6,28 +6,6 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.pageYOffset;
-      const hero = document.getElementById('hero');
-      if (hero) {
-        // Effet de zoom sur l'image de fond - grossit quand on scroll vers le bas
-        // Facteur adapté selon la taille d'écran
-        let zoomMultiplier = 0.0005; // Desktop
-        if (window.innerWidth <= 768) {
-          zoomMultiplier = 0.0003; // Mobile - effet plus subtil
-        } else if (window.innerWidth <= 1024) {
-          zoomMultiplier = 0.0004; // Tablette - effet intermédiaire
-        }
-        
-        const zoomFactor = 1 + (scrolled * zoomMultiplier);
-        hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -39,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   return (
     <section 
       id="hero"
-      className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut scroll-animate hero-effect"
+      className="section relative flex items-center justify-center overflow-hidden hero-diagonal-cut scroll-animate hero-effect"
       style={{ 
         minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
         background: `
@@ -52,6 +30,28 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         backgroundAttachment: window.innerWidth <= 1024 ? 'scroll' : 'fixed'
       }}
     >
+      {/* Fond dynamique unifié avec les autres sections */}
+      <div className="dynamic-background">
+        <div className="bg-layer bg-layer-gradient"></div>
+        <div className="bg-layer bg-layer-tech"></div>
+        <div className="bg-layer bg-layer-particles"></div>
+        <div className="bg-layer bg-layer-depth"></div>
+        <div className="bg-layer bg-layer-metallic"></div>
+      </div>
+
+      {/* Formes mécaniques animées */}
+      <div className="mechanical-shapes">
+        <div className="mechanical-shape gear-shape rotate-slow" style={{ top: '15%', left: '10%' }}></div>
+        <div className="mechanical-shape wrench-shape float-right" style={{ top: '25%', right: '15%' }}></div>
+        <div className="mechanical-shape bolt-shape rotate-medium" style={{ bottom: '20%', left: '20%' }}></div>
+        <div className="mechanical-shape spring-shape float-up" style={{ top: '40%', right: '25%' }}></div>
+        <div className="mechanical-shape piston-shape float-down" style={{ bottom: '30%', right: '10%' }}></div>
+        <div className="mechanical-shape brake-shape rotate-reverse" style={{ top: '60%', left: '5%' }}></div>
+        <div className="mechanical-shape oil-drop-shape float-left" style={{ bottom: '15%', left: '30%' }}></div>
+        <div className="mechanical-shape screwdriver-shape rotate-fast" style={{ top: '20%', left: '70%' }}></div>
+        <div className="mechanical-shape hammer-shape float-right" style={{ bottom: '40%', right: '30%' }}></div>
+      </div>
+
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full">
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text">Mécanicien à domicile</span>

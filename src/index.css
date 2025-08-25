@@ -336,25 +336,6 @@
   }
 }
 
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .bg-layer-tech {
-    background: transparent;
-  }
-  
-  .bg-layer-depth {
-    background: radial-gradient(
-      ellipse 80% 60% at 50% 50%,
-      rgba(128, 128, 128, 0.05) 0%,
-      rgba(169, 169, 169, 0.03) 40%,
-      transparent 70%
-    );
-  }
-  
-  .bg-layer-metallic {
-    background-size: 300px 300px;
-  }
-}
 
 /* === FOND DYNAMIQUE POUR SECTIONS BLANCHES === */
 .dynamic-background-white {
@@ -744,6 +725,36 @@
   opacity: 0.15;
 }
 
+/* Couleurs pour le hero - Orange avec opacité réduite */
+#hero .mechanical-shapes .mechanical-shape,
+#hero .mechanical-shapes .gear-shape,
+#hero .mechanical-shapes .wrench-shape,
+#hero .mechanical-shapes .bolt-shape,
+#hero .mechanical-shapes .spring-shape,
+#hero .mechanical-shapes .piston-shape,
+#hero .mechanical-shapes .brake-shape,
+#hero .mechanical-shapes .oil-drop-shape,
+#hero .mechanical-shapes .screwdriver-shape,
+#hero .mechanical-shapes .hammer-shape {
+  background: #FF6B35 !important;
+  opacity: 0.12;
+}
+
+#hero .mechanical-shapes .gear-shape::before,
+#hero .mechanical-shapes .bolt-shape::before,
+#hero .mechanical-shapes .piston-shape::before,
+#hero .mechanical-shapes .brake-shape::before,
+#hero .mechanical-shapes .spring-shape::before,
+#hero .mechanical-shapes .spring-shape::after,
+#hero .mechanical-shapes .screwdriver-shape::before,
+#hero .mechanical-shapes .hammer-shape::before {
+  background: #FF6B35 !important;
+}
+
+#hero .mechanical-shapes .wrench-shape::after {
+  border-color: #FF6B35 !important;
+}
+
 .mechanical-shapes.black-section .gear-shape::before,
 .mechanical-shapes.black-section .bolt-shape::before,
 .mechanical-shapes.black-section .piston-shape::before,
@@ -768,6 +779,10 @@
   
   .mechanical-shapes.black-section .mechanical-shape {
     opacity: 0.12;
+  }
+  
+  #hero .mechanical-shapes .mechanical-shape {
+    opacity: 0.08;
   }
 }
 

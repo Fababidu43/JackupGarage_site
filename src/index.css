@@ -1411,6 +1411,24 @@ img {
 /* === COUPE DIAGONALE HERO === */
 .hero-diagonal-cut {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7vh), 0 100%);
+  background-size: cover !important;
+  background-position: center center !important;
+}
+
+/* Responsive pour l'image de fond du hero */
+@media (max-width: 1024px) {
+  .hero-diagonal-cut {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-diagonal-cut {
+    background-size: cover !important;
+    background-position: center 30% !important;
+  }
 }
 
 /* === COUPES DIAGONALES INTÉGRÉES === */

@@ -8,8 +8,8 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
     const handleScroll = () => {
-      // Désactiver l'effet de zoom sur mobile
-      if (window.innerWidth <= 768) return;
+      // Désactiver l'effet de zoom sur mobile et tablette
+      if (window.innerWidth <= 1024) return;
       
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
@@ -39,12 +39,12 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
         background: `
           linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center top/cover,
+          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center center/cover,
           radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
         `,
-        backgroundPosition: 'center top',
+        backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: window.innerWidth <= 768 ? 'scroll' : 'fixed'
+        backgroundAttachment: window.innerWidth <= 1024 ? 'scroll' : 'fixed'
       }}
     >
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full">

@@ -125,47 +125,48 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
     // Récupérer les informations du lieu
     const place = autocompleteRef.current?.getPlace();
-    if (!place || !place.address_components) {
-      setCoverageResult({ status: 'out-of-zone', city: placeName });
-      return;
+    
+    // Extraire le code postal pour vérifier le département si disponible
+    let department = '';
+    if (place && place.address_components) {
+      const postalCode = place.address_components.find((component: any) => 
+        component.types.includes('postal_code')
+      )?.long_name;
+      department = postalCode ? postalCode.substring(0, 2) : '';
     }
 
-    // Extraire le code postal pour vérifier le département
-    const postalCode = place?.address_components?.find((component: any) => 
-      component.types.includes('postal_code')
-    )?.long_name;
-    const department = postalCode ? postalCode.substring(0, 2) : '';
-
-    // Zone standard (départements 43 et 42 depuis Monistrol)
-    if (department === '43' || department === '42') {
-      if (distanceFromCenter <= STANDARD_RADIUS) {
-        setCoverageResult({ 
-          status: 'covered', 
-          city: placeName,
-          distance: distanceFromCenter 
-        });
-      } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+    // Logique de couverture basée sur la distance ET le département
+    if (distanceFromCenter <= STANDARD_RADIUS) {
+      // Zone standard (0-50km)
+      setCoverageResult({ 
+        status: 'covered', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      // Zone élargie (50-75km) - Priorité aux départements 43 et 42
+      if (department === '43' || department === '42' || !department) {
         setCoverageResult({
           status: 'quote-only',
           city: placeName,
           distance: distanceFromCenter
         });
       } else {
+        // Autres départements dans la zone élargie - hors zone
         setCoverageResult({ 
           status: 'out-of-zone', 
           city: placeName,
           distance: distanceFromCenter 
         });
       }
-      return;
+    } else {
+      // Au-delà de 75km - hors zone
+      setCoverageResult({ 
+        status: 'out-of-zone', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
     }
-
-    // Autres zones non couvertes
-    setCoverageResult({ 
-      status: 'out-of-zone', 
-      city: placeName,
-      distance: distanceFromCenter 
-    });
   };
 
   // Initialiser Google Maps

@@ -9,6 +9,9 @@ interface ServiceAreaProps {
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
 const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
+const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
+const SAINT_ETIENNE_COORDS = { lat: 45.4397, lng: 4.3872 };
+const SAINT_ETIENNE_EXCLUSION_RADIUS = 10; // km
 
 declare global {
   interface Window {
@@ -64,6 +67,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
 
     // Vérifier si c'est dans les départements couverts
+    const place = autocompleteRef.current?.getPlace();
     const postalCode = place?.address_components?.find((component: any) => 
       component.types.includes('postal_code')
     )?.long_name;
@@ -76,19 +80,19 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     if (distanceFromCenter <= STANDARD_RADIUS) {
       // Zone standard 0-50km
       if (isDept43 || isDept42) {
-        setLocationStatus({ 
+        setCoverageResult({ 
           status: 'covered', 
           city: placeName,
           distance: distanceFromCenter 
         });
       } else if (isDept69) {
-        setLocationStatus({ 
+        setCoverageResult({ 
           status: 'on-demand', 
           city: placeName,
           distance: distanceFromCenter 
         });
       } else {
-        setLocationStatus({ 
+        setCoverageResult({ 
           status: 'out-of-zone', 
           city: placeName,
           distance: distanceFromCenter 
@@ -103,6 +107,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       });
     } else if (distanceFromCenter <= 90) {
       // Hors zone standard 75-90km
+      setCoverageResult({ 
+        status: 'quote-only', 
+        city: placeName,
+        distance: distanceFromCenter 
+      });
+    } else {
       // Non desservi >90km
       setCoverageResult({ 
         status: 'out-of-zone', 
@@ -418,11 +428,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     Zone élargie embrayage : Supplément 1,00 € TTC/km au-delà de 50 km
                   </p>
                 </div>
-              <div 
-                ref={mapRef}
+                <div 
+                  ref={mapRef}
                   className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
                   style={{ minHeight: '400px' }}
-              />
+                />
 
                 {/* Légende élégante */}
                 <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
@@ -455,35 +465,35 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   </h3>
                 </div>
               
-              <div>
-                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3 font-tech">
-                  Votre ville ou code postal
-                </label>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={coverageInput}
-                  onChange={(e) => setCoverageInput(e.target.value)}
-                  placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
-                />
-              </div>
-
-              {/* Résultat de couverture */}
-              {coverageResult.status && (
-                <div className={`mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl font-medium text-xs sm:text-sm border-2 transition-all duration-300 ${
-                  coverageResult.status === 'covered' ? 'bg-green-50 text-green-800 border-green-300 shadow-green-100' :
-                  coverageResult.status === 'on-demand' ? 'bg-yellow-50 text-yellow-800 border-yellow-300 shadow-yellow-100' :
-                  coverageResult.status === 'quote-only' ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-orange-100' :
-                  coverageResult.status === 'limited-access' ? 'bg-blue-50 text-blue-800 border-blue-300 shadow-blue-100' :
-                  'bg-red-50 text-red-800 border-red-300 shadow-red-100'
-                }`}>
-                  <div className="font-tech leading-relaxed">
-                    {getStatusMessage()}
-                  </div>
+                <div>
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3 font-tech">
+                    Votre ville ou code postal
+                  </label>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={coverageInput}
+                    onChange={(e) => setCoverageInput(e.target.value)}
+                    placeholder="Ex: Monistrol-sur-Loire, 43120..."
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
+                  />
                 </div>
-              )}
-            </div>
+
+                {/* Résultat de couverture */}
+                {coverageResult.status && (
+                  <div className={`mt-3 sm:mt-4 p-3 sm:p-4 rounded-xl font-medium text-xs sm:text-sm border-2 transition-all duration-300 ${
+                    coverageResult.status === 'covered' ? 'bg-green-50 text-green-800 border-green-300 shadow-green-100' :
+                    coverageResult.status === 'on-demand' ? 'bg-yellow-50 text-yellow-800 border-yellow-300 shadow-yellow-100' :
+                    coverageResult.status === 'quote-only' ? 'bg-orange-50 text-orange-800 border-orange-300 shadow-orange-100' :
+                    coverageResult.status === 'limited-access' ? 'bg-blue-50 text-blue-800 border-blue-300 shadow-blue-100' :
+                    'bg-red-50 text-red-800 border-red-300 shadow-red-100'
+                  }`}>
+                    <div className="font-tech leading-relaxed">
+                      {getStatusMessage()}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -603,6 +613,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 </div>
               )}
             </div>
+          )}
 
           {/* CTA principal */}
           <div className="text-center">

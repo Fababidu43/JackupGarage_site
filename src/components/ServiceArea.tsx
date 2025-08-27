@@ -67,31 +67,26 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
-    // Vérifier si c'est dans les départements couverts
+    // Récupérer les informations du lieu
     const place = autocompleteRef.current?.getPlace();
-    const postalCode = place?.address_components?.find((component: any) => 
+    if (!place || !place.address_components) {
+      setCoverageResult({ status: 'out-of-zone', city: placeName });
+      return;
+    }
+
+    // Extraire le code postal et le département
+    const postalCode = place.address_components.find((component: any) => 
       component.types.includes('postal_code')
     )?.long_name;
 
-    const isDept43 = postalCode && postalCode.startsWith('43');
-    const isDept42 = postalCode && postalCode.startsWith('42');
-    const isDept69 = postalCode && postalCode.startsWith('69');
+    const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Vérifier si c'est dans la zone Lyon (sur demande)
-    const isLyonArea = isDept69 && distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
-
-    // Calcul de la couverture selon les départements et distances
-    if (distanceFromCenter <= STANDARD_RADIUS) {
-      // Zone standard 0-50km
-      if (isDept43 || isDept42) {
+    // Logique de couverture améliorée
+    if (department === '43' || department === '42') {
+      // Départements 43 et 42 : couverts si dans le rayon de 50km
+      if (distanceFromCenter <= STANDARD_RADIUS) {
         setCoverageResult({ 
           status: 'covered', 
-          city: placeName,
-          distance: distanceFromCenter 
-        });
-      } else if (isLyonArea) {
-        setCoverageResult({ 
-          status: 'on-demand', 
           city: placeName,
           distance: distanceFromCenter 
         });
@@ -102,22 +97,23 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           distance: distanceFromCenter 
         });
       }
-    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isLyonArea) {
-      // Zone élargie 50-75km
-      setCoverageResult({ 
-        status: 'on-demand', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-    } else if (distanceFromCenter <= 90) {
-      // Hors zone standard 75-90km
-      setCoverageResult({ 
-        status: 'quote-only', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
+    } else if (department === '69') {
+      // Département 69 : sur demande si dans la zone Lyon (15km de Lyon)
+      if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+        setCoverageResult({ 
+          status: 'on-demand', 
+          city: placeName,
+          distance: distanceFromLyon 
+        });
+      } else {
+        setCoverageResult({ 
+          status: 'out-of-zone', 
+          city: placeName,
+          distance: distanceFromLyon 
+        });
+      }
     } else {
-      // Non desservi >90km
+      // Autres départements : non couverts
       setCoverageResult({ 
         status: 'out-of-zone', 
         city: placeName,
@@ -366,14 +362,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     
     switch (coverageResult.status) {
       case 'covered':
-        return `Nous intervenons à ${coverageResult.city} sans supplément.`;
+        return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
-        return `Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
-      case 'quote-only':
-        return `Hors zone standard. Contactez-nous pour un devis personnalisé.`;
+        return `Zone Lyon sur demande : ${coverageResult.city} (${distance} km de Lyon). Nous contacter.`;
       case 'out-of-zone':
-        return `Zone non desservie.`;
+        return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:
         return '';
     }

@@ -367,7 +367,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        return `${coverageResult.city} : sur demande uniquement (${distance} km de Lyon). Nous contacter.`;
+        if (coverageResult.distance && coverageResult.distance <= LYON_ON_DEMAND_RADIUS) {
+          return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité de l'intervention.`;
+        }
+        return `${coverageResult.city} : sur demande uniquement (${distance} km). Nous contacter.`;
+      case 'quote-only':
+        return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:

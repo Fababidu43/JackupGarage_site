@@ -51,7 +51,6 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
-    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Extraire le code postal pour vérifier le département
     const postalCode = place?.address_components?.find((component: any) => 

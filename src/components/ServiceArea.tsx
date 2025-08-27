@@ -66,7 +66,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
-    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Récupérer les informations du lieu
     const place = autocompleteRef.current?.getPlace();

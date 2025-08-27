@@ -6,6 +6,8 @@ import logo from '../logo.png';
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
 const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
+const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
+const LYON_ON_DEMAND_RADIUS = 15; // km
 
 declare global {
   interface Window {
@@ -28,7 +30,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     name: ''
   });
   const [locationStatus, setLocationStatus] = useState<{
-    status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | 'limited-access' | null;
+    status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | null;
     city: string;
     distance?: number;
   }>({ status: null, city: '' });
@@ -47,12 +49,16 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
+    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Vérifier le département via le code postal (approximatif)
     // Note: Dans un vrai contexte, il faudrait utiliser l'API Google Places
     const isDept43 = placeName.includes('43') || placeName.toLowerCase().includes('puy') || placeName.toLowerCase().includes('monistrol');
     const isDept42 = placeName.includes('42') || placeName.toLowerCase().includes('saint-étienne') || placeName.toLowerCase().includes('loire');
     const isDept69 = placeName.includes('69') || placeName.toLowerCase().includes('lyon') || placeName.toLowerCase().includes('rhône');
+
+    // Vérifier si c'est dans la zone Lyon (sur demande)
+    const isLyonArea = isDept69 && distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
 
     // Calcul de la couverture selon les départements et distances
     if (distanceFromCenter <= STANDARD_RADIUS) {
@@ -62,7 +68,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           city: placeName,
           distance: distanceFromCenter 
         });
-      } else if (isDept69) {
+      } else if (isLyonArea) {
         setLocationStatus({ 
           status: 'on-demand', 
           city: placeName,
@@ -75,7 +81,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           distance: distanceFromCenter 
         });
       }
-    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isDept69) {
+    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isLyonArea) {
       setLocationStatus({ 
         status: 'on-demand', 
         city: placeName,
@@ -146,7 +152,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       case 'covered':
         return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        return `Intervention sur demande pour ${locationStatus.city} (Rhône - ${distance} km). Nous contacter.`;
+        return `Intervention sur demande pour ${locationStatus.city} (Lyon - ${distance} km). Nous contacter.`;
       case 'out-of-zone':
         return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:
@@ -417,7 +423,6 @@ Merci de me recontacter pour un devis !`;
                     locationStatus.status === 'covered' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
                     locationStatus.status === 'on-demand' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
                     locationStatus.status === 'quote-only' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
-                    locationStatus.status === 'limited-access' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
                     'bg-red-500/20 text-red-300 border-red-500/30'
                   }`}>
                     <div className="font-tech leading-relaxed">

@@ -48,11 +48,18 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
+    // Extraire le code postal pour vérifier le département
+    const postalCode = place?.address_components?.find((component: any) => 
+      component.types.includes('postal_code')
+    )?.long_name;
+
+    const department = postalCode ? postalCode.substring(0, 2) : '';
+
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
-    // PRIORITÉ 1: Zone Lyon (toujours prioritaire) - Dans un rayon de 15km de Lyon
-    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+    // PRIORITÉ 1: Zone Lyon (toujours prioritaire)
+    if (department === '69' && distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
       setLocationStatus({
         status: 'on-demand',
         city: placeName,
@@ -60,13 +67,6 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       });
       return;
     }
-
-    // Extraire le code postal pour vérifier le département des autres zones
-    const postalCode = place?.address_components?.find((component: any) => 
-      component.types.includes('postal_code')
-    )?.long_name;
-
-    const department = postalCode ? postalCode.substring(0, 2) : '';
 
     // PRIORITÉ 2: Départements 43 et 42
     if (department === '43' || department === '42') {

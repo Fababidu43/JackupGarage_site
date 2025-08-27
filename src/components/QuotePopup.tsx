@@ -5,7 +5,8 @@ import logo from '../logo.png';
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
-const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
+const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
+// Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 15; // km
 
@@ -50,6 +51,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
+    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Extraire le code postal pour vérifier le département
     const postalCode = place?.address_components?.find((component: any) => 
@@ -57,7 +59,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     )?.long_name;
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Zone Lyon spécifique (dans un rayon de 15km de Lyon)
+    // PRIORITÉ 1: Vérifier d'abord si on est dans le cercle Lyon (peu importe le département)
     if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
       setLocationStatus({
         status: 'on-demand',
@@ -67,7 +69,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Zone standard (départements 43 et 42 dans un rayon de 50km)
+    // PRIORITÉ 2: Zone standard (départements 43 et 42 depuis Monistrol)
     if (department === '43' || department === '42') {
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setLocationStatus({
@@ -91,7 +93,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Autres zones non couvertes
+    // PRIORITÉ 3: Autres zones non couvertes
     setLocationStatus({ 
       status: 'out-of-zone', 
       city: placeName,
@@ -155,10 +157,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       case 'covered':
         return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        if (locationStatus.distance && locationStatus.distance <= LYON_ON_DEMAND_RADIUS) {
-          return `${locationStatus.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité.`;
-        }
-        return `${locationStatus.city} : sur demande uniquement (${distance} km). Nous contacter.`;
+        return `${locationStatus.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité.`;
       case 'quote-only':
         return `${locationStatus.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':

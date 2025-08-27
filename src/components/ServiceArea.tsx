@@ -8,8 +8,8 @@ interface ServiceAreaProps {
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
-const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
 const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
+// Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 15; // km
 
@@ -66,6 +66,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
+    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Récupérer les informations du lieu
     const place = autocompleteRef.current?.getPlace();
@@ -80,7 +81,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     )?.long_name;
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Zone Lyon spécifique (dans un rayon de 15km de Lyon)
+    // PRIORITÉ 1: Vérifier d'abord si on est dans le cercle Lyon (peu importe le département)
     if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
       setCoverageResult({ 
         status: 'on-demand', 
@@ -90,7 +91,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       return;
     }
 
-    // Zone standard (départements 43 et 42 dans un rayon de 50km)
+    // PRIORITÉ 2: Zone standard (départements 43 et 42 depuis Monistrol)
     if (department === '43' || department === '42') {
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setCoverageResult({ 
@@ -114,7 +115,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       return;
     }
 
-    // Autres zones non couvertes
+    // PRIORITÉ 3: Autres zones non couvertes
     setCoverageResult({ 
       status: 'out-of-zone', 
       city: placeName,
@@ -367,10 +368,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        if (coverageResult.distance && coverageResult.distance <= LYON_ON_DEMAND_RADIUS) {
-          return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité de l'intervention.`;
-        }
-        return `${coverageResult.city} : sur demande uniquement (${distance} km). Nous contacter.`;
+        return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité de l'intervention.`;
       case 'quote-only':
         return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':

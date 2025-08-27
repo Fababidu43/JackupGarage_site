@@ -315,8 +315,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             lng: place.geometry.location.lng()
           };
 
-          // Extraire le code postal pour vérifier le département
-          // Vérifier la couverture (la fonction gère déjà tous les cas)
+          // Extraire le nom du lieu
+          const placeName = place.name || place.formatted_address || '';
+          
+          // Vérifier la couverture
           checkCoverage(coords, placeName);
 
           // Ajouter/déplacer le marqueur

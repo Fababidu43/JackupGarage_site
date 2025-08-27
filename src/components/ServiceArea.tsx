@@ -71,18 +71,17 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const place = autocompleteRef.current?.getPlace();
     if (!place || !place.address_components) {
       setCoverageResult({ status: 'out-of-zone', city: placeName });
-      return;
-    }
-
-    // Extraire le code postal et le département
-    const postalCode = place.address_components.find((component: any) => 
-      component.types.includes('postal_code')
-    )?.long_name;
 
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // PRIORITÉ 1: Zone Lyon (toujours prioritaire)
-    if (department === '69' && distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+    // Extraire le code postal pour vérifier le département
+    const postalCode = place?.address_components?.find((component: any) => 
+      component.types.includes('postal_code')
+    )?.long_name;
+    const department = postalCode ? postalCode.substring(0, 2) : '';
+
+    // Zone Lyon spécifique (dans un rayon de 15km de Lyon)
+    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
       setCoverageResult({ 
         status: 'on-demand', 
         city: placeName,
@@ -91,13 +90,19 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       return;
     }
 
-    // PRIORITÉ 2: Départements 43 et 42
+    // Zone standard (départements 43 et 42 dans un rayon de 50km)
     if (department === '43' || department === '42') {
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setCoverageResult({ 
           status: 'covered', 
           city: placeName,
           distance: distanceFromCenter 
+        });
+      } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+        setCoverageResult({
+          status: 'quote-only',
+          city: placeName,
+          distance: distanceFromCenter
         });
       } else {
         setCoverageResult({ 
@@ -109,7 +114,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       return;
     }
 
-    // PRIORITÉ 3: Autres zones non couvertes
+    // Autres zones non couvertes
     setCoverageResult({ 
       status: 'out-of-zone', 
       city: placeName,
@@ -362,7 +367,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        return `${coverageResult.city} : sur demande uniquement (${distance} km de Lyon). Nous contacter.`;
+        if (coverageResult.distance && coverageResult.distance <= LYON_ON_DEMAND_RADIUS) {
+          return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité de l'intervention.`;
+        }
+        return `${coverageResult.city} : sur demande uniquement (${distance} km). Nous contacter.`;
+      case 'quote-only':
+        return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:

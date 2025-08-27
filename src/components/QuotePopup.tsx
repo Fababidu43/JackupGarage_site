@@ -47,68 +47,54 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   };
 
   // Vérifier la couverture d'un point
-  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
+  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
+    // Extraire le code postal pour vérifier le département
+    const postalCode = place?.address_components?.find((component: any) => 
+      component.types.includes('postal_code')
+    )?.long_name;
+
+    const department = postalCode ? postalCode.substring(0, 2) : '';
+
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
-    // Vérifier le département via le code postal (approximatif)
-    // Note: Dans un vrai contexte, il faudrait utiliser l'API Google Places
-    const isDept43 = placeName.includes('43') || placeName.toLowerCase().includes('puy') || placeName.toLowerCase().includes('monistrol');
-    const isDept42 = placeName.includes('42') || placeName.toLowerCase().includes('saint-étienne') || placeName.toLowerCase().includes('loire');
-    const isDept69 = placeName.includes('69') || placeName.toLowerCase().includes('lyon') || placeName.toLowerCase().includes('rhône');
-
-    // Vérifier si c'est dans la zone Lyon (sur demande)
-    const isLyonArea = isDept69 && distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
-
-    // Calcul de la couverture selon les départements et distances
-    if (distanceFromCenter <= STANDARD_RADIUS) {
-      if (isDept43 || isDept42) {
-        setLocationStatus({ 
-          status: 'covered', 
+    // Vérifier la couverture pour tous les départements
+    if (department === '43' || department === '42') {
+      // Départements 43 et 42 : couverts si <= 50km de Monistrol
+      if (distanceFromCenter <= STANDARD_RADIUS) {
+        setLocationStatus({
+          status: 'covered',
           city: placeName,
-          distance: distanceFromCenter 
-        });
-      } else if (isLyonArea) {
-        setLocationStatus({ 
-          status: 'on-demand', 
-          city: placeName,
-          distance: distanceFromCenter 
+          distance: distanceFromCenter
         });
       } else {
-        setLocationStatus({ 
-          // Extraire le code postal pour vérifier le département
-          const postalCode = place.address_components?.find((component: any) => 
-            component.types.includes('postal_code')
-          )?.long_name;
-
-          const department = postalCode ? postalCode.substring(0, 2) : '';
-          status: 'out-of-zone', 
+        setLocationStatus({
+          status: 'out-of-zone',
           city: placeName,
-          
-          // Vérifier la couverture pour tous les départements
-          if (department === '43' || department === '42' || department === '69') {
-            checkCoverage(coords, placeName);
-          } else {
-            // Département non couvert
-            setLocationStatus({ 
-              status: 'out-of-zone', 
-              city: placeName,
-              distance: calculateDistance(coords, CENTER_COORDS)
-            });
-          }
+          distance: distanceFromCenter
         });
       }
-    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isLyonArea) {
-      setLocationStatus({ 
-        status: 'on-demand', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
+    } else if (department === '69') {
+      // Département 69 : sur demande si <= 15km de Lyon
+      if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+        setLocationStatus({
+          status: 'on-demand',
+          city: placeName,
+          distance: distanceFromLyon
+        });
+      } else {
+        setLocationStatus({
+          status: 'out-of-zone',
+          city: placeName,
+          distance: distanceFromLyon
+        });
+      }
     } else {
+      // Département non couvert
       setLocationStatus({ 
         status: 'out-of-zone', 
         city: placeName,
-        distance: distanceFromCenter 
+        distance: distanceFromCenter
       });
     }
   };
@@ -141,7 +127,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
         const placeName = place.name || place.formatted_address || '';
         setFormData({ ...formData, location: placeName });
-        checkCoverage(coords, placeName);
+        checkCoverage(coords, placeName, place);
       });
     };
 

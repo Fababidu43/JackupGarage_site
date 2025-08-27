@@ -125,7 +125,7 @@ function App() {
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
         
-        {/* Services intro (jaune #FDD902) */}
+        {/* Services intro (blanc #FFFFFF) */}
         <div className="relative">
           <div className="scroll-animate services-effect">
             <Services />

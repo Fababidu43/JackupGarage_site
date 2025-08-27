@@ -81,9 +81,18 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Logique de couverture améliorée
+    // PRIORITÉ 1: Zone Lyon (toujours prioritaire)
+    if (department === '69' && distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+      setCoverageResult({ 
+        status: 'on-demand', 
+        city: placeName,
+        distance: distanceFromLyon 
+      });
+      return;
+    }
+
+    // PRIORITÉ 2: Départements 43 et 42
     if (department === '43' || department === '42') {
-      // Départements 43 et 42 : couverts si dans le rayon de 50km
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setCoverageResult({ 
           status: 'covered', 
@@ -97,29 +106,15 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           distance: distanceFromCenter 
         });
       }
-    } else if (department === '69') {
-      // Département 69 : sur demande si dans la zone Lyon (15km de Lyon)
-      if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
-        setCoverageResult({ 
-          status: 'on-demand', 
-          city: placeName,
-          distance: distanceFromLyon 
-        });
-      } else {
-        setCoverageResult({ 
-          status: 'out-of-zone', 
-          city: placeName,
-          distance: distanceFromLyon 
-        });
-      }
-    } else {
-      // Autres départements : non couverts
-      setCoverageResult({ 
-        status: 'out-of-zone', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
+      return;
     }
+
+    // PRIORITÉ 3: Autres zones non couvertes
+    setCoverageResult({ 
+      status: 'out-of-zone', 
+      city: placeName,
+      distance: distanceFromCenter 
+    });
   };
 
   // Initialiser Google Maps
@@ -367,7 +362,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        return `Zone Lyon sur demande : ${coverageResult.city} (${distance} km de Lyon). Nous contacter.`;
+        return `${coverageResult.city} : sur demande uniquement (${distance} km de Lyon). Nous contacter.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:

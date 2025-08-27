@@ -58,9 +58,18 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
-    // Vérifier la couverture pour tous les départements
+    // PRIORITÉ 1: Zone Lyon (toujours prioritaire)
+    if (department === '69' && distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+      setLocationStatus({
+        status: 'on-demand',
+        city: placeName,
+        distance: distanceFromLyon
+      });
+      return;
+    }
+
+    // PRIORITÉ 2: Départements 43 et 42
     if (department === '43' || department === '42') {
-      // Départements 43 et 42 : couverts si <= 50km de Monistrol
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setLocationStatus({
           status: 'covered',
@@ -74,29 +83,15 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           distance: distanceFromCenter
         });
       }
-    } else if (department === '69') {
-      // Département 69 : sur demande si <= 15km de Lyon
-      if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
-        setLocationStatus({
-          status: 'on-demand',
-          city: placeName,
-          distance: distanceFromLyon
-        });
-      } else {
-        setLocationStatus({
-          status: 'out-of-zone',
-          city: placeName,
-          distance: distanceFromLyon
-        });
-      }
-    } else {
-      // Département non couvert
-      setLocationStatus({ 
-        status: 'out-of-zone', 
-        city: placeName,
-        distance: distanceFromCenter
-      });
+      return;
     }
+
+    // PRIORITÉ 3: Autres zones non couvertes
+    setLocationStatus({ 
+      status: 'out-of-zone', 
+      city: placeName,
+      distance: distanceFromCenter
+    });
   };
 
   // Initialiser l'autocomplete Google Places
@@ -155,7 +150,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       case 'covered':
         return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        return `Intervention sur demande pour ${locationStatus.city} (Lyon - ${distance} km). Nous contacter.`;
+        return `${locationStatus.city} : sur demande uniquement (${distance} km de Lyon). Nous contacter.`;
       case 'out-of-zone':
         return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:

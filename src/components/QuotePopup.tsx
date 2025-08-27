@@ -10,6 +10,27 @@ const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 15; // km
 
+// Liste des villes de Lyon et alentours (15km)
+const LYON_CITIES = [
+  // Lyon arrondissements
+  "Lyon", "Lyon 1er", "Lyon 2e", "Lyon 3e", "Lyon 4e", "Lyon 5e", 
+  "Lyon 6e", "Lyon 7e", "Lyon 8e", "Lyon 9e",
+  // Villeurbanne
+  "Villeurbanne",
+  // Est lyonnais
+  "Bron", "Vénissieux", "Saint-Priest", "Chassieu", "Décines-Charpieu",
+  "Meyzieu", "Jonage", "Jons", "Niévroz", "Thil",
+  // Ouest lyonnais
+  "Écully", "Tassin-la-Demi-Lune", "Sainte-Foy-lès-Lyon", "Francheville",
+  "Craponne", "Charbonnières-les-Bains", "Marcy-l'Étoile", "La Tour-de-Salvagny",
+  // Nord lyonnais
+  "Caluire-et-Cuire", "Rillieux-la-Pape", "Sathonay-Camp", "Sathonay-Village",
+  "Fontaines-sur-Saône", "Fontaines-Saint-Martin", "Collonges-au-Mont-d'Or",
+  // Sud lyonnais
+  "Pierre-Bénite", "Oullins", "La Mulatière", "Irigny", "Saint-Genis-Laval",
+  "Brignais", "Chaponost", "Orliénas"
+];
+
 declare global {
   interface Window {
     google: any;
@@ -49,8 +70,21 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
+    // Vérifier d'abord si c'est une ville de Lyon (priorité absolue)
+    const isLyonCity = LYON_CITIES.some(city => 
+      placeName.toLowerCase().includes(city.toLowerCase()) || 
+      city.toLowerCase().includes(placeName.toLowerCase())
+    );
+    
+    if (isLyonCity) {
+      setLocationStatus({
+        status: 'on-demand',
+        city: placeName
+      });
+      return;
+    }
+
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
-    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Extraire le code postal pour vérifier le département
     const postalCode = place?.address_components?.find((component: any) => 
@@ -58,17 +92,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     )?.long_name;
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // PRIORITÉ 1: Vérifier d'abord si on est dans le cercle Lyon (peu importe le département)
-    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
-      setLocationStatus({
-        status: 'on-demand',
-        city: placeName,
-        distance: distanceFromLyon
-      });
-      return;
-    }
-
-    // PRIORITÉ 2: Zone standard (départements 43 et 42 depuis Monistrol)
+    // Zone standard (départements 43 et 42 depuis Monistrol)
     if (department === '43' || department === '42') {
       if (distanceFromCenter <= STANDARD_RADIUS) {
         setLocationStatus({
@@ -92,7 +116,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // PRIORITÉ 3: Autres zones non couvertes
+    // Autres zones non couvertes
     setLocationStatus({ 
       status: 'out-of-zone', 
       city: placeName,

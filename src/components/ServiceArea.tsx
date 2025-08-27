@@ -68,9 +68,19 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
     // Récupérer les informations du lieu
-    const place = autocompleteRef.current?.getPlace();
+    // PRIORITÉ 1: Zone Lyon (toujours prioritaire) - Dans un rayon de 15km de Lyon
+    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+      setCoverageResult({ 
+        status: 'on-demand', 
+        city: placeName,
+        distance: distanceFromLyon 
+      });
+      return;
+    }
+
+    // Récupérer les informations du lieu pour les autres zones
     if (!place || !place.address_components) {
-      setCoverageResult({ status: 'out-of-zone', city: placeName });
+      setCoverageResult({ status: 'out-of-zone', city: placeName, distance: distanceFromCenter });
       return;
     }
 
@@ -80,16 +90,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     )?.long_name;
 
     const department = postalCode ? postalCode.substring(0, 2) : '';
-
-    // PRIORITÉ 1: Zone Lyon (toujours prioritaire) - Vérifier d'abord la distance
-    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
-      setCoverageResult({ 
-        status: 'on-demand', 
-        city: placeName,
-        distance: distanceFromLyon 
-      });
-      return;
-    }
 
     // PRIORITÉ 2: Départements 43 et 42
     if (department === '43' || department === '42') {

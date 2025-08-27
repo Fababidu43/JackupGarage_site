@@ -58,8 +58,8 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
 
-    // PRIORITÉ 1: Zone Lyon (toujours prioritaire)
-    if (department === '69' && distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
+    // PRIORITÉ 1: Zone Lyon (toujours prioritaire) - Vérifier d'abord la distance
+    if (distanceFromLyon <= LYON_ON_DEMAND_RADIUS) {
       setLocationStatus({
         status: 'on-demand',
         city: placeName,

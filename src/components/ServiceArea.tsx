@@ -87,14 +87,16 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     // Vérifier d'abord si c'est une ville de Lyon (priorité absolue)
     const isLyonCity = LYON_CITIES.some(city => 
-      placeName.toLowerCase().includes(city.toLowerCase()) || 
-      city.toLowerCase().includes(placeName.toLowerCase())
+      placeName.toLowerCase().includes(city.toLowerCase()) ||
+      city.toLowerCase().includes(placeName.toLowerCase()) ||
+      placeName.toLowerCase().trim() === city.toLowerCase().trim()
     );
     
     if (isLyonCity) {
       setCoverageResult({ 
         status: 'on-demand', 
-        city: placeName
+        city: placeName,
+        distance: 0 // Distance non pertinente pour Lyon
       });
       return;
     }
@@ -383,6 +385,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   };
 
   const getStatusMessage = () => {
+    if (coverageResult.status === 'on-demand' && coverageResult.distance === 0) {
+      return `${coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
+    }
+    
     if (!coverageResult.distance) return '';
     
     const distance = Math.round(coverageResult.distance);
@@ -391,7 +397,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité.`;
+        return `${coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
       case 'quote-only':
         return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':

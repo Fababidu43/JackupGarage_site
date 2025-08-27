@@ -72,14 +72,16 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
     // Vérifier d'abord si c'est une ville de Lyon (priorité absolue)
     const isLyonCity = LYON_CITIES.some(city => 
-      placeName.toLowerCase().includes(city.toLowerCase()) || 
-      city.toLowerCase().includes(placeName.toLowerCase())
+      placeName.toLowerCase().includes(city.toLowerCase()) ||
+      city.toLowerCase().includes(placeName.toLowerCase()) ||
+      placeName.toLowerCase().trim() === city.toLowerCase().trim()
     );
     
     if (isLyonCity) {
       setLocationStatus({
         status: 'on-demand',
-        city: placeName
+        city: placeName,
+        distance: 0 // Distance non pertinente pour Lyon
       });
       return;
     }
@@ -172,6 +174,10 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   }, [isOpen, step, formData]);
 
   const getLocationStatusMessage = () => {
+    if (locationStatus.status === 'on-demand' && locationStatus.distance === 0) {
+      return `${locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
+    }
+    
     if (!locationStatus.distance) return '';
     
     const distance = Math.round(locationStatus.distance);
@@ -180,7 +186,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       case 'covered':
         return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        return `${locationStatus.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité.`;
+        return `${locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
       case 'quote-only':
         return `${locationStatus.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
       case 'out-of-zone':

@@ -172,7 +172,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #FDD902 0%, #FFEAA7 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -180,18 +180,17 @@ function App() {
                   <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase font-futuristic hover-glow-text" style={{ color: '#8B4513' }}>
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
                   Embrayage & Volant Moteur
                 </h3>
                 
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light font-tech" style={{ color: '#6B4423' }}>
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
                   Remplacement complet avec essais. Déplacements étendus sur demande.
                 </p>
                 
                 <button 
                   onClick={openQuotePopup}
-                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide font-tech transition-colors hover-lift underline-animate"
-                  style={{ color: '#FF6B35' }}
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-600 hover:text-orange-700 font-tech transition-colors hover-lift underline-animate"
                 >
                   Demander un devis
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
@@ -199,7 +198,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-sm mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
+                <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
                     src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Kit embrayage et volant moteur" 
@@ -251,7 +250,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #FDD902 0%, #FFEAA7 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -259,18 +258,17 @@ function App() {
                   <Car className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase font-futuristic hover-glow-text" style={{ color: '#8B4513' }}>
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
                   Suspensions & Amortisseurs
                 </h3>
                 
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light font-tech" style={{ color: '#6B4423' }}>
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
                   Amortisseurs, rotules, silentblocs : direction sûre et stable.
                 </p>
                 
                 <button 
                   onClick={openQuotePopup}
-                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide font-tech transition-colors hover-lift underline-animate"
-                  style={{ color: '#FF6B35' }}
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-600 hover:text-orange-700 font-tech transition-colors hover-lift underline-animate"
                 >
                   Demander un devis
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
@@ -278,7 +276,7 @@ function App() {
               </div>
               
               <div className="lg:order-1">
-                <div className="aspect-square w-full max-w-sm mx-auto rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow" style={{ background: 'linear-gradient(135deg, #FF6B35, #FF8C42)' }}>
+                <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
                     src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                     alt="Amortisseurs et suspensions automobile" 

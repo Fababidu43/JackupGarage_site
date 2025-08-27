@@ -71,8 +71,8 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const place = autocompleteRef.current?.getPlace();
     if (!place || !place.address_components) {
       setCoverageResult({ status: 'out-of-zone', city: placeName });
-
-    const department = postalCode ? postalCode.substring(0, 2) : '';
+      return;
+    }
 
     // Extraire le code postal pour vérifier le département
     const postalCode = place?.address_components?.find((component: any) => 
@@ -367,12 +367,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        if (coverageResult.distance && coverageResult.distance <= LYON_ON_DEMAND_RADIUS) {
-          return `${coverageResult.city} se trouve dans la zone Lyon. Contactez-nous pour vérifier la faisabilité de l'intervention.`;
-        }
-        return `${coverageResult.city} : sur demande uniquement (${distance} km). Nous contacter.`;
-      case 'quote-only':
-        return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
+        return `${coverageResult.city} : sur demande uniquement (${distance} km de Lyon). Nous contacter.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:

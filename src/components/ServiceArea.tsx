@@ -11,7 +11,7 @@ const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
 const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
-const LYON_ON_DEMAND_RADIUS = 15; // km
+const LYON_ON_DEMAND_RADIUS = 10; // km
 
 // Liste des villes de Lyon et alentours (15km)
 const LYON_CITIES = [
@@ -31,7 +31,27 @@ const LYON_CITIES = [
   "Fontaines-sur-Saône", "Fontaines-Saint-Martin", "Collonges-au-Mont-d'Or",
   // Sud lyonnais
   "Pierre-Bénite", "Oullins", "La Mulatière", "Irigny", "Saint-Genis-Laval",
-  "Brignais", "Chaponost", "Orliénas"
+  "Brignais", "Chaponost", "Orliénas",
+  // Nord-Est lyonnais
+  "Vaulx-en-Velin", "Vénissieux", "Saint-Fons", "Feyzin", "Corbas",
+  "Mions", "Solaize", "Ternay", "Givors", "Grigny",
+  // Nord-Ouest lyonnais
+  "Dardilly", "Limonest", "Champagne-au-Mont-d'Or", "Saint-Didier-au-Mont-d'Or",
+  "Saint-Cyr-au-Mont-d'Or", "Poleymieux-au-Mont-d'Or", "Albigny-sur-Saône",
+  "Neuville-sur-Saône", "Fleurieu-sur-Saône", "Rochetaillée-sur-Saône",
+  // Sud-Ouest lyonnais
+  "Saint-Genis-les-Ollières", "Pollionnay", "Messimy", "Vourles",
+  "Montagny", "Mornant", "Soucieu-en-Jarrest", "Thurins",
+  // Sud-Est lyonnais
+  "Saint-Symphorien-d'Ozon", "Chaponnay", "Marennes", "Communay",
+  "Simandres", "Toussieu", "Saint-Pierre-de-Chandieu", "Heyrieux",
+  // Autres communes proches
+  "Genay", "Massieux", "Trévoux", "Reyrieux", "Parcieux",
+  "Montanay", "Curis-au-Mont-d'Or", "Saint-Germain-au-Mont-d'Or",
+  "Lissieu", "Civrieux-d'Azergues", "Chasselay", "Dommartin",
+  "Chazay-d'Azergues", "Morancé", "Lucenay", "Lozanne",
+  "Chatillon-d'Azergues", "Chessy", "Pommiers", "Anse",
+  "Ambérieux-d'Azergues", "Le Perréon", "Lacenas", "Denicé"
 ];
 
 declare global {
@@ -277,7 +297,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         fillOpacity: 0.2,
         map: mapInstance.current,
         center: LYON_COORDS,
-        radius: LYON_ON_DEMAND_RADIUS * 1000
+        radius: LYON_ON_DEMAND_RADIUS * 1000 // 10km
       });
 
       // Marqueur centre
@@ -441,7 +461,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 </h3>
                 <div className="text-center mb-3 sm:mb-4 px-2">
                   <p className="text-orange-300 text-xs sm:text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-lg inline-block">
-                    Zone élargie embrayage : Supplément 1€/km au-delà de 50 km
+                    Zone Lyon (10km) : Sur demande uniquement • Zone élargie embrayage : Supplément 1€/km au-delà de 50 km
                   </p>
                 </div>
                 <div 
@@ -462,7 +482,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-blue-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Lyon sur demande</span>
+                    <span className="text-white font-medium whitespace-nowrap">Lyon sur demande (10km)</span>
                   </div>
                 </div>
               </div>

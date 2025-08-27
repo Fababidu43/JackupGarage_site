@@ -8,7 +8,7 @@ const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
 const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
-const LYON_ON_DEMAND_RADIUS = 15; // km
+const LYON_ON_DEMAND_RADIUS = 10; // km
 
 // Liste des villes de Lyon et alentours (15km)
 const LYON_CITIES = [
@@ -28,7 +28,27 @@ const LYON_CITIES = [
   "Fontaines-sur-Saône", "Fontaines-Saint-Martin", "Collonges-au-Mont-d'Or",
   // Sud lyonnais
   "Pierre-Bénite", "Oullins", "La Mulatière", "Irigny", "Saint-Genis-Laval",
-  "Brignais", "Chaponost", "Orliénas"
+  "Brignais", "Chaponost", "Orliénas",
+  // Nord-Est lyonnais
+  "Vaulx-en-Velin", "Vénissieux", "Saint-Fons", "Feyzin", "Corbas",
+  "Mions", "Solaize", "Ternay", "Givors", "Grigny",
+  // Nord-Ouest lyonnais
+  "Dardilly", "Limonest", "Champagne-au-Mont-d'Or", "Saint-Didier-au-Mont-d'Or",
+  "Saint-Cyr-au-Mont-d'Or", "Poleymieux-au-Mont-d'Or", "Albigny-sur-Saône",
+  "Neuville-sur-Saône", "Fleurieu-sur-Saône", "Rochetaillée-sur-Saône",
+  // Sud-Ouest lyonnais
+  "Saint-Genis-les-Ollières", "Pollionnay", "Messimy", "Vourles",
+  "Montagny", "Mornant", "Soucieu-en-Jarrest", "Thurins",
+  // Sud-Est lyonnais
+  "Saint-Symphorien-d'Ozon", "Chaponnay", "Marennes", "Communay",
+  "Simandres", "Toussieu", "Saint-Pierre-de-Chandieu", "Heyrieux",
+  // Autres communes proches
+  "Genay", "Massieux", "Trévoux", "Reyrieux", "Parcieux",
+  "Montanay", "Curis-au-Mont-d'Or", "Saint-Germain-au-Mont-d'Or",
+  "Lissieu", "Civrieux-d'Azergues", "Chasselay", "Dommartin",
+  "Chazay-d'Azergues", "Morancé", "Lucenay", "Lozanne",
+  "Chatillon-d'Azergues", "Chessy", "Pommiers", "Anse",
+  "Ambérieux-d'Azergues", "Le Perréon", "Lacenas", "Denicé"
 ];
 
 declare global {

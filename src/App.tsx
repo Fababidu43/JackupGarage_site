@@ -172,7 +172,7 @@ function App() {
         </div>
 
         {/* Service 2 - Embrayage (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #FDD902 0%, #FFEAA7 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -180,17 +180,17 @@ function App() {
                   <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase font-futuristic hover-glow-text" style={{ color: '#8B4513' }}>
                   Embrayage & Volant Moteur
                 </h3>
                 
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-gray-700 font-tech">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light font-tech" style={{ color: '#6B4423' }}>
                   Remplacement complet avec essais. Déplacements étendus sur demande.
                 </p>
                 
                 <button 
                   onClick={openQuotePopup}
-                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide hover:opacity-80 font-tech transition-colors hover-lift underline-animate"
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide font-tech transition-colors hover-lift underline-animate"
                   style={{ color: '#FF6B35' }}
                 >
                   Demander un devis
@@ -251,7 +251,7 @@ function App() {
         </div>
 
         {/* Service 4 - Suspensions (FOND BLANC) */}
-        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #FDD902 0%, #FFEAA7 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -259,17 +259,17 @@ function App() {
                   <Car className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase font-futuristic hover-glow-text" style={{ color: '#8B4513' }}>
                   Suspensions & Amortisseurs
                 </h3>
                 
-                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-gray-700 font-tech">
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light font-tech" style={{ color: '#6B4423' }}>
                   Amortisseurs, rotules, silentblocs : direction sûre et stable.
                 </p>
                 
                 <button 
                   onClick={openQuotePopup}
-                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide hover:opacity-80 font-tech transition-colors hover-lift underline-animate"
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide font-tech transition-colors hover-lift underline-animate"
                   style={{ color: '#FF6B35' }}
                 >
                   Demander un devis

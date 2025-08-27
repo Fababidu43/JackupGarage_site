@@ -39,16 +39,16 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+    <section id="faq" className="section py-6 lg:py-8 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash" style={{ background: 'linear-gradient(135deg, #FDD902 0%, #FFEAA7 100%)' }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6 sm:mb-8">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg">
             <HelpCircle className="w-5 h-5" />
           </div>
-          <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900 mb-2 sm:mb-3 tracking-tight uppercase font-futuristic">
+          <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-2 sm:mb-3 tracking-tight uppercase font-futuristic" style={{ color: '#8B4513' }}>
             Questions Fréquentes
           </h2>
-          <p className="text-sm sm:text-base font-semibold uppercase font-tech mb-2" style={{ color: '#FF6B35' }}>
+          <p className="text-sm sm:text-base font-semibold uppercase font-tech mb-2" style={{ color: '#6B4423' }}>
             Toutes les réponses à vos questions
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full"></div>
@@ -101,22 +101,22 @@ const FAQ = () => {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500/20 via-orange-500/40 to-orange-500/20"></div>
                 
                 {/* Question */}
-                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-orange-50/40 to-white/80 border-b border-orange-500/15 group-hover:from-orange-50/60 group-hover:to-white transition-all duration-300">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 font-futuristic flex items-center gap-3 group-hover:text-gray-800 transition-colors duration-300">
+                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-gradient-to-r from-yellow-50/60 to-yellow-100/40 border-b border-orange-500/15 group-hover:from-yellow-50/80 group-hover:to-yellow-100/60 transition-all duration-300">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-bold font-futuristic flex items-center gap-3 transition-colors duration-300" style={{ color: '#8B4513' }}>
                     <div className="w-2 h-2 bg-orange-500 rounded-full shadow-sm"></div>
                     {item.question}
                   </h3>
                 </div>
                 
                 {/* Réponse */}
-                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-white/95 group-hover:bg-white transition-all duration-300">
-                  <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
+                <div className="px-4 sm:px-6 py-4 sm:py-5 bg-yellow-50/80 group-hover:bg-yellow-50/95 transition-all duration-300">
+                  <p className="text-xs sm:text-sm lg:text-base font-tech leading-relaxed transition-colors duration-300" style={{ color: '#6B4423' }}>
                     {item.question === "Combien coûte un déplacement ?" ? (
                       <>
                         Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km.{' '}
                         <button
                           onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
-                          className="text-orange-500 hover:text-orange-600 underline font-medium transition-colors duration-200"
+                          className="underline font-medium transition-colors duration-200" style={{ color: '#FF6B35' }}
                         >
                           Voir notre zone d'intervention
                         </button>
@@ -143,12 +143,12 @@ const FAQ = () => {
         </div>
 
         <div className="text-center mt-6 sm:mt-8">
-          <p className="text-sm text-gray-600 font-tech mb-4">
+          <p className="text-sm font-tech mb-4" style={{ color: '#6B4423' }}>
             Vous avez d'autres questions ?
           </p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-600 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover:shadow-lg hover:shadow-orange-500/25"
+            className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-600 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover:shadow-lg hover:shadow-orange-500/25 hover-scale"
           >
             Nous Contacter
           </button>

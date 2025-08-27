@@ -144,11 +144,11 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     
     switch (locationStatus.status) {
       case 'covered':
-        return `✅ Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
+        return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        return `⚠️ Intervention sur demande pour ${locationStatus.city} (Rhône - ${distance} km). Nous contacter.`;
+        return `Intervention sur demande pour ${locationStatus.city} (Rhône - ${distance} km). Nous contacter.`;
       case 'out-of-zone':
-        return `🚫 ${locationStatus.city} est hors de notre zone d'intervention.`;
+        return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:
         return '';
     }

@@ -362,16 +362,16 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     
     switch (coverageResult.status) {
       case 'covered':
-        return `✅ Nous intervenons à ${coverageResult.city} sans supplément.`;
+        return `Nous intervenons à ${coverageResult.city} sans supplément.`;
       case 'on-demand':
         const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
-        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
+        return `Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
       case 'quote-only':
-        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
+        return `Hors zone standard. Contactez-nous pour un devis personnalisé.`;
       case 'limited-access':
-        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
+        return `Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
       case 'out-of-zone':
-        return `🚫 Zone non desservie.`;
+        return `Zone non desservie.`;
       default:
         return '';
     }
@@ -408,7 +408,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               </div>
               <div className="condition-pill warning text-xs sm:text-sm">
                 <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
-                Rhône (69) : sur demande
+                Rhône sur demande
               </div>
             </div>
           </div>
@@ -420,12 +420,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             <div className="w-full">
               <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 font-futuristic text-center">
-                  <MapIcon className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
+                  <Map className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
                   Carte Interactive
                 </h3>
                 <div className="text-center mb-3 sm:mb-4 px-2">
                   <p className="text-orange-300 text-xs sm:text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-lg inline-block">
-                    Zone élargie embrayage : Supplément 1,00 € TTC/km au-delà de 50 km
+                    Zone élargie embrayage : Supplément 1€/km au-delà de 50 km
                   </p>
                 </div>
                 <div 
@@ -502,16 +502,16 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             {/* Affichage compact des départements pour le SEO */}
             <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4 font-futuristic text-center">
-                <MapIcon className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
+                <Map className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
                 Communes Desservies
               </h3>
               
-              {/* 43 - Haute-Loire (prioritaire) */}
+              {/* Haute-Loire (prioritaire) */}
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-base font-bold text-orange-300 font-futuristic flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    43 — Haute-Loire (prioritaire)
+                    Haute-Loire (43) - Prioritaire
                   </h4>
                   <button
                     onClick={() => setShowAllCommunes43(!showAllCommunes43)}
@@ -530,12 +530,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   </div>
                 )}
               </div>
-              {/* 42 - Loire */}
+              {/* Loire */}
               <div className="mb-4">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-base font-bold text-orange-300 font-futuristic flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    42 — Loire
+                    Loire (42)
                   </h4>
                   <button
                     onClick={() => setShowAllCommunes42(!showAllCommunes42)}
@@ -555,16 +555,16 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 )}
               </div>
 
-              {/* 69 - Rhône */}
+              {/* Rhône */}
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <h4 className="text-base font-bold text-orange-300 font-futuristic">
-                    69 — Rhône
+                    Rhône (69)
                   </h4>
                 </div>
                 <div className="text-yellow-300 text-sm font-tech bg-yellow-500/10 p-3 rounded-lg">
-                  ⚠️ Intervention sur demande uniquement. Contactez-nous pour vérifier la faisabilité.
+                  Intervention sur demande uniquement. Contactez-nous pour vérifier la faisabilité.
                 </div>
               </div>
             </div>

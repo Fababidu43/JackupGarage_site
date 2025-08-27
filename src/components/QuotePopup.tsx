@@ -4,10 +4,8 @@ import logo from '../logo.png';
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 50; // km
-const EMBRAYAGE_RADIUS = 75; // km
-const SAINT_ETIENNE_EXCLUSION_RADIUS = 6; // km
-const SAINT_ETIENNE_COORDS = { lat: 45.4397, lng: 4.3872 };
+const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
+const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
 
 declare global {
   interface Window {
@@ -49,34 +47,37 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
-    const distanceFromSaintEtienne = calculateDistance(coords, SAINT_ETIENNE_COORDS);
-    
-    // Cas particulier Saint-Étienne intra-muros
-    if (distanceFromSaintEtienne <= SAINT_ETIENNE_EXCLUSION_RADIUS) {
-      setLocationStatus({ 
-        status: 'limited-access', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-      return;
-    }
 
-    // Calcul de la couverture selon les distances
+    // Vérifier le département via le code postal (approximatif)
+    // Note: Dans un vrai contexte, il faudrait utiliser l'API Google Places
+    const isDept43 = placeName.includes('43') || placeName.toLowerCase().includes('puy') || placeName.toLowerCase().includes('monistrol');
+    const isDept42 = placeName.includes('42') || placeName.toLowerCase().includes('saint-étienne') || placeName.toLowerCase().includes('loire');
+    const isDept69 = placeName.includes('69') || placeName.toLowerCase().includes('lyon') || placeName.toLowerCase().includes('rhône');
+
+    // Calcul de la couverture selon les départements et distances
     if (distanceFromCenter <= STANDARD_RADIUS) {
-      setLocationStatus({ 
-        status: 'covered', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      if (isDept43 || isDept42) {
+        setLocationStatus({ 
+          status: 'covered', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      } else if (isDept69) {
+        setLocationStatus({ 
+          status: 'on-demand', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      } else {
+        setLocationStatus({ 
+          status: 'out-of-zone', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      }
+    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isDept69) {
       setLocationStatus({ 
         status: 'on-demand', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-    } else if (distanceFromCenter <= 90) {
-      setLocationStatus({ 
-        status: 'quote-only', 
         city: placeName,
         distance: distanceFromCenter 
       });
@@ -143,16 +144,11 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     
     switch (locationStatus.status) {
       case 'covered':
-        return `✅ Nous intervenons à ${locationStatus.city} sans supplément.`;
+        return `✅ Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
       case 'on-demand':
-        const supplement = Math.round((distance - STANDARD_RADIUS) * 1); // 1€/km
-        return `⚠️ Zone élargie embrayage : supplément de ${supplement} € TTC (distance : ${distance} km).`;
-      case 'quote-only':
-        return `🚫 Hors zone standard. Contactez-nous pour un devis personnalisé.`;
-      case 'limited-access':
-        return `ⓘ Saint-Étienne intra-muros : accès limité, intervention possible au cas par cas.`;
+        return `⚠️ Intervention sur demande pour ${locationStatus.city} (Rhône - ${distance} km). Nous contacter.`;
       case 'out-of-zone':
-        return `🚫 Zone non desservie.`;
+        return `🚫 ${locationStatus.city} est hors de notre zone d'intervention.`;
       default:
         return '';
     }

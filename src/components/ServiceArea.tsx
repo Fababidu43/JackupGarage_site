@@ -7,10 +7,8 @@ interface ServiceAreaProps {
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 50; // km
-const EMBRAYAGE_RADIUS = 75; // km
-const SAINT_ETIENNE_EXCLUSION_RADIUS = 6; // km
-const SAINT_ETIENNE_COORDS = { lat: 45.4397, lng: 4.3872 };
+const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
+const ON_DEMAND_RADIUS = 80; // km pour le Rhône (69)
 
 declare global {
   interface Window {
@@ -64,27 +62,39 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     const distanceFromCenter = calculateDistance(coords, CENTER_COORDS);
-    const distanceFromSaintEtienne = calculateDistance(coords, SAINT_ETIENNE_COORDS);
-    
-    // Cas particulier Saint-Étienne intra-muros
-    if (distanceFromSaintEtienne <= SAINT_ETIENNE_EXCLUSION_RADIUS) {
-      setCoverageResult({ 
-        status: 'limited-access', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-      return;
-    }
 
-    // Calcul de la couverture selon les distances
+    // Vérifier si c'est dans les départements couverts
+    const postalCode = place?.address_components?.find((component: any) => 
+      component.types.includes('postal_code')
+    )?.long_name;
+
+    const isDept43 = postalCode && postalCode.startsWith('43');
+    const isDept42 = postalCode && postalCode.startsWith('42');
+    const isDept69 = postalCode && postalCode.startsWith('69');
+
+    // Calcul de la couverture selon les départements et distances
     if (distanceFromCenter <= STANDARD_RADIUS) {
       // Zone standard 0-50km
-      setCoverageResult({ 
-        status: 'covered', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
+      if (isDept43 || isDept42) {
+        setLocationStatus({ 
+          status: 'covered', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      } else if (isDept69) {
+        setLocationStatus({ 
+          status: 'on-demand', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      } else {
+        setLocationStatus({ 
+          status: 'out-of-zone', 
+          city: placeName,
+          distance: distanceFromCenter 
+        });
+      }
+    } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isDept69) {
       // Zone élargie 50-75km
       setCoverageResult({ 
         status: 'on-demand', 
@@ -93,12 +103,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       });
     } else if (distanceFromCenter <= 90) {
       // Hors zone standard 75-90km
-      setCoverageResult({ 
-        status: 'quote-only', 
-        city: placeName,
-        distance: distanceFromCenter 
-      });
-    } else {
       // Non desservi >90km
       setCoverageResult({ 
         status: 'out-of-zone', 
@@ -379,8 +383,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
               Zone d'intervention
             </h2>
-            <p className="text-lg sm:text-xl lg:text-2xl text-orange-300 font-medium font-tech mb-6">
-              Loire (42) et Haute-Loire (43). Sol dur et plat uniquement.
+            <p className="text-lg sm:text-xl lg:text-2xl text-orange-300 font-medium font-tech mb-4">
+              Rayon d'intervention : 50 km autour de Monistrol-sur-Loire
+            </p>
+            <p className="text-sm sm:text-base text-orange-200 font-tech mb-6">
+              Haute-Loire (43) • Loire (42) • Rhône (69) sur demande
             </p>
             
             {/* Pills de conditions */}
@@ -389,9 +396,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <Home className="w-3 h-3 sm:w-4 sm:h-4" />
                 Sol dur et plat uniquement
               </div>
-              <div className="condition-pill info text-xs sm:text-sm">
-                <Info className="w-3 h-3 sm:w-4 sm:h-4" />
-                Saint-Étienne : accès limité
+              <div className="condition-pill warning text-xs sm:text-sm">
+                <MapPin className="w-3 h-3 sm:w-4 sm:h-4" />
+                Rhône (69) : sur demande
               </div>
             </div>
           </div>
@@ -481,11 +488,84 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           </div>
 
           {/* Listes des communes (accordéons) */}
-          {(showAllCommunes43 || showAllCommunes42) && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              {/* Haute-Loire */}
+          <div className="mb-8">
+            {/* Affichage compact des départements pour le SEO */}
+            <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-4 font-futuristic text-center">
+                <MapIcon className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
+                Communes Desservies
+              </h3>
+              
+              {/* 43 - Haute-Loire (prioritaire) */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-orange-300 font-futuristic flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    43 — Haute-Loire (prioritaire)
+                  </h4>
+                  <button
+                    onClick={() => setShowAllCommunes43(!showAllCommunes43)}
+                    className="text-orange-300 hover:text-orange-200 transition-colors"
+                  >
+                    {showAllCommunes43 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                </div>
+                {showAllCommunes43 ? (
+                  <div className="text-white/80 text-sm font-tech leading-relaxed bg-green-500/10 p-3 rounded-lg">
+                    {communes43.join(' • ')}
+                  </div>
+                ) : (
+                  <div className="text-white/60 text-xs font-tech">
+                    {communes43.slice(0, 5).join(' • ')} ... ({communes43.length} communes)
+                  </div>
+                )}
+              </div>
+              {/* 42 - Loire */}
+              <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-base font-bold text-orange-300 font-futuristic flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    42 — Loire
+                  </h4>
+                  <button
+                    onClick={() => setShowAllCommunes42(!showAllCommunes42)}
+                    className="text-orange-300 hover:text-orange-200 transition-colors"
+                  >
+                    {showAllCommunes42 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                </div>
+                {showAllCommunes42 ? (
+                  <div className="text-white/80 text-sm font-tech leading-relaxed bg-green-500/10 p-3 rounded-lg">
+                    {communes42.join(' • ')}
+                  </div>
+                ) : (
+                  <div className="text-white/60 text-xs font-tech">
+                    {communes42.slice(0, 5).join(' • ')} ... ({communes42.length} communes)
+                  </div>
+                )}
+              </div>
+
+              {/* 69 - Rhône */}
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <h4 className="text-base font-bold text-orange-300 font-futuristic">
+                    69 — Rhône
+                  </h4>
+                </div>
+                <div className="text-yellow-300 text-sm font-tech bg-yellow-500/10 p-3 rounded-lg">
+                  ⚠️ Intervention sur demande uniquement. Contactez-nous pour vérifier la faisabilité.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Anciennes listes détaillées (cachées par défaut) */}
+          {false && (showAllCommunes43 || showAllCommunes42) && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 hidden">
+              {/* Haute-Loire - Version détaillée */}
               {showAllCommunes43 && (
-                <div className="bg-orange-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-orange-500/20">
+                <div className="bg-green-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-green-500/20">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-bold text-white font-futuristic">
                       Haute-Loire (43)
@@ -498,14 +578,14 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     </button>
                   </div>
                   <div className="text-white/80 text-sm font-tech leading-relaxed">
-                    {communes43.join(', ')}
+                    {communes43.join(' • ')}
                   </div>
                 </div>
               )}
 
-              {/* Loire */}
+              {/* Loire - Version détaillée */}
               {showAllCommunes42 && (
-                <div className="bg-orange-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-orange-500/20">
+                <div className="bg-green-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-green-500/20">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-bold text-white font-futuristic">
                       Loire (42)
@@ -518,12 +598,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     </button>
                   </div>
                   <div className="text-white/80 text-sm font-tech leading-relaxed">
-                    {communes42.join(', ')}
+                    {communes42.join(' • ')}
                   </div>
                 </div>
               )}
             </div>
-          )}
 
           {/* CTA principal */}
           <div className="text-center">

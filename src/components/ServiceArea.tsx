@@ -289,21 +289,24 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             lng: place.geometry.location.lng()
           };
 
-          // Vérifier si c'est dans les départements 42/43
+          // Extraire le code postal pour vérifier le département
           const postalCode = place.address_components?.find((component: any) => 
             component.types.includes('postal_code')
           )?.long_name;
 
-          const isDept4243 = postalCode && (postalCode.startsWith('42') || postalCode.startsWith('43'));
+          const department = postalCode ? postalCode.substring(0, 2) : '';
+          const placeName = place.name || place.formatted_address || '';
           
-          if (!isDept4243) {
+          // Vérifier la couverture pour tous les départements
+          if (department === '43' || department === '42' || department === '69') {
+            checkCoverage(coords, placeName);
+          } else {
+            // Département non couvert
             setCoverageResult({ 
               status: 'out-of-zone', 
-              city: place.name || place.formatted_address,
+              city: placeName,
               distance: calculateDistance(coords, CENTER_COORDS)
             });
-          } else {
-            checkCoverage(coords, place.name || place.formatted_address);
           }
 
           // Ajouter/déplacer le marqueur

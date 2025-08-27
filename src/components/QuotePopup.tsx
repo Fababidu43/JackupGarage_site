@@ -76,9 +76,26 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
         });
       } else {
         setLocationStatus({ 
+          // Extraire le code postal pour vérifier le département
+          const postalCode = place.address_components?.find((component: any) => 
+            component.types.includes('postal_code')
+          )?.long_name;
+
+          const department = postalCode ? postalCode.substring(0, 2) : '';
           status: 'out-of-zone', 
           city: placeName,
-          distance: distanceFromCenter 
+          
+          // Vérifier la couverture pour tous les départements
+          if (department === '43' || department === '42' || department === '69') {
+            checkCoverage(coords, placeName);
+          } else {
+            // Département non couvert
+            setLocationStatus({ 
+              status: 'out-of-zone', 
+              city: placeName,
+              distance: calculateDistance(coords, CENTER_COORDS)
+            });
+          }
         });
       }
     } else if (distanceFromCenter <= ON_DEMAND_RADIUS && isLyonArea) {

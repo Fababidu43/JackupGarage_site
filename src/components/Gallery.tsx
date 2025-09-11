@@ -273,18 +273,13 @@ const Gallery = () => {
               
               {/* Info */}
               <div className="p-3 sm:p-4">
-                  onClick={() => {
-                    setShowAddForm(false);
-                    setIsAdmin(false);
-                    setNewPhoto({ title: '', date: '', image: '', file: null });
-                  }}
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic mb-1">
                   {photo.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-500 font-tech">
                   {photo.date}
                 </p>
               </div>
-                  disabled={!newPhoto.title || !newPhoto.date || !newPhoto.image}
             </div>
           ))}
         </div>

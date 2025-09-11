@@ -16,6 +16,7 @@ import QuotePopup from './components/QuotePopup';
 
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState<'home' | 'gallery'>('home');
   const scrollDirectionRef = useRef<'up' | 'down'>('down');
   const lastScrollYRef = useRef(0);
 
@@ -119,9 +120,34 @@ function App() {
     setIsQuotePopupOpen(false);
   };
 
+  const navigateToGallery = () => {
+    setCurrentPage('gallery');
+    window.scrollTo(0, 0);
+  };
+
+  const navigateToHome = () => {
+    setCurrentPage('home');
+    window.scrollTo(0, 0);
+  };
+
+  // Rendu conditionnel selon la page
+  if (currentPage === 'gallery') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header onQuoteClick={openQuotePopup} onNavigateHome={navigateToHome} />
+        <main className="flex-1">
+          <Gallery />
+        </main>
+        <Footer />
+        <MobileCTA onQuoteClick={openQuotePopup} />
+        <QuotePopup isOpen={isQuotePopupOpen} onClose={closeQuotePopup} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onQuoteClick={openQuotePopup} />
+      <Header onQuoteClick={openQuotePopup} onNavigateGallery={navigateToGallery} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
@@ -383,11 +409,6 @@ function App() {
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Galerie - En attente d'implémentation dans une page séparée */}
-        <div className="scroll-animate">
-          <Gallery />
         </div>
         
         {/* Zone d'intervention (FOND NOIR) */}

@@ -4,9 +4,11 @@ import logo from '../logo.png';
 
 interface HeaderProps {
   onQuoteClick: () => void;
+  onNavigateGallery?: () => void;
+  onNavigateHome?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
+const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavigateHome }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -69,6 +71,14 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
+    } else if (sectionId === 'gallery' && onNavigateGallery) {
+      // Navigation vers la page galerie
+      onNavigateGallery();
+      setIsMenuOpen(false);
+    } else if (sectionId === 'hero' && onNavigateHome) {
+      // Navigation vers la page d'accueil
+      onNavigateHome();
+      setIsMenuOpen(false);
     }
   };
 
@@ -107,7 +117,13 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
             {/* Logo */}
             <div 
               className="flex items-center cursor-pointer group"
-              onClick={() => scrollToSection('hero')}
+              onClick={() => {
+                if (onNavigateHome) {
+                  onNavigateHome();
+                } else {
+                  scrollToSection('hero');
+                }
+              }}
             >
               <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 sm:px-3 py-1 sm:py-2 
                 hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md

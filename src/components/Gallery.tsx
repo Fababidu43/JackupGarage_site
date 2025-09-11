@@ -140,10 +140,10 @@ const Gallery = () => {
     : null;
 
   return (
-    <section id="gallery" className="section py-8 lg:py-12 reveal-on-scroll diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+    <section className="section py-8 lg:py-12 min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-8 sm:mb-12 pt-16">
           <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl">
             <Camera className="w-8 h-8" />
           </div>

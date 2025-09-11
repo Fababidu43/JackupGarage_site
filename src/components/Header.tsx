@@ -189,81 +189,80 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
             
             {/* Menu Panel */}
             <div className="fixed top-16 right-2 left-2 sm:right-4 sm:left-4 max-w-sm mx-auto bg-gradient-to-br from-gray-900 via-black to-gray-900 backdrop-blur-md rounded-2xl shadow-2xl
-              border-2 border-orange-500/40 z-40 lg:hidden transform transition-all duration-300 ease-out overflow-hidden"
+              border border-orange-500/20 z-40 lg:hidden transform transition-all duration-300 ease-out overflow-hidden"
             >
               
               {/* Accent lumineux en haut */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-500"></div>
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent"></div>
               
               {/* Header avec croix */}
-              <div className="flex items-center justify-between p-5 border-b border-orange-500/30 bg-black/30">
+              <div className="flex items-center justify-between p-4 border-b border-orange-500/10 bg-black/20">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center">
+                  <div className="w-10 h-6 bg-white/90 border border-orange-500/20 rounded flex items-center justify-center">
                     <img 
                       src={logo} 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <span className="text-white font-bold text-base font-futuristic uppercase tracking-wide">Navigation</span>
+                  <span className="text-white/90 font-medium text-sm font-futuristic uppercase tracking-wide">Menu</span>
                 </div>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 text-white/70 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200
+                  className="p-1.5 text-white/60 hover:text-orange-300 hover:bg-orange-500/5 rounded-lg transition-all duration-200
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2"
                   aria-label="Fermer le menu"
                 >
-                  <X size={18} />
+                  <X size={16} />
                 </button>
               </div>
               
               {/* Navigation Links identique au desktop */}
-              <nav className="py-2">
+              <nav className="py-1">
                 {navigationItems.map((item, index) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.id)}
-                    className={`relative w-full px-5 py-4 text-left text-sm font-tech transition-all duration-300 ease-out group
-                      hover:bg-gradient-to-r hover:from-orange-500/10 hover:to-orange-600/5
+                    className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out group
+                      hover:bg-orange-500/5
                       ${activeSection === item.id 
-                        ? 'text-orange-400 bg-orange-500/10' 
-                        : 'text-white/90 hover:text-orange-300'
-                      } ${index !== navigationItems.length - 1 ? 'border-b border-white/5' : ''}`}
+                        ? 'text-orange-300 bg-orange-500/5' 
+                        : 'text-white/80 hover:text-orange-200'
+                      }`}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        activeSection === item.id ? 'bg-orange-400 shadow-lg shadow-orange-400/50' : 'bg-white/20 group-hover:bg-orange-400/50'
+                    <div className="flex items-center gap-2">
+                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
+                        activeSection === item.id ? 'bg-orange-300' : 'bg-white/30 group-hover:bg-orange-300/70'
                       }`}></div>
                       <span className="font-medium">{item.name}</span>
                     </div>
                     
                     {/* Barre latérale active */}
                     {activeSection === item.id && (
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-400 to-orange-600 rounded-r"></div>
+                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-orange-300 rounded-r"></div>
                     )}
                   </button>
                 ))}
               </nav>
               
               {/* CTA identique au desktop */}
-              <div className="p-5 border-t border-orange-500/30 bg-black/20">
+              <div className="p-4 border-t border-orange-500/10 bg-black/10">
                 <button
                   onClick={() => {
                     onQuoteClick();
                     setIsMenuOpen(false);
                   }}
-                  className="w-full flex items-center justify-center px-4 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold 
-                    rounded-xl transition-all duration-300 ease-out transform hover:scale-105 active:scale-95
-                    hover:shadow-xl hover:shadow-orange-500/30 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
-                    font-futuristic uppercase tracking-wide text-sm relative overflow-hidden"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-orange-500/90 to-orange-600/90 text-white font-medium 
+                    rounded-lg transition-all duration-200 ease-out transform hover:scale-[1.02] active:scale-95
+                    hover:shadow-lg hover:shadow-orange-500/20 focus:outline-none focus:ring-1 focus:ring-orange-500/30
+                    font-tech uppercase tracking-wide text-sm backdrop-blur-sm"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative z-10">🚗 Devis Express</span>
+                  <span>Devis Express</span>
                 </button>
               </div>
               
               {/* Effet lumineux en bas */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500/30 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"></div>
             </div>
           </>
         )}

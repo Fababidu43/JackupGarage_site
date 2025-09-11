@@ -88,18 +88,16 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo en gros */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-48 h-32 sm:w-72 sm:h-48 lg:w-96 lg:h-64 xl:w-[30rem] xl:h-80 bg-black/80 backdrop-blur-sm border-2 border-orange-500/60 rounded-2xl flex items-center justify-center p-4 sm:p-6 lg:p-8 mx-auto shadow-2xl hover:bg-black/90 hover:border-orange-500/80 transition-all duration-300 hover-scale">
-            <div className="w-full h-full flex items-center justify-center">
-              <img 
-                src={logo} 
-                alt="Jack Up Garage" 
-                className="w-full h-full object-contain filter brightness-0 invert"
-                style={{ maxWidth: '100%', maxHeight: '100%' }}
-                onError={(e) => {
-                  console.error('Hero logo failed to load');
-                }}
-              />
-            </div>
+          <div className="w-48 h-32 sm:w-72 sm:h-48 lg:w-96 lg:h-64 xl:w-[30rem] xl:h-80 bg-white/95 backdrop-blur-sm border-2 border-orange-500/60 rounded-2xl flex items-center justify-center p-4 sm:p-6 lg:p-8 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/80 transition-all duration-300 hover-scale">
+            <img 
+              src={logo} 
+              alt="Jack Up Garage" 
+              className="w-full h-full object-contain"
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              onError={(e) => {
+                console.error('Hero logo failed to load');
+              }}
+            />
           </div>
         </div>
         

@@ -150,12 +150,6 @@ function App() {
                   Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
                 </p>
                 
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
-                  </p>
-                </div>
-                
                 <button 
                   onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-400 hover:text-orange-300 font-tech transition-colors hover-lift underline-animate"

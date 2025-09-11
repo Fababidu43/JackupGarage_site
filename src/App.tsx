@@ -207,7 +207,7 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
-                    src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/freins_photos.jpg" 
                     alt="Système de freinage - Disques et plaquettes" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />

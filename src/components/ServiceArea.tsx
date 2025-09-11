@@ -7,8 +7,8 @@ interface ServiceAreaProps {
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
-const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
+const STANDARD_RADIUS = 30; // km (0-30 km)
+const EMBRAYAGE_RADIUS = 70; // km pour la zone élargie (30-70 km)
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
@@ -177,7 +177,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       // Créer la carte
       mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center: CENTER_COORDS,
-        zoom: 9,
+        zoom: 8,
         styles: [
           { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
           { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
@@ -277,7 +277,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         radius: STANDARD_RADIUS * 1000 // en mètres
       });
 
-      // Cercle embrayage (75km) - initialement caché
+      // Cercle embrayage (70km) - initialement caché
       embrayageCircleRef.current = new window.google.maps.Circle({
         strokeColor: '#F59E0B',
         strokeOpacity: 0.8,
@@ -406,7 +406,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'on-demand':
         return `${coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
       case 'quote-only':
-        return `${coverageResult.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
+        return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément 1€/km au-delà de 30 km.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:
@@ -431,7 +431,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               Zone d'intervention
             </h2>
             <p className="text-lg sm:text-xl lg:text-2xl text-orange-300 font-medium font-tech mb-4">
-              Rayon d'intervention : 50 km autour de Monistrol-sur-Loire
+              Rayon d'intervention : 30 km autour de Monistrol-sur-Loire
             </p>
             <p className="text-sm sm:text-base text-orange-200 font-tech mb-6">
               Haute-Loire (43) • Loire (42) • Rhône (69) sur demande
@@ -471,11 +471,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
                   <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-50km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-30km)</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-yellow-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (50-75km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (30-70km)</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-blue-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg"></div>

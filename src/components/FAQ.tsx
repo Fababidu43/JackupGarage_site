@@ -10,7 +10,7 @@ const FAQ = () => {
     },
     {
       question: "Combien coûte un déplacement ?",
-      answer: "Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km. Voir notre zone d'intervention pour plus de détails."
+      answer: "Gratuit dans un rayon de 30 km. Pour la zone élargie selon nature des travaux (30-70 km), supplément de 1€/km. Voir notre zone d'intervention pour plus de détails."
     },
     {
       question: "Combien de temps dure une intervention ?",
@@ -113,7 +113,7 @@ const FAQ = () => {
                   <p className="text-xs sm:text-sm lg:text-base text-gray-700 font-tech leading-relaxed transition-colors duration-300">
                     {item.question === "Combien coûte un déplacement ?" ? (
                       <>
-                        Gratuit dans un rayon de 50 km. Pour la zone élargie embrayage (50-75 km), supplément de 1€/km.{' '}
+                        Gratuit dans un rayon de 30 km. Pour la zone élargie selon nature des travaux (30-70 km), supplément de 1€/km.{' '}
                         <button
                           onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
                           className="underline font-medium text-orange-600 hover:text-orange-700 transition-colors duration-200"

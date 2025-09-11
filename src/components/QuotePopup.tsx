@@ -4,8 +4,8 @@ import logo from '../logo.png';
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 50; // km (40-50 km, affichage par défaut 50 km)
-const EMBRAYAGE_RADIUS = 75; // km pour la zone élargie
+const STANDARD_RADIUS = 30; // km (0-30 km)
+const EMBRAYAGE_RADIUS = 70; // km pour la zone élargie (30-70 km)
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
@@ -208,7 +208,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       case 'on-demand':
         return `${locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
       case 'quote-only':
-        return `${locationStatus.city} : zone élargie embrayage (${distance} km). Supplément 1€/km au-delà de 50 km.`;
+        return `${locationStatus.city} : zone élargie selon nature des travaux (${distance} km). Supplément 1€/km au-delà de 30 km.`;
       case 'out-of-zone':
         return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:

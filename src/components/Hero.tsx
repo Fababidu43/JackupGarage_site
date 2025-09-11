@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo en gros */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-32 h-24 sm:w-48 sm:h-36 lg:w-64 lg:h-48 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
+          <div className="w-48 h-24 sm:w-72 sm:h-36 lg:w-96 lg:h-48 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
             <div className="flex-1 flex items-center justify-center w-full">
               <img 
                 src={logo} 
@@ -114,10 +114,6 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>
-        
-        <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll animate-slide-in-up">
-          Haute-Loire & Loire (43–42)
-        </div>
         
         <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">
           Vidange et entretien, freinage, embrayage, distribution, suspensions, échappement, transmissions.<br />

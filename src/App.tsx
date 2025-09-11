@@ -200,7 +200,7 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
-                    src="https://images.pexels.com/photos/13065690/pexels-photo-13065690.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/embrayage_photos.jpg" 
                     alt="Kit embrayage et volant moteur" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />
@@ -239,7 +239,7 @@ function App() {
               <div>
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
                   <img 
-                    src="https://images.pexels.com/photos/5835359/pexels-photo-5835359.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/distri_photos.jpg" 
                     alt="Kit de distribution - Courroie et galets" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />
@@ -278,7 +278,7 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
-                    src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/amortie_photos.jpg" 
                     alt="Amortisseurs et suspensions automobile" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />

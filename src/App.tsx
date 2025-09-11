@@ -334,7 +334,7 @@ function App() {
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
                     🚗 <strong>Signes d'usure :</strong> Véhicule qui rebondit, tenue de route dégradée, bruits de suspension, usure irrégulière des pneus, direction qui tire.
                   </p>
-                </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}

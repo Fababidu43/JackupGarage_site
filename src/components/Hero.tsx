@@ -88,25 +88,17 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo en gros */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-32 h-24 sm:w-48 sm:h-36 lg:w-64 lg:h-48 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
-            <div className="flex-1 flex items-center justify-center w-full">
+          <div className="w-48 h-32 sm:w-72 sm:h-48 lg:w-96 lg:h-64 xl:w-[30rem] xl:h-80 bg-black/80 backdrop-blur-sm border-2 border-orange-500/60 rounded-2xl flex items-center justify-center p-4 sm:p-6 lg:p-8 mx-auto shadow-2xl hover:bg-black/90 hover:border-orange-500/80 transition-all duration-300 hover-scale">
+            <div className="w-full h-full flex items-center justify-center">
               <img 
                 src={logo} 
                 alt="Jack Up Garage" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain filter brightness-0 invert"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
                 onError={(e) => {
                   console.error('Hero logo failed to load');
                 }}
               />
-            </div>
-            <div className="text-center mt-1 sm:mt-2">
-              <p className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic uppercase tracking-wide leading-tight">
-                Mécanicien à domicile
-              </p>
-              <p className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic uppercase tracking-wide leading-tight">
-                Haute-Loire & Loire (43–42)
-              </p>
             </div>
           </div>
         </div>

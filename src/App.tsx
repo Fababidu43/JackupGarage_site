@@ -4,7 +4,7 @@ import { Droplets, Cog, Settings, Car, ArrowRight, Wrench } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
-// import Gallery from './components/Gallery';
+import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import ServiceArea from './components/ServiceArea';
 import Contact from './components/Contact';

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus } from 'lucide-react';
+import { useEffect, useCallback } from 'react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { GalleryService, Photo } from '../lib/galleryService';
+import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -9,6 +11,17 @@ const Gallery = () => {
   const [adminCode, setAdminCode] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const [showDeleteMode, setShowDeleteMode] = useState(false);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [uploadProgress, setUploadProgress] = useState<ProcessingProgress | null>(null);
+  const [batchUploadProgress, setBatchUploadProgress] = useState<ProcessingProgress | null>(null);
+  const [showStats, setShowStats] = useState(false);
+  const [stats, setStats] = useState({
+    totalPhotos: 0,
+    visiblePhotos: 0,
+    totalSize: 0,
+    recentUploads: 0
+  });
   const [newPhoto, setNewPhoto] = useState({
     title: '',
     date: '',
@@ -17,98 +30,41 @@ const Gallery = () => {
   });
   const [keySequence, setKeySequence] = useState<string[]>([]);
 
-  // Galerie simple avec photos d'interventions
-  const [photos, setPhotos] = useState(() => {
-    // Charger les photos depuis localStorage au démarrage
-    const savedPhotos = localStorage.getItem('gallery-photos');
-    if (savedPhotos) {
-      try {
-        return JSON.parse(savedPhotos);
-      } catch (error) {
-        console.error('Erreur lors du chargement des photos:', error);
-      }
-    }
-    // Photos par défaut si rien en localStorage
-    return [
-    {
-      id: 1,
-      title: 'Vidange moteur',
-      image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '15 Mars 2024'
-    },
-    {
-      id: 2,
-      title: 'Remplacement embrayage',
-      image: '/embrayage_photos.jpg',
-      date: '12 Mars 2024'
-    },
-    {
-      id: 3,
-      title: 'Kit distribution',
-      image: '/distri_photos.jpg',
-      date: '10 Mars 2024'
-    },
-    {
-      id: 4,
-      title: 'Changement amortisseurs',
-      image: '/amortie_photos.jpg',
-      date: '8 Mars 2024'
-    },
-    {
-      id: 5,
-      title: 'Système de freinage',
-      image: '/freins_photos.jpg',
-      date: '5 Mars 2024'
-    },
-    {
-      id: 6,
-      title: 'Diagnostic électronique',
-      image: 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '3 Mars 2024'
-    },
-    {
-      id: 7,
-      title: 'Entretien complet',
-      image: 'https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '1er Mars 2024'
-    },
-    {
-      id: 8,
-      title: 'Réparation échappement',
-      image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '28 Février 2024'
-    },
-    {
-      id: 9,
-      title: 'Changement batterie',
-      image: 'https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '25 Février 2024'
-    },
-    {
-      id: 10,
-      title: 'Révision complète',
-      image: 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '22 Février 2024'
-    },
-    {
-      id: 11,
-      title: 'Réparation suspension',
-      image: 'https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '20 Février 2024'
-    },
-    {
-      id: 12,
-      title: 'Changement courroie',
-      image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
-      date: '18 Février 2024'
-    }
-    ];
-  });
-
-  // Sauvegarder automatiquement les photos dans localStorage
+  // Charger les photos depuis Supabase
   useEffect(() => {
-    localStorage.setItem('gallery-photos', JSON.stringify(photos));
-  }, [photos]);
+    loadPhotos();
+    loadStats();
+  }, []);
+
+  const loadPhotos = useCallback(async () => {
+    try {
+      setLoading(true);
+      const photosData = isAdmin 
+        ? await GalleryService.getAllPhotos()
+        : await GalleryService.getVisiblePhotos();
+      setPhotos(photosData);
+    } catch (error) {
+      console.error('Erreur chargement photos:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [isAdmin]);
+
+  const loadStats = useCallback(async () => {
+    try {
+      const statsData = await GalleryService.getGalleryStats();
+      setStats(statsData);
+    } catch (error) {
+      console.error('Erreur chargement stats:', error);
+    }
+  }, []);
+
+  // Recharger les photos quand le mode admin change
+  useEffect(() => {
+    if (isAdmin) {
+      loadPhotos();
+    }
+  }, [isAdmin, loadPhotos]);
 
   // Raccourci clavier complexe : Ctrl+Shift+Alt+G+A+L
   useEffect(() => {
@@ -154,7 +110,7 @@ const Gallery = () => {
   }, [keySequence]);
 
   const openModal = (imageId: number) => {
-    setSelectedImage(imageId);
+    setSelectedImage(Number(imageId));
   };
 
   const closeModal = () => {
@@ -164,7 +120,7 @@ const Gallery = () => {
   const navigateImage = (direction: 'prev' | 'next') => {
     if (selectedImage === null) return;
     
-    const currentIndex = photos.findIndex(photo => photo.id === selectedImage);
+    const currentIndex = photos.findIndex(photo => Number(photo.id) === selectedImage);
     let newIndex;
     
     if (direction === 'prev') {
@@ -173,11 +129,11 @@ const Gallery = () => {
       newIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0;
     }
     
-    setSelectedImage(photos[newIndex].id);
+    setSelectedImage(Number(photos[newIndex].id));
   };
 
   const selectedPhoto = selectedImage 
-    ? photos.find(photo => photo.id === selectedImage)
+    ? photos.find(photo => Number(photo.id) === selectedImage)
     : null;
 
   const handleAdminLogin = () => {
@@ -193,8 +149,10 @@ const Gallery = () => {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 1) {
+      // Upload simple
+      const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
         setNewPhoto({
@@ -204,35 +162,96 @@ const Gallery = () => {
         });
       };
       reader.readAsDataURL(file);
+    } else if (files.length > 1) {
+      // Upload multiple
+      handleMultipleUpload(files);
     }
   };
 
-  const handleAddPhoto = () => {
-    if (newPhoto.title && newPhoto.date && (newPhoto.image || newPhoto.file)) {
-      const newId = Math.max(...photos.map(p => p.id)) + 1;
-      const updatedPhotos = [{
-        id: newId,
-        title: newPhoto.title,
-        date: newPhoto.date,
-        image: newPhoto.image
-      }, ...photos];
-      
-      setPhotos(updatedPhotos);
+  const handleAddPhoto = async () => {
+    if (!newPhoto.title || !newPhoto.file) {
+      alert('Veuillez remplir le titre et sélectionner une image');
+      return;
+    }
+
+    try {
+      const result = await GalleryService.uploadImage(
+        newPhoto.file,
+        newPhoto.title,
+        newPhoto.date,
+        undefined,
+        setUploadProgress
+      );
+
+      if (result.success) {
+        alert('Photo ajoutée avec succès !');
+        await loadPhotos();
+        await loadStats();
+      } else {
+        alert(`Erreur: ${result.error}`);
+      }
+    } catch (error) {
+      alert(`Erreur lors de l'upload: ${error}`);
+    } finally {
       setNewPhoto({ title: '', date: '', image: '', file: null });
       setShowAddForm(false);
-      setIsAdmin(false);
-      setShowDeleteMode(false);
-      
-      // Confirmation de sauvegarde
-      alert('Photo ajoutée et sauvegardée automatiquement !');
+      setUploadProgress(null);
     }
   };
 
-  const handleDeletePhoto = (photoId: number) => {
-    if (confirm('Êtes-vous sûr de vouloir supprimer cette photo ?')) {
-      const updatedPhotos = photos.filter(photo => photo.id !== photoId);
-      setPhotos(updatedPhotos);
-      alert('Photo supprimée avec succès !');
+  const handleMultipleUpload = async (files: File[]) => {
+    try {
+      const titles = files.map((file, index) => 
+        `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
+      );
+      
+      const result = await GalleryService.uploadMultipleImages(
+        files,
+        titles,
+        [],
+        setBatchUploadProgress
+      );
+
+      alert(`Upload terminé: ${result.summary.successful} réussis, ${result.summary.failed} échecs`);
+      await loadPhotos();
+      await loadStats();
+    } catch (error) {
+      alert(`Erreur upload multiple: ${error}`);
+    } finally {
+      setBatchUploadProgress(null);
+    }
+  };
+
+  const handleDeletePhoto = async (photoId: string) => {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer cette photo définitivement ?')) {
+      return;
+    }
+
+    try {
+      const success = await GalleryService.deletePhoto(photoId);
+      if (success) {
+        alert('Photo supprimée avec succès !');
+        await loadPhotos();
+        await loadStats();
+      } else {
+        alert('Erreur lors de la suppression');
+      }
+    } catch (error) {
+      alert(`Erreur: ${error}`);
+    }
+  };
+
+  const handleToggleVisibility = async (photoId: string, currentVisibility: boolean) => {
+    try {
+      const success = await GalleryService.togglePhotoVisibility(photoId, !currentVisibility);
+      if (success) {
+        await loadPhotos();
+        await loadStats();
+      } else {
+        alert('Erreur lors de la modification');
+      }
+    } catch (error) {
+      alert(`Erreur: ${error}`);
     }
   };
 
@@ -251,9 +270,19 @@ const Gallery = () => {
           <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl">
             <Camera className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
-            Galerie
-          </h2>
+          
+          {/* Point d'accès admin discret */}
+          <div className="relative inline-block">
+            <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
+              Galerie
+              <button
+                onClick={() => setShowAdminLogin(true)}
+                className="inline-block w-2 h-2 bg-gray-400 rounded-full ml-2 hover:bg-orange-500 transition-colors duration-200 opacity-30 hover:opacity-100"
+                title="Administration"
+              />
+            </h2>
+          </div>
+          
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium font-tech mb-4">
             Nos interventions en images
           </p>
@@ -263,69 +292,169 @@ const Gallery = () => {
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full mt-4"></div>
         </div>
 
+        {/* Statistiques admin */}
+        {isAdmin && (
+          <div className="mb-8 bg-gray-50 rounded-xl p-6 border border-gray-200">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900 font-futuristic flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-orange-500" />
+                Statistiques de la galerie
+              </h3>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div className="bg-white p-4 rounded-lg border">
+                <div className="text-2xl font-bold text-orange-600">{stats.totalPhotos}</div>
+                <div className="text-sm text-gray-600">Total photos</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg border">
+                <div className="text-2xl font-bold text-green-600">{stats.visiblePhotos}</div>
+                <div className="text-sm text-gray-600">Visibles</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg border">
+                <div className="text-2xl font-bold text-blue-600">{ImageProcessor.formatFileSize(stats.totalSize)}</div>
+                <div className="text-sm text-gray-600">Taille totale</div>
+              </div>
+              <div className="bg-white p-4 rounded-lg border">
+                <div className="text-2xl font-bold text-purple-600">{stats.recentUploads}</div>
+                <div className="text-sm text-gray-600">Cette semaine</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Indicateurs de progression */}
+        {uploadProgress && (
+          <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="flex items-center gap-3 mb-2">
+              <Clock className="w-5 h-5 text-blue-600" />
+              <span className="font-medium text-blue-900">Upload en cours...</span>
+            </div>
+            <div className="text-sm text-blue-700 mb-2">{uploadProgress.message}</div>
+            <div className="w-full bg-blue-200 rounded-full h-2">
+              <div 
+                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(uploadProgress.current / uploadProgress.total) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {batchUploadProgress && (
+          <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="flex items-center gap-3 mb-2">
+              <Upload className="w-5 h-5 text-green-600" />
+              <span className="font-medium text-green-900">Upload multiple en cours...</span>
+            </div>
+            <div className="text-sm text-green-700 mb-2">{batchUploadProgress.message}</div>
+            <div className="w-full bg-green-200 rounded-full h-2">
+              <div 
+                className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(batchUploadProgress.current / batchUploadProgress.total) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
         {/* Zone d'ajout pour le collègue */}
 
-        {/* Grille de photos simple */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {photos.map((photo) => (
-            <div
-              key={photo.id}
-              className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
-                showDeleteMode 
-                  ? 'border-red-300 hover:border-red-500' 
-                  : 'border-gray-200 hover:border-orange-500/50'
-              }`}
-              onClick={() => openModal(photo.id)}
-            >
-              {/* Bouton de suppression en mode admin */}
-              {showDeleteMode && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeletePhoto(photo.id);
-                  }}
-                  className="absolute top-2 right-2 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-              
-              {/* Image */}
-              <div className="aspect-square overflow-hidden relative">
-                <img
-                  src={photo.image}
-                  alt={photo.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                
-                {/* Overlay avec icône zoom */}
-                <div className={`absolute inset-0 transition-all duration-300 flex items-center justify-center ${
+        {/* Chargement */}
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <p className="text-gray-500 font-tech">Chargement des photos...</p>
+          </div>
+        ) : (
+          /* Grille de photos */
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {photos.map((photo) => (
+              <div
+                key={photo.id}
+                className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
                   showDeleteMode 
-                    ? 'bg-red-500/20' 
-                    : 'bg-black/0 group-hover:bg-black/20'
-                }`}>
-                  <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {showDeleteMode ? (
-                      <X className="w-5 h-5 text-red-600" />
-                    ) : (
+                    ? 'border-red-300 hover:border-red-500' 
+                    : `border-gray-200 hover:border-orange-500/50 ${!photo.is_visible && isAdmin ? 'opacity-50' : ''}`
+                }`}
+                onClick={() => openModal(Number(photo.id))}
+              >
+                {/* Contrôles admin */}
+                {isAdmin && (
+                  <div className="absolute top-2 right-2 z-10 flex gap-1">
+                    {/* Visibilité */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleVisibility(photo.id, photo.is_visible);
+                      }}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
+                        photo.is_visible 
+                          ? 'bg-green-500 hover:bg-green-600 text-white' 
+                          : 'bg-gray-500 hover:bg-gray-600 text-white'
+                      }`}
+                      title={photo.is_visible ? 'Masquer' : 'Afficher'}
+                    >
+                      {photo.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                    </button>
+                    
+                    {/* Suppression */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePhoto(photo.id);
+                      }}
+                      className="w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+                      title="Supprimer définitivement"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+                
+                {/* Image */}
+                <div className="aspect-square overflow-hidden relative">
+                  <img
+                    src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
+                    alt={photo.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  
+                  {/* Overlay avec icône zoom et statut */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Camera className="w-5 h-5 text-gray-700" />
+                    </div>
+                  </div>
+                  
+                  {/* Indicateur de statut pour admin */}
+                  {isAdmin && !photo.is_visible && (
+                    <div className="absolute bottom-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                      Masquée
+                    </div>
+                  )}
+                </div>
+                
+                {/* Info */}
+                <div className="p-3 sm:p-4">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic mb-1">
+                    {photo.title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs sm:text-sm text-gray-500 font-tech">
+                      {new Date(photo.upload_date).toLocaleDateString('fr-FR')}
+                    </p>
+                    {isAdmin && (
+                      <div className="flex items-center gap-1 text-xs text-gray-400">
+                        <span>{ImageProcessor.formatFileSize(photo.file_size)}</span>
+                        <span>•</span>
+                        <span>{photo.width}×{photo.height}</span>
+                      </div>
                     )}
                   </div>
                 </div>
               </div>
-              
-              {/* Info */}
-              <div className="p-3 sm:p-4">
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic mb-1">
-                  {photo.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-500 font-tech">
-                  {photo.date}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Message si aucune photo */}
         {photos.length === 0 && (
@@ -435,10 +564,14 @@ const Gallery = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Photo</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  multiple
                   onChange={handleFileChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 />
+                <p className="text-xs text-gray-500 mt-1">
+                  Formats acceptés: JPG, PNG, WebP, GIF. Taille max: 5MB. Sélectionnez plusieurs fichiers pour un upload groupé.
+                </p>
                 {newPhoto.image && (
                   <div className="mt-2">
                     <img src={newPhoto.image} alt="Aperçu" className="w-20 h-20 object-cover rounded-lg" />
@@ -458,7 +591,7 @@ const Gallery = () => {
                 onClick={handleAddPhoto}
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
               >
-                Ajouter
+                {uploadProgress ? 'Upload...' : 'Ajouter'}
               </button>
               
               {/* Boutons admin supplémentaires */}
@@ -472,6 +605,13 @@ const Gallery = () => {
                   }`}
                 >
                   {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
+                </button>
+                
+                <button
+                  onClick={() => setShowStats(!showStats)}
+                  className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
+                >
+                  {showStats ? 'Masquer stats' : 'Voir stats'}
                 </button>
               </div>
             </div>
@@ -522,7 +662,7 @@ const Gallery = () => {
               {/* Image */}
               <div className="aspect-video">
                 <img
-                  src={selectedPhoto.image}
+                  src={GalleryService.getImageUrl(selectedPhoto.file_path)}
                   alt={selectedPhoto.title}
                   className="w-full h-full object-cover"
                 />
@@ -533,9 +673,21 @@ const Gallery = () => {
                 <h3 className="text-2xl font-bold text-gray-900 font-futuristic mb-2">
                   {selectedPhoto.title}
                 </h3>
-                <p className="text-gray-600 font-tech">
-                  {selectedPhoto.date}
-                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-600 font-tech">
+                    {new Date(selectedPhoto.upload_date).toLocaleDateString('fr-FR')}
+                  </p>
+                  {isAdmin && (
+                    <div className="text-sm text-gray-500 font-tech">
+                      {ImageProcessor.formatFileSize(selectedPhoto.file_size)} • {selectedPhoto.width}×{selectedPhoto.height}px
+                    </div>
+                  )}
+                </div>
+                {selectedPhoto.description && (
+                  <p className="text-gray-600 font-tech mt-2">
+                    {selectedPhoto.description}
+                  </p>
+                )}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { Droplets, Zap, Settings, Car, ArrowRight } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import ServiceArea from './components/ServiceArea';
 import Contact from './components/Contact';
@@ -142,12 +143,18 @@ function App() {
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                  Entretiens
+                  Vidange & Entretien
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Vidanges, filtres, freins. Interventions propres et rapides, à domicile.
+                  Vidange moteur, remplacement des filtres (huile, air, habitacle), contrôle des niveaux et de l'état général du véhicule.
                 </p>
+                
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
+                    💡 <strong>À savoir :</strong> Une vidange doit être effectuée tous les 10 000 à 15 000 km selon le type d'huile et les préconisations constructeur.
+                  </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}
@@ -171,22 +178,28 @@ function App() {
           </div>
         </div>
 
-        {/* Service 2 - Embrayage (FOND BLANC) */}
+        {/* Service 2 - Freinage (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>
-                  <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
+                  <Car className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
-                  Embrayage & Volant Moteur
+                  Freinage
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement complet avec essais. Déplacements étendus sur demande.
+                  Remplacement des éléments de freinage : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main.
                 </p>
+                
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
+                    ⚠️ <strong>Symptômes d'usure :</strong> Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée, voyant frein allumé.
+                  </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}
@@ -200,8 +213,8 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
-                    src="/embrayage_photos.jpg" 
-                    alt="Kit embrayage et volant moteur" 
+                    src="https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Système de freinage - Disques et plaquettes" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />
                 </div>
@@ -210,21 +223,27 @@ function App() {
           </div>
         </div>
 
-        {/* Service 3 - Kit Distributions (FOND NOIR) */}
+        {/* Service 3 - Embrayage (FOND NOIR) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
-                  <Settings className="w-6 h-6 sm:w-7 sm:h-7" />
+                  <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                  Kit Distributions
+                  Embrayage & Volant Moteur
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Courroie, galets, pompe à eau : remplacement conforme constructeur.
+                  Remplacement complet du kit embrayage, volant moteur, butée et fourchette. Essais et réglages inclus.
+                </p>
+                
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
+                    🔧 <strong>Symptômes d'usure :</strong> Pédale dure, difficulté à passer les vitesses, bruit métallique, véhicule qui n'avance plus correctement, odeur de brûlé.
+                  </p>
                 </p>
                 
                 <button 
@@ -239,8 +258,8 @@ function App() {
               <div>
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
                   <img 
-                    src="/distri_photos.jpg" 
-                    alt="Kit de distribution - Courroie et galets" 
+                    src="/embrayage_photos.jpg" 
+                    alt="Kit embrayage et volant moteur" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />
                 </div>
@@ -249,21 +268,27 @@ function App() {
           </div>
         </div>
 
-        {/* Service 4 - Suspensions (FOND BLANC) */}
+        {/* Service 4 - Kit Distributions (FOND BLANC) */}
         <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>
-                  <Car className="w-6 h-6 sm:w-7 sm:h-7" />
+                  <Settings className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
-                  Suspensions & Amortisseurs
+                  Kit Distribution
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Amortisseurs, rotules, silentblocs : direction sûre et stable.
+                  Remplacement de la courroie de distribution, galets tendeurs et pompe à eau selon les préconisations constructeur.
+                </p>
+                
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
+                    ⏰ <strong>Prévention :</strong> La courroie de distribution doit généralement être remplacée tous les 5 ans ou 120 000 km, contactez-nous pour savoir si la vôtre doit être changée.
+                  </p>
                 </p>
                 
                 <button 
@@ -278,6 +303,51 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
+                    src="/distri_photos.jpg" 
+                    alt="Kit de distribution - Courroie et galets" 
+                    className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Service 5 - Suspensions (FOND NOIR) */}
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
+              <div>
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
+                  <Car className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
+                  Suspensions & Amortisseurs
+                </h3>
+                
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
+                  Remplacement des amortisseurs, ressorts, rotules de direction, silentblocs et coupelles d'amortisseurs pour une direction sûre et stable.
+                </p>
+                
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
+                    🚗 <strong>Signes d'usure :</strong> Véhicule qui rebondit, tenue de route dégradée, bruits de suspension, usure irrégulière des pneus, direction qui tire.
+                  </p>
+                </p>
+                
+                <button 
+                  onClick={openQuotePopup}
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-400 hover:text-orange-300 font-tech transition-colors hover-lift underline-animate"
+                >
+                  Demander un devis
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+              
+              <div>
+                <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
+                  <img 
                     src="/amortie_photos.jpg" 
                     alt="Amortisseurs et suspensions automobile" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
@@ -286,6 +356,56 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Service 6 - Autres prestations (FOND BLANC) */}
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
+              <div className="lg:order-2">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center text-white mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35' }}>
+                  <Wrench className="w-6 h-6 sm:w-7 sm:h-7" />
+                </div>
+                
+                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                  Autres Prestations
+                </h3>
+                
+                <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
+                  Rénovation d'optiques, remplacement d'alternateur, démarreur, batterie, carter d'huile, supports moteur, éléments de carrosserie, sondes, thermostat, radiateurs, essuie-glaces, lève-vitres, contacteurs, commodos, ampoules.
+                </p>
+                
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
+                    🔧 <strong>Service complet :</strong> Diagnostic, réparation et remplacement de nombreux éléments. Contactez-nous pour toute demande spécifique.
+                  </p>
+                </p>
+                
+                <button 
+                  onClick={openQuotePopup}
+                  className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-600 hover:text-orange-700 font-tech transition-colors hover-lift underline-animate"
+                >
+                  Demander un devis
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+              
+              <div className="lg:order-1">
+                <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
+                  <img 
+                    src="https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    alt="Autres prestations automobiles" 
+                    className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Galerie */}
+        <div className="scroll-animate">
+          <Gallery />
         </div>
         
         {/* Zone d'intervention (FOND NOIR) */}

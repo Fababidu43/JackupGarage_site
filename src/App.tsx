@@ -309,7 +309,7 @@ function App() {
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement des amortisseurs, ressorts, rotules de direction, silentblocs et coupelles d'amortisseurs pour une direction sûre et stable.
+                  Remplacement d'amortisseurs, triangles, rotules, cardan, biellettes
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">

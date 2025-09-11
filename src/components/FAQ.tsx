@@ -114,6 +114,7 @@ const FAQ = () => {
                     {item.question === "Combien coûte un déplacement ?" ? (
                       <>
                         Gratuit dans un rayon de 30 km. Pour la zone élargie selon nature des travaux (30-70 km), supplément de 1€/km.{' '}
+                        Gratuit dans un rayon de 30 km. Pour la zone élargie selon nature des travaux (30-60 km), supplément de 1€/km.{' '}
                         <button
                           onClick={() => document.getElementById('area')?.scrollIntoView({ behavior: 'smooth' })}
                           className="underline font-medium text-orange-600 hover:text-orange-700 transition-colors duration-200"

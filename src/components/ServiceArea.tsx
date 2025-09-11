@@ -438,7 +438,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-yellow-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (30-70km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (30-60km)</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-blue-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg"></div>

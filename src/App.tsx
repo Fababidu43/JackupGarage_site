@@ -305,7 +305,7 @@ function App() {
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                  Suspensions & Amortisseurs
+                  Suspensions, direction et transmissions
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">

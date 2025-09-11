@@ -1,116 +1,84 @@
 import React, { useState } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Wrench, Car, Settings, Droplets, Calendar, MapPin, Clock } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus } from 'lucide-react';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  // Articles de blog avec photos
-  const blogPosts = [
+  // Galerie simple avec photos d'interventions
+  const photos = [
     {
       id: 1,
-      title: 'Vidange complète sur Peugeot 308',
-      description: 'Intervention à domicile pour une vidange moteur avec remplacement du filtre à huile et contrôle des niveaux.',
+      title: 'Vidange moteur',
       image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'entretien',
-      date: '15 Mars 2024',
-      location: 'Monistrol-sur-Loire',
-      duration: '45 min',
-      tags: ['Vidange', 'Filtre', 'Peugeot']
+      date: '15 Mars 2024'
     },
     {
       id: 2,
-      title: 'Remplacement kit embrayage Renault Clio',
-      description: 'Changement complet du kit embrayage et volant moteur sur une Renault Clio. Intervention technique réalisée avec succès.',
+      title: 'Remplacement embrayage',
       image: '/embrayage_photos.jpg',
-      category: 'embrayage',
-      date: '12 Mars 2024',
-      location: 'Saint-Étienne',
-      duration: '4h30',
-      tags: ['Embrayage', 'Volant moteur', 'Renault']
+      date: '12 Mars 2024'
     },
     {
       id: 3,
-      title: 'Kit distribution Citroën C3',
-      description: 'Remplacement du kit de distribution complet : courroie, galets tendeurs et pompe à eau sur Citroën C3.',
+      title: 'Kit distribution',
       image: '/distri_photos.jpg',
-      category: 'distribution',
-      date: '10 Mars 2024',
-      location: 'Le Puy-en-Velay',
-      duration: '5h',
-      tags: ['Distribution', 'Courroie', 'Citroën']
+      date: '10 Mars 2024'
     },
     {
       id: 4,
-      title: 'Changement amortisseurs avant',
-      description: 'Remplacement des amortisseurs avant et contrôle de la géométrie sur véhicule utilitaire.',
+      title: 'Changement amortisseurs',
       image: '/amortie_photos.jpg',
-      category: 'suspension',
-      date: '8 Mars 2024',
-      location: 'Yssingeaux',
-      duration: '2h30',
-      tags: ['Amortisseurs', 'Suspension', 'Utilitaire']
+      date: '8 Mars 2024'
     },
     {
       id: 5,
-      title: 'Système de freinage complet',
-      description: 'Remplacement des disques et plaquettes de frein avant et arrière avec purge du circuit.',
+      title: 'Système de freinage',
       image: '/freins_photos.jpg',
-      category: 'freinage',
-      date: '5 Mars 2024',
-      location: 'Firminy',
-      duration: '2h',
-      tags: ['Freins', 'Disques', 'Plaquettes']
+      date: '5 Mars 2024'
     },
     {
       id: 6,
-      title: 'Diagnostic électronique avancé',
-      description: 'Diagnostic complet du système électronique et résolution de pannes multiples sur véhicule récent.',
+      title: 'Diagnostic électronique',
       image: 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'diagnostic',
-      date: '3 Mars 2024',
-      location: 'Retournac',
-      duration: '1h30',
-      tags: ['Diagnostic', 'Électronique', 'Panne']
+      date: '3 Mars 2024'
     },
     {
       id: 7,
-      title: 'Entretien complet Ford Focus',
-      description: 'Service d\'entretien complet : vidange, filtres, contrôles de sécurité et remise à zéro des témoins.',
+      title: 'Entretien complet',
       image: 'https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'entretien',
-      date: '1er Mars 2024',
-      location: 'Bas-en-Basset',
-      duration: '1h15',
-      tags: ['Entretien', 'Ford', 'Révision']
+      date: '1er Mars 2024'
     },
     {
       id: 8,
-      title: 'Réparation système d\'échappement',
-      description: 'Remplacement du silencieux arrière et réparation de la ligne d\'échappement complète.',
+      title: 'Réparation échappement',
       image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
-      category: 'echappement',
-      date: '28 Février 2024',
-      location: 'Saint-Just-Malmont',
-      duration: '1h45',
-      tags: ['Échappement', 'Silencieux', 'Réparation']
+      date: '28 Février 2024'
+    },
+    {
+      id: 9,
+      title: 'Changement batterie',
+      image: 'https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=800',
+      date: '25 Février 2024'
+    },
+    {
+      id: 10,
+      title: 'Révision complète',
+      image: 'https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800',
+      date: '22 Février 2024'
+    },
+    {
+      id: 11,
+      title: 'Réparation suspension',
+      image: 'https://images.pexels.com/photos/4489702/pexels-photo-4489702.jpeg?auto=compress&cs=tinysrgb&w=800',
+      date: '20 Février 2024'
+    },
+    {
+      id: 12,
+      title: 'Changement courroie',
+      image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
+      date: '18 Février 2024'
     }
   ];
-
-  const categories = [
-    { id: 'all', name: 'Toutes', icon: <Camera className="w-4 h-4" />, color: 'bg-orange-500' },
-    { id: 'entretien', name: 'Entretien', icon: <Droplets className="w-4 h-4" />, color: 'bg-blue-500' },
-    { id: 'freinage', name: 'Freinage', icon: <Car className="w-4 h-4" />, color: 'bg-red-500' },
-    { id: 'embrayage', name: 'Embrayage', icon: <Wrench className="w-4 h-4" />, color: 'bg-yellow-500' },
-    { id: 'distribution', name: 'Distribution', icon: <Settings className="w-4 h-4" />, color: 'bg-purple-500' },
-    { id: 'suspension', name: 'Suspension', icon: <Car className="w-4 h-4" />, color: 'bg-green-500' },
-    { id: 'diagnostic', name: 'Diagnostic', icon: <Wrench className="w-4 h-4" />, color: 'bg-indigo-500' },
-    { id: 'echappement', name: 'Échappement', icon: <Car className="w-4 h-4" />, color: 'bg-gray-500' }
-  ];
-
-  const filteredPosts = selectedCategory === 'all' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
 
   const openModal = (imageId: number) => {
     setSelectedImage(imageId);
@@ -123,20 +91,20 @@ const Gallery = () => {
   const navigateImage = (direction: 'prev' | 'next') => {
     if (selectedImage === null) return;
     
-    const currentIndex = filteredPosts.findIndex(post => post.id === selectedImage);
+    const currentIndex = photos.findIndex(photo => photo.id === selectedImage);
     let newIndex;
     
     if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : filteredPosts.length - 1;
+      newIndex = currentIndex > 0 ? currentIndex - 1 : photos.length - 1;
     } else {
-      newIndex = currentIndex < filteredPosts.length - 1 ? currentIndex + 1 : 0;
+      newIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0;
     }
     
-    setSelectedImage(filteredPosts[newIndex].id);
+    setSelectedImage(photos[newIndex].id);
   };
 
-  const selectedPost = selectedImage 
-    ? blogPosts.find(post => post.id === selectedImage)
+  const selectedPhoto = selectedImage 
+    ? photos.find(photo => photo.id === selectedImage)
     : null;
 
   return (
@@ -151,117 +119,87 @@ const Gallery = () => {
             Galerie
           </h2>
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium font-tech mb-4">
-            Nos dernières interventions
+            Nos interventions en images
           </p>
           <p className="text-sm sm:text-base text-gray-600 font-tech">
-            Découvrez notre travail professionnel à travers nos réalisations récentes
+            Découvrez notre travail professionnel à travers nos réalisations
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full mt-4"></div>
         </div>
 
-        {/* Filtres par catégorie */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 rounded-xl font-medium text-sm sm:text-base transition-all duration-300 font-tech hover-scale ${
-                selectedCategory === category.id
-                  ? `${category.color} text-white shadow-lg transform scale-105`
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {category.icon}
-              <span className="hidden sm:inline">{category.name}</span>
-              <span className="sm:hidden">{category.name}</span>
-            </button>
-          ))}
+        {/* Zone d'ajout pour le collègue */}
+        <div className="mb-8 sm:mb-12">
+          <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-2 border-dashed border-orange-300 rounded-2xl p-6 sm:p-8 text-center">
+            <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white mx-auto mb-4">
+              <Upload className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-orange-800 font-futuristic mb-2">
+              Zone d'ajout de photos
+            </h3>
+            <p className="text-sm sm:text-base text-orange-700 font-tech mb-4">
+              Pour ajouter des photos, contactez l'administrateur du site ou utilisez l'interface d'administration.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-tech text-sm">
+                <Plus className="w-4 h-4 mr-2" />
+                Ajouter une photo
+              </button>
+              <button className="inline-flex items-center px-4 py-2 border-2 border-orange-500 text-orange-600 rounded-lg hover:bg-orange-50 transition-colors font-tech text-sm">
+                <Camera className="w-4 h-4 mr-2" />
+                Interface admin
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Grille d'articles blog */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredPosts.map((post) => (
-            <article
-              key={post.id}
-              className="group bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer"
-              onClick={() => openModal(post.id)}
+        {/* Grille de photos simple */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {photos.map((photo) => (
+            <div
+              key={photo.id}
+              className="group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer"
+              onClick={() => openModal(photo.id)}
             >
               {/* Image */}
-              <div className="aspect-video overflow-hidden relative">
+              <div className="aspect-square overflow-hidden relative">
                 <img
-                  src={post.image}
-                  alt={post.title}
+                  src={photo.image}
+                  alt={photo.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 
-                {/* Overlay avec catégorie */}
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-white text-xs font-bold uppercase tracking-wide ${
-                    categories.find(cat => cat.id === post.category)?.color || 'bg-gray-500'
-                  }`}>
-                    {categories.find(cat => cat.id === post.category)?.name}
-                  </span>
-                </div>
-
-                {/* Icône zoom */}
-                <div className="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Camera className="w-5 h-5 text-white" />
+                {/* Overlay avec icône zoom */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                  <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Camera className="w-5 h-5 text-gray-700" />
+                  </div>
                 </div>
               </div>
               
-              {/* Contenu */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 font-futuristic mb-3 group-hover:text-orange-600 transition-colors">
-                  {post.title}
+              {/* Info */}
+              <div className="p-3 sm:p-4">
+                <h3 className="text-sm sm:text-base font-bold text-gray-900 font-futuristic mb-1 group-hover:text-orange-600 transition-colors">
+                  {photo.title}
                 </h3>
-                
-                <p className="text-gray-600 font-tech text-sm leading-relaxed mb-4">
-                  {post.description}
+                <p className="text-xs sm:text-sm text-gray-500 font-tech">
+                  {photo.date}
                 </p>
-
-                {/* Métadonnées */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-xs text-gray-500 font-tech">
-                    <Calendar className="w-4 h-4 mr-2 text-orange-500" />
-                    {post.date}
-                  </div>
-                  <div className="flex items-center text-xs text-gray-500 font-tech">
-                    <MapPin className="w-4 h-4 mr-2 text-orange-500" />
-                    {post.location}
-                  </div>
-                  <div className="flex items-center text-xs text-gray-500 font-tech">
-                    <Clock className="w-4 h-4 mr-2 text-orange-500" />
-                    Durée: {post.duration}
-                  </div>
-                </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-orange-100 text-orange-700 text-xs rounded-full font-tech"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
 
-        {/* Message si aucun article */}
-        {filteredPosts.length === 0 && (
+        {/* Message si aucune photo */}
+        {photos.length === 0 && (
           <div className="text-center py-12">
             <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500 font-tech">Aucun article dans cette catégorie</p>
+            <p className="text-gray-500 font-tech">Aucune photo dans la galerie</p>
           </div>
         )}
       </div>
 
       {/* Modal lightbox */}
-      {selectedImage && selectedPost && (
+      {selectedImage && selectedPhoto && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
           <div className="relative max-w-4xl max-h-full w-full">
             {/* Bouton fermer */}
@@ -293,54 +231,20 @@ const Gallery = () => {
               {/* Image */}
               <div className="aspect-video">
                 <img
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
+                  src={selectedPhoto.image}
+                  alt={selectedPhoto.title}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Informations détaillées */}
+              {/* Informations */}
               <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`px-3 py-1 rounded-full text-white text-sm font-bold uppercase tracking-wide ${
-                    categories.find(cat => cat.id === selectedPost.category)?.color || 'bg-gray-500'
-                  }`}>
-                    {categories.find(cat => cat.id === selectedPost.category)?.name}
-                  </span>
-                  <div className="text-sm text-gray-500 font-tech">{selectedPost.date}</div>
-                </div>
-
-                <h3 className="text-2xl font-bold text-gray-900 font-futuristic mb-4">
-                  {selectedPost.title}
+                <h3 className="text-2xl font-bold text-gray-900 font-futuristic mb-2">
+                  {selectedPhoto.title}
                 </h3>
-                
-                <p className="text-gray-600 font-tech leading-relaxed mb-6">
-                  {selectedPost.description}
+                <p className="text-gray-600 font-tech">
+                  {selectedPhoto.date}
                 </p>
-
-                {/* Métadonnées détaillées */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div className="flex items-center text-sm text-gray-600 font-tech">
-                    <MapPin className="w-5 h-5 mr-3 text-orange-500" />
-                    <span><strong>Lieu:</strong> {selectedPost.location}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600 font-tech">
-                    <Clock className="w-5 h-5 mr-3 text-orange-500" />
-                    <span><strong>Durée:</strong> {selectedPost.duration}</span>
-                  </div>
-                </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {selectedPost.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full font-tech"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

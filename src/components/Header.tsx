@@ -86,14 +86,14 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const homeNavigationItems = [
     { name: 'Accueil', id: 'hero', icon: '🏠' },
     { name: 'Services', id: 'services', icon: '🔧' },
-    { name: 'Galerie', id: 'gallery', icon: '📸' },
     { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
     { name: 'FAQ', id: 'faq', icon: '❓' },
-    { name: 'Contact', id: 'contact', icon: '📞' }
+    { name: 'Contact', id: 'contact', icon: '📞' },
+    { name: 'Galerie', id: 'gallery', icon: '📸' }
   ];
 
   const galleryNavigationItems = [
-    { name: 'Retour à l\'accueil', id: 'hero', icon: '🏠' }
+    { name: '🏠 Retour à l\'accueil', id: 'hero', icon: '' }
   ];
 
   const navigationItems = isGalleryPage ? galleryNavigationItems : homeNavigationItems;
@@ -154,10 +154,10 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
               {isGalleryPage ? (
                 <button
                   onClick={() => onNavigateHome && onNavigateHome()}
-                  className="relative px-3 py-2 text-sm font-medium tracking-wide uppercase font-tech
+                  className="relative px-4 py-2 text-sm font-medium tracking-wide font-tech
                     transition-all duration-200 ease-out transform hover:translate-y-[-1px]
-                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
-                    text-white/90 hover:text-orange-400"
+                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded-lg
+                    text-white/90 hover:text-orange-400 bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30"
                 >
                   🏠 Retour à l'accueil
                 </button>

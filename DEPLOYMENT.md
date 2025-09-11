@@ -254,14 +254,18 @@ VITE_SITE_URL=https://votre-site.netlify.app
 ### 📸 **Galerie Administrable (avec Supabase)**
 La galerie de photos est désormais entièrement administrable par votre client, sans aucune intervention de votre part une fois le site déployé.
 
-- **Accès Admin** :
+- **Accès Admin Sécurisé** :
   - **Raccourci secret** : Sur la page "Galerie", utilisez la combinaison de touches `Ctrl+Shift+Alt+G+A+L` (G-A-L pour Galerie Admin Login).
-  - **Code admin** : `43BENJI43` (peut être modifié dans le code source si nécessaire).
+  - **Authentification Supabase** : Connexion avec email et mot de passe sécurisés.
+  - **Comptes administrateurs** :
+    - `benjamin.froussard@outlook.fr` (mot de passe: `43benji43`)
+    - `fabian.measson123@gmail.com` (mot de passe: `43benji43`)
 - **Fonctionnalités pour le client** :
   - **Ajout de photos** : Votre client peut glisser-déposer ou sélectionner plusieurs images à la fois. Le système valide automatiquement les images (format, taille max 5MB, résolution min 300x300px), les optimise pour le web, génère des miniatures et les stocke de manière sécurisée sur Supabase.
   - **Gestion de la visibilité** : Chaque photo peut être masquée ou affichée publiquement sur le site.
   - **Suppression de photos** : Possibilité de supprimer définitivement des images.
   - **Détection des doublons** : Le système empêche l'upload de photos identiques déjà présentes.
+  - **Déconnexion sécurisée** : Bouton de déconnexion pour sécuriser l'accès.
 - **Stockage** : Toutes les photos sont stockées dans votre base de données Supabase, garantissant leur persistance et leur visibilité pour tous les visiteurs du site.
 
 ### 🗺️ **Carte Interactive**

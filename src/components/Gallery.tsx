@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect, useCallback } from 'react';
 import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 import { GalleryService, Photo } from '../lib/galleryService';
 import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';
 
@@ -8,8 +9,13 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
-  const [adminCode, setAdminCode] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: ''
+  });
+  const [loginError, setLoginError] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showDeleteMode, setShowDeleteMode] = useState(false);
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,6 +35,32 @@ const Gallery = () => {
     file: null as File | null
   });
   const [keySequence, setKeySequence] = useState<string[]>([]);
+
+  // Vérifier l'état d'authentification au chargement
+  useEffect(() => {
+    checkAuthStatus();
+    
+    // Écouter les changements d'authentification
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setIsAdmin(!!session?.user);
+      if (event === 'SIGNED_OUT') {
+        setShowAddForm(false);
+        setShowDeleteMode(false);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      setIsAdmin(!!session?.user);
+    } catch (error) {
+      console.error('Erreur vérification auth:', error);
+      setIsAdmin(false);
+    }
+  };
 
   // Charger les photos depuis Supabase
   useEffect(() => {
@@ -136,15 +168,45 @@ const Gallery = () => {
     ? photos.find(photo => Number(photo.id) === selectedImage)
     : null;
 
-  const handleAdminLogin = () => {
-    if (adminCode === '43BENJI43') {
-      setIsAdmin(true);
+  const handleAdminLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoggingIn(true);
+    setLoginError('');
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: loginForm.email,
+        password: loginForm.password
+      });
+
+      if (error) {
+        setLoginError('Email ou mot de passe incorrect');
+        return;
+      }
+
+      if (data.user) {
+        setIsAdmin(true);
+        setShowAdminLogin(false);
+        setShowAddForm(true);
+        setLoginForm({ email: '', password: '' });
+      }
+    } catch (error) {
+      setLoginError('Erreur de connexion');
+      console.error('Erreur login:', error);
+    } finally {
+      setIsLoggingIn(false);
+    }
+  };
+
+  const handleAdminLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      setIsAdmin(false);
       setShowAdminLogin(false);
-      setShowAddForm(true);
-      setAdminCode('');
-    } else {
-      alert('Code incorrect');
-      setAdminCode('');
+      setShowAddForm(false);
+      setShowDeleteMode(false);
+    } catch (error) {
+      console.error('Erreur déconnexion:', error);
     }
   };
 
@@ -300,6 +362,12 @@ const Gallery = () => {
                 <BarChart3 className="w-5 h-5 text-orange-500" />
                 Statistiques de la galerie
               </h3>
+              <button
+                onClick={handleAdminLogout}
+                className="px-3 py-1 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-colors text-sm font-medium"
+              >
+                Déconnexion
+              </button>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div className="bg-white p-4 rounded-lg border">
@@ -477,11 +545,12 @@ const Gallery = () => {
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-gray-900 font-futuristic">Code Admin</h3>
+              <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
               <button
                 onClick={() => {
                   setShowAdminLogin(false);
-                  setAdminCode('');
+                  setLoginForm({ email: '', password: '' });
+                  setLoginError('');
                   setKeySequence([]);
                 }}
                 className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
@@ -490,35 +559,62 @@ const Gallery = () => {
               </button>
             </div>
             
-            <div className="space-y-4">
-              <input
-                type="password"
-                value={adminCode}
-                onChange={(e) => setAdminCode(e.target.value)}
-                placeholder="Entrez le code admin"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
-              />
-            </div>
-            
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={() => {
-                  setShowAdminLogin(false);
-                  setAdminCode('');
-                  setKeySequence([]);
-                }}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                Annuler
-              </button>
-              <button
-                onClick={handleAdminLogin}
-                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
-              >
-                Valider
-              </button>
-            </div>
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  value={loginForm.email}
+                  onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                  placeholder="votre-email@example.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  required
+                  disabled={isLoggingIn}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+                <input
+                  type="password"
+                  value={loginForm.password}
+                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                  placeholder="Entrez votre mot de passe"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  required
+                  disabled={isLoggingIn}
+                />
+              </div>
+              
+              {loginError && (
+                <div className="text-red-600 text-sm bg-red-50 p-2 rounded">
+                  {loginError}
+                </div>
+              )}
+              
+              <div className="flex gap-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAdminLogin(false);
+                    setLoginForm({ email: '', password: '' });
+                    setLoginError('');
+                    setKeySequence([]);
+                  }}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  disabled={isLoggingIn}
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
+                  disabled={isLoggingIn}
+                >
+                  {isLoggingIn ? 'Connexion...' : 'Se connecter'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
@@ -587,33 +683,35 @@ const Gallery = () => {
               >
                 Annuler
               </button>
+              <input
               <button
                 onClick={handleAddPhoto}
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
               >
                 {uploadProgress ? 'Upload...' : 'Ajouter'}
               </button>
+            </div>
+            
+            {/* Boutons admin supplémentaires */}
+            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-200">
+              <button
+                onClick={toggleDeleteMode}
+                className={`flex-1 px-3 py-2 rounded-lg transition-colors text-sm ${
+                  showDeleteMode 
+                    ? 'bg-red-500 text-white hover:bg-red-600' 
+                    : 'bg-red-100 text-red-700 hover:bg-red-200'
+                }`}
+              >
+                {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
+              </button>
               
-              {/* Boutons admin supplémentaires */}
-              <div className="flex gap-2 mt-4 pt-4 border-t border-gray-200">
-                <button
-                  onClick={toggleDeleteMode}
-                  className={`flex-1 px-3 py-2 rounded-lg transition-colors text-sm ${
-                    showDeleteMode 
-                      ? 'bg-red-500 text-white hover:bg-red-600' 
-                      : 'bg-red-100 text-red-700 hover:bg-red-200'
-                  }`}
-                >
-                  {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
-                </button>
-                
-                <button
-                  onClick={() => setShowStats(!showStats)}
-                  className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
-                >
-                  {showStats ? 'Masquer stats' : 'Voir stats'}
-                </button>
-              </div>
+              <button
+                onClick={() => setShowStats(!showStats)}
+                className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
+              >
+                {showStats ? 'Masquer stats' : 'Voir stats'}
+              </button>
+              />
             </div>
           </div>
         </div>

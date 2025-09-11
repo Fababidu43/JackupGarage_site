@@ -93,9 +93,19 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
               src={logo} 
               alt="Jack Up Garage - Mécanicien à domicile" 
               className="w-full h-full object-contain transition-all duration-300"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
               onError={(e) => {
                 console.error('Hero logo failed to load');
+              }}
+              onLoad={() => {
+                // Marquer le contenu comme chargé pour éviter le FOUC
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                  heroContent.classList.add('loaded');
+                }
               }}
             />
           </div>

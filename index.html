@@ -1,15 +1,61 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" itemscope itemtype="https://schema.org/AutoRepair">
   <head>
     <meta charset="UTF-8" />
+    <!-- Performance Critical -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Jack Up Garage - Mécanicien à domicile</title>
-    <meta name="description" content="Mécanicien professionnel à domicile dans la Haute-Loire (43) et la Loire (42). Entretien, réparation automobile sur sol dur et plat. Devis gratuit." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- SEO Optimized Meta Tags -->
+    <title>Mécanicien à Domicile Haute-Loire (43) | Jack Up Garage | Réparation Auto Le Puy-en-Velay</title>
+    <meta name="description" content="⭐ Mécanicien professionnel à domicile en Haute-Loire (43). Vidange, freinage, embrayage à Le Puy-en-Velay, Monistrol-sur-Loire, Yssingeaux. Devis gratuit sous 12h !" />
+    <meta name="keywords" content="mécanicien domicile haute-loire, réparation auto 43, vidange le puy en velay, garage mobile monistrol sur loire, mécanicien yssingeaux, entretien voiture domicile" />
+    
+    <!-- Geo-targeting -->
+    <meta name="geo.region" content="FR-43" />
+    <meta name="geo.placename" content="Haute-Loire, Le Puy-en-Velay" />
+    <meta name="geo.position" content="45.0434;3.8847" />
+    <meta name="ICBM" content="45.0434, 3.8847" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:title" content="Jack Up Garage - Mécanicien à Domicile Haute-Loire (43)" />
+    <meta property="og:description" content="Mécanicien professionnel à domicile en Haute-Loire. Vidange, freinage, embrayage. Intervention rapide, devis gratuit !" />
+    <meta property="og:url" content="https://jackupgarage.fr" />
+    <meta property="og:site_name" content="Jack Up Garage" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content="https://jackupgarage.fr/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jack Up Garage - Mécanicien à Domicile Haute-Loire (43)" />
+    <meta name="twitter:description" content="Mécanicien professionnel à domicile en Haute-Loire. Intervention rapide, devis gratuit !" />
+    <meta name="twitter:image" content="https://jackupgarage.fr/twitter-image.jpg" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jackupgarage.fr/" />
+    
+    <!-- Performance: Preload Critical Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry"></script>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap"></noscript>
+    
+    <!-- Lazy load Google Maps -->
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const script = document.createElement('script');
+          script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
+          script.async = true;
+          script.defer = true;
+          document.head.appendChild(script);
+        }, 1000);
+      });
+    </script>
+    
     <style>
       /* Prévention du flash de contenu non stylé */
       body {
@@ -29,7 +75,13 @@
         min-height: 100vh;
         overflow-x: hidden;
       }
+      
+      /* Critical CSS pour éviter le FOUC */
+      .hero-content { opacity: 0; }
+      .hero-content.loaded { opacity: 1; transition: opacity 0.3s ease; }
     </style>
+    
+    <!-- Structured Data will be injected by component -->
   </head>
   <body>
     <div id="root"></div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
 import { Droplets, Cog, Settings, Car, ArrowRight, Wrench } from 'lucide-react';
+import StructuredData from './components/StructuredData';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -148,6 +149,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <StructuredData />
       <Header onQuoteClick={openQuotePopup} onNavigateGallery={navigateToGallery} />
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}

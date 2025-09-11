@@ -1,0 +1,27 @@
+{
+  "name": "Jack Up Garage - Mécanicien à domicile Haute-Loire",
+  "short_name": "Jack Up Garage",
+  "description": "Mécanicien professionnel à domicile en Haute-Loire (43). Vidange, freinage, embrayage, distribution.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#FF6B35",
+  "orientation": "portrait-primary",
+  "categories": ["automotive", "business", "utilities"],
+  "lang": "fr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://jackupgarage.fr/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block admin areas (if any in future)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow important pages
+Allow: /
+Allow: /galerie
+Allow: /services
+Allow: /zone-intervention
+Allow: /contact
+
+# Block unnecessary files
+Disallow: /*.json$
+Disallow: /*.xml$ 
+Disallow: /src/
+Disallow: /node_modules/

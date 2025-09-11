@@ -457,7 +457,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             <div className="w-full">
               <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-orange-500/20 shadow-2xl">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 font-futuristic text-center">
-                  <Map className="w-5 h-5 sm:w-6 sm:h-6 inline-block mr-2 text-orange-400" />
                   Carte Interactive
                 </h3>
                 <div className="text-center mb-3 sm:mb-4 px-2">

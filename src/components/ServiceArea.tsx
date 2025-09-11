@@ -83,7 +83,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
     "Sainte-Sigolène", "Retournac", "Bas-en-Basset", "Saint-Just-Malmont", "Dunières", 
     "Tence", "Saint-Didier-en-Velay", "Craponne-sur-Arzon", "Vorey", "Aurec-sur-Loire", 
-    "Saint-Paulien", "Allegre", "Saugues", "Pinols", "Lavoûte-Chilhac"
+    "Saint-Paulien", "Allegre"
   ];
 
   const communes42 = [

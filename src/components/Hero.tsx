@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
+import logo from '../logo.png';
 
 interface HeroProps {
   onQuoteClick: () => void;
@@ -85,6 +86,21 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       </div>
       
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
+        {/* Logo en gros */}
+        <div className="mb-6 sm:mb-8 reveal-on-scroll">
+          <div className="w-32 h-20 sm:w-48 sm:h-28 lg:w-64 lg:h-36 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex items-center justify-center p-3 sm:p-4 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
+            <img 
+              src={logo} 
+              alt="Jack Up Garage" 
+              className="w-full h-full object-contain"
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              onError={(e) => {
+                console.error('Hero logo failed to load');
+              }}
+            />
+          </div>
+        </div>
+        
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>
@@ -94,8 +110,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
         
         <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">
-          Entretien, freins, embrayage, distribution, suspensions.<br />
-          <span className="text-orange-300 hover-glow-text animate-text-shimmer">Nous venons chez vous.</span>
+          Vidange et entretien, freinage, embrayage, distribution, suspensions, échappement, transmissions.<br />
+          <span className="text-orange-300 hover-glow-text animate-text-shimmer">Nous venons à vous.</span>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-2 sm:px-4 animate-buttons-appear">
@@ -117,16 +133,11 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
 
         {/* Barre de preuves */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 lg:gap-4 xl:gap-6 text-white/80 reveal-on-scroll px-2 sm:px-4 animate-badges-appear">
-          <div className="flex items-center animate-badge-float-1">
-            <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
-            <span className="font-medium tracking-wide text-xs uppercase font-tech">RC Pro</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
           <div className="flex items-center animate-badge-float-2">
             <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">Devis gratuit</span>
           </div>
-          <div className="hidden sm:block w-1 h-1 bg-orange-400 rounded-full"></div>
+          <div className="w-1 h-1 bg-orange-400 rounded-full"></div>
           <div className="flex items-center animate-badge-float-3">
             <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">{"Réponse < 12h"}</span>

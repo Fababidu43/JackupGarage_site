@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import { Droplets, Zap, Settings, Car, ArrowRight, Wrench } from 'lucide-react';
+import { Droplets, Cog, Settings, Car, ArrowRight, Wrench } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -229,22 +229,16 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 sm:mb-6 pulse-subtle" style={{ background: '#FF6B35', color: 'white' }}>
-                  <Zap className="w-6 h-6 sm:w-7 sm:h-7" />
+                  <Cog className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                  Embrayage & Volant Moteur
+                  Kit Embrayage & Volant Moteur
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement complet avec essais. Déplacements étendus sur demande.
+                  Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande.
                 </p>
-                
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande
-                  </p>
-                </div>
                 
                 <button 
                   onClick={openQuotePopup}
@@ -282,14 +276,8 @@ function App() {
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Courroie, galets, pompe à eau : remplacement conforme constructeur.
+                  Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires.
                 </p>
-                
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                  <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
-                    Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires.
-                  </p>
-                </div>
                 
                 <button 
                   onClick={openQuotePopup}

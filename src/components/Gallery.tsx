@@ -296,8 +296,6 @@ const Gallery = () => {
                   src={photo.image}
                   alt={photo.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
                 />
                 
                 {/* Overlay avec icône zoom */}

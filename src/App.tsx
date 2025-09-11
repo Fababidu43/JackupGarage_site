@@ -17,6 +17,7 @@ import QuotePopup from './components/QuotePopup';
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState<'home' | 'gallery'>('home');
+  const [isLoading, setIsLoading] = React.useState(false);
   const scrollDirectionRef = useRef<'up' | 'down'>('down');
   const lastScrollYRef = useRef(0);
 
@@ -121,15 +122,36 @@ function App() {
   };
 
   const navigateToGallery = () => {
+    setIsLoading(true);
     setCurrentPage('gallery');
-    window.scrollTo(0, 0);
+    // Forcer le rendu immédiat
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      setIsLoading(false);
+    });
   };
 
   const navigateToHome = () => {
+    setIsLoading(true);
     setCurrentPage('home');
-    // Scroll immédiat vers le haut
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    // Forcer le rendu immédiat
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      setIsLoading(false);
+    });
   };
+
+  // Écran de chargement pendant la transition
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center loading-screen">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-orange-500/30 border-t-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white font-tech">Chargement...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Rendu conditionnel selon la page
   if (currentPage === 'gallery') {

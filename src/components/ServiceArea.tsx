@@ -119,7 +119,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   // Initialiser Google Maps
   useEffect(() => {
     const initMap = () => {
-      if (!window.google || !mapRef.current) return;
+      if (!window.google || !mapRef.current) {
+        // Réessayer dans 500ms si Google Maps n'est pas encore chargé
+        setTimeout(initMap, 500);
+        return;
+      }
 
       // Créer la carte
       mapInstance.current = new window.google.maps.Map(mapRef.current, {

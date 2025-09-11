@@ -4,12 +4,107 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Jack Up Garage - Mécanicien à domicile</title>
-    <meta name="description" content="Mécanicien professionnel à domicile dans la Haute-Loire (43) et la Loire (42). Entretien, réparation automobile sur sol dur et plat. Devis gratuit." />
+    <title>Jack Up Garage - Mécanicien à domicile Haute-Loire (43) Loire (42) | Vidange, Freins, Embrayage</title>
+    <meta name="description" content="Mécanicien professionnel à domicile Haute-Loire (43) Loire (42). Vidange, freins, embrayage, distribution, suspensions. Intervention rapide, devis gratuit. Monistrol-sur-Loire." />
+    <meta name="keywords" content="mécanicien domicile, garage mobile, vidange domicile, freins domicile, embrayage domicile, Haute-Loire, Loire, Monistrol-sur-Loire, Le Puy-en-Velay, Saint-Étienne, réparation automobile, entretien voiture, mécanicien 43, mécanicien 42" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Jack Up Garage" />
+    <link rel="canonical" href="https://jackupgarage.fr" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jackupgarage.fr" />
+    <meta property="og:title" content="Jack Up Garage - Mécanicien à domicile Haute-Loire Loire" />
+    <meta property="og:description" content="Mécanicien professionnel à domicile. Vidange, freins, embrayage, distribution. Intervention Haute-Loire (43) Loire (42). Devis gratuit." />
+    <meta property="og:image" content="https://jackupgarage.fr/logo.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://jackupgarage.fr" />
+    <meta property="twitter:title" content="Jack Up Garage - Mécanicien à domicile Haute-Loire Loire" />
+    <meta property="twitter:description" content="Mécanicien professionnel à domicile. Vidange, freins, embrayage, distribution. Intervention Haute-Loire (43) Loire (42)." />
+    <meta property="twitter:image" content="https://jackupgarage.fr/logo.png" />
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoRepair",
+      "name": "Jack Up Garage",
+      "description": "Mécanicien professionnel à domicile spécialisé dans l'entretien et la réparation automobile",
+      "url": "https://jackupgarage.fr",
+      "telephone": "+33123456789",
+      "email": "contact@jackupgarage.fr",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Monistrol-sur-Loire",
+        "postalCode": "43120",
+        "addressRegion": "Haute-Loire",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.2947,
+        "longitude": 4.1736
+      },
+      "areaServed": [
+        {
+          "@type": "State",
+          "name": "Haute-Loire"
+        },
+        {
+          "@type": "State", 
+          "name": "Loire"
+        }
+      ],
+      "serviceType": [
+        "Vidange automobile",
+        "Réparation freins",
+        "Changement embrayage",
+        "Kit distribution",
+        "Suspensions",
+        "Entretien automobile"
+      ],
+      "priceRange": "€€",
+      "openingHours": "Mo-Sa 08:00-18:00",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services mécaniques à domicile",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Vidange et entretien",
+              "description": "Vidange moteur, changement filtres, contrôle niveaux"
+            }
+          },
+          {
+            "@type": "Offer", 
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Système de freinage",
+              "description": "Remplacement plaquettes, disques, purge liquide de frein"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service", 
+              "name": "Embrayage et volant moteur",
+              "description": "Remplacement kit embrayage et volant moteur"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="stylesheet"></noscript>
+    
     <style>
       /* Prévention du flash de contenu non stylé */
       body {
@@ -18,6 +113,12 @@
         overflow-x: hidden;
         width: 100%;
         box-sizing: border-box;
+        background-color: #0A0A0A;
+        color: white;
+      }
+      
+      .loading-screen {
+        background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
       }
       
       *, *::before, *::after {
@@ -28,6 +129,16 @@
         width: 100%;
         min-height: 100vh;
         overflow-x: hidden;
+        background-color: #0A0A0A;
+      }
+      
+      /* Optimisation images */
+      img {
+        loading: lazy;
+      }
+      
+      img[src*="logo"] {
+        loading: eager;
       }
     </style>
   </head>

@@ -8,7 +8,7 @@ interface ServiceAreaProps {
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
 const STANDARD_RADIUS = 30; // km (0-30 km)
-const EMBRAYAGE_RADIUS = 70; // km pour la zone élargie (30-70 km)
+const EMBRAYAGE_RADIUS = 60; // km pour la zone élargie (30-60 km)
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
@@ -100,7 +100,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         distance: distanceFromCenter 
       });
     } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
-      // Zone élargie (50-75km) - Priorité aux départements 43 et 42
+      // Zone élargie (30-60km) - Priorité aux départements 43 et 42
       if (department === '43' || department === '42' || !department) {
         setCoverageResult({
           status: 'quote-only',
@@ -116,7 +116,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         });
       }
     } else {
-      // Au-delà de 75km - hors zone
+      // Au-delà de 60km - hors zone
       setCoverageResult({ 
         status: 'out-of-zone', 
         city: placeName,
@@ -242,7 +242,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         fillOpacity: 0.1,
         map: mapInstance.current, // Affiché par défaut
         center: CENTER_COORDS,
-        radius: EMBRAYAGE_RADIUS * 1000
+        radius: EMBRAYAGE_RADIUS * 1000 // 60km
       });
 
       // Zone Lyon sur demande

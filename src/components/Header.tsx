@@ -86,17 +86,16 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const homeNavigationItems = [
     { name: 'Accueil', id: 'hero', icon: '🏠' },
     { name: 'Services', id: 'services', icon: '🔧' },
-    { name: 'Galerie', id: 'gallery', icon: '📸' },
     { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
     { name: 'FAQ', id: 'faq', icon: '❓' },
-    { name: 'Contact', id: 'contact', icon: '📞' }
+    { name: 'Contact', id: 'contact', icon: '📞' },
+    { name: 'Galerie', id: 'gallery', icon: '📸' }
   ];
 
   const galleryNavigationItems = [
     { name: 'Retour à l\'accueil', id: 'hero', icon: '🏠' }
   ];
 
-  const navigationItems = isGalleryPage ? galleryNavigationItems : homeNavigationItems;
 
   return (
     <>
@@ -153,16 +152,23 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               {isGalleryPage ? (
                 <button
-                  onClick={() => onNavigateHome && onNavigateHome()}
-                  className="relative px-3 py-2 text-sm font-medium tracking-wide uppercase font-tech
-                    transition-all duration-200 ease-out transform hover:translate-y-[-1px]
-                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
-                    text-white/90 hover:text-orange-400"
+                  onClick={() => {
+                    if (onNavigateHome) {
+                      onNavigateHome();
+                      setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }, 50);
+                    }
+                  }}
+                  className="relative px-4 py-2 bg-white/10 border border-white/20 text-white font-medium tracking-wide uppercase font-tech
+                    transition-all duration-300 ease-out transform hover:scale-105 hover:bg-white/20 hover:border-white/40
+                    focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 rounded-lg backdrop-blur-sm
+                    shadow-lg hover:shadow-xl text-sm"
                 >
                   🏠 Retour à l'accueil
                 </button>
               ) : (
-                navigationItems.map((item) => (
+                homeNavigationItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
@@ -254,10 +260,20 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
               
               {/* Navigation Links identique au desktop */}
               <nav className="py-1">
-                {navigationItems.map((item, index) => (
+                {(isGalleryPage ? galleryNavigationItems : homeNavigationItems).map((item, index) => (
                   <button
                     key={item.name}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => {
+                      if (isGalleryPage && item.id === 'hero' && onNavigateHome) {
+                        onNavigateHome();
+                        setTimeout(() => {
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }, 50);
+                        setIsMenuOpen(false);
+                      } else {
+                        scrollToSection(item.id);
+                      }
+                    }}
                     className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out group
                       hover:bg-orange-500/5
                       ${activeSection === item.id 
@@ -269,7 +285,9 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                       <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
                         activeSection === item.id ? 'bg-orange-300' : 'bg-white/30 group-hover:bg-orange-300/70'
                       }`}></div>
-                      <span className="font-medium">{item.name}</span>
+                      <span className="font-medium">
+                        {isGalleryPage && item.id === 'hero' ? '🏠 Retour à l\'accueil' : item.name}
+                      </span>
                     </div>
                     
                     {/* Barre latérale active */}

@@ -127,7 +127,9 @@ function App() {
 
   const navigateToHome = () => {
     setCurrentPage('home');
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   // Rendu conditionnel selon la page

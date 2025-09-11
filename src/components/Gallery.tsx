@@ -3,9 +3,15 @@ import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus } from 'lucide-react
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newPhoto, setNewPhoto] = useState({
+    title: '',
+    date: '',
+    image: ''
+  });
 
   // Galerie simple avec photos d'interventions
-  const photos = [
+  const [photos, setPhotos] = useState([
     {
       id: 1,
       title: 'Vidange moteur',
@@ -78,7 +84,7 @@ const Gallery = () => {
       image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
       date: '18 Février 2024'
     }
-  ];
+  ]);
 
   const openModal = (imageId: number) => {
     setSelectedImage(imageId);
@@ -107,6 +113,19 @@ const Gallery = () => {
     ? photos.find(photo => photo.id === selectedImage)
     : null;
 
+  const handleAddPhoto = () => {
+    if (newPhoto.title && newPhoto.date && newPhoto.image) {
+      const newId = Math.max(...photos.map(p => p.id)) + 1;
+      setPhotos([{
+        id: newId,
+        title: newPhoto.title,
+        date: newPhoto.date,
+        image: newPhoto.image
+      }, ...photos]);
+      setNewPhoto({ title: '', date: '', image: '' });
+      setShowAddForm(false);
+    }
+  };
   return (
     <section className="section py-8 lg:py-12 min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,29 +147,6 @@ const Gallery = () => {
         </div>
 
         {/* Zone d'ajout pour le collègue */}
-        <div className="mb-8 sm:mb-12">
-          <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-2 border-dashed border-orange-300 rounded-2xl p-6 sm:p-8 text-center">
-            <div className="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white mx-auto mb-4">
-              <Upload className="w-6 h-6" />
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-orange-800 font-futuristic mb-2">
-              Zone d'ajout de photos
-            </h3>
-            <p className="text-sm sm:text-base text-orange-700 font-tech mb-4">
-              Pour ajouter des photos, contactez l'administrateur du site ou utilisez l'interface d'administration.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-tech text-sm">
-                <Plus className="w-4 h-4 mr-2" />
-                Ajouter une photo
-              </button>
-              <button className="inline-flex items-center px-4 py-2 border-2 border-orange-500 text-orange-600 rounded-lg hover:bg-orange-50 transition-colors font-tech text-sm">
-                <Camera className="w-4 h-4 mr-2" />
-                Interface admin
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* Grille de photos simple */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -198,6 +194,81 @@ const Gallery = () => {
         )}
       </div>
 
+      {/* Bouton d'ajout discret en bas à droite */}
+      <button
+        onClick={() => setShowAddForm(true)}
+        className="fixed bottom-20 right-4 w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-30 hover:scale-110"
+        title="Ajouter une photo"
+      >
+        <Plus className="w-6 h-6" />
+      </button>
+
+      {/* Modal d'ajout de photo */}
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter une photo</h3>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Titre de l'intervention</label>
+                <input
+                  type="text"
+                  value={newPhoto.title}
+                  onChange={(e) => setNewPhoto({...newPhoto, title: e.target.value})}
+                  placeholder="Ex: Vidange moteur"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                <input
+                  type="text"
+                  value={newPhoto.date}
+                  onChange={(e) => setNewPhoto({...newPhoto, date: e.target.value})}
+                  placeholder="Ex: 15 Mars 2024"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">URL de l'image</label>
+                <input
+                  type="url"
+                  value={newPhoto.image}
+                  onChange={(e) => setNewPhoto({...newPhoto, image: e.target.value})}
+                  placeholder="https://..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleAddPhoto}
+                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Modal lightbox */}
       {selectedImage && selectedPhoto && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">

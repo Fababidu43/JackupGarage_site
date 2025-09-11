@@ -86,6 +86,21 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       </div>
       
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
+        {/* Logo principal centré */}
+        <div className="mb-6 sm:mb-8 reveal-on-scroll">
+          <div className="w-32 h-16 sm:w-40 sm:h-20 lg:w-48 lg:h-24 xl:w-56 xl:h-28 bg-white/95 border-2 border-orange-500/30 rounded-2xl flex items-center justify-center p-2 sm:p-3 mx-auto shadow-2xl hover:border-orange-500/50 transition-all duration-300 hover-scale backdrop-blur-sm">
+            <img 
+              src={logo} 
+              alt="Jack Up Garage - Mécanicien à domicile" 
+              className="w-full h-full object-contain transition-all duration-300"
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              onError={(e) => {
+                console.error('Hero logo failed to load');
+              }}
+            />
+          </div>
+        </div>
+        
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
           <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>

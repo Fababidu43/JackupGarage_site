@@ -162,7 +162,7 @@ function App() {
               <div>
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-orange-500/20 to-orange-600/10 rounded-lg shadow-lg flex items-center justify-center border border-orange-500/20 hover-scale border-glow">
                   <img 
-                    src="https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/entretiens_photos.jpg" 
                     alt="Vidange moteur - Entretien automobile" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />

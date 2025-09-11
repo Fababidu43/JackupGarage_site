@@ -143,16 +143,16 @@ function App() {
                 </div>
                 
                 <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
-                  Vidange & Entretien
+                  Entretiens
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Vidange moteur, remplacement des filtres (huile, air, habitacle), contrôle des niveaux et de l'état général du véhicule.
+                  Vidanges, filtres, freins. Interventions propres et rapides, à domicile.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    💡 <strong>À savoir :</strong> Une vidange doit être effectuée tous les 10 000 à 15 000 km selon le type d'huile et les préconisations constructeur.
+                    Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
                   </p>
                 </div>
                 
@@ -237,12 +237,12 @@ function App() {
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement complet du kit embrayage, volant moteur, butée et fourchette. Essais et réglages inclus.
+                  Remplacement complet avec essais. Déplacements étendus sur demande.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    🔧 <strong>Symptômes d'usure :</strong> Pédale dure, difficulté à passer les vitesses, bruit métallique, véhicule qui n'avance plus correctement, odeur de brûlé.
+                    Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande
                   </p>
                 </div>
                 
@@ -282,12 +282,12 @@ function App() {
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement de la courroie de distribution, galets tendeurs et pompe à eau selon les préconisations constructeur.
+                  Courroie, galets, pompe à eau : remplacement conforme constructeur.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
-                    ⏰ <strong>Prévention :</strong> La courroie de distribution doit généralement être remplacée tous les 5 ans ou 120 000 km, contactez-nous pour savoir si la vôtre doit être changée.
+                    Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires.
                   </p>
                 </div>
                 

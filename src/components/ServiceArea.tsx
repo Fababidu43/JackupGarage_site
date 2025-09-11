@@ -459,11 +459,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 font-futuristic text-center">
                   Carte Interactive
                 </h3>
-                <div className="text-center mb-3 sm:mb-4 px-2">
-                  <p className="text-orange-300 text-xs sm:text-sm font-tech bg-orange-500/10 backdrop-blur-sm px-3 sm:px-4 py-2 rounded-lg inline-block">
-                    Zone Lyon (10km) : Sur demande uniquement • Zone élargie embrayage : Supplément 1€/km au-delà de 50 km
-                  </p>
-                </div>
                 <div 
                   ref={mapRef}
                   className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"

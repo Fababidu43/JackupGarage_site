@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick }) => {
   const navigationItems = [
     { name: 'Accueil', id: 'hero', icon: '🏠' },
     { name: 'Services', id: 'services', icon: '🔧' },
-    // { name: 'Galerie', id: 'gallery', icon: '📸' },
+    { name: 'Galerie', id: 'gallery', icon: '📸' },
     { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
     { name: 'FAQ', id: 'faq', icon: '❓' },
     { name: 'Contact', id: 'contact', icon: '📞' }

@@ -386,9 +386,9 @@ function App() {
         </div>
         
         {/* Galerie - En attente d'implémentation dans une page séparée */}
-        {/* <div className="scroll-animate">
+        <div className="scroll-animate">
           <Gallery />
-        </div> */}
+        </div>
         
         {/* Zone d'intervention (FOND NOIR) */}
         <div className="scroll-animate">

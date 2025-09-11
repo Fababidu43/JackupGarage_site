@@ -4,10 +4,14 @@ import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus } from 'lucide-react
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [adminCode, setAdminCode] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const [newPhoto, setNewPhoto] = useState({
     title: '',
     date: '',
-    image: ''
+    image: '',
+    file: null as File | null
   });
 
   // Galerie simple avec photos d'interventions
@@ -113,8 +117,35 @@ const Gallery = () => {
     ? photos.find(photo => photo.id === selectedImage)
     : null;
 
+  const handleAdminLogin = () => {
+    if (adminCode === '43BENJI43') {
+      setIsAdmin(true);
+      setShowAdminLogin(false);
+      setShowAddForm(true);
+      setAdminCode('');
+    } else {
+      alert('Code incorrect');
+      setAdminCode('');
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setNewPhoto({
+          ...newPhoto,
+          file: file,
+          image: e.target?.result as string
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddPhoto = () => {
-    if (newPhoto.title && newPhoto.date && newPhoto.image) {
+    if (newPhoto.title && newPhoto.date && (newPhoto.image || newPhoto.file)) {
       const newId = Math.max(...photos.map(p => p.id)) + 1;
       setPhotos([{
         id: newId,
@@ -122,8 +153,9 @@ const Gallery = () => {
         date: newPhoto.date,
         image: newPhoto.image
       }, ...photos]);
-      setNewPhoto({ title: '', date: '', image: '' });
+      setNewPhoto({ title: '', date: '', image: '', file: null });
       setShowAddForm(false);
+      setIsAdmin(false);
     }
   };
   return (
@@ -196,12 +228,61 @@ const Gallery = () => {
 
       {/* Bouton d'ajout discret en bas à droite */}
       <button
-        onClick={() => setShowAddForm(true)}
-        className="fixed bottom-20 right-4 w-12 h-12 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-30 hover:scale-110"
+        onClick={() => setShowAdminLogin(true)}
+        className="fixed bottom-20 right-4 w-8 h-8 bg-gray-400 hover:bg-orange-500 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center z-30 hover:scale-105 opacity-30 hover:opacity-100"
         title="Ajouter une photo"
       >
-        <Plus className="w-6 h-6" />
+        <Plus className="w-4 h-4" />
       </button>
+
+      {/* Modal de connexion admin */}
+      {showAdminLogin && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900 font-futuristic">Code Admin</h3>
+              <button
+                onClick={() => {
+                  setShowAdminLogin(false);
+                  setAdminCode('');
+                }}
+                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <input
+                type="password"
+                value={adminCode}
+                onChange={(e) => setAdminCode(e.target.value)}
+                placeholder="Entrez le code admin"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
+              />
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowAdminLogin(false);
+                  setAdminCode('');
+                }}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleAdminLogin}
+                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Valider
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal d'ajout de photo */}
       {showAddForm && (
@@ -241,14 +322,18 @@ const Gallery = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">URL de l'image</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Photo</label>
                 <input
-                  type="url"
-                  value={newPhoto.image}
-                  onChange={(e) => setNewPhoto({...newPhoto, image: e.target.value})}
-                  placeholder="https://..."
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 />
+                {newPhoto.image && (
+                  <div className="mt-2">
+                    <img src={newPhoto.image} alt="Aperçu" className="w-20 h-20 object-cover rounded-lg" />
+                  </div>
+                )}
               </div>
             </div>
             

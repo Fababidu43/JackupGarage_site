@@ -244,7 +244,7 @@ function App() {
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
                     🔧 <strong>Symptômes d'usure :</strong> Pédale dure, difficulté à passer les vitesses, bruit métallique, véhicule qui n'avance plus correctement, odeur de brûlé.
                   </p>
-                </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}
@@ -289,7 +289,7 @@ function App() {
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
                     ⏰ <strong>Prévention :</strong> La courroie de distribution doit généralement être remplacée tous les 5 ans ou 120 000 km, contactez-nous pour savoir si la vôtre doit être changée.
                   </p>
-                </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}

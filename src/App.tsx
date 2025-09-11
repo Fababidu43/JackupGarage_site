@@ -147,7 +147,7 @@ function App() {
                 </h3>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Vidanges, filtres, freins. Interventions propres et rapides, à domicile.
+                  Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">

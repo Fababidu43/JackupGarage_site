@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo en gros */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-72 h-36 sm:w-96 sm:h-48 lg:w-[32rem] lg:h-64 xl:w-[40rem] xl:h-80 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 lg:p-6 xl:p-8 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
+          <div className="w-48 h-24 sm:w-72 sm:h-36 lg:w-96 lg:h-48 bg-white/95 border-2 border-orange-500/40 rounded-2xl flex flex-col items-center justify-center p-3 sm:p-4 mx-auto shadow-2xl hover:bg-white hover:border-orange-500/60 transition-all duration-300 hover-scale">
             <div className="flex-1 flex items-center justify-center w-full">
               <img 
                 src={logo} 
@@ -101,10 +101,10 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
               />
             </div>
             <div className="text-center mt-1 sm:mt-2">
-              <p className="text-orange-500 font-bold text-sm sm:text-base lg:text-lg xl:text-xl font-futuristic uppercase tracking-wide leading-tight">
+              <p className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic uppercase tracking-wide leading-tight">
                 Mécanicien à domicile
               </p>
-              <p className="text-orange-500 font-bold text-sm sm:text-base lg:text-lg xl:text-xl font-futuristic uppercase tracking-wide leading-tight">
+              <p className="text-orange-500 font-bold text-xs sm:text-sm lg:text-base font-futuristic uppercase tracking-wide leading-tight">
                 Haute-Loire & Loire (43–42)
               </p>
             </div>
@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
         
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
-          <span className="hover-glow-text animate-text-glow">Jack Up Garage</span>
+          <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>
         
         <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">

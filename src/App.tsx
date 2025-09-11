@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
-import { Droplets, Zap, Settings, Car, ArrowRight } from 'lucide-react';
+import { Droplets, Zap, Settings, Car, ArrowRight, Wrench } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';

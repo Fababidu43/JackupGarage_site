@@ -379,7 +379,7 @@ function App() {
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
                     🔧 <strong>Service complet :</strong> Diagnostic, réparation et remplacement de nombreux éléments. Contactez-nous pour toute demande spécifique.
                   </p>
-                </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}

@@ -10,7 +10,7 @@ const Services = () => {
             Nos Services
           </h2>
           <p className="text-base sm:text-lg text-gray-700 font-semibold uppercase font-tech px-4">
-            À domicile
+           Prestations À domicile
           </p>
         </div>
       </div>

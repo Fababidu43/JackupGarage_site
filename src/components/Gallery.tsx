@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus } from 'lucide-react';
 
 const Gallery = () => {
@@ -13,9 +14,21 @@ const Gallery = () => {
     image: '',
     file: null as File | null
   });
+  const [keySequence, setKeySequence] = useState<string[]>([]);
 
   // Galerie simple avec photos d'interventions
-  const [photos, setPhotos] = useState([
+  const [photos, setPhotos] = useState(() => {
+    // Charger les photos depuis localStorage au démarrage
+    const savedPhotos = localStorage.getItem('gallery-photos');
+    if (savedPhotos) {
+      try {
+        return JSON.parse(savedPhotos);
+      } catch (error) {
+        console.error('Erreur lors du chargement des photos:', error);
+      }
+    }
+    // Photos par défaut si rien en localStorage
+    return [
     {
       id: 1,
       title: 'Vidange moteur',
@@ -88,7 +101,56 @@ const Gallery = () => {
       image: 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800',
       date: '18 Février 2024'
     }
-  ]);
+    ];
+  });
+
+  // Sauvegarder automatiquement les photos dans localStorage
+  useEffect(() => {
+    localStorage.setItem('gallery-photos', JSON.stringify(photos));
+  }, [photos]);
+
+  // Raccourci clavier complexe : Ctrl+Shift+Alt+G+A+L
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Séquence requise : Ctrl+Shift+Alt puis G, A, L
+      if (e.ctrlKey && e.shiftKey && e.altKey) {
+        const newSequence = [...keySequence, e.key.toLowerCase()];
+        setKeySequence(newSequence);
+        
+        // Vérifier si la séquence complète est tapée : g, a, l
+        if (newSequence.length >= 3) {
+          const lastThree = newSequence.slice(-3);
+          if (lastThree.join('') === 'gal') {
+            setShowAdminLogin(true);
+            setKeySequence([]); // Reset
+          }
+        }
+        
+        // Reset si trop long
+        if (newSequence.length > 5) {
+          setKeySequence([]);
+        }
+      } else {
+        // Reset si les touches modificatrices ne sont pas pressées
+        setKeySequence([]);
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      // Reset après 2 secondes d'inactivité
+      setTimeout(() => {
+        setKeySequence([]);
+      }, 2000);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [keySequence]);
 
   const openModal = (imageId: number) => {
     setSelectedImage(imageId);
@@ -147,15 +209,20 @@ const Gallery = () => {
   const handleAddPhoto = () => {
     if (newPhoto.title && newPhoto.date && (newPhoto.image || newPhoto.file)) {
       const newId = Math.max(...photos.map(p => p.id)) + 1;
-      setPhotos([{
+      const updatedPhotos = [{
         id: newId,
         title: newPhoto.title,
         date: newPhoto.date,
         image: newPhoto.image
-      }, ...photos]);
+      }, ...photos];
+      
+      setPhotos(updatedPhotos);
       setNewPhoto({ title: '', date: '', image: '', file: null });
       setShowAddForm(false);
       setIsAdmin(false);
+      
+      // Confirmation de sauvegarde
+      alert('Photo ajoutée et sauvegardée automatiquement !');
     }
   };
   return (
@@ -206,13 +273,18 @@ const Gallery = () => {
               
               {/* Info */}
               <div className="p-3 sm:p-4">
-                <h3 className="text-sm sm:text-base font-bold text-gray-900 font-futuristic mb-1 group-hover:text-orange-600 transition-colors">
+                  onClick={() => {
+                    setShowAddForm(false);
+                    setIsAdmin(false);
+                    setNewPhoto({ title: '', date: '', image: '', file: null });
+                  }}
                   {photo.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-500 font-tech">
                   {photo.date}
                 </p>
               </div>
+                  disabled={!newPhoto.title || !newPhoto.date || !newPhoto.image}
             </div>
           ))}
         </div>
@@ -226,14 +298,12 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Bouton d'ajout discret en bas à droite */}
-      <button
-        onClick={() => setShowAdminLogin(true)}
-        className="fixed bottom-20 right-4 w-8 h-8 bg-gray-400 hover:bg-orange-500 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center z-30 hover:scale-105 opacity-30 hover:opacity-100"
-        title="Ajouter une photo"
-      >
-        <Plus className="w-4 h-4" />
-      </button>
+      {/* Indicateur de raccourci (optionnel, pour debug) */}
+      {keySequence.length > 0 && (
+        <div className="fixed top-4 right-4 bg-black/80 text-white px-3 py-1 rounded text-xs z-50">
+          Séquence: {keySequence.join('')}
+        </div>
+      )}
 
       {/* Modal de connexion admin */}
       {showAdminLogin && (
@@ -245,6 +315,7 @@ const Gallery = () => {
                 onClick={() => {
                   setShowAdminLogin(false);
                   setAdminCode('');
+                  setKeySequence([]);
                 }}
                 className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
               >
@@ -268,6 +339,7 @@ const Gallery = () => {
                 onClick={() => {
                   setShowAdminLogin(false);
                   setAdminCode('');
+                  setKeySequence([]);
                 }}
                 className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
               >

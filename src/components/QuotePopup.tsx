@@ -70,36 +70,30 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     )?.long_name;
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Zone standard (départements 43 et 42 depuis Monistrol)
-    if (department === '43' || department === '42') {
-      if (distanceFromCenter <= STANDARD_RADIUS) {
-        setLocationStatus({
-          status: 'covered',
-          city: placeName,
-          distance: distanceFromCenter
-        });
-      } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
-        setLocationStatus({
-          status: 'quote-only',
-          city: placeName,
-          distance: distanceFromCenter
-        });
-      } else {
-        setLocationStatus({
-          status: 'out-of-zone',
-          city: placeName,
-          distance: distanceFromCenter
-        });
-      }
-      return;
+    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire
+    if (distanceFromCenter <= STANDARD_RADIUS) {
+      // Zone standard (0-30km)
+      setLocationStatus({
+        status: 'covered',
+        city: placeName,
+        distance: distanceFromCenter
+      });
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS && distanceFromCenter > STANDARD_RADIUS) {
+      // Zone élargie (30-60km) - selon nature des travaux
+      setLocationStatus({
+        status: 'quote-only',
+        city: placeName,
+        distance: distanceFromCenter
+      });
+    } else {
+      // Au-delà de 60km - hors zone
+      setLocationStatus({
+        status: 'out-of-zone',
+        city: placeName,
+        distance: distanceFromCenter
+      });
     }
 
-    // Autres zones non couvertes
-    setLocationStatus({ 
-      status: 'out-of-zone', 
-      city: placeName,
-      distance: distanceFromCenter
-    });
   };
 
   // Initialiser l'autocomplete Google Places

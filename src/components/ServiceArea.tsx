@@ -91,30 +91,21 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       department = postalCode ? postalCode.substring(0, 2) : '';
     }
 
-    // Logique de couverture basée sur la distance ET le département
+    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire
     if (distanceFromCenter <= STANDARD_RADIUS) {
-      // Zone standard (0-50km)
+      // Zone standard (0-30km)
       setCoverageResult({ 
         status: 'covered', 
         city: placeName,
         distance: distanceFromCenter 
       });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS) {
-      // Zone élargie (30-60km) - Priorité aux départements 43 et 42
-      if (department === '43' || department === '42' || !department) {
-        setCoverageResult({
-          status: 'quote-only',
-          city: placeName,
-          distance: distanceFromCenter
-        });
-      } else {
-        // Autres départements dans la zone élargie - hors zone
-        setCoverageResult({ 
-          status: 'out-of-zone', 
-          city: placeName,
-          distance: distanceFromCenter 
-        });
-      }
+    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS && distanceFromCenter > STANDARD_RADIUS) {
+      // Zone élargie (30-60km) - selon nature des travaux
+      setCoverageResult({
+        status: 'quote-only',
+        city: placeName,
+        distance: distanceFromCenter
+      });
     } else {
       // Au-delà de 60km - hors zone
       setCoverageResult({ 

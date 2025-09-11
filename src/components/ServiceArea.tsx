@@ -393,7 +393,18 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   const getStatusMessage = () => {
     if (coverageResult.status === 'on-demand' && coverageResult.distance === 0) {
-      return `${coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
+      return (
+        <span>
+          {coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
+          <a 
+            href="tel:+33123456789" 
+            className="underline font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+          >
+            Contactez-nous
+          </a>
+          {' '}pour vérifier la faisabilité.
+        </span>
+      );
     }
     
     if (!coverageResult.distance) return '';

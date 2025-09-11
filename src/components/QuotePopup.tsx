@@ -195,7 +195,18 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
   const getLocationStatusMessage = () => {
     if (locationStatus.status === 'on-demand' && locationStatus.distance === 0) {
-      return `${locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
+      return (
+        <span>
+          {locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
+          <a 
+            href="tel:+33123456789" 
+            className="underline font-semibold text-yellow-200 hover:text-yellow-100 transition-colors duration-200"
+          >
+            Contactez-nous
+          </a>
+          {' '}pour vérifier la faisabilité.
+        </span>
+      );
     }
     
     if (!locationStatus.distance) return '';

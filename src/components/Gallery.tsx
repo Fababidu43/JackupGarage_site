@@ -8,6 +8,7 @@ const Gallery = () => {
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [adminCode, setAdminCode] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showDeleteMode, setShowDeleteMode] = useState(false);
   const [newPhoto, setNewPhoto] = useState({
     title: '',
     date: '',
@@ -220,11 +221,28 @@ const Gallery = () => {
       setNewPhoto({ title: '', date: '', image: '', file: null });
       setShowAddForm(false);
       setIsAdmin(false);
+      setShowDeleteMode(false);
       
       // Confirmation de sauvegarde
       alert('Photo ajoutée et sauvegardée automatiquement !');
     }
   };
+
+  const handleDeletePhoto = (photoId: number) => {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette photo ?')) {
+      const updatedPhotos = photos.filter(photo => photo.id !== photoId);
+      setPhotos(updatedPhotos);
+      alert('Photo supprimée avec succès !');
+    }
+  };
+
+  const toggleDeleteMode = () => {
+    setShowDeleteMode(!showDeleteMode);
+    if (showAddForm) {
+      setShowAddForm(false);
+    }
+  };
+
   return (
     <section className="section py-8 lg:py-12 min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -252,9 +270,26 @@ const Gallery = () => {
           {photos.map((photo) => (
             <div
               key={photo.id}
-              className="group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer"
+              className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
+                showDeleteMode 
+                  ? 'border-red-300 hover:border-red-500' 
+                  : 'border-gray-200 hover:border-orange-500/50'
+              }`}
               onClick={() => openModal(photo.id)}
             >
+              {/* Bouton de suppression en mode admin */}
+              {showDeleteMode && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeletePhoto(photo.id);
+                  }}
+                  className="absolute top-2 right-2 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+              
               {/* Image */}
               <div className="aspect-square overflow-hidden relative">
                 <img
@@ -264,9 +299,17 @@ const Gallery = () => {
                 />
                 
                 {/* Overlay avec icône zoom */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                <div className={`absolute inset-0 transition-all duration-300 flex items-center justify-center ${
+                  showDeleteMode 
+                    ? 'bg-red-500/20' 
+                    : 'bg-black/0 group-hover:bg-black/20'
+                }`}>
                   <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Camera className="w-5 h-5 text-gray-700" />
+                    {showDeleteMode ? (
+                      <X className="w-5 h-5 text-red-600" />
+                    ) : (
+                      <Camera className="w-5 h-5 text-gray-700" />
+                    )}
                   </div>
                 </div>
               </div>
@@ -417,10 +460,35 @@ const Gallery = () => {
               >
                 Ajouter
               </button>
+              
+              {/* Boutons admin supplémentaires */}
+              <div className="flex gap-2 mt-4 pt-4 border-t border-gray-200">
+                <button
+                  onClick={toggleDeleteMode}
+                  className={`flex-1 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    showDeleteMode 
+                      ? 'bg-red-500 text-white hover:bg-red-600' 
+                      : 'bg-red-100 text-red-700 hover:bg-red-200'
+                  }`}
+                >
+                  {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* Indicateur mode suppression */}
+      {showDeleteMode && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-40">
+          <div className="flex items-center gap-2">
+            <X className="w-4 h-4" />
+            <span className="text-sm font-medium">Mode suppression activé - Cliquez sur les photos à supprimer</span>
+          </div>
+        </div>
+      )}
+
       {/* Modal lightbox */}
       {selectedImage && selectedPhoto && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">

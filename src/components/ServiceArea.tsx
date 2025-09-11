@@ -13,47 +13,6 @@ const EMBRAYAGE_RADIUS = 70; // km pour la zone élargie (30-70 km)
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
 
-// Liste des villes de Lyon et alentours (15km)
-const LYON_CITIES = [
-  // Lyon arrondissements
-  "Lyon", "Lyon 1er", "Lyon 2e", "Lyon 3e", "Lyon 4e", "Lyon 5e", 
-  "Lyon 6e", "Lyon 7e", "Lyon 8e", "Lyon 9e",
-  // Villeurbanne
-  "Villeurbanne",
-  // Est lyonnais
-  "Bron", "Vénissieux", "Saint-Priest", "Chassieu", "Décines-Charpieu",
-  "Meyzieu", "Jonage", "Jons", "Niévroz", "Thil",
-  // Ouest lyonnais
-  "Écully", "Tassin-la-Demi-Lune", "Sainte-Foy-lès-Lyon", "Francheville",
-  "Craponne", "Charbonnières-les-Bains", "Marcy-l'Étoile", "La Tour-de-Salvagny",
-  // Nord lyonnais
-  "Caluire-et-Cuire", "Rillieux-la-Pape", "Sathonay-Camp", "Sathonay-Village",
-  "Fontaines-sur-Saône", "Fontaines-Saint-Martin", "Collonges-au-Mont-d'Or",
-  // Sud lyonnais
-  "Pierre-Bénite", "Oullins", "La Mulatière", "Irigny", "Saint-Genis-Laval",
-  "Brignais", "Chaponost", "Orliénas",
-  // Nord-Est lyonnais
-  "Vaulx-en-Velin", "Vénissieux", "Saint-Fons", "Feyzin", "Corbas",
-  "Mions", "Solaize", "Ternay", "Givors", "Grigny",
-  // Nord-Ouest lyonnais
-  "Dardilly", "Limonest", "Champagne-au-Mont-d'Or", "Saint-Didier-au-Mont-d'Or",
-  "Saint-Cyr-au-Mont-d'Or", "Poleymieux-au-Mont-d'Or", "Albigny-sur-Saône",
-  "Neuville-sur-Saône", "Fleurieu-sur-Saône", "Rochetaillée-sur-Saône",
-  // Sud-Ouest lyonnais
-  "Saint-Genis-les-Ollières", "Pollionnay", "Messimy", "Vourles",
-  "Montagny", "Mornant", "Soucieu-en-Jarrest", "Thurins",
-  // Sud-Est lyonnais
-  "Saint-Symphorien-d'Ozon", "Chaponnay", "Marennes", "Communay",
-  "Simandres", "Toussieu", "Saint-Pierre-de-Chandieu", "Heyrieux",
-  // Autres communes proches
-  "Genay", "Massieux", "Trévoux", "Reyrieux", "Parcieux",
-  "Montanay", "Curis-au-Mont-d'Or", "Saint-Germain-au-Mont-d'Or",
-  "Lissieu", "Civrieux-d'Azergues", "Chasselay", "Dommartin",
-  "Chazay-d'Azergues", "Morancé", "Lucenay", "Lozanne",
-  "Chatillon-d'Azergues", "Chessy", "Pommiers", "Anse",
-  "Ambérieux-d'Azergues", "Le Perréon", "Lacenas", "Denicé"
-];
-
 declare global {
   interface Window {
     google: any;
@@ -105,18 +64,15 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Vérifier la couverture d'un point
   const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
-    // Vérifier d'abord si c'est une ville de Lyon (priorité absolue)
-    const isLyonCity = LYON_CITIES.some(city => 
-      placeName.toLowerCase().includes(city.toLowerCase()) ||
-      city.toLowerCase().includes(placeName.toLowerCase()) ||
-      placeName.toLowerCase().trim() === city.toLowerCase().trim()
-    );
+    // Vérifier d'abord si c'est dans la zone Lyon (10km autour de Lyon)
+    const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
+    const isInLyonZone = distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
     
-    if (isLyonCity) {
+    if (isInLyonZone) {
       setCoverageResult({ 
         status: 'on-demand', 
         city: placeName,
-        distance: 0 // Distance non pertinente pour Lyon
+        distance: distanceFromLyon
       });
       return;
     }
@@ -392,21 +348,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   };
 
   const getStatusMessage = () => {
-    if (coverageResult.status === 'on-demand' && coverageResult.distance === 0) {
-      return (
-        <span>
-          {coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
-          <a 
-            href="tel:+33123456789" 
-            className="underline font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-          >
-            Contactez-nous
-          </a>
-          {' '}pour vérifier la faisabilité.
-        </span>
-      );
-    }
-    
     if (!coverageResult.distance) return '';
     
     const distance = Math.round(coverageResult.distance);
@@ -415,7 +356,18 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
-        return `${coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - Contactez-nous pour vérifier la faisabilité.`;
+        return (
+          <span>
+            {coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
+            <a 
+              href="tel:+33123456789" 
+              className="underline font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+            >
+              Contactez-nous
+            </a>
+            {' '}pour vérifier la faisabilité.
+          </span>
+        );
       case 'quote-only':
         return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément 1€/km au-delà de 30 km.`;
       case 'out-of-zone':

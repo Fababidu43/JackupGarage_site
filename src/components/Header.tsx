@@ -6,9 +6,10 @@ interface HeaderProps {
   onQuoteClick: () => void;
   onNavigateGallery?: () => void;
   onNavigateHome?: () => void;
+  isGalleryPage?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavigateHome }) => {
+const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavigateHome, isGalleryPage = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -82,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
     }
   };
 
-  const navigationItems = [
+  const homeNavigationItems = [
     { name: 'Accueil', id: 'hero', icon: '🏠' },
     { name: 'Services', id: 'services', icon: '🔧' },
     { name: 'Galerie', id: 'gallery', icon: '📸' },
@@ -90,6 +91,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
     { name: 'FAQ', id: 'faq', icon: '❓' },
     { name: 'Contact', id: 'contact', icon: '📞' }
   ];
+
+  const galleryNavigationItems = [
+    { name: 'Retour à l\'accueil', id: 'hero', icon: '🏠' }
+  ];
+
+  const navigationItems = isGalleryPage ? galleryNavigationItems : homeNavigationItems;
 
   return (
     <>
@@ -144,7 +151,18 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              {navigationItems.map((item) => (
+              {isGalleryPage ? (
+                <button
+                  onClick={() => onNavigateHome && onNavigateHome()}
+                  className="relative px-3 py-2 text-sm font-medium tracking-wide uppercase font-tech
+                    transition-all duration-200 ease-out transform hover:translate-y-[-1px]
+                    focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
+                    text-white/90 hover:text-orange-400"
+                >
+                  🏠 Retour à l'accueil
+                </button>
+              ) : (
+                navigationItems.map((item) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
@@ -167,7 +185,8 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                     <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500" />
                   )}
                 </button>
-              ))}
+                ))
+              )}
               
               {/* CTA Appeler Desktop */}
               <a

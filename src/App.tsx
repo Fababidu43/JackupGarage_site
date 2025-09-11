@@ -134,7 +134,7 @@ function App() {
   if (currentPage === 'gallery') {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header onQuoteClick={openQuotePopup} onNavigateHome={navigateToHome} />
+        <Header onQuoteClick={openQuotePopup} onNavigateHome={navigateToHome} isGalleryPage={true} />
         <main className="flex-1">
           <Gallery />
         </main>

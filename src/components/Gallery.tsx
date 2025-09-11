@@ -683,7 +683,6 @@ const Gallery = () => {
               >
                 Annuler
               </button>
-              <input
               <button
                 onClick={handleAddPhoto}
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
@@ -711,7 +710,6 @@ const Gallery = () => {
               >
                 {showStats ? 'Masquer stats' : 'Voir stats'}
               </button>
-              />
             </div>
           </div>
         </div>

@@ -337,12 +337,16 @@ const Gallery = () => {
           <div className="relative inline-block">
             <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
               Galerie
-              <button
-                onClick={() => setShowAdminLogin(true)}
-                className="inline-block w-2 h-2 bg-gray-400 rounded-full ml-2 hover:bg-orange-500 transition-colors duration-200 opacity-30 hover:opacity-100"
-                title="Administration"
-              />
             </h2>
+            
+            {/* Bouton d'accès admin discret - plus visible */}
+            <button
+              onClick={() => setShowAdminLogin(true)}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-300 hover:bg-orange-500 rounded-full flex items-center justify-center transition-all duration-200 opacity-40 hover:opacity-100 hover:scale-110 shadow-sm"
+              title="Administration de la galerie"
+            >
+              <span className="text-xs text-gray-600 hover:text-white font-bold">•</span>
+            </button>
           </div>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium font-tech mb-4">

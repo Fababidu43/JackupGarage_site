@@ -450,7 +450,10 @@ const Gallery = () => {
                     ? 'border-red-300 hover:border-red-500' 
                     : `border-gray-200 hover:border-orange-500/50 ${!project.is_visible && isAdmin ? 'opacity-50' : ''}`
                 }`}
-                onClick={() => openProjectDetails(project)}
+                onClick={() => {
+                  console.log('Clic sur projet:', project.title);
+                  openProjectDetails(project);
+                }}
               >
                 {/* Contrôles admin */}
                 {isAdmin && (
@@ -757,7 +760,17 @@ const Gallery = () => {
 
       {/* Modal détails du projet */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
+        <div 
+          className="fixed inset-0 bg-black backdrop-blur-md flex items-center justify-center p-4"
+          style={{ 
+            zIndex: 100000,
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
+        >
           <div className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">
@@ -896,4 +909,5 @@ const Gallery = () => {
     </section>
   );
 };
+
 export default Gallery;

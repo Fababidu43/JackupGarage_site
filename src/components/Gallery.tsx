@@ -760,29 +760,21 @@ const Gallery = () => {
 
       {/* Modal détails du projet */}
       {selectedProject && (
-        <div 
-          className="fixed inset-0 bg-black backdrop-blur-md flex items-center justify-center p-4 modal-overlay"
-          style={{ 
-            zIndex: 999999,
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            width: '100vw',
-            height: '100vh'
-          }}
-        >
+        <div className="fixed inset-0 z-[999999] flex items-center justify-center">
+          {/* Overlay de fond */}
           <div 
-            className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
-            style={{ zIndex: 999999 }}
-          >
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            onClick={closeProjectDetails}
+          />
+          
+          {/* Contenu du modal */}
+          <div className="relative z-[999999] max-w-6xl max-h-[90vh] w-full mx-4 bg-white rounded-2xl overflow-hidden shadow-2xl">
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <button
                   onClick={closeProjectDetails}
-                  className="flex items-center gap-2 text-white/80 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all z-[999999]"
+                  className="flex items-center gap-2 text-white/80 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-all"
                 >
                   <ArrowLeft className="w-5 h-5" />
                   <span className="font-medium">Retour</span>
@@ -790,7 +782,7 @@ const Gallery = () => {
                 
                 <button
                   onClick={closeProjectDetails}
-                  className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all hover:scale-105 z-[999999]"
+                  className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all hover:scale-105"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -829,8 +821,8 @@ const Gallery = () => {
               </div>
             </div>
             
-            {/* Contenu */}
-            <div className="p-4 sm:p-6 max-h-[calc(100vh-300px)] overflow-y-auto">
+            {/* Contenu scrollable */}
+            <div className="p-4 sm:p-6 max-h-[calc(90vh-200px)] overflow-y-auto">
               {/* Description */}
               {selectedProject.description && (
                 <div className="mb-6">

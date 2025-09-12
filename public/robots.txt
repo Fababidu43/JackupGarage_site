@@ -20,6 +20,6 @@ Allow: /contact
 
 # Block unnecessary files
 Disallow: /*.json$
-Disallow: /*.xml$ 
+Disallow: /*.xml$
 Disallow: /src/
 Disallow: /node_modules/

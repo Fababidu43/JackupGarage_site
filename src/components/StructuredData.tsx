@@ -5,8 +5,8 @@ const StructuredData: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
     "name": "Jack Up Garage",
-    "alternateName": "Jack Up Garage - Mécanicien à domicile",
-    "description": "Mécanicien professionnel à domicile en Haute-Loire (43) et Loire (42). Spécialisé en vidange, freinage, embrayage, distribution, suspensions.",
+    "alternateName": "Jack Up Garage - Garagiste et mécanicien à domicile",
+    "description": "Garagiste et mécanicien professionnel à domicile en Haute-Loire (43) et Loire (42). Spécialisé en vidange, freinage, embrayage, distribution, suspensions.",
     "url": "https://jackupgarage.fr",
     "logo": "https://jackupgarage.fr/logo.png",
     "image": [
@@ -108,7 +108,7 @@ const StructuredData: React.FC = () => {
             "name": "Vidange moteur à domicile",
             "description": "Vidange complète avec changement filtre à huile et contrôle niveaux"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
         },
         {
           "@type": "Offer", 
@@ -117,7 +117,7 @@ const StructuredData: React.FC = () => {
             "name": "Réparation système de freinage",
             "description": "Changement plaquettes, disques, purge liquide de frein"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
         },
         {
           "@type": "Offer",
@@ -126,7 +126,7 @@ const StructuredData: React.FC = () => {
             "name": "Remplacement embrayage",
             "description": "Kit embrayage complet et volant moteur"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
         }
       ]
     },
@@ -143,6 +143,19 @@ const StructuredData: React.FC = () => {
           "bestRating": "5"
         },
         "reviewBody": "Service excellent, mécanicien professionnel qui se déplace à domicile. Très pratique !"
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Client Loire"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "Garagiste très professionnel, intervention rapide dans la Loire."
       }
     ],
     "aggregateRating": {
@@ -160,7 +173,7 @@ const StructuredData: React.FC = () => {
       "@type": "Person",
       "name": "Mécanicien Jack Up Garage"
     },
-    "slogan": "Votre mécanicien à domicile en Haute-Loire",
+    "slogan": "Votre garagiste et mécanicien à domicile en Haute-Loire et Loire",
     "knowsAbout": [
       "Mécanique automobile",
       "Diagnostic électronique", 

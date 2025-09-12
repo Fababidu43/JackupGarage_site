@@ -261,17 +261,17 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       console.log('Réponse du serveur:', result);
       
       if (result.success) {
-        console.log('Email envoyé avec succès');
+        console.log('✅ Email envoyé avec succès via MailerSend !');
+        console.log('Détails:', result.details);
         setIsSubmitted(true);
       } else {
-        console.error('Erreur envoi email:', result.error);
-        console.log('Détails de l\'erreur:', result);
-        // Afficher quand même le message de confirmation (fallback UX)
+        console.error('❌ Erreur envoi email:', result.error);
+        // Afficher le message de confirmation même en cas d'erreur (fallback UX)
         setIsSubmitted(true);
       }
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
-      // Afficher quand même le message de confirmation (fallback UX)
+      // Afficher le message de confirmation même en cas d'erreur (fallback UX)
       setIsSubmitted(true);
     }
   };

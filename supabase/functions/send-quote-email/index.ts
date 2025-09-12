@@ -300,32 +300,18 @@ Email automatique généré par le site Jack Up Garage
 ${new Date().toISOString()}
 `;
 
-    console.log('=== TENTATIVE D\'ENVOI EMAIL VIA MAILERSEND ===');
-    console.log('Configuration SMTP:');
-    console.log('- Server: smtp.mailersend.net');
-    console.log('- Port: 587');
-    console.log('- Username: MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net');
-    console.log('- Destinataire: fabian.measson123@gmail.com');
-    console.log('- Sujet:', `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`);
+    console.log('=== ENVOI EMAIL VIA API MAILERSEND ===');
 
-    // Configuration MailerSend SMTP
-    const smtpConfig = {
-      hostname: 'smtp.mailersend.net',
-      port: 587,
-      username: 'MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net',
-      password: 'mssp.zhgqwXn.pq3enl69jv5l2vwr.ao4E6Hn'
-    };
-
-    // Utiliser l'API MailerSend REST plutôt que SMTP direct (plus fiable dans Deno)
+    // Payload pour l'API MailerSend
     const emailPayload = {
       from: {
-        email: 'MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net',
-        name: 'Jack Up Garage'
+        email: "MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net",
+        name: "Jack Up Garage"
       },
       to: [
         {
-          email: 'fabian.measson123@gmail.com',
-          name: 'Fabian - Jack Up Garage'
+          email: "fabian.measson123@gmail.com",
+          name: "Fabian - Jack Up Garage"
         }
       ],
       subject: `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`,
@@ -333,28 +319,48 @@ ${new Date().toISOString()}
       text: textContent
     };
 
-    console.log('Payload email préparé:', JSON.stringify(emailPayload, null, 2));
+    console.log('Envoi vers MailerSend API...');
 
-    // Pour l'instant, simulation d'envoi réussi avec logs détaillés
-    // Dans un environnement de production, vous utiliseriez l'API MailerSend
-    console.log('=== EMAIL PRÊT À ÊTRE ENVOYÉ ===');
-    console.log('✅ Configuration SMTP MailerSend validée');
-    console.log('✅ Email HTML généré avec succès');
-    console.log('✅ Destinataire configuré');
+    // Appel à l'API MailerSend
+    const response = await fetch('https://api.mailersend.com/v1/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer mlsn.e80f10c4534d1626c8ef882743c6eab027f1458b14423b3e147985449f92e35b`,
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify(emailPayload)
+    });
+
+    console.log('Réponse MailerSend status:', response.status);
     
-    return { 
-      success: true, 
-      message: "Email préparé avec succès (MailerSend)",
-      details: {
-        to: 'fabian.measson123@gmail.com',
-        subject: emailPayload.subject,
-        timestamp: new Date().toISOString(),
-        service: serviceName,
-        client: quoteData.name,
-        phone: quoteData.phone,
-        smtp_server: 'smtp.mailersend.net'
-      }
-    };
+    if (response.ok) {
+      const result = await response.json();
+      console.log('✅ Email envoyé avec succès via MailerSend');
+      console.log('Détails:', result);
+      
+      return { 
+        success: true, 
+        message: "Email envoyé avec succès via MailerSend",
+        details: {
+          to: 'fabian.measson123@gmail.com',
+          subject: emailPayload.subject,
+          timestamp: new Date().toISOString(),
+          service: serviceName,
+          client: quoteData.name,
+          phone: quoteData.phone,
+          mailersend_response: result
+        }
+      };
+    } else {
+      const errorText = await response.text();
+      console.error('❌ Erreur MailerSend:', response.status, errorText);
+      
+      return { 
+        success: false, 
+        error: `Erreur MailerSend: ${response.status} - ${errorText}`
+      };
+    }
     
   } catch (error) {
     console.error("Erreur envoi email MailerSend:", error);
@@ -444,7 +450,7 @@ serve(async (req: Request) => {
         details: error.message
       }),
       {
-        status: 500,
+      status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
     );

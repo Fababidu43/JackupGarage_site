@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
       />
       
       <header 
-        className={`fixed w-full top-0 z-40 transition-all duration-300 ease-out ${
+        className={`fixed w-full top-0 z-30 transition-all duration-300 ease-out ${
           isScrolled 
             ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-2'
             : 'bg-black/70 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-3'

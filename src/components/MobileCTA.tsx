@@ -7,7 +7,7 @@ interface MobileCTAProps {
 
 const MobileCTA: React.FC<MobileCTAProps> = ({ onQuoteClick }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-black/95 backdrop-blur-md border-t-2 border-orange-500/30 shadow-2xl" 
+    <div className="fixed bottom-0 left-0 right-0 z-20 md:hidden bg-black/95 backdrop-blur-md border-t-2 border-orange-500/30 shadow-2xl"
          style={{ 
            paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
            boxShadow: '0 -8px 32px rgba(0, 0, 0, 0.8), 0 -2px 8px rgba(255, 107, 53, 0.2)'

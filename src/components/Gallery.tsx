@@ -633,7 +633,7 @@ const Gallery = () => {
 
       {/* Modal d'ajout de projet */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black backdrop-blur-md z-[99999] flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
           <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un projet</h3>
@@ -757,7 +757,7 @@ const Gallery = () => {
 
       {/* Modal détails du projet */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/95 backdrop-blur-md z-[99999] flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
           <div className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">
@@ -812,7 +812,7 @@ const Gallery = () => {
             </div>
             
             {/* Contenu */}
-            <div className="p-4 sm:p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="p-4 sm:p-6 max-h-[calc(100vh-300px)] overflow-y-auto">
               {/* Description */}
               {selectedProject.description && (
                 <div className="mb-6">
@@ -896,5 +896,5 @@ const Gallery = () => {
     </section>
   );
 };
-
+        <div className="fixed inset-0 bg-black backdrop-blur-md z-[99999] flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
 export default Gallery;

@@ -30,6 +30,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     phone: '',
     name: ''
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [locationStatus, setLocationStatus] = useState<{
     status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | null;
     city: string;
@@ -246,16 +247,23 @@ Merci de recontacter le client pour établir un devis personnalisé.`;
     // Simuler l'envoi automatique du SMS (en réalité, cela nécessiterait un service backend)
     console.log('SMS envoyé automatiquement:', message);
     
-    // Afficher un message de confirmation à l'utilisateur
-    alert('✅ Votre demande de devis a été envoyée avec succès !\n\n📞 Vous recevrez une réponse par téléphone ou email sous 12h.\n\n🔧 Jack Up Garage - Mécanicien à domicile');
-    
-    onClose();
+    // Afficher le message de confirmation dans le popup
+    setIsSubmitted(true);
+  };
+
+  const resetForm = () => {
     setStep(1);
     setFormData({ service: '', urgency: '', location: '', phone: '', name: '' });
     setLocationStatus({ status: null, city: '' });
     setLocationInput('');
+    setIsSubmitted(false);
   };
 
+  const handleClose = () => {
+    onClose();
+    // Réinitialiser après fermeture pour éviter les conflits
+    setTimeout(resetForm, 300);
+  };
   const nextStep = () => {
     if (step < 4) setStep(step + 1);
   };
@@ -325,8 +333,32 @@ Merci de recontacter le client pour établir un devis personnalisé.`;
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto px-2 pt-2 pb-0 sm:p-3 lg:p-4 min-h-0">
+          {/* Message de confirmation */}
+          {isSubmitted && (
+            <div className="text-center py-4 sm:py-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500 rounded-full flex items-center justify-center text-white mx-auto mb-3 sm:mb-4 shadow-lg">
+                <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8" />
+              </div>
+              <h4 className="text-base sm:text-lg font-bold text-white mb-2 sm:mb-3 font-futuristic">
+                DEMANDE ENVOYÉE !
+              </h4>
+              <p className="text-xs sm:text-sm text-green-300 mb-3 sm:mb-4 font-tech leading-relaxed">
+                Votre demande de devis a été envoyée avec succès.
+              </p>
+              <p className="text-xs sm:text-sm text-orange-300 mb-4 sm:mb-6 font-tech leading-relaxed">
+                📞 Vous recevrez une réponse par téléphone ou email sous 12h.
+              </p>
+              <button
+                onClick={handleClose}
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale text-xs sm:text-sm"
+              >
+                Fermer
+              </button>
+            </div>
+          )}
+
           {/* Step 1: Service */}
-          {step === 1 && (
+          {step === 1 && !isSubmitted && (
             <div>
               <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
                 <Settings className="w-4 h-4 text-orange-400" />
@@ -367,7 +399,7 @@ Merci de recontacter le client pour établir un devis personnalisé.`;
           )}
 
           {/* Step 2: Urgency */}
-          {step === 2 && (
+          {step === 2 && !isSubmitted && (
             <div>
               <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
                 <Clock className="w-4 h-4 text-orange-400" />
@@ -409,7 +441,7 @@ Merci de recontacter le client pour établir un devis personnalisé.`;
           )}
 
           {/* Step 3: Location */}
-          {step === 3 && (
+          {step === 3 && !isSubmitted && (
             <div>
               <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-orange-400" />
@@ -464,7 +496,7 @@ Merci de recontacter le client pour établir un devis personnalisé.`;
           )}
 
           {/* Step 4: Contact */}
-          {step === 4 && (
+          {step === 4 && !isSubmitted && (
             <div>
               <h4 className="text-sm sm:text-base font-bold text-white mb-2 sm:mb-3 font-futuristic tracking-wide flex items-center gap-2">
                 <Phone className="w-4 h-4 text-orange-400" />

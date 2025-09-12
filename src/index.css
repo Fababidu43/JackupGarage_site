@@ -1576,10 +1576,17 @@
   30 = Header
   40 = Navigation mobile
   50 = Dropdowns/tooltips
-  100000+ = Modals
+  999999+ = Modals (priorité absolue)
 */
 .modal-overlay {
-  z-index: 100000 !important;
+  z-index: 999999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
 }
 
 .safe-area-bottom {

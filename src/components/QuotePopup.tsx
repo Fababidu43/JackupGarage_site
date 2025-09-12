@@ -31,6 +31,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     name: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [locationStatus, setLocationStatus] = useState<{
     status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | null;
     city: string;
@@ -227,6 +228,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = () => {
     // Envoyer la demande de devis par email
+    setIsLoading(true);
     sendQuoteEmail();
   };
 
@@ -273,6 +275,8 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       console.error('Erreur lors de l\'envoi:', error);
       // Afficher le message de confirmation même en cas d'erreur (fallback UX)
       setIsSubmitted(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -282,6 +286,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     setLocationStatus({ status: null, city: '' });
     setLocationInput('');
     setIsSubmitted(false);
+    setIsLoading(false);
   };
 
   const handleClose = () => {
@@ -565,11 +570,20 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
                 </button>
                 <button
                   onClick={handleSubmit}
-                  disabled={!formData.name || !formData.phone || !formData.location}
+                  disabled={!formData.name || !formData.phone || !formData.location || isLoading}
                   className="flex-1 px-2 sm:px-3 py-2 sm:py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-tech font-bold uppercase tracking-wide hover-scale flex items-center justify-center gap-2 text-xs sm:text-sm"
                 >
-                  <CheckCircle className="w-4 h-4" />
-                  Envoyer
+                  {isLoading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle className="w-4 h-4" />
+                      Envoyer
+                    </>
+                  )}
                 </button>
               </div>
               

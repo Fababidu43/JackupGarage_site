@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import { useEffect, useCallback } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Car, Calendar, MapPin, ArrowLeft } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { GalleryService, Photo } from '../lib/galleryService';
 import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';
 
+interface WorkProject {
+  id: string;
+  title: string;
+  description?: string;
+  car_info?: string;
+  location?: string;
+  work_date: string;
+  photos: Photo[];
+  is_visible: boolean;
+  created_at: string;
+}
+
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<WorkProject | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -17,23 +30,23 @@ const Gallery = () => {
   const [loginError, setLoginError] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [showDeleteMode, setShowDeleteMode] = useState(false);
-  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [workProjects, setWorkProjects] = useState<WorkProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploadProgress, setUploadProgress] = useState<ProcessingProgress | null>(null);
   const [batchUploadProgress, setBatchUploadProgress] = useState<ProcessingProgress | null>(null);
-  const [showStats, setShowStats] = useState(false);
   const [stats, setStats] = useState({
     totalPhotos: 0,
     visiblePhotos: 0,
     totalSize: 0,
     recentUploads: 0
   });
-  const [newPhoto, setNewPhoto] = useState({
+  const [newProject, setNewProject] = useState({
     title: '',
-    date: '',
-    image: '',
-    file: null as File | null,
-    multipleFiles: [] as File[]
+    description: '',
+    car_info: '',
+    location: '',
+    work_date: new Date().toISOString().split('T')[0],
+    photos: [] as File[]
   });
 
   // Vérifier l'état d'authentification au chargement
@@ -62,21 +75,56 @@ const Gallery = () => {
     }
   };
 
-  // Charger les photos depuis Supabase
+  // Charger les projets depuis Supabase
   useEffect(() => {
-    loadPhotos();
+    loadWorkProjects();
     loadStats();
   }, []);
 
-  const loadPhotos = useCallback(async () => {
+  const loadWorkProjects = useCallback(async () => {
     try {
       setLoading(true);
       const photosData = isAdmin 
         ? await GalleryService.getAllPhotos()
         : await GalleryService.getVisiblePhotos();
-      setPhotos(photosData);
+      
+      // Grouper les photos par batch_id pour créer les projets
+      const projectsMap = new Map<string, WorkProject>();
+      
+      photosData.forEach(photo => {
+        const batchId = photo.batch_id || 'single_' + photo.id;
+        
+        if (!projectsMap.has(batchId)) {
+          projectsMap.set(batchId, {
+            id: batchId,
+            title: photo.title,
+            description: photo.description || '',
+            car_info: '', // À implémenter dans la DB
+            location: '', // À implémenter dans la DB
+            work_date: photo.upload_date,
+            photos: [],
+            is_visible: photo.is_visible,
+            created_at: photo.upload_date
+          });
+        }
+        
+        const project = projectsMap.get(batchId)!;
+        project.photos.push(photo);
+        
+        // Garder la visibilité la plus restrictive
+        if (!photo.is_visible) {
+          project.is_visible = false;
+        }
+      });
+      
+      // Convertir en array et trier par date
+      const projects = Array.from(projectsMap.values()).sort((a, b) => 
+        new Date(b.work_date).getTime() - new Date(a.work_date).getTime()
+      );
+      
+      setWorkProjects(projects);
     } catch (error) {
-      console.error('Erreur chargement photos:', error);
+      console.error('Erreur chargement projets:', error);
     } finally {
       setLoading(false);
     }
@@ -91,12 +139,12 @@ const Gallery = () => {
     }
   }, []);
 
-  // Recharger les photos quand le mode admin change
+  // Recharger les projets quand le mode admin change
   useEffect(() => {
     if (isAdmin) {
-      loadPhotos();
+      loadWorkProjects();
     }
-  }, [isAdmin, loadPhotos]);
+  }, [isAdmin, loadWorkProjects]);
 
   // Gestion de l'accès admin via le footer
   useEffect(() => {
@@ -118,32 +166,29 @@ const Gallery = () => {
     };
   }, []);
 
-  const openModal = (imageId: number) => {
-    setSelectedImage(Number(imageId));
+  const openProjectDetails = (project: WorkProject) => {
+    setSelectedProject(project);
+    setSelectedImageIndex(0);
   };
 
-  const closeModal = () => {
-    setSelectedImage(null);
+  const closeProjectDetails = () => {
+    setSelectedProject(null);
+    setSelectedImageIndex(0);
   };
 
   const navigateImage = (direction: 'prev' | 'next') => {
-    if (selectedImage === null) return;
-    
-    const currentIndex = photos.findIndex(photo => Number(photo.id) === selectedImage);
-    let newIndex;
+    if (!selectedProject) return;
     
     if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : photos.length - 1;
+      setSelectedImageIndex(prev => 
+        prev > 0 ? prev - 1 : selectedProject.photos.length - 1
+      );
     } else {
-      newIndex = currentIndex < photos.length - 1 ? currentIndex + 1 : 0;
+      setSelectedImageIndex(prev => 
+        prev < selectedProject.photos.length - 1 ? prev + 1 : 0
+      );
     }
-    
-    setSelectedImage(Number(photos[newIndex].id));
   };
-
-  const selectedPhoto = selectedImage 
-    ? photos.find(photo => Number(photo.id) === selectedImage)
-    : null;
 
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -189,152 +234,98 @@ const Gallery = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length === 1) {
-      // Upload simple
-      const file = files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setNewPhoto({
-          ...newPhoto,
-          file: file,
-          image: e.target?.result as string
-        });
-      };
-      reader.readAsDataURL(file);
-    } else if (files.length > 1) {
-      // Upload multiple
-      // Stocker les fichiers multiples pour l'upload
-      setNewPhoto({
-        ...newPhoto,
-        file: null,
-        image: '',
-        multipleFiles: files
-      });
-    }
+    setNewProject({
+      ...newProject,
+      photos: files
+    });
   };
 
-  const handleAddPhoto = async () => {
+  const handleAddProject = async () => {
     // Validation des champs requis
-    if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
-      // Upload multiple - pas besoin de titre obligatoire
-    } else if (!newPhoto.title || !newPhoto.file) {
-      alert('Veuillez remplir le titre et sélectionner une image');
+    if (!newProject.title || newProject.photos.length === 0) {
+      alert('Veuillez remplir le titre et sélectionner au moins une image');
       return;
     }
-
-    // Vérifier s'il y a des fichiers multiples
-    if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
-      // Upload multiple
-      try {
-        setUploadProgress({
-          current: 0,
-          total: newPhoto.multipleFiles.length,
-          status: 'processing',
-          message: 'Préparation de l\'upload multiple...'
-        });
-
-        const titles = newPhoto.multipleFiles.map((file, index) => 
-          newPhoto.title ? `${newPhoto.title} ${index + 1}` : `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
-        );
-        
-        const result = await GalleryService.uploadMultipleImages(
-          newPhoto.multipleFiles,
-          titles,
-          [],
-          (overall, individual) => {
-            setBatchUploadProgress(overall);
-            if (individual) {
-              setUploadProgress(individual);
-            }
-          }
-        );
-
-        alert(`Upload terminé: ${result.summary.successful} réussis, ${result.summary.failed} échecs`);
-        await loadPhotos();
-        await loadStats();
-        
-        // Réinitialiser les états
-        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
-        setShowAddForm(false);
-      } catch (error) {
-        console.error('Erreur upload multiple:', error);
-        alert(`Erreur upload multiple: ${error}`);
-      } finally {
-        setUploadProgress(null);
-        setBatchUploadProgress(null);
-      }
-      return;
-    }
-
-    // Upload simple
 
     try {
-      const result = await GalleryService.uploadImage(
-        newPhoto.file,
-        newPhoto.title,
-        newPhoto.date,
-        undefined,
-        setUploadProgress
+      setUploadProgress({
+        current: 0,
+        total: newProject.photos.length,
+        status: 'processing',
+        message: 'Préparation de l\'upload...'
+      });
+
+      // Créer les titres pour chaque photo (même titre pour toutes)
+      const titles = newProject.photos.map(() => newProject.title);
+      const descriptions = newProject.photos.map(() => newProject.description);
+      
+      const result = await GalleryService.uploadMultipleImages(
+        newProject.photos,
+        titles,
+        descriptions,
+        (overall, individual) => {
+          setBatchUploadProgress(overall);
+          if (individual) {
+            setUploadProgress(individual);
+          }
+        }
       );
 
-      if (result.success) {
-        alert('Photo ajoutée avec succès !');
-        await loadPhotos();
-        await loadStats();
-        
-        // Réinitialiser les états
-        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
-        setShowAddForm(false);
-      } else {
-        console.error('Erreur upload:', result.error);
-        alert(`Erreur: ${result.error}`);
-      }
+      alert(`Projet ajouté avec succès: ${result.summary.successful} photos uploadées`);
+      await loadWorkProjects();
+      await loadStats();
+      
+      // Réinitialiser le formulaire
+      setNewProject({
+        title: '',
+        description: '',
+        car_info: '',
+        location: '',
+        work_date: new Date().toISOString().split('T')[0],
+        photos: []
+      });
+      setShowAddForm(false);
     } catch (error) {
-      console.error('Erreur lors de l\'upload:', error);
-      alert(`Erreur lors de l'upload: ${error}`);
+      console.error('Erreur upload projet:', error);
+      alert(`Erreur upload: ${error}`);
     } finally {
       setUploadProgress(null);
+      setBatchUploadProgress(null);
     }
   };
 
-
-  const handleDeletePhoto = async (photoId: string) => {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer cette photo définitivement ?')) {
+  const handleDeleteProject = async (project: WorkProject) => {
+    if (!confirm(`Êtes-vous sûr de vouloir supprimer le projet "${project.title}" avec toutes ses photos ?`)) {
       return;
     }
 
     try {
-      const success = await GalleryService.deletePhoto(photoId);
-      if (success) {
-        alert('Photo supprimée avec succès !');
-        await loadPhotos();
-        await loadStats();
-      } else {
-        alert('Erreur lors de la suppression');
+      // Supprimer toutes les photos du projet
+      for (const photo of project.photos) {
+        await GalleryService.deletePhoto(photo.id);
       }
+      
+      alert('Projet supprimé avec succès !');
+      await loadWorkProjects();
+      await loadStats();
     } catch (error) {
       alert(`Erreur: ${error}`);
     }
   };
 
-  const handleToggleVisibility = async (photoId: string, currentVisibility: boolean) => {
+  const handleToggleProjectVisibility = async (project: WorkProject) => {
     try {
-      const success = await GalleryService.togglePhotoVisibility(photoId, !currentVisibility);
-      if (success) {
-        await loadPhotos();
-        await loadStats();
-      } else {
-        alert('Erreur lors de la modification');
+      const newVisibility = !project.is_visible;
+      
+      // Mettre à jour la visibilité de toutes les photos du projet
+      for (const photo of project.photos) {
+        await GalleryService.togglePhotoVisibility(photo.id, newVisibility);
       }
+      
+      await loadWorkProjects();
+      await loadStats();
     } catch (error) {
       alert(`Erreur: ${error}`);
-    }
-  };
-
-  const toggleDeleteMode = () => {
-    setShowDeleteMode(!showDeleteMode);
-    if (showAddForm) {
-      setShowAddForm(false);
     }
   };
 
@@ -347,16 +338,15 @@ const Gallery = () => {
             <Camera className="w-8 h-8" />
           </div>
           
-          {/* Point d'accès admin discret */}
           <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
-            Galerie
+            Nos Travaux
           </h2>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium font-tech mb-4">
-            Nos interventions en images
+            Découvrez nos interventions récentes
           </p>
           <p className="text-sm sm:text-base text-gray-600 font-tech">
-            Découvrez notre travail professionnel à travers nos réalisations
+            Chaque projet avec photos et détails complets
           </p>
           <div className="w-16 h-0.5 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto rounded-full mt-4"></div>
         </div>
@@ -367,7 +357,7 @@ const Gallery = () => {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-900 font-futuristic flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-orange-500" />
-                Statistiques de la galerie
+                Statistiques
               </h3>
               <button
                 onClick={handleAdminLogout}
@@ -378,12 +368,12 @@ const Gallery = () => {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div className="bg-white p-4 rounded-lg border">
-                <div className="text-2xl font-bold text-orange-600">{stats.totalPhotos}</div>
-                <div className="text-sm text-gray-600">Total photos</div>
+                <div className="text-2xl font-bold text-orange-600">{workProjects.length}</div>
+                <div className="text-sm text-gray-600">Projets</div>
               </div>
               <div className="bg-white p-4 rounded-lg border">
-                <div className="text-2xl font-bold text-green-600">{stats.visiblePhotos}</div>
-                <div className="text-sm text-gray-600">Visibles</div>
+                <div className="text-2xl font-bold text-green-600">{stats.totalPhotos}</div>
+                <div className="text-sm text-gray-600">Photos</div>
               </div>
               <div className="bg-white p-4 rounded-lg border">
                 <div className="text-2xl font-bold text-blue-600">{ImageProcessor.formatFileSize(stats.totalSize)}</div>
@@ -394,6 +384,19 @@ const Gallery = () => {
                 <div className="text-sm text-gray-600">Cette semaine</div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Bouton d'ajout admin */}
+        {isAdmin && (
+          <div className="mb-8 text-center">
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition-all duration-200 font-tech font-bold uppercase tracking-wide hover-scale shadow-lg"
+            >
+              <Plus className="w-5 h-5 mr-2" />
+              Ajouter un projet
+            </button>
           </div>
         )}
 
@@ -418,7 +421,7 @@ const Gallery = () => {
           <div className="mb-6 bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="flex items-center gap-3 mb-2">
               <Upload className="w-5 h-5 text-green-600" />
-              <span className="font-medium text-green-900">Upload multiple en cours...</span>
+              <span className="font-medium text-green-900">Projet en cours d'ajout...</span>
             </div>
             <div className="text-sm text-green-700 mb-2">{batchUploadProgress.message}</div>
             <div className="w-full bg-green-200 rounded-full h-2">
@@ -430,26 +433,24 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Zone d'ajout pour le collègue */}
-
         {/* Chargement */}
         {loading ? (
           <div className="text-center py-12">
             <div className="animate-spin w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-gray-500 font-tech">Chargement des photos...</p>
+            <p className="text-gray-500 font-tech">Chargement des projets...</p>
           </div>
         ) : (
-          /* Grille de photos */
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {photos.map((photo) => (
+          /* Grille des projets */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {workProjects.map((project) => (
               <div
-                key={photo.id}
+                key={project.id}
                 className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
                   showDeleteMode 
                     ? 'border-red-300 hover:border-red-500' 
-                    : `border-gray-200 hover:border-orange-500/50 ${!photo.is_visible && isAdmin ? 'opacity-50' : ''}`
+                    : `border-gray-200 hover:border-orange-500/50 ${!project.is_visible && isAdmin ? 'opacity-50' : ''}`
                 }`}
-                onClick={() => openModal(Number(photo.id))}
+                onClick={() => openProjectDetails(project)}
               >
                 {/* Contrôles admin */}
                 {isAdmin && (
@@ -458,71 +459,84 @@ const Gallery = () => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleToggleVisibility(photo.id, photo.is_visible);
+                        handleToggleProjectVisibility(project);
                       }}
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
-                        photo.is_visible 
+                        project.is_visible 
                           ? 'bg-green-500 hover:bg-green-600 text-white' 
                           : 'bg-gray-500 hover:bg-gray-600 text-white'
                       }`}
-                      title={photo.is_visible ? 'Masquer' : 'Afficher'}
+                      title={project.is_visible ? 'Masquer' : 'Afficher'}
                     >
-                      {photo.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                      {project.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                     </button>
                     
                     {/* Suppression */}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDeletePhoto(photo.id);
+                        handleDeleteProject(project);
                       }}
                       className="w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
-                      title="Supprimer définitivement"
+                      title="Supprimer le projet"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 )}
                 
-                {/* Image */}
-                <div className="aspect-square overflow-hidden relative">
+                {/* Image miniature (première photo) */}
+                <div className="aspect-video overflow-hidden relative">
                   <img
-                    src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
-                    alt={photo.title}
+                    src={GalleryService.getImageUrl(project.photos[0]?.thumbnail_path || project.photos[0]?.file_path)}
+                    alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     loading="lazy"
                   />
                   
-                  {/* Overlay avec icône zoom et statut */}
+                  {/* Badge nombre de photos */}
+                  {project.photos.length > 1 && (
+                    <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-medium">
+                      {project.photos.length} photos
+                    </div>
+                  )}
+                  
+                  {/* Overlay avec icône */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                    <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Camera className="w-5 h-5 text-gray-700" />
+                    <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Camera className="w-6 h-6 text-gray-700" />
                     </div>
                   </div>
                   
                   {/* Indicateur de statut pour admin */}
-                  {isAdmin && !photo.is_visible && (
+                  {isAdmin && !project.is_visible && (
                     <div className="absolute bottom-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
-                      Masquée
+                      Masqué
                     </div>
                   )}
                 </div>
                 
-                {/* Info */}
-                <div className="p-3 sm:p-4">
-                  <h3 className="text-base sm:text-lg font-bold text-gray-900 font-futuristic mb-1">
-                    {photo.title}
+                {/* Informations du projet */}
+                <div className="p-4">
+                  <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2 line-clamp-2">
+                    {project.title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs sm:text-sm text-gray-500 font-tech">
-                      {new Date(photo.upload_date).toLocaleDateString('fr-FR')}
+                  
+                  <div className="flex items-center text-sm text-gray-500 font-tech mb-2">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    {new Date(project.work_date).toLocaleDateString('fr-FR')}
+                  </div>
+                  
+                  {project.description && (
+                    <p className="text-sm text-gray-600 font-tech line-clamp-2 mb-2">
+                      {project.description}
                     </p>
+                  )}
+                  
+                  <div className="flex items-center justify-between text-xs text-gray-400">
+                    <span>{project.photos.length} photo{project.photos.length > 1 ? 's' : ''}</span>
                     {isAdmin && (
-                      <div className="flex items-center gap-1 text-xs text-gray-400">
-                        <span>{ImageProcessor.formatFileSize(photo.file_size)}</span>
-                        <span>•</span>
-                        <span>{photo.width}×{photo.height}</span>
-                      </div>
+                      <span>{ImageProcessor.formatFileSize(project.photos.reduce((sum, p) => sum + p.file_size, 0))}</span>
                     )}
                   </div>
                 </div>
@@ -531,11 +545,11 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Message si aucune photo */}
-        {photos.length === 0 && (
+        {/* Message si aucun projet */}
+        {workProjects.length === 0 && !loading && (
           <div className="text-center py-12">
             <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-500 font-tech">Aucune photo dans la galerie</p>
+            <p className="text-gray-500 font-tech">Aucun projet dans la galerie</p>
           </div>
         )}
       </div>
@@ -617,12 +631,12 @@ const Gallery = () => {
         </div>
       )}
 
-      {/* Modal d'ajout de photo */}
+      {/* Modal d'ajout de projet */}
       {showAddForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter une photo</h3>
+              <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un projet</h3>
               <button
                 onClick={() => setShowAddForm(false)}
                 className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
@@ -633,29 +647,63 @@ const Gallery = () => {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Titre de l'intervention</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Titre du projet *</label>
                 <input
                   type="text"
-                  value={newPhoto.title}
-                  onChange={(e) => setNewPhoto({...newPhoto, title: e.target.value})}
-                  placeholder="Ex: Vidange moteur"
+                  value={newProject.title}
+                  onChange={(e) => setNewProject({...newProject, title: e.target.value})}
+                  placeholder="Ex: Vidange complète Peugeot 308"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description du travail</label>
+                <textarea
+                  value={newProject.description}
+                  onChange={(e) => setNewProject({...newProject, description: e.target.value})}
+                  placeholder="Décrivez les travaux effectués, les pièces changées, etc."
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
+                />
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Véhicule</label>
+                  <input
+                    type="text"
+                    value={newProject.car_info}
+                    onChange={(e) => setNewProject({...newProject, car_info: e.target.value})}
+                    placeholder="Ex: Peugeot 308 HDI 2015"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Lieu</label>
+                  <input
+                    type="text"
+                    value={newProject.location}
+                    onChange={(e) => setNewProject({...newProject, location: e.target.value})}
+                    placeholder="Ex: Le Puy-en-Velay"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Date du travail</label>
                 <input
-                  type="text"
-                  value={newPhoto.date}
-                  onChange={(e) => setNewPhoto({...newPhoto, date: e.target.value})}
-                  placeholder="Ex: 15 Mars 2024"
+                  type="date"
+                  value={newProject.work_date}
+                  onChange={(e) => setNewProject({...newProject, work_date: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Photo</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Photos *</label>
                 <input
                   type="file"
                   accept="image/jpeg,image/png,image/webp,image/gif"
@@ -664,27 +712,22 @@ const Gallery = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Formats acceptés: JPG, PNG, WebP, GIF. Taille max: 5MB. Sélectionnez plusieurs fichiers pour un upload groupé.
+                  Sélectionnez une ou plusieurs photos. La première sera utilisée comme miniature.
                 </p>
-                {newPhoto.image && (
-                  <div className="mt-2">
-                    <img src={newPhoto.image} alt="Aperçu" className="w-20 h-20 object-cover rounded-lg" />
-                  </div>
-                )}
-                {newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 && (
+                {newProject.photos.length > 0 && (
                   <div className="mt-2">
                     <p className="text-sm text-green-600 font-medium">
-                      {newPhoto.multipleFiles.length} fichier(s) sélectionné(s) pour upload multiple
+                      {newProject.photos.length} photo{newProject.photos.length > 1 ? 's' : ''} sélectionnée{newProject.photos.length > 1 ? 's' : ''}
                     </p>
                     <div className="flex flex-wrap gap-1 mt-1">
-                      {newPhoto.multipleFiles.slice(0, 3).map((file, index) => (
+                      {newProject.photos.slice(0, 3).map((file, index) => (
                         <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
                           {file.name}
                         </span>
                       ))}
-                      {newPhoto.multipleFiles.length > 3 && (
+                      {newProject.photos.length > 3 && (
                         <span className="text-xs text-gray-500">
-                          +{newPhoto.multipleFiles.length - 3} autres...
+                          +{newProject.photos.length - 3} autres...
                         </span>
                       )}
                     </div>
@@ -701,108 +744,149 @@ const Gallery = () => {
                 Annuler
               </button>
               <button
-                onClick={handleAddPhoto}
+                onClick={handleAddProject}
                 className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
                 disabled={uploadProgress !== null || batchUploadProgress !== null}
               >
-                {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 
-                 newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 ? 
-                 `Ajouter ${newPhoto.multipleFiles.length} photos` : 'Ajouter'}
-              </button>
-            </div>
-            
-            {/* Boutons admin supplémentaires */}
-            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-200">
-              <button
-                onClick={toggleDeleteMode}
-                className={`flex-1 px-3 py-2 rounded-lg transition-colors text-sm ${
-                  showDeleteMode 
-                    ? 'bg-red-500 text-white hover:bg-red-600' 
-                    : 'bg-red-100 text-red-700 hover:bg-red-200'
-                }`}
-              >
-                {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
-              </button>
-              
-              <button
-                onClick={() => setShowStats(!showStats)}
-                className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
-              >
-                {showStats ? 'Masquer stats' : 'Voir stats'}
+                {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 'Ajouter le projet'}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Indicateur mode suppression */}
-      {showDeleteMode && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-40">
-          <div className="flex items-center gap-2">
-            <X className="w-4 h-4" />
-            <span className="text-sm font-medium">Mode suppression activé - Cliquez sur les photos à supprimer</span>
-          </div>
-        </div>
-      )}
-
-      {/* Modal lightbox */}
-      {selectedImage && selectedPhoto && (
+      {/* Modal détails du projet */}
+      {selectedProject && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl max-h-full w-full">
-            {/* Bouton fermer */}
-            <button
-              onClick={closeModal}
-              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {/* Navigation précédent */}
-            <button
-              onClick={() => navigateImage('prev')}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            {/* Navigation suivant */}
-            <button
-              onClick={() => navigateImage('next')}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Contenu modal */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
-              {/* Image */}
-              <div className="aspect-video">
-                <img
-                  src={GalleryService.getImageUrl(selectedPhoto.file_path)}
-                  alt={selectedPhoto.title}
-                  className="w-full h-full object-cover"
-                />
+          <div className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={closeProjectDetails}
+                  className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  <span className="font-medium">Retour</span>
+                </button>
+                
+                <button
+                  onClick={closeProjectDetails}
+                  className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-
-              {/* Informations */}
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 font-futuristic mb-2">
-                  {selectedPhoto.title}
-                </h3>
-                <div className="flex items-center justify-between">
-                  <p className="text-gray-600 font-tech">
-                    {new Date(selectedPhoto.upload_date).toLocaleDateString('fr-FR')}
-                  </p>
-                  {isAdmin && (
-                    <div className="text-sm text-gray-500 font-tech">
-                      {ImageProcessor.formatFileSize(selectedPhoto.file_size)} • {selectedPhoto.width}×{selectedPhoto.height}px
+              
+              <div className="mt-4">
+                <h2 className="text-2xl sm:text-3xl font-bold font-futuristic mb-2">
+                  {selectedProject.title}
+                </h2>
+                
+                <div className="flex flex-wrap items-center gap-4 text-white/90 text-sm">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    {new Date(selectedProject.work_date).toLocaleDateString('fr-FR')}
+                  </div>
+                  
+                  {selectedProject.car_info && (
+                    <div className="flex items-center gap-1">
+                      <Car className="w-4 h-4" />
+                      {selectedProject.car_info}
                     </div>
                   )}
+                  
+                  {selectedProject.location && (
+                    <div className="flex items-center gap-1">
+                      <MapPin className="w-4 h-4" />
+                      {selectedProject.location}
+                    </div>
+                  )}
+                  
+                  <div className="flex items-center gap-1">
+                    <Camera className="w-4 h-4" />
+                    {selectedProject.photos.length} photo{selectedProject.photos.length > 1 ? 's' : ''}
+                  </div>
                 </div>
-                {selectedPhoto.description && (
-                  <p className="text-gray-600 font-tech mt-2">
-                    {selectedPhoto.description}
+              </div>
+            </div>
+            
+            {/* Contenu */}
+            <div className="p-4 sm:p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
+              {/* Description */}
+              {selectedProject.description && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2">
+                    Description des travaux
+                  </h3>
+                  <p className="text-gray-700 font-tech leading-relaxed">
+                    {selectedProject.description}
                   </p>
+                </div>
+              )}
+              
+              {/* Photos */}
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-4">
+                  Photos du projet
+                </h3>
+                
+                {/* Photo principale */}
+                <div className="mb-4">
+                  <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden">
+                    <img
+                      src={GalleryService.getImageUrl(selectedProject.photos[selectedImageIndex]?.file_path)}
+                      alt={`${selectedProject.title} - Photo ${selectedImageIndex + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                    
+                    {/* Navigation si plusieurs photos */}
+                    {selectedProject.photos.length > 1 && (
+                      <>
+                        <button
+                          onClick={() => navigateImage('prev')}
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                        >
+                          <ChevronLeft className="w-5 h-5" />
+                        </button>
+                        
+                        <button
+                          onClick={() => navigateImage('next')}
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+                        >
+                          <ChevronRight className="w-5 h-5" />
+                        </button>
+                        
+                        {/* Indicateur */}
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+                          {selectedImageIndex + 1} / {selectedProject.photos.length}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Miniatures si plusieurs photos */}
+                {selectedProject.photos.length > 1 && (
+                  <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                    {selectedProject.photos.map((photo, index) => (
+                      <button
+                        key={photo.id}
+                        onClick={() => setSelectedImageIndex(index)}
+                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          index === selectedImageIndex 
+                            ? 'border-orange-500 ring-2 ring-orange-500/30' 
+                            : 'border-gray-200 hover:border-orange-300'
+                        }`}
+                      >
+                        <img
+                          src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
+                          alt={`Miniature ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
             </div>

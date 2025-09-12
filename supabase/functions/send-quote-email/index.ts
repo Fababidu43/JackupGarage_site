@@ -322,7 +322,7 @@ ${new Date().toISOString()}
     console.log('Envoi vers MailerSend API...');
 
     // Récupérer le token depuis les variables d'environnement
-    const mailerSendToken = Deno.env.get('MAILERSEND_API_TOKEN');
+    const mailerSendToken = Deno.env.get('MAILERSEND_API_TOKEN') || 'mlsn.e80f10c4534d1626c8ef882743c6eab027f1458b14423b3e147985449f92e35b';
     
     if (!mailerSendToken) {
       throw new Error('Token MailerSend manquant dans les variables d\'environnement');

@@ -33,6 +33,13 @@ VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
 2. Créez un nouveau projet
 3. Récupérez l'URL et la clé anonyme dans Settings > API
 4. Exécutez les migrations SQL présentes dans le dossier `supabase/migrations/`
+5. **Configuration MailerSend pour les Edge Functions :**
+   - Allez dans votre projet Supabase Dashboard
+   - Naviguez vers "Edge Functions" 
+   - Sélectionnez la fonction `send-quote-email`
+   - Ajoutez une variable d'environnement :
+     - **Nom** : `MAILERSEND_API_TOKEN`
+     - **Valeur** : Votre token API MailerSend
 
 ### 5. Configuration Google Maps
 1. Allez sur [Google Cloud Console](https://console.cloud.google.com/)

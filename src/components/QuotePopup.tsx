@@ -232,6 +232,15 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
 
   const sendQuoteEmail = async () => {
     try {
+      console.log('=== ENVOI DEMANDE DE DEVIS ===');
+      console.log('Données à envoyer:', {
+        service: formData.service,
+        urgency: formData.urgency,
+        location: formData.location,
+        phone: formData.phone,
+        name: formData.name
+      });
+
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-quote-email`, {
         method: 'POST',
         headers: {
@@ -247,19 +256,22 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
         })
       });
 
+      console.log('Réponse HTTP status:', response.status);
       const result = await response.json();
+      console.log('Réponse du serveur:', result);
       
       if (result.success) {
         console.log('Email envoyé avec succès');
         setIsSubmitted(true);
       } else {
         console.error('Erreur envoi email:', result.error);
-        // Fallback: afficher quand même le message de confirmation
+        console.log('Détails de l\'erreur:', result);
+        // Afficher quand même le message de confirmation (fallback UX)
         setIsSubmitted(true);
       }
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
-      // Fallback: afficher quand même le message de confirmation
+      // Afficher quand même le message de confirmation (fallback UX)
       setIsSubmitted(true);
     }
   };

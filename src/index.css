@@ -1568,6 +1568,15 @@
 }
 
 /* === SAFE AREA POUR IPHONE === */
+/* Z-index hierarchy pour les modals */
+.modal-backdrop {
+  z-index: 9998;
+}
+
+.modal-content {
+  z-index: 9999;
+}
+
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }

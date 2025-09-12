@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect, useCallback } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Calendar, MapPin, Wrench } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { GalleryService, Photo } from '../lib/galleryService';
 import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';
@@ -30,8 +30,9 @@ const Gallery = () => {
   });
   const [newPhoto, setNewPhoto] = useState({
     title: '',
-    date: '',
-    image: '',
+    description: '',
+    location: '',
+    date: new Date().toISOString().split('T')[0], // Date par défaut aujourd'hui
     file: null as File | null,
     multipleFiles: [] as File[]
   });
@@ -74,13 +75,44 @@ const Gallery = () => {
       const photosData = isAdmin 
         ? await GalleryService.getAllPhotos()
         : await GalleryService.getVisiblePhotos();
-      setPhotos(photosData);
+      
+      // Grouper les photos par batch_id ou par titre similaire pour créer des "travaux"
+      const groupedPhotos = groupPhotosByWork(photosData);
+      setPhotos(groupedPhotos);
     } catch (error) {
       console.error('Erreur chargement photos:', error);
     } finally {
       setLoading(false);
     }
   }, [isAdmin]);
+
+  // Grouper les photos par travaux (même batch_id ou titre similaire)
+  const groupPhotosByWork = (photos: Photo[]) => {
+    const grouped: { [key: string]: Photo[] } = {};
+    
+    photos.forEach(photo => {
+      // Utiliser batch_id comme clé de groupement, ou le titre si pas de batch
+      const groupKey = photo.batch_id || photo.title;
+      
+      if (!grouped[groupKey]) {
+        grouped[groupKey] = [];
+      }
+      grouped[groupKey].push(photo);
+    });
+    
+    // Convertir en array plate avec une photo "principale" par groupe
+    const result: Photo[] = [];
+    Object.values(grouped).forEach(group => {
+      // Trier par date dans le groupe
+      group.sort((a, b) => new Date(b.upload_date).getTime() - new Date(a.upload_date).getTime());
+      
+      // Ajouter la photo principale avec les autres photos du groupe
+      const mainPhoto = { ...group[0], relatedPhotos: group };
+      result.push(mainPhoto);
+    });
+    
+    return result.sort((a, b) => new Date(b.upload_date).getTime() - new Date(a.upload_date).getTime());
+  };
 
   const loadStats = useCallback(async () => {
     try {
@@ -215,10 +247,13 @@ const Gallery = () => {
 
   const handleAddPhoto = async () => {
     // Validation des champs requis
-    if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
-      // Upload multiple - pas besoin de titre obligatoire
-    } else if (!newPhoto.title || !newPhoto.file) {
-      alert('Veuillez remplir le titre et sélectionner une image');
+    if (!newPhoto.title) {
+      alert('Veuillez remplir le titre du travail');
+      return;
+    }
+
+    if (!newPhoto.multipleFiles?.length && !newPhoto.file) {
+      alert('Veuillez sélectionner au moins une image');
       return;
     }
 
@@ -234,13 +269,13 @@ const Gallery = () => {
         });
 
         const titles = newPhoto.multipleFiles.map((file, index) => 
-          newPhoto.title ? `${newPhoto.title} ${index + 1}` : `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
+          `${newPhoto.title} - Photo ${index + 1}`
         );
         
         const result = await GalleryService.uploadMultipleImages(
           newPhoto.multipleFiles,
           titles,
-          [],
+          Array(newPhoto.multipleFiles.length).fill(newPhoto.description),
           (overall, individual) => {
             setBatchUploadProgress(overall);
             if (individual) {
@@ -254,7 +289,7 @@ const Gallery = () => {
         await loadStats();
         
         // Réinitialiser les états
-        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
+        setNewPhoto({ title: '', description: '', location: '', date: new Date().toISOString().split('T')[0], file: null, multipleFiles: [] });
         setShowAddForm(false);
       } catch (error) {
         console.error('Erreur upload multiple:', error);
@@ -272,7 +307,7 @@ const Gallery = () => {
       const result = await GalleryService.uploadImage(
         newPhoto.file,
         newPhoto.title,
-        newPhoto.date,
+        newPhoto.description,
         undefined,
         setUploadProgress
       );
@@ -283,7 +318,7 @@ const Gallery = () => {
         await loadStats();
         
         // Réinitialiser les états
-        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
+        setNewPhoto({ title: '', description: '', location: '', date: new Date().toISOString().split('T')[0], file: null, multipleFiles: [] });
         setShowAddForm(false);
       } else {
         console.error('Erreur upload:', result.error);
@@ -440,47 +475,458 @@ const Gallery = () => {
           </div>
         ) : (
           /* Grille de photos */
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="space-y-8 sm:space-y-12">
             {photos.map((photo) => (
-              <div
+              <article
                 key={photo.id}
-                className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
-                  showDeleteMode 
-                    ? 'border-red-300 hover:border-red-500' 
-                    : `border-gray-200 hover:border-orange-500/50 ${!photo.is_visible && isAdmin ? 'opacity-50' : ''}`
-                }`}
-                onClick={() => openModal(Number(photo.id))}
+                className={`bg-white rounded-2xl shadow-xl overflow-hidden border transition-all duration-300 hover:shadow-2xl ${
+                  !photo.is_visible && isAdmin ? 'opacity-50' : ''
+                } ${showDeleteMode ? 'border-red-300' : 'border-gray-200 hover:border-orange-500/30'}`}
               >
-                {/* Contrôles admin */}
-                {isAdmin && (
-                  <div className="absolute top-2 right-2 z-10 flex gap-1">
-                    {/* Visibilité */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleVisibility(photo.id, photo.is_visible);
-                      }}
-                      className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
-                        photo.is_visible 
-                          ? 'bg-green-500 hover:bg-green-600 text-white' 
-                          : 'bg-gray-500 hover:bg-gray-600 text-white'
-                      }`}
-                      title={photo.is_visible ? 'Masquer' : 'Afficher'}
-                    >
-                      {photo.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                    </button>
+                {/* Header du travail */}
+                <div className="p-4 sm:p-6 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-gray-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 font-futuristic mb-2">
+                        {photo.title}
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4 text-orange-500" />
+                          <span>{new Date(photo.upload_date).toLocaleDateString('fr-FR')}</span>
+                        </div>
+                        {photo.relatedPhotos && (
+                          <div className="flex items-center gap-1">
+                            <Camera className="w-4 h-4 text-orange-500" />
+                            <span>{photo.relatedPhotos.length} photo{photo.relatedPhotos.length > 1 ? 's' : ''}</span>
+                          </div>
+                        )}
+                      </div>
+                      {photo.description && (
+                        <p className="text-gray-700 font-tech leading-relaxed">
+                          {photo.description}
+                        </p>
+                      )}
+                    </div>
                     
-                    {/* Suppression */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeletePhoto(photo.id);
-                      }}
-                      className="w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
-                      title="Supprimer définitivement"
+                    {/* Contrôles admin */}
+                    {isAdmin && (
+                      <div className="flex gap-2 ml-4">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleVisibility(photo.id, photo.is_visible);
+                          }}
+                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
+                            photo.is_visible 
+                              ? 'bg-green-500 hover:bg-green-600 text-white' 
+                              : 'bg-gray-500 hover:bg-gray-600 text-white'
+                          }`}
+                          title={photo.is_visible ? 'Masquer' : 'Afficher'}
+                        >
+                          {photo.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                        </button>
+                        
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (photo.relatedPhotos) {
+                              // Supprimer toutes les photos du groupe
+                              if (confirm(`Supprimer ce travail et ses ${photo.relatedPhotos.length} photos ?`)) {
+                                photo.relatedPhotos.forEach(p => handleDeletePhoto(p.id));
+                              }
+                            } else {
+                              handleDeletePhoto(photo.id);
+                            }
+                          }}
+                          className="w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+                          title="Supprimer ce travail"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Galerie de photos du travail */}
+                <div className="p-4 sm:p-6">
+                  {photo.relatedPhotos && photo.relatedPhotos.length > 0 ? (
+                    <div className={`grid gap-3 sm:gap-4 ${
+                      photo.relatedPhotos.length === 1 ? 'grid-cols-1' :
+                      photo.relatedPhotos.length === 2 ? 'grid-cols-2' :
+                      photo.relatedPhotos.length === 3 ? 'grid-cols-3' :
+                      photo.relatedPhotos.length === 4 ? 'grid-cols-2' :
+                      'grid-cols-2 sm:grid-cols-3'
+                    }`}>
+                      {photo.relatedPhotos.map((relatedPhoto, index) => (
+                        <div
+                          key={relatedPhoto.id}
+                          className={`group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover-scale ${
+                            photo.relatedPhotos!.length === 1 ? 'aspect-video' :
+                            photo.relatedPhotos!.length === 4 && index >= 2 ? 'col-span-1' :
+                            'aspect-square'
+                          }`}
+                          onClick={() => openModal(Number(relatedPhoto.id))}
+                        >
+                          <img
+                            src={GalleryService.getImageUrl(relatedPhoto.thumbnail_path || relatedPhoto.file_path)}
+                            alt={`${photo.title} - Photo ${index + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                          />
+                          
+                          {/* Overlay avec numéro */}
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                            <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <span className="text-sm font-bold text-gray-700">{index + 1}</span>
+                            </div>
+                          </div>
+                          
+                          {/* Indicateur admin */}
+                          {isAdmin && !relatedPhoto.is_visible && (
+                            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                              Masquée
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    /* Photo unique */}
+                    <div 
+                      className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer hover-scale aspect-video"
+                      onClick={() => openModal(Number(photo.id))}
                     >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                      <img
+                        src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
+                        alt={photo.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                        <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <Camera className="w-6 h-6 text-gray-700" />
+                        </div>
+                      </div>
+                      
+                      {isAdmin && !photo.is_visible && (
+                        <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+                          Masquée
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {/* Message si aucune photo */}
+        {photos.length === 0 && !loading && (
+          <div className="text-center py-12">
+            <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <p className="text-gray-500 font-tech">Aucun travail dans la galerie</p>
+          </div>
+        )}
+      </div>
+
+      {/* Modal de connexion admin */}
+      {showAdminLogin && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
+              <button
+                onClick={() => {
+                  setShowAdminLogin(false);
+                  setLoginForm({ email: '', password: '' });
+                  setLoginError('');
+                }}
+                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input
+                  type="email"
+                  value={loginForm.email}
+                  onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                  placeholder="votre-email@example.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  required
+                  disabled={isLoggingIn}
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+                <input
+                  type="password"
+                  value={loginForm.password}
+                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                  placeholder="Entrez votre mot de passe"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  required
+                  disabled={isLoggingIn}
+                />
+              </div>
+              
+              {loginError && (
+                <div className="text-red-600 text-sm bg-red-50 p-2 rounded">
+                  {loginError}
+                </div>
+              )}
+              
+              <div className="flex gap-3 mt-6">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAdminLogin(false);
+                    setLoginForm({ email: '', password: '' });
+                    setLoginError('');
+                  }}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  disabled={isLoggingIn}
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
+                  disabled={isLoggingIn}
+                >
+                  {isLoggingIn ? 'Connexion...' : 'Se connecter'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal d'ajout de travail */}
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un travail</h3>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Titre du travail *</label>
+                <input
+                  type="text"
+                  value={newPhoto.title}
+                  onChange={(e) => setNewPhoto({...newPhoto, title: e.target.value})}
+                  placeholder="Ex: Vidange complète Peugeot 308"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  required
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description du travail</label>
+                <textarea
+                  value={newPhoto.description}
+                  onChange={(e) => setNewPhoto({...newPhoto, description: e.target.value})}
+                  placeholder="Décrivez le travail effectué, les pièces changées, les problèmes rencontrés..."
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                  <input
+                    type="date"
+                    value={newPhoto.date}
+                    onChange={(e) => setNewPhoto({...newPhoto, date: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Lieu</label>
+                  <input
+                    type="text"
+                    value={newPhoto.location}
+                    onChange={(e) => setNewPhoto({...newPhoto, location: e.target.value})}
+                    placeholder="Ex: Le Puy-en-Velay"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Photos du travail *</label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  multiple
+                  onChange={handleFileChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Sélectionnez une ou plusieurs photos (JPG, PNG, WebP, GIF - 5MB max chacune)
+                </p>
+                
+                {newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 && (
+                  <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-sm text-green-700 font-medium mb-2">
+                      {newPhoto.multipleFiles.length} photo{newPhoto.multipleFiles.length > 1 ? 's' : ''} sélectionnée{newPhoto.multipleFiles.length > 1 ? 's' : ''}
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {newPhoto.multipleFiles.slice(0, 4).map((file, index) => (
+                        <div key={index} className="text-xs bg-white px-2 py-1 rounded border truncate">
+                          {file.name}
+                        </div>
+                      ))}
+                      {newPhoto.multipleFiles.length > 4 && (
+                        <div className="text-xs text-gray-500 col-span-2">
+                          +{newPhoto.multipleFiles.length - 4} autres photos...
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleAddPhoto}
+                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
+                disabled={uploadProgress !== null || batchUploadProgress !== null || !newPhoto.title}
+              >
+                {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 
+                 newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 ? 
+                 `Ajouter le travail (${newPhoto.multipleFiles.length} photos)` : 'Ajouter le travail'}
+              </button>
+            </div>
+            
+            {/* Boutons admin supplémentaires */}
+            <div className="flex gap-2 mt-4 pt-4 border-t border-gray-200">
+              <button
+                onClick={toggleDeleteMode}
+                className={`flex-1 px-3 py-2 rounded-lg transition-colors text-sm ${
+                  showDeleteMode 
+                    ? 'bg-red-500 text-white hover:bg-red-600' 
+                    : 'bg-red-100 text-red-700 hover:bg-red-200'
+                }`}
+              >
+                {showDeleteMode ? 'Arrêter suppression' : 'Mode suppression'}
+              </button>
+              
+              <button
+                onClick={() => setShowStats(!showStats)}
+                className="flex-1 px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
+              >
+                {showStats ? 'Masquer stats' : 'Voir stats'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Indicateur mode suppression */}
+      {showDeleteMode && (
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-40">
+          <div className="flex items-center gap-2">
+            <X className="w-4 h-4" />
+            <span className="text-sm font-medium">Mode suppression activé - Cliquez sur les travaux à supprimer</span>
+          </div>
+        </div>
+      )}
+
+      {/* Modal lightbox */}
+      {selectedImage && selectedPhoto && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl max-h-full w-full">
+            {/* Bouton fermer */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Navigation précédent */}
+            <button
+              onClick={() => navigateImage('prev')}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {/* Navigation suivant */}
+            <button
+              onClick={() => navigateImage('next')}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Contenu modal */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
+              {/* Image */}
+              <div className="aspect-video">
+                <img
+                  src={GalleryService.getImageUrl(selectedPhoto.file_path)}
+                  alt={selectedPhoto.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Informations */}
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-gray-900 font-futuristic mb-2">
+                  {selectedPhoto.title}
+                </h3>
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-600 font-tech">
+                    {new Date(selectedPhoto.upload_date).toLocaleDateString('fr-FR')}
+                  </p>
+                {isAdmin && (
+                    <div className="text-sm text-gray-500 font-tech">
+                      {ImageProcessor.formatFileSize(selectedPhoto.file_size)} • {selectedPhoto.width}×{selectedPhoto.height}px
+                    </div>
+                  )}
+                </div>
+                {selectedPhoto.description && (
+                  <p className="text-gray-600 font-tech mt-2">
+                    {selectedPhoto.description}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};
+
+export default Gallery;
                   </div>
                 )}
                 

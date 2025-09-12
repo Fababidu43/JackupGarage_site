@@ -128,8 +128,29 @@ function App() {
 
   const navigateToHome = () => {
     setCurrentPage('home');
-    // Scroll immédiat vers le haut
+    // Scroll immédiat vers le haut et forcer le re-render
     window.scrollTo({ top: 0, behavior: 'auto' });
+    
+    // Forcer le re-calcul des animations après un court délai
+    setTimeout(() => {
+      // Déclencher manuellement le système d'animation
+      const animatedSections = document.querySelectorAll('.scroll-animate');
+      animatedSections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > windowHeight * 0.2;
+        
+        if (isVisible) {
+          section.classList.add('visible');
+        }
+      });
+      
+      // Marquer le hero comme chargé
+      const heroContent = document.querySelector('.hero-content');
+      if (heroContent) {
+        heroContent.classList.add('loaded');
+      }
+    }, 50);
   };
 
   // Rendu conditionnel selon la page

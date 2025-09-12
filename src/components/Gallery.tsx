@@ -100,6 +100,13 @@ const Gallery = () => {
 
   // Raccourci clavier complexe : Ctrl+Shift+Alt+G+A+L
   useEffect(() => {
+    // Vérifier si on arrive avec le hash #gallery-admin
+    if (window.location.hash === '#gallery-admin') {
+      setShowAdminLogin(true);
+      // Nettoyer le hash
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    
     const handleKeyDown = (e: KeyboardEvent) => {
       // Séquence requise : Ctrl+Shift+Alt puis G, A, L
       if (e.ctrlKey && e.shiftKey && e.altKey) {
@@ -334,19 +341,9 @@ const Gallery = () => {
           </div>
           
           {/* Point d'accès admin discret */}
-          <div className="relative inline-block">
-            <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
-              Galerie
-            </h2>
-            
-            {/* Bouton d'accès admin super petit */}
-            <button
-              onClick={() => setShowAdminLogin(true)}
-              className="absolute -top-1 -right-1 w-3 h-3 bg-gray-400 hover:bg-orange-500 rounded-full transition-all duration-200 opacity-30 hover:opacity-100 hover:scale-125"
-              title="Administration de la galerie"
-            >
-            </button>
-          </div>
+          <h2 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 mb-4 sm:mb-6 tracking-tight uppercase font-futuristic">
+            Galerie
+          </h2>
           
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium font-tech mb-4">
             Nos interventions en images

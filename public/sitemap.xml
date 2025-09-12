@@ -8,20 +8,20 @@
   <!-- Page d'accueil -->
   <url>
     <loc>https://jackupgarage.fr/</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://jackupgarage.fr/logo.png</image:loc>
       <image:title>Jack Up Garage - Logo</image:title>
-      <image:caption>Mécanicien à domicile Haute-Loire</image:caption>
+      <image:caption>Garagiste et mécanicien à domicile Haute-Loire et Loire</image:caption>
     </image:image>
   </url>
 
   <!-- Galerie -->
   <url>
     <loc>https://jackupgarage.fr/galerie</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -29,7 +29,7 @@
   <!-- Services -->
   <url>
     <loc>https://jackupgarage.fr/services</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -37,7 +37,7 @@
   <!-- Zone d'intervention -->
   <url>
     <loc>https://jackupgarage.fr/zone-intervention</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -45,7 +45,7 @@
   <!-- Contact -->
   <url>
     <loc>https://jackupgarage.fr/contact</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -53,21 +53,21 @@
   <!-- Pages de services spécifiques -->
   <url>
     <loc>https://jackupgarage.fr/vidange-domicile-haute-loire</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackupgarage.fr/reparation-freins-le-puy-en-velay</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackupgarage.fr/embrayage-monistrol-sur-loire</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

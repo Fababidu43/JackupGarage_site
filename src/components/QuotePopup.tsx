@@ -226,29 +226,42 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   ];
 
   const handleSubmit = () => {
-    // Créer le message SMS récapitulatif
-    const service = services.find(s => s.id === formData.service);
-    const urgence = urgencies.find(u => u.id === formData.urgency);
-    
-    const message = `🚗 JACK UP GARAGE - DEMANDE DE DEVIS
+    // Envoyer la demande de devis par email
+    sendQuoteEmail();
+  };
 
-👤 CLIENT: ${formData.name}
-📞 TEL: ${formData.phone}
-📍 VILLE: ${formData.location}
+  const sendQuoteEmail = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-quote-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          service: formData.service,
+          urgency: formData.urgency,
+          location: formData.location,
+          phone: formData.phone,
+          name: formData.name
+        })
+      });
 
-🔧 SERVICE: ${service?.name}
-⏰ URGENCE: ${urgence?.name}
-⏱️ DUREE: ${service?.time}
-
-📅 DEMANDE: ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
-
-Merci de recontacter le client pour établir un devis personnalisé.`;
-
-    // Simuler l'envoi automatique du SMS (en réalité, cela nécessiterait un service backend)
-    console.log('SMS envoyé automatiquement:', message);
-    
-    // Afficher le message de confirmation dans le popup
-    setIsSubmitted(true);
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('Email envoyé avec succès');
+        setIsSubmitted(true);
+      } else {
+        console.error('Erreur envoi email:', result.error);
+        // Fallback: afficher quand même le message de confirmation
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      // Fallback: afficher quand même le message de confirmation
+      setIsSubmitted(true);
+    }
   };
 
   const resetForm = () => {

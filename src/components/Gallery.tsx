@@ -18,8 +18,7 @@ interface WorkProject {
 }
 
 const Gallery = () => {
-  const [selectedProject, setSelectedProject] = useState<WorkProject | null>(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+  const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -166,28 +165,8 @@ const Gallery = () => {
     };
   }, []);
 
-  const openProjectDetails = (project: WorkProject) => {
-    setSelectedProject(project);
-    setSelectedImageIndex(0);
-  };
-
-  const closeProjectDetails = () => {
-    setSelectedProject(null);
-    setSelectedImageIndex(0);
-  };
-
-  const navigateImage = (direction: 'prev' | 'next') => {
-    if (!selectedProject) return;
-    
-    if (direction === 'prev') {
-      setSelectedImageIndex(prev => 
-        prev > 0 ? prev - 1 : selectedProject.photos.length - 1
-      );
-    } else {
-      setSelectedImageIndex(prev => 
-        prev < selectedProject.photos.length - 1 ? prev + 1 : 0
-      );
-    }
+  const toggleProjectDetails = (projectId: string) => {
+    setExpandedProject(expandedProject === projectId ? null : projectId);
   };
 
   const handleAdminLogin = async (e: React.FormEvent) => {
@@ -450,7 +429,7 @@ const Gallery = () => {
                     ? 'border-red-300 hover:border-red-500' 
                     : `border-gray-200 hover:border-orange-500/50 ${!project.is_visible && isAdmin ? 'opacity-50' : ''}`
                 }`}
-                onClick={() => openProjectDetails(project)}
+                onClick={() => toggleProjectDetails(project.id)}
               >
                 {/* Contrôles admin */}
                 {isAdmin && (
@@ -809,90 +788,48 @@ const Gallery = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Contenu */}
-            <div className="p-4 sm:p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
-              {/* Description */}
-              {selectedProject.description && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2">
-                    Description des travaux
-                  </h3>
-                  <p className="text-gray-700 font-tech leading-relaxed">
-                    {selectedProject.description}
-                  </p>
-                </div>
-              )}
               
-              {/* Photos */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-4">
-                  Photos du projet
-                </h3>
-                
-                {/* Photo principale */}
-                <div className="mb-4">
-                  <div className="relative aspect-video bg-gray-100 rounded-xl overflow-hidden">
-                    <img
-                      src={GalleryService.getImageUrl(selectedProject.photos[selectedImageIndex]?.file_path)}
-                      alt={`${selectedProject.title} - Photo ${selectedImageIndex + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    
-                    {/* Navigation si plusieurs photos */}
-                    {selectedProject.photos.length > 1 && (
-                      <>
-                        <button
-                          onClick={() => navigateImage('prev')}
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        
-                        <button
-                          onClick={() => navigateImage('next')}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-colors"
-                        >
-                          <ChevronRight className="w-5 h-5" />
-                        </button>
-                        
-                        {/* Indicateur */}
-                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
-                          {selectedImageIndex + 1} / {selectedProject.photos.length}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Miniatures si plusieurs photos */}
-                {selectedProject.photos.length > 1 && (
-                  <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
-                    {selectedProject.photos.map((photo, index) => (
+              {/* Détails du projet (affichés en dessous quand expanded) */}
+              {expandedProject === project.id && (
+                <div className="mt-4 bg-gray-50 rounded-xl p-6 border-l-4 border-orange-500 shadow-inner">
+                  {/* Header du projet étendu */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-2xl font-bold text-gray-900 font-futuristic">
+                        {project.title}
+                      </h3>
                       <button
-                        key={photo.id}
-                        onClick={() => setSelectedImageIndex(index)}
-                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                          index === selectedImageIndex 
-                            ? 'border-orange-500 ring-2 ring-orange-500/30' 
-                            : 'border-gray-200 hover:border-orange-300'
-                        }`}
+                        onClick={() => setExpandedProject(null)}
+                        className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
                       >
-                        <img
-                          src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
-                          alt={`Miniature ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
+                        <X className="w-5 h-5" />
                       </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+                    </div>
+                    
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(project.work_date).toLocaleDateString('fr-FR')}
+                      </div>
+                      
+                      {project.car_info && (
+                        <div className="flex items-center gap-1">
+                          <Car className="w-4 h-4" />
+                          {project.car_info}
+                        </div>
+                      )}
+                      
+                      {project.location && (
+                        <div className="flex items-center gap-1">
+                          <MapPin className="w-4 h-4" />
+                          {project.location}
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center gap-1">
+                        <Camera className="w-4 h-4" />
+                        {project.photos.length} photo{project.photos.length > 1 ? 's' : ''}
+                      </div>
     </section>
   );
 };

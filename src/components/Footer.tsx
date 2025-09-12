@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className={`bg-black text-white py-3 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto z-10 ${isVisible ? 'revealed' : ''}`}
+      className={`bg-black text-white py-3 relative overflow-hidden border-t border-orange-500/20 shadow-lg footer-reveal mt-auto ${isVisible ? 'revealed' : ''}`}
       style={{ 
         minHeight: '120px',
         paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'

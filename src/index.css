@@ -1568,27 +1568,6 @@
 }
 
 /* === SAFE AREA POUR IPHONE === */
-/* Z-index hierarchy pour les modals */
-/* Hiérarchie z-index globale */
-/* 
-  10 = Footer
-  20 = Mobile CTA
-  30 = Header
-  40 = Navigation mobile
-  50 = Dropdowns/tooltips
-  999999+ = Modals (priorité absolue)
-*/
-.modal-overlay {
-  z-index: 999999 !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-}
-
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }

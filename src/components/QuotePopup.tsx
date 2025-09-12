@@ -305,7 +305,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[9999] flex items-center justify-center p-1 sm:p-2 lg:p-4">
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-1 sm:p-2 lg:p-4">
       {/* Fond dynamique */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-600/10"></div>
@@ -338,7 +338,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-1 sm:p-1.5 text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded-lg transition-all duration-200 hover:scale-110 flex-shrink-0"
+            className="p-1 sm:p-1.5 text-gray-400 hover:text-orange-400 hover:bg-orange-500/10 rounded-lg transition-all duration-200 hover-scale flex-shrink-0"
           >
             <X className="w-4 h-4" />
           </button>

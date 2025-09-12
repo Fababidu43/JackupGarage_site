@@ -160,12 +160,13 @@ export class GalleryService {
       const { data: existingPhoto } = await supabase
         .from('gallery_photos')
         .select('id, title')
-        .eq('file_hash', fileHash);
+        .eq('file_hash', fileHash)
+        .single();
 
-      if (existingPhoto && existingPhoto.length > 0) {
+      if (existingPhoto) {
         return {
           success: false,
-          error: `Image déjà présente: "${existingPhoto[0].title}"`
+          error: `Image déjà présente: "${existingPhoto.title}"`
         };
       }
 

@@ -339,13 +339,12 @@ const Gallery = () => {
               Galerie
             </h2>
             
-            {/* Bouton d'accès admin discret - plus visible */}
+            {/* Bouton d'accès admin super petit */}
             <button
               onClick={() => setShowAdminLogin(true)}
-              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-300 hover:bg-orange-500 rounded-full flex items-center justify-center transition-all duration-200 opacity-40 hover:opacity-100 hover:scale-110 shadow-sm"
+              className="absolute -top-1 -right-1 w-3 h-3 bg-gray-400 hover:bg-orange-500 rounded-full transition-all duration-200 opacity-30 hover:opacity-100 hover:scale-125"
               title="Administration de la galerie"
             >
-              <span className="text-xs text-gray-600 hover:text-white font-bold">•</span>
             </button>
           </div>
           

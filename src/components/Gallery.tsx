@@ -35,8 +35,6 @@ const Gallery = () => {
     file: null as File | null,
     multipleFiles: [] as File[]
   });
-  const [keySequence, setKeySequence] = useState<string[]>([]);
-  const [keySequence] = useState<string[]>([]);
 
   // Vérifier l'état d'authentification au chargement
   useEffect(() => {

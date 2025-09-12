@@ -87,16 +87,16 @@ const Footer = () => {
             {/* Contact rapide */}
             <div className="flex items-center space-x-1 sm:space-x-2">
               <a 
-                href="tel:+33123456789"
+                href="tel:+33630703036"
                 className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
               >
                 <Phone className="w-3 h-3 mr-0.5 sm:mr-1" />
-                <span className="text-xs font-tech hidden sm:inline">01 23 45 67 89</span>
+                <span className="text-xs font-tech hidden sm:inline">06 30 70 30 36</span>
                 <span className="text-xs font-tech sm:hidden">Tel</span>
               </a>
               <div className="w-0.5 h-3 bg-gray-700"></div>
               <a 
-                href="mailto:contact@jackupgarage.fr"
+                href="mailto:fabian.measson123@gmail.com"
                 className="flex items-center text-gray-400 hover:text-orange-400 transition-colors hover-lift"
               >
                 <Mail className="w-3 h-3 mr-0.5 sm:mr-1" />

@@ -133,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
             <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
           <a
-            href="tel:+33123456789"
+            href="tel:+33630703036"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button-secondary group"
           >
             <Phone className="mr-3 w-5 h-5 group-hover:animate-ring transition-transform duration-300" />

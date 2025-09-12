@@ -225,31 +225,31 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   ];
 
   const handleSubmit = () => {
-    // Créer le message WhatsApp ou SMS
-    const message = `🚗 DEMANDE DE DEVIS JACK UP GARAGE
+    // Créer le message SMS récapitulatif
+    const service = services.find(s => s.id === formData.service);
+    const urgence = urgencies.find(u => u.id === formData.urgency);
     
-Service: ${services.find(s => s.id === formData.service)?.name}
-Urgence: ${urgencies.find(u => u.id === formData.urgency)?.name}
-Ville: ${formData.location}
-Nom: ${formData.name}
-Téléphone: ${formData.phone}
+    const message = `🚗 JACK UP GARAGE - DEMANDE DE DEVIS
 
-Merci de me recontacter pour un devis !`;
+👤 CLIENT: ${formData.name}
+📞 TEL: ${formData.phone}
+📍 VILLE: ${formData.location}
 
-    // Ouvrir WhatsApp ou SMS
-    const phoneNumber = "0123456789";
+🔧 SERVICE: ${service?.name}
+⏰ URGENCE: ${urgence?.name}
+⏱️ DUREE: ${service?.time}
+
+📅 DEMANDE: ${new Date().toLocaleDateString('fr-FR')} à ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+
+Merci de recontacter le client pour établir un devis personnalisé.`;
+
+    // Envoyer par SMS uniquement
+    const phoneNumber = "0630703036";
     const encodedMessage = encodeURIComponent(message);
     
-    // Essayer WhatsApp d'abord, puis SMS
-    const whatsappUrl = `https://wa.me/33${phoneNumber.substring(1)}?text=${encodedMessage}`;
+    // Ouvrir l'application SMS
     const smsUrl = `sms:${phoneNumber}?body=${encodedMessage}`;
-    
-    // Détecter si mobile pour WhatsApp, sinon SMS
-    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      window.open(whatsappUrl, '_blank');
-    } else {
-      window.open(smsUrl, '_blank');
-    }
+    window.open(smsUrl, '_blank');
     
     onClose();
     setStep(1);

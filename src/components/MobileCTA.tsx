@@ -14,7 +14,7 @@ const MobileCTA: React.FC<MobileCTAProps> = ({ onQuoteClick }) => {
          }}>
       <div className="flex">
         <a
-          href="tel:+33123456789"
+          href="tel:+33630703036"
           className="flex-1 flex items-center justify-center py-4 text-white font-bold tracking-wide text-sm font-tech transition-all duration-200 active:scale-95"
           style={{ background: '#FF6B35' }}
         >

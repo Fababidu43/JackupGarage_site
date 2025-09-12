@@ -14,8 +14,8 @@ const StructuredData: React.FC = () => {
       "https://jackupgarage.fr/entretiens_photos.jpg",
       "https://jackupgarage.fr/freins_photos.jpg"
     ],
-    "telephone": "+33123456789",
-    "email": "contact@jackupgarage.fr",
+    "telephone": "+33630703036",
+    "email": "fabian.measson123@gmail.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Monistrol-sur-Loire",

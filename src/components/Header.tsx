@@ -196,13 +196,13 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
               
               {/* CTA Appeler Desktop */}
               <a
-                onClick={onQuoteClick}
+                href="tel:+33630703036"
                 className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                   font-tech uppercase tracking-wide text-xs xl:text-sm"
               >
-                Devis
+                Appeler
               </a>
             </div>
 

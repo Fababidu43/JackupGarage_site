@@ -335,7 +335,22 @@ ${new Date().toISOString()}
     console.log('Réponse MailerSend status:', response.status);
     
     if (response.ok) {
-      const result = await response.json();
+      let result;
+      const contentType = response.headers.get('content-type');
+      
+      try {
+        if (contentType && contentType.includes('application/json')) {
+          result = await response.json();
+        } else {
+          const textResponse = await response.text();
+          result = { message: textResponse || 'Email sent successfully' };
+        }
+      } catch (jsonError) {
+        console.log('Erreur parsing JSON, lecture en texte:', jsonError);
+        const textResponse = await response.text();
+        result = { message: textResponse || 'Email sent successfully' };
+      }
+      
       console.log('✅ Email envoyé avec succès via MailerSend');
       console.log('Détails:', result);
       
@@ -353,7 +368,19 @@ ${new Date().toISOString()}
         }
       };
     } else {
-      const errorText = await response.text();
+      let errorText;
+      try {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const errorJson = await response.json();
+          errorText = JSON.stringify(errorJson);
+        } else {
+          errorText = await response.text();
+        }
+      } catch (error) {
+        errorText = await response.text();
+      }
+      
       console.error('❌ Erreur MailerSend:', response.status, errorText);
       
       return { 

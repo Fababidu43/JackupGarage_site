@@ -36,14 +36,7 @@ const Gallery = () => {
     multipleFiles: [] as File[]
   });
   const [keySequence, setKeySequence] = useState<string[]>([]);
-
-  // Nettoyer le hash au montage du composant
-  useEffect(() => {
-    // Nettoyer le hash seulement s'il contient gallery-admin
-    if (window.location.hash === '#gallery-admin') {
-      window.history.replaceState(null, '', window.location.pathname);
-    }
-  }, []);
+  const [keySequence] = useState<string[]>([]);
 
   // Vérifier l'état d'authentification au chargement
   useEffect(() => {
@@ -107,19 +100,13 @@ const Gallery = () => {
     }
   }, [isAdmin, loadPhotos]);
 
-  // Raccourci clavier complexe : Ctrl+Shift+Alt+G+A+L
+  // Gestion de l'accès admin via le footer
   useEffect(() => {
-    // Vérifier si on arrive avec le hash #gallery-admin
-    const checkHashOnLoad = () => {
-      if (window.location.hash === '#gallery-admin') {
-        setShowAdminLogin(true);
-        // Nettoyer le hash
-        window.history.replaceState(null, '', window.location.pathname);
-      }
-    };
-
-    // Vérifier au chargement
-    checkHashOnLoad();
+    // Nettoyer le hash au montage du composant
+    if (window.location.hash === '#gallery-admin') {
+      setShowAdminLogin(true);
+      window.history.replaceState(null, '', window.location.pathname);
+    }
 
     // Écouter l'événement personnalisé du footer
     const handleOpenAdminLogin = () => {
@@ -128,47 +115,10 @@ const Gallery = () => {
 
     window.addEventListener('openAdminLogin', handleOpenAdminLogin);
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Séquence requise : Ctrl+Shift+Alt puis G, A, L
-      if (e.ctrlKey && e.shiftKey && e.altKey) {
-        const newSequence = [...keySequence, e.key.toLowerCase()];
-        setKeySequence(newSequence);
-        
-        // Vérifier si la séquence complète est tapée : g, a, l
-        if (newSequence.length >= 3) {
-          const lastThree = newSequence.slice(-3);
-          if (lastThree.join('') === 'gal') {
-            setShowAdminLogin(true);
-            setKeySequence([]); // Reset
-          }
-        }
-        
-        // Reset si trop long
-        if (newSequence.length > 5) {
-          setKeySequence([]);
-        }
-      } else {
-        // Reset si les touches modificatrices ne sont pas pressées
-        setKeySequence([]);
-      }
-    };
-
-    const handleKeyUp = (e: KeyboardEvent) => {
-      // Reset après 2 secondes d'inactivité
-      setTimeout(() => {
-        setKeySequence([]);
-      }, 2000);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
-    
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
       window.removeEventListener('openAdminLogin', handleOpenAdminLogin);
     };
-  }, [keySequence]);
+  }, []);
 
   const openModal = (imageId: number) => {
     setSelectedImage(Number(imageId));
@@ -592,13 +542,6 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Indicateur de raccourci (optionnel, pour debug) */}
-      {keySequence.length > 0 && (
-        <div className="fixed top-4 right-4 bg-black/80 text-white px-3 py-1 rounded text-xs z-50">
-          Séquence: {keySequence.join('')}
-        </div>
-      )}
-
       {/* Modal de connexion admin */}
       {showAdminLogin && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
@@ -610,7 +553,6 @@ const Gallery = () => {
                   setShowAdminLogin(false);
                   setLoginForm({ email: '', password: '' });
                   setLoginError('');
-                  setKeySequence([]);
                 }}
                 className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
               >
@@ -658,7 +600,6 @@ const Gallery = () => {
                     setShowAdminLogin(false);
                     setLoginForm({ email: '', password: '' });
                     setLoginError('');
-                    setKeySequence([]);
                   }}
                   className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                   disabled={isLoggingIn}

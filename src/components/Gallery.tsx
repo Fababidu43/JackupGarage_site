@@ -37,6 +37,14 @@ const Gallery = () => {
   });
   const [keySequence, setKeySequence] = useState<string[]>([]);
 
+  // Nettoyer le hash au montage du composant
+  useEffect(() => {
+    // Nettoyer le hash seulement s'il contient gallery-admin
+    if (window.location.hash === '#gallery-admin') {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, []);
+
   // Vérifier l'état d'authentification au chargement
   useEffect(() => {
     checkAuthStatus();
@@ -102,12 +110,24 @@ const Gallery = () => {
   // Raccourci clavier complexe : Ctrl+Shift+Alt+G+A+L
   useEffect(() => {
     // Vérifier si on arrive avec le hash #gallery-admin
-    if (window.location.hash === '#gallery-admin') {
+    const checkHashOnLoad = () => {
+      if (window.location.hash === '#gallery-admin') {
+        setShowAdminLogin(true);
+        // Nettoyer le hash
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    };
+
+    // Vérifier au chargement
+    checkHashOnLoad();
+
+    // Écouter l'événement personnalisé du footer
+    const handleOpenAdminLogin = () => {
       setShowAdminLogin(true);
-      // Nettoyer le hash
-      window.history.replaceState(null, '', window.location.pathname);
-    }
-    
+    };
+
+    window.addEventListener('openAdminLogin', handleOpenAdminLogin);
+
     const handleKeyDown = (e: KeyboardEvent) => {
       // Séquence requise : Ctrl+Shift+Alt puis G, A, L
       if (e.ctrlKey && e.shiftKey && e.altKey) {
@@ -146,6 +166,7 @@ const Gallery = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('openAdminLogin', handleOpenAdminLogin);
     };
   }, [keySequence]);
 
@@ -245,10 +266,25 @@ const Gallery = () => {
   };
 
   const handleAddPhoto = async () => {
+    // Validation des champs requis
+    if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
+      // Upload multiple - pas besoin de titre obligatoire
+    } else if (!newPhoto.title || !newPhoto.file) {
+      alert('Veuillez remplir le titre et sélectionner une image');
+      return;
+    }
+
     // Vérifier s'il y a des fichiers multiples
     if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
       // Upload multiple
       try {
+        setUploadProgress({
+          current: 0,
+          total: newPhoto.multipleFiles.length,
+          status: 'processing',
+          message: 'Préparation de l\'upload multiple...'
+        });
+
         const titles = newPhoto.multipleFiles.map((file, index) => 
           newPhoto.title ? `${newPhoto.title} ${index + 1}` : `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
         );
@@ -257,27 +293,32 @@ const Gallery = () => {
           newPhoto.multipleFiles,
           titles,
           [],
-          setBatchUploadProgress
+          (overall, individual) => {
+            setBatchUploadProgress(overall);
+            if (individual) {
+              setUploadProgress(individual);
+            }
+          }
         );
 
         alert(`Upload terminé: ${result.summary.successful} réussis, ${result.summary.failed} échecs`);
         await loadPhotos();
         await loadStats();
-      } catch (error) {
-        alert(`Erreur upload multiple: ${error}`);
-      } finally {
+        
+        // Réinitialiser les états
         setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
         setShowAddForm(false);
+      } catch (error) {
+        console.error('Erreur upload multiple:', error);
+        alert(`Erreur upload multiple: ${error}`);
+      } finally {
+        setUploadProgress(null);
         setBatchUploadProgress(null);
       }
       return;
     }
 
     // Upload simple
-    if (!newPhoto.title || !newPhoto.file) {
-      alert('Veuillez remplir le titre et sélectionner une image');
-      return;
-    }
 
     try {
       const result = await GalleryService.uploadImage(
@@ -292,14 +333,18 @@ const Gallery = () => {
         alert('Photo ajoutée avec succès !');
         await loadPhotos();
         await loadStats();
+        
+        // Réinitialiser les états
+        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
+        setShowAddForm(false);
       } else {
+        console.error('Erreur upload:', result.error);
         alert(`Erreur: ${result.error}`);
       }
     } catch (error) {
+      console.error('Erreur lors de l\'upload:', error);
       alert(`Erreur lors de l'upload: ${error}`);
     } finally {
-      setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
-      setShowAddForm(false);
       setUploadProgress(null);
     }
   };
@@ -346,7 +391,7 @@ const Gallery = () => {
   };
 
   return (
-    <section className="section py-8 lg:py-12 min-h-screen bg-white">
+    <section className="section py-8 lg:py-12 min-h-screen bg-white" data-gallery-page>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12 pt-16">

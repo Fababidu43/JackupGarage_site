@@ -896,5 +896,4 @@ const Gallery = () => {
     </section>
   );
 };
-        <div className="fixed inset-0 bg-black backdrop-blur-md z-[99999] flex items-center justify-center p-4" style={{ zIndex: 99999 }}>
 export default Gallery;

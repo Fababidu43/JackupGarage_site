@@ -18,7 +18,6 @@ export interface Photo {
   batch_id?: string;
   file_hash: string;
   processing_status: 'pending' | 'processing' | 'completed' | 'failed';
-  relatedPhotos?: Photo[]; // Pour grouper les photos d'un même travail
 }
 
 export interface UploadBatch {

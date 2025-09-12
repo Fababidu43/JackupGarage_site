@@ -32,7 +32,8 @@ const Gallery = () => {
     title: '',
     date: '',
     image: '',
-    file: null as File | null
+    file: null as File | null,
+    multipleFiles: [] as File[]
   });
   const [keySequence, setKeySequence] = useState<string[]>([]);
 
@@ -233,11 +234,46 @@ const Gallery = () => {
       reader.readAsDataURL(file);
     } else if (files.length > 1) {
       // Upload multiple
-      handleMultipleUpload(files);
+      // Stocker les fichiers multiples pour l'upload
+      setNewPhoto({
+        ...newPhoto,
+        file: null,
+        image: '',
+        multipleFiles: files
+      });
     }
   };
 
   const handleAddPhoto = async () => {
+    // Vérifier s'il y a des fichiers multiples
+    if (newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0) {
+      // Upload multiple
+      try {
+        const titles = newPhoto.multipleFiles.map((file, index) => 
+          newPhoto.title ? `${newPhoto.title} ${index + 1}` : `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
+        );
+        
+        const result = await GalleryService.uploadMultipleImages(
+          newPhoto.multipleFiles,
+          titles,
+          [],
+          setBatchUploadProgress
+        );
+
+        alert(`Upload terminé: ${result.summary.successful} réussis, ${result.summary.failed} échecs`);
+        await loadPhotos();
+        await loadStats();
+      } catch (error) {
+        alert(`Erreur upload multiple: ${error}`);
+      } finally {
+        setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
+        setShowAddForm(false);
+        setBatchUploadProgress(null);
+      }
+      return;
+    }
+
+    // Upload simple
     if (!newPhoto.title || !newPhoto.file) {
       alert('Veuillez remplir le titre et sélectionner une image');
       return;
@@ -262,34 +298,12 @@ const Gallery = () => {
     } catch (error) {
       alert(`Erreur lors de l'upload: ${error}`);
     } finally {
-      setNewPhoto({ title: '', date: '', image: '', file: null });
+      setNewPhoto({ title: '', date: '', image: '', file: null, multipleFiles: [] });
       setShowAddForm(false);
       setUploadProgress(null);
     }
   };
 
-  const handleMultipleUpload = async (files: File[]) => {
-    try {
-      const titles = files.map((file, index) => 
-        `${file.name.split('.')[0]} - ${new Date().toLocaleDateString()}`
-      );
-      
-      const result = await GalleryService.uploadMultipleImages(
-        files,
-        titles,
-        [],
-        setBatchUploadProgress
-      );
-
-      alert(`Upload terminé: ${result.summary.successful} réussis, ${result.summary.failed} échecs`);
-      await loadPhotos();
-      await loadStats();
-    } catch (error) {
-      alert(`Erreur upload multiple: ${error}`);
-    } finally {
-      setBatchUploadProgress(null);
-    }
-  };
 
   const handleDeletePhoto = async (photoId: string) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cette photo définitivement ?')) {
@@ -673,6 +687,25 @@ const Gallery = () => {
                     <img src={newPhoto.image} alt="Aperçu" className="w-20 h-20 object-cover rounded-lg" />
                   </div>
                 )}
+                {newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 && (
+                  <div className="mt-2">
+                    <p className="text-sm text-green-600 font-medium">
+                      {newPhoto.multipleFiles.length} fichier(s) sélectionné(s) pour upload multiple
+                    </p>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {newPhoto.multipleFiles.slice(0, 3).map((file, index) => (
+                        <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                          {file.name}
+                        </span>
+                      ))}
+                      {newPhoto.multipleFiles.length > 3 && (
+                        <span className="text-xs text-gray-500">
+                          +{newPhoto.multipleFiles.length - 3} autres...
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -685,9 +718,12 @@ const Gallery = () => {
               </button>
               <button
                 onClick={handleAddPhoto}
-                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
+                disabled={uploadProgress !== null || batchUploadProgress !== null}
               >
-                {uploadProgress ? 'Upload...' : 'Ajouter'}
+                {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 
+                 newPhoto.multipleFiles && newPhoto.multipleFiles.length > 0 ? 
+                 `Ajouter ${newPhoto.multipleFiles.length} photos` : 'Ajouter'}
               </button>
             </div>
             

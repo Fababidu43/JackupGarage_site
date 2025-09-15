@@ -88,10 +88,17 @@ const Gallery = () => {
         ? await GalleryService.getAllPhotos()
         : await GalleryService.getVisiblePhotos();
       
-      // Grouper les photos par batch_id pour créer les projets
+      // Grouper les photos par batch_id pour créer les projets et éviter les doublons
       const projectsMap = new Map<string, WorkProject>();
+      const seenHashes = new Set<string>();
       
       photosData.forEach(photo => {
+        // Éviter les doublons basés sur le hash du fichier
+        if (seenHashes.has(photo.file_hash)) {
+          return;
+        }
+        seenHashes.add(photo.file_hash);
+        
         const batchId = photo.batch_id || 'single_' + photo.id;
         
         if (!projectsMap.has(batchId)) {
@@ -506,18 +513,7 @@ const Gallery = () => {
                     {project.title}
                   </h3>
                   
-                  <div className="flex items-center text-sm text-gray-500 font-tech mb-2">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    {new Date(project.work_date).toLocaleDateString('fr-FR')}
-                  </div>
-                  
-                  {project.description && (
-                    <p className="text-sm text-gray-600 font-tech line-clamp-2 mb-2">
-                      {project.description}
-                    </p>
-                  )}
-                  
-                  <div className="flex items-center justify-between text-xs text-gray-400">
+                  <div className="flex items-center justify-between text-xs text-gray-400 mt-4">
                     <span>{project.photos.length} photo{project.photos.length > 1 ? 's' : ''}</span>
                     {isAdmin && (
                       <span>{ImageProcessor.formatFileSize(project.photos.reduce((sum, p) => sum + p.file_size, 0))}</span>
@@ -527,21 +523,9 @@ const Gallery = () => {
 
                 {/* Détails du projet (affichés en dessous quand expanded) */}
                 {expandedProject === project.id && (
-                  <div className="mt-4 bg-gray-50 rounded-xl p-6 border-l-4 border-orange-500 shadow-inner">
+                  <div className="bg-gray-50 border-t border-gray-200 p-6">
                     {/* Header du projet étendu */}
                     <div className="mb-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-2xl font-bold text-gray-900 font-futuristic">
-                          {project.title}
-                        </h3>
-                        <button
-                          onClick={() => setExpandedProject(null)}
-                          className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
-                        >
-                          <X className="w-5 h-5" />
-                        </button>
-                      </div>
-                      
                       <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
@@ -565,6 +549,51 @@ const Gallery = () => {
                         <div className="flex items-center gap-1">
                           <Camera className="w-4 h-4" />
                           {project.photos.length} photo{project.photos.length > 1 ? 's' : ''}
+                        </div>
+                      </div>
+                      
+                      {/* Description si elle existe */}
+                      {project.description && (
+                        <div className="mb-6">
+                          <h4 className="text-sm font-bold text-gray-900 mb-2 uppercase tracking-wide">Description</h4>
+                          <p className="text-sm text-gray-700 leading-relaxed">
+                            {project.description}
+                          </p>
+                        </div>
+                      )}
+                      
+                      {/* Grille de toutes les photos */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-bold text-gray-900 mb-3 uppercase tracking-wide flex items-center gap-2">
+                          <Camera className="w-4 h-4" />
+                          Toutes les photos ({project.photos.length})
+                        </h4>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                          {project.photos.map((photo, index) => (
+                            <div
+                              key={photo.id}
+                              className="aspect-square overflow-hidden rounded-lg border border-gray-200 hover:border-orange-500 transition-colors cursor-pointer group"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Ici on pourrait ouvrir une lightbox pour voir la photo en grand
+                                window.open(GalleryService.getImageUrl(photo.file_path), '_blank');
+                              }}
+                            >
+                              <img
+                                src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
+                                alt={`${project.title} - Photo ${index + 1}`}
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                loading="lazy"
+                              />
+                              
+                              {/* Overlay au hover */}
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                                <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                  <Eye className="w-4 h-4 text-gray-700" />
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

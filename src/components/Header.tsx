@@ -113,18 +113,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
         }`}
         style={{
           backdropFilter: 'blur(12px)',
-          zIndex: isMenuOpen ? 50 : 10, // Passer derrière les modals admin (z-60)
-        }}
-      >
-      <header 
-        className={`absolute w-full top-0 z-40 transition-all duration-300 ease-out ${
-          isScrolled 
-            ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-2'
-            : 'bg-black/70 backdrop-blur-md shadow-lg border-b border-orange-500/30 py-3'
-        }`}
-        style={{
-          backdropFilter: 'blur(12px)',
-          zIndex: isMenuOpen ? 50 : 10, // Passer derrière les modals admin (z-60)
+          zIndex: isMenuOpen ? 50 : 40, // Passer derrière les modals admin (z-60)
         }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">

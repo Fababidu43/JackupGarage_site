@@ -615,7 +615,7 @@ const Gallery = () => {
 
       {/* Modal de connexion admin */}
       {showAdminLogin && (
-        <div className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
@@ -692,7 +692,7 @@ const Gallery = () => {
 
       {/* Modal d'ajout de projet */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un projet</h3>
@@ -816,7 +816,7 @@ const Gallery = () => {
 
       {/* Modal détails du projet */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4">
+        <div className="absolute inset-0 bg-black/90 z-[60] flex items-center justify-center p-4">
           <div className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">

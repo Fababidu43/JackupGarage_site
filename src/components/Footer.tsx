@@ -36,7 +36,7 @@ const Footer = () => {
         paddingBottom: 'max(1rem, env(safe-area-inset-bottom))'
       }}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
+      <div className="z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1">
         {/* Layout horizontal compact */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px] pb-4">
           

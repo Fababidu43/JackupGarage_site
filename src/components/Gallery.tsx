@@ -33,6 +33,7 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true);
   const [uploadProgress, setUploadProgress] = useState<ProcessingProgress | null>(null);
   const [batchUploadProgress, setBatchUploadProgress] = useState<ProcessingProgress | null>(null);
+  const [selectedProject, setSelectedProject] = useState<WorkProject | null>(null);
   const [stats, setStats] = useState({
     totalPhotos: 0,
     visiblePhotos: 0,
@@ -167,6 +168,10 @@ const Gallery = () => {
 
   const toggleProjectDetails = (projectId: string) => {
     setExpandedProject(expandedProject === projectId ? null : projectId);
+  };
+
+  const closeProjectDetails = () => {
+    setSelectedProject(null);
   };
 
   const handleAdminLogin = async (e: React.FormEvent) => {
@@ -519,6 +524,52 @@ const Gallery = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Détails du projet (affichés en dessous quand expanded) */}
+                {expandedProject === project.id && (
+                  <div className="mt-4 bg-gray-50 rounded-xl p-6 border-l-4 border-orange-500 shadow-inner">
+                    {/* Header du projet étendu */}
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-2xl font-bold text-gray-900 font-futuristic">
+                          {project.title}
+                        </h3>
+                        <button
+                          onClick={() => setExpandedProject(null)}
+                          className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+                      
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {new Date(project.work_date).toLocaleDateString('fr-FR')}
+                        </div>
+                        
+                        {project.car_info && (
+                          <div className="flex items-center gap-1">
+                            <Car className="w-4 h-4" />
+                            {project.car_info}
+                          </div>
+                        )}
+                        
+                        {project.location && (
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" />
+                            {project.location}
+                          </div>
+                        )}
+                        
+                        <div className="flex items-center gap-1">
+                          <Camera className="w-4 h-4" />
+                          {project.photos.length} photo{project.photos.length > 1 ? 's' : ''}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -788,268 +839,11 @@ const Gallery = () => {
                   </div>
                 </div>
               </div>
-              
-              {/* Détails du projet (affichés en dessous quand expanded) */}
-              {expandedProject === project.id && (
-                <div className="mt-4 bg-gray-50 rounded-xl p-6 border-l-4 border-orange-500 shadow-inner">
-                  {/* Header du projet étendu */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 font-futuristic">
-                        {project.title}
-                      </h3>
-                      <button
-                        onClick={() => setExpandedProject(null)}
-                        className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
-                    </div>
-                    
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(project.work_date).toLocaleDateString('fr-FR')}
-                      </div>
-                      
-                      {project.car_info && (
-                        <div className="flex items-center gap-1">
-                          <Car className="w-4 h-4" />
-                          {project.car_info}
-                        </div>
-                      )}
-                      
-                      {project.location && (
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          {project.location}
-                        </div>
-                      )}
-                      
-                      <div className="flex items-center gap-1">
-                        <Camera className="w-4 h-4" />
-                        {project.photos.length} photo{project.photos.length > 1 ? 's' : ''}
-                      </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             )}
-           </div>
-         ))}
-       </div>
-     )}
-
-     {/* Message si aucun projet */}
-     {workProjects.length === 0 && !loading && (
-       <div className="text-center py-12">
-         <Camera className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-         <p className="text-gray-500 font-tech">Aucun projet dans la galerie</p>
-       </div>
-     )}
-   </div>
-
-   {/* Modal de connexion admin */}
-   {showAdminLogin && (
-     <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-       <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
-         <div className="flex items-center justify-between mb-4">
-           <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
-           <button
-             onClick={() => {
-               setShowAdminLogin(false);
-               setLoginForm({ email: '', password: '' });
-               setLoginError('');
-             }}
-             className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
-           >
-             <X className="w-5 h-5" />
-           </button>
-         </div>
-         
-         <form onSubmit={handleAdminLogin} className="space-y-4">
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-             <input
-               type="email"
-               value={loginForm.email}
-               onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
-               placeholder="votre-email@example.com"
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-               required
-               disabled={isLoggingIn}
-             />
-           </div>
-           
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
-             <input
-               type="password"
-               value={loginForm.password}
-               onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-               placeholder="Entrez votre mot de passe"
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-               required
-               disabled={isLoggingIn}
-             />
-           </div>
-           
-           {loginError && (
-             <div className="text-red-600 text-sm bg-red-50 p-2 rounded">
-               {loginError}
-             </div>
-           )}
-           
-           <div className="flex gap-3 mt-6">
-             <button
-               type="button"
-               onClick={() => {
-                 setShowAdminLogin(false);
-                 setLoginForm({ email: '', password: '' });
-                 setLoginError('');
-               }}
-               className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-               disabled={isLoggingIn}
-             >
-               Annuler
-             </button>
-             <button
-               type="submit"
-               className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
-               disabled={isLoggingIn}
-             >
-               {isLoggingIn ? 'Connexion...' : 'Se connecter'}
-             </button>
-           </div>
-         </form>
-       </div>
-     </div>
-   )}
-
-   {/* Modal d'ajout de projet */}
-   {showAddForm && (
-     <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-       <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
-         <div className="flex items-center justify-between mb-4">
-           <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un projet</h3>
-           <button
-             onClick={() => setShowAddForm(false)}
-             className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
-           >
-             <X className="w-5 h-5" />
-           </button>
-         </div>
-         
-         <div className="space-y-4">
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-2">Titre du projet *</label>
-             <input
-               type="text"
-               value={newProject.title}
-               onChange={(e) => setNewProject({...newProject, title: e.target.value})}
-               placeholder="Ex: Vidange complète Peugeot 308"
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-             />
-           </div>
-           
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-2">Description du travail</label>
-             <textarea
-               value={newProject.description}
-               onChange={(e) => setNewProject({...newProject, description: e.target.value})}
-               placeholder="Décrivez les travaux effectués, les pièces changées, etc."
-               rows={4}
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
-             />
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-             <div>
-               <label className="block text-sm font-medium text-gray-700 mb-2">Véhicule</label>
-               <input
-                 type="text"
-                 value={newProject.car_info}
-                 onChange={(e) => setNewProject({...newProject, car_info: e.target.value})}
-                 placeholder="Ex: Peugeot 308 HDI 2015"
-                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-               />
-             </div>
-             
-             <div>
-               <label className="block text-sm font-medium text-gray-700 mb-2">Lieu</label>
-               <input
-                 type="text"
-                 value={newProject.location}
-                 onChange={(e) => setNewProject({...newProject, location: e.target.value})}
-                 placeholder="Ex: Le Puy-en-Velay"
-                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-               />
-             </div>
-           </div>
-           
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-2">Date du travail</label>
-             <input
-               type="date"
-               value={newProject.work_date}
-               onChange={(e) => setNewProject({...newProject, work_date: e.target.value})}
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-             />
-           </div>
-           
-           <div>
-             <label className="block text-sm font-medium text-gray-700 mb-2">Photos *</label>
-             <input
-               type="file"
-               accept="image/jpeg,image/png,image/webp,image/gif"
-               multiple
-               onChange={handleFileChange}
-               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-             />
-             <p className="text-xs text-gray-500 mt-1">
-               Sélectionnez une ou plusieurs photos. La première sera utilisée comme miniature.
-             </p>
-             {newProject.photos.length > 0 && (
-               <div className="mt-2">
-                 <p className="text-sm text-green-600 font-medium">
-                   {newProject.photos.length} photo{newProject.photos.length > 1 ? 's' : ''} sélectionnée{newProject.photos.length > 1 ? 's' : ''}
-                 </p>
-                 <div className="flex flex-wrap gap-1 mt-1">
-                   {newProject.photos.slice(0, 3).map((file, index) => (
-                     <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
-                       {file.name}
-                     </span>
-                   ))}
-                   {newProject.photos.length > 3 && (
-                     <span className="text-xs text-gray-500">
-                       +{newProject.photos.length - 3} autres...
-                     </span>
-                   )}
-                 </div>
-               </div>
-             )}
-           </div>
-         </div>
-         
-         <div className="flex gap-3 mt-6">
-           <button
-             onClick={() => setShowAddForm(false)}
-             className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-           >
-             Annuler
-           </button>
-           <button
-             onClick={handleAddProject}
-             className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50"
-             disabled={uploadProgress !== null || batchUploadProgress !== null}
-           >
-             {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 'Ajouter le projet'}
-           </button>
-         </div>
-       </div>
-     </div>
-   )}
- </section>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 

@@ -253,7 +253,7 @@ const StructuredData: React.FC = () => {
       "telephone": "+33630703036",
       "contactType": "customer service",
       "availableLanguage": "French"
-    ]
+    }
   };
 
   return (

@@ -120,7 +120,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
         
         <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">
-          Vidange et entretien, freinage, embrayage, distribution, suspensions, échappement, transmissions.<br />
+          Fababi, Vidange et entretien, freinage, embrayage, distribution, suspensions, échappement, transmissions.<br />
           <span className="text-orange-300 hover-glow-text animate-text-shimmer">Nous venons à vous.</span>
         </p>
 

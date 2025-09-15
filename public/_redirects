@@ -1,0 +1,7 @@
+# Netlify redirects for SPA
+/*    /index.html   200
+
+# SEO redirects
+/garagiste-haute-loire    /    301
+/mecanicien-domicile-43   /    301
+/garage-monistrol         /    301

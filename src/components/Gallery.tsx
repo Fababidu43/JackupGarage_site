@@ -616,7 +616,7 @@ const Gallery = () => {
       {/* Modal de connexion admin */}
       {showAdminLogin && (
         <div className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
               <button

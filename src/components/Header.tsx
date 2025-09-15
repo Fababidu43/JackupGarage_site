@@ -113,7 +113,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
         }`}
         style={{
           backdropFilter: 'blur(12px)',
-          zIndex: isMenuOpen ? 50 : 40, // Passer derrière les modals admin (z-60)
+          zIndex: isMenuOpen ? 50 : 10, // Passer derrière les modals admin (z-60)
         }}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">

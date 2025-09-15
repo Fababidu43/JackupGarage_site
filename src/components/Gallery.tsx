@@ -262,20 +262,27 @@ const Gallery = () => {
         }
       );
 
-      alert(`Projet ajouté avec succès: ${result.summary.successful} photos uploadées`);
-      await loadWorkProjects();
-      await loadStats();
+      if (result.summary.successful > 0) {
+        alert(`Projet ajouté avec succès: ${result.summary.successful} photos uploadées`);
+        
+        // Recharger les données
+        await loadWorkProjects();
+        await loadStats();
+        
+        // Réinitialiser le formulaire
+        setNewProject({
+          title: '',
+          description: '',
+          car_info: '',
+          location: '',
+          work_date: new Date().toISOString().split('T')[0],
+          photos: []
+        });
+        setShowAddForm(false);
+      } else {
+        alert('Erreur: Aucune photo n\'a pu être uploadée');
+      }
       
-      // Réinitialiser le formulaire
-      setNewProject({
-        title: '',
-        description: '',
-        car_info: '',
-        location: '',
-        work_date: new Date().toISOString().split('T')[0],
-        photos: []
-      });
-      setShowAddForm(false);
     } catch (error) {
       console.error('Erreur upload projet:', error);
       alert(`Erreur upload: ${error}`);
@@ -477,13 +484,13 @@ const Gallery = () => {
                 
                 {/* Image miniature (première photo) */}
                 <div 
-                  className="aspect-video overflow-hidden relative cursor-pointer"
+                  className="aspect-video overflow-hidden relative cursor-pointer group"
                   onClick={() => toggleProjectDetails(project.id)}
                 >
                   <img
                     src={GalleryService.getImageUrl(project.photos[0]?.thumbnail_path || project.photos[0]?.file_path)}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />
                   
@@ -494,12 +501,8 @@ const Gallery = () => {
                     </div>
                   )}
                   
-                  {/* Overlay avec icône */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Camera className="w-6 h-6 text-gray-700" />
-                    </div>
-                  </div>
+                  {/* Overlay simple */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
                   
                   {/* Indicateur de statut pour admin */}
                   {isAdmin && !project.is_visible && (
@@ -511,10 +514,10 @@ const Gallery = () => {
                 
                 {/* Informations du projet */}
                 <div 
-                  className="p-4 cursor-pointer"
+                  className="p-4 cursor-pointer group"
                   onClick={() => toggleProjectDetails(project.id)}
                 >
-                  <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2 line-clamp-2">
+                  <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2 line-clamp-2 group-hover:text-orange-600 transition-colors duration-200">
                     {project.title}
                   </h3>
                   
@@ -577,26 +580,18 @@ const Gallery = () => {
                           {project.photos.map((photo, index) => (
                             <div
                               key={photo.id}
-                              className="aspect-video overflow-hidden rounded-lg border border-gray-200 hover:border-orange-500 transition-colors cursor-pointer group shadow-md hover:shadow-lg"
+                              className="aspect-video overflow-hidden rounded-lg border border-gray-200 hover:border-orange-500 transition-all duration-300 cursor-pointer group shadow-md hover:shadow-lg"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Ici on pourrait ouvrir une lightbox pour voir la photo en grand
                                 window.open(GalleryService.getImageUrl(photo.file_path), '_blank');
                               }}
                             >
                               <img
                                 src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
                                 alt={`${project.title} - Photo ${index + 1}`}
-                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                                 loading="lazy"
                               />
-                              
-                              {/* Overlay au hover */}
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                                <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                                  <Eye className="w-6 h-6 text-gray-700" />
-                                </div>
-                              </div>
                             </div>
                           ))}
                         </div>
@@ -620,7 +615,7 @@ const Gallery = () => {
 
       {/* Modal de connexion admin */}
       {showAdminLogin && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-bold text-gray-900 font-futuristic">Connexion Admin</h3>
@@ -697,7 +692,7 @@ const Gallery = () => {
 
       {/* Modal d'ajout de projet */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-gray-900 font-futuristic">Ajouter un projet</h3>
@@ -821,7 +816,7 @@ const Gallery = () => {
 
       {/* Modal détails du projet */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4">
           <div className="relative max-w-6xl max-h-full w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
             {/* Header */}
             <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 sm:p-6">

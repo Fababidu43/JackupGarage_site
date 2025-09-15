@@ -436,12 +436,11 @@ const Gallery = () => {
             {workProjects.map((project) => (
               <div
                 key={project.id}
-                className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl hover-scale cursor-pointer relative ${
+                className={`group bg-white rounded-xl shadow-lg overflow-hidden border transition-all duration-300 hover:shadow-xl relative ${
                   showDeleteMode 
                     ? 'border-red-300 hover:border-red-500' 
                     : `border-gray-200 hover:border-orange-500/50 ${!project.is_visible && isAdmin ? 'opacity-50' : ''}`
                 }`}
-                onClick={() => toggleProjectDetails(project.id)}
               >
                 {/* Contrôles admin */}
                 {isAdmin && (
@@ -477,7 +476,10 @@ const Gallery = () => {
                 )}
                 
                 {/* Image miniature (première photo) */}
-                <div className="aspect-video overflow-hidden relative">
+                <div 
+                  className="aspect-video overflow-hidden relative cursor-pointer"
+                  onClick={() => toggleProjectDetails(project.id)}
+                >
                   <img
                     src={GalleryService.getImageUrl(project.photos[0]?.thumbnail_path || project.photos[0]?.file_path)}
                     alt={project.title}
@@ -508,7 +510,10 @@ const Gallery = () => {
                 </div>
                 
                 {/* Informations du projet */}
-                <div className="p-4">
+                <div 
+                  className="p-4 cursor-pointer"
+                  onClick={() => toggleProjectDetails(project.id)}
+                >
                   <h3 className="text-lg font-bold text-gray-900 font-futuristic mb-2 line-clamp-2">
                     {project.title}
                   </h3>
@@ -568,11 +573,11 @@ const Gallery = () => {
                           <Camera className="w-4 h-4" />
                           Toutes les photos ({project.photos.length})
                         </h4>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {project.photos.map((photo, index) => (
                             <div
                               key={photo.id}
-                              className="aspect-square overflow-hidden rounded-lg border border-gray-200 hover:border-orange-500 transition-colors cursor-pointer group"
+                              className="aspect-video overflow-hidden rounded-lg border border-gray-200 hover:border-orange-500 transition-colors cursor-pointer group shadow-md hover:shadow-lg"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 // Ici on pourrait ouvrir une lightbox pour voir la photo en grand
@@ -587,9 +592,9 @@ const Gallery = () => {
                               />
                               
                               {/* Overlay au hover */}
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                                <div className="w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  <Eye className="w-4 h-4 text-gray-700" />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                                <div className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                                  <Eye className="w-6 h-6 text-gray-700" />
                                 </div>
                               </div>
                             </div>

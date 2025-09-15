@@ -1,6 +1,14 @@
 User-agent: *
 Allow: /
 
+# Pages importantes pour le SEO
+Allow: /garagiste-le-puy-en-velay
+Allow: /mecanicien-monistrol-sur-loire
+Allow: /garage-yssingeaux
+Allow: /vidange-domicile-haute-loire
+Allow: /reparation-freins-le-puy-en-velay
+Allow: /embrayage-monistrol-sur-loire
+
 # Sitemap
 Sitemap: https://jackupgarage.fr/sitemap.xml
 
@@ -18,8 +26,16 @@ Allow: /services
 Allow: /zone-intervention
 Allow: /contact
 
+# Crawl plus fréquent pour les pages importantes
+Crawl-delay: 0.5
+
 # Block unnecessary files
 Disallow: /*.json$
 Disallow: /*.xml$ 
 Disallow: /src/
 Disallow: /node_modules/
+
+# SEO boost
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.2

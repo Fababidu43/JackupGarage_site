@@ -3,10 +3,10 @@ import React from 'react';
 const StructuredData: React.FC = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    "name": "Jack Up Garage",
-    "alternateName": "Jack Up Garage - Mécanicien à domicile",
-    "description": "Mécanicien professionnel à domicile en Haute-Loire (43) et Loire (42). Spécialisé en vidange, freinage, embrayage, distribution, suspensions.",
+    "@type": ["AutoRepair", "LocalBusiness"],
+    "name": "Jack Up Garage - Garagiste à Domicile Haute-Loire",
+    "alternateName": ["Jack Up Garage", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire"],
+    "description": "Garagiste professionnel à domicile en Haute-Loire (43). Mécanicien mobile spécialisé en vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Le Puy-en-Velay, Monistrol-sur-Loire, Yssingeaux.",
     "url": "https://jackupgarage.fr",
     "logo": "https://jackupgarage.fr/logo.png",
     "image": [
@@ -16,6 +16,10 @@ const StructuredData: React.FC = () => {
     ],
     "telephone": "+33630703036",
     "email": "fabian.measson123@gmail.com",
+    "priceRange": "€€",
+    "paymentAccepted": ["Cash", "Check", "Bank transfer"],
+    "currenciesAccepted": "EUR",
+    "hasMap": "https://www.google.com/maps/place/Monistrol-sur-Loire",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Monistrol-sur-Loire",
@@ -30,6 +34,15 @@ const StructuredData: React.FC = () => {
       "longitude": 4.1736
     },
     "areaServed": [
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 45.2947,
+          "longitude": 4.1736
+        },
+        "geoRadius": "30000"
+      },
       {
         "@type": "State",
         "name": "Haute-Loire",
@@ -54,23 +67,43 @@ const StructuredData: React.FC = () => {
       },
       {
         "@type": "City",
+        "name": "Brioude"
+      },
+      {
+        "@type": "City",
+        "name": "Retournac"
+      },
+      {
+        "@type": "City",
+        "name": "Bas-en-Basset"
+      },
+      {
+        "@type": "City",
         "name": "Saint-Étienne"
       }
     ],
     "serviceType": [
-      "Vidange moteur",
-      "Entretien automobile",
-      "Réparation freins",
-      "Changement plaquettes",
-      "Remplacement embrayage",
-      "Kit distribution",
-      "Suspensions",
-      "Amortisseurs",
-      "Diagnostic automobile"
+      "Vidange moteur à domicile",
+      "Entretien automobile mobile",
+      "Réparation freins à domicile",
+      "Changement plaquettes de frein",
+      "Remplacement embrayage à domicile",
+      "Kit distribution à domicile",
+      "Suspensions et amortisseurs",
+      "Diagnostic automobile mobile",
+      "Mécanicien à domicile",
+      "Garagiste mobile",
+      "Réparation auto à domicile",
+      "Service mécanique itinérant"
     ],
-    "priceRange": "€€",
-    "paymentAccepted": ["Cash", "Check", "Bank transfer"],
-    "currenciesAccepted": "EUR",
+    "keywords": [
+      "garagiste haute-loire",
+      "mécanicien à domicile 43",
+      "garage monistrol sur loire",
+      "réparation auto haute-loire",
+      "vidange à domicile le puy",
+      "garagiste mobile"
+    ],
     "openingHours": [
       "Mo-Sa 08:00-18:00"
     ],
@@ -97,6 +130,24 @@ const StructuredData: React.FC = () => {
         "validThrough": "2024-12-31"
       }
     ],
+    "speciality": [
+      "Mécanique automobile mobile",
+      "Intervention à domicile",
+      "Réparation sur site",
+      "Service client personnalisé"
+    ],
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.2947,
+        "longitude": 4.1736
+      },
+      "geoRadius": "30000",
+      "description": "Zone d'intervention de 30km autour de Monistrol-sur-Loire, couvrant Le Puy-en-Velay, Yssingeaux, Brioude et environs"
+    },
+    "mobilitySolution": "Service à domicile",
+    "vehicleType": "Véhicule d'intervention mobile équipé",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Services de mécanique automobile",
@@ -105,7 +156,8 @@ const StructuredData: React.FC = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Vidange moteur à domicile",
+            "name": "Vidange moteur à domicile Haute-Loire",
+            "category": "Entretien automobile",
             "description": "Vidange complète avec changement filtre à huile et contrôle niveaux"
           },
           "areaServed": "Haute-Loire"
@@ -114,7 +166,8 @@ const StructuredData: React.FC = () => {
           "@type": "Offer", 
           "itemOffered": {
             "@type": "Service",
-            "name": "Réparation système de freinage",
+            "name": "Réparation freins à domicile Haute-Loire",
+            "category": "Sécurité automobile",
             "description": "Changement plaquettes, disques, purge liquide de frein"
           },
           "areaServed": "Haute-Loire"
@@ -123,7 +176,8 @@ const StructuredData: React.FC = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service", 
-            "name": "Remplacement embrayage",
+            "name": "Remplacement embrayage à domicile",
+            "category": "Transmission automobile",
             "description": "Kit embrayage complet et volant moteur"
           },
           "areaServed": "Haute-Loire"
@@ -133,7 +187,7 @@ const StructuredData: React.FC = () => {
     "review": [
       {
         "@type": "Review",
-        "author": {
+        "author": { 
           "@type": "Person",
           "name": "Client Haute-Loire"
         },
@@ -143,6 +197,18 @@ const StructuredData: React.FC = () => {
           "bestRating": "5"
         },
         "reviewBody": "Service excellent, mécanicien professionnel qui se déplace à domicile. Très pratique !"
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person", 
+          "name": "Client Le Puy-en-Velay"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        },
+        "reviewBody": "Intervention rapide pour ma vidange, mécanicien compétent et prix correct."
       }
     ],
     "aggregateRating": {
@@ -154,7 +220,9 @@ const StructuredData: React.FC = () => {
     },
     "sameAs": [
       "https://www.facebook.com/jackupgarage",
-      "https://www.instagram.com/jackupgarage"
+      "https://www.instagram.com/jackupgarage",
+      "https://www.google.com/maps/place/Jack+Up+Garage",
+      "https://www.pagesjaunes.fr/pros/jack-up-garage"
     ],
     "founder": {
       "@type": "Person",
@@ -163,7 +231,11 @@ const StructuredData: React.FC = () => {
     "slogan": "Votre mécanicien à domicile en Haute-Loire",
     "knowsAbout": [
       "Mécanique automobile",
-      "Diagnostic électronique", 
+      "Diagnostic électronique",
+      "Réparation à domicile",
+      "Service mobile automobile",
+      "Mécanique Haute-Loire",
+      "Intervention rapide",
       "Entretien préventif",
       "Réparation à domicile"
     ],
@@ -175,6 +247,12 @@ const StructuredData: React.FC = () => {
         "price": "0",
         "priceCurrency": "EUR"
       }
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+33630703036",
+      "contactType": "customer service",
+      "availableLanguage": "French"
     ]
   };
 

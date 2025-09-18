@@ -42,7 +42,7 @@ const Footer = () => {
           
           {/* Nom seulement */}
           <div className="text-center lg:text-left">
-            <h3 className="text-sm sm:text-base font-bold text-white font-futuristic">Jack Up Garage</h3>
+            <h3 className="text-sm sm:text-base font-bold text-white font-futuristic">JACK Up Auto</h3>
             <p className="text-orange-400 text-xs font-tech">Mécanicien à domicile</p>
           </div>
 
@@ -87,16 +87,16 @@ const Footer = () => {
             {/* Contact rapide */}
             <div className="flex items-center space-x-1 sm:space-x-2">
               <a 
-                href="tel:+33630703036"
+                href="tel:+33629485339"
                 className="flex items-center text-orange-400 hover:text-orange-300 transition-colors hover-lift"
               >
                 <Phone className="w-3 h-3 mr-0.5 sm:mr-1" />
-                <span className="text-xs font-tech hidden sm:inline">06 30 70 30 36</span>
+                <span className="text-xs font-tech hidden sm:inline">06 29 48 53 39</span>
                 <span className="text-xs font-tech sm:hidden">Tel</span>
               </a>
               <div className="w-0.5 h-3 bg-gray-700"></div>
               <a 
-                href="mailto:fabian.measson123@gmail.com"
+                href="mailto:jackup-auto@outlook.fr"
                 className="flex items-center text-gray-400 hover:text-orange-400 transition-colors hover-lift"
               >
                 <Mail className="w-3 h-3 mr-0.5 sm:mr-1" />
@@ -133,7 +133,7 @@ const Footer = () => {
         {/* Copyright minimaliste */}
         <div className="mt-2 pt-2 pb-2 border-t border-gray-800 text-center">
           <p className="text-gray-500 text-xs font-tech">
-            © 2024 Jack Up Garage • Haute-Loire & Loire (43-42)
+            © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
           </p>
         </div>
       </div>

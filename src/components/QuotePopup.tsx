@@ -331,7 +331,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
             </div>
             <div>
               <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white font-futuristic tracking-wide">
-                DEVIS EXPRESS
+                JACK Up Auto - DEVIS EXPRESS
               </h3>
               <p className="text-orange-400 text-xs sm:text-sm font-tech">Mécanicien à domicile</p>
             </div>

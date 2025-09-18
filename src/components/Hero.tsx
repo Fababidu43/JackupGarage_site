@@ -112,10 +112,14 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
         
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
-          <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
+          <span className="hover-glow-text animate-text-glow">JACK Up Auto</span>
         </h1>
         
         <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll animate-slide-in-up">
+          Mécanicien à domicile
+        </div>
+        
+        <div className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-orange-300 font-medium mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
           Haute-Loire & Loire (43–42)
         </div>
         
@@ -133,7 +137,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
             <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
           </button>
           <a
-            href="tel:+33630703036"
+            href="tel:+33629485339"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button-secondary group"
           >
             <Phone className="mr-3 w-5 h-5 group-hover:animate-ring transition-transform duration-300" />

@@ -57,11 +57,11 @@ const Contact = () => {
                   <div>
                     <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Téléphone</h3>
                     <a 
-                      href="tel:+33630703036"
+                      href="tel:+33629485339"
                       className="font-semibold hover:opacity-80 font-tech hover-lift text-sm sm:text-base"
                       style={{ color: '#FF6B35' }}
                     >
-                      06 30 70 30 36
+                      06 29 48 53 39
                     </a>
                   </div>
                 </div>
@@ -75,11 +75,11 @@ const Contact = () => {
                   <div>
                     <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text">Email</h3>
                     <a 
-                      href="mailto:fabian.measson123@gmail.com"
+                      href="mailto:jackup-auto@outlook.fr"
                       className="font-semibold hover:opacity-80 font-tech hover-lift text-sm sm:text-base break-all"
                       style={{ color: '#FF6B35' }}
                     >
-                      fabian.measson123@gmail.com
+                      jackup-auto@outlook.fr
                     </a>
                   </div>
                 </div>

@@ -58,19 +58,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* CGV au centre */}
-          <div className="flex-1 flex justify-center items-center">
-            <button
-              onClick={() => {
-                // Navigation vers la page CGV
-                window.open('/cgv', '_blank');
-              }}
-              className="text-orange-400 hover:text-orange-300 transition-colors text-sm font-tech underline hover:no-underline"
-            >
-              Conditions Générales de Vente
-            </button>
-          </div>
-
           {/* Contact + Réseaux sociaux */}
           <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 lg:justify-end">
             {/* Bouton d'accès admin galerie - très discret */}

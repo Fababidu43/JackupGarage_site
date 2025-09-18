@@ -276,7 +276,7 @@ function App() {
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
-                    ⚠️ <strong>Symptômes d'usure :</strong> Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée, voyant frein allumé.
+                    🚗 <strong>Symptômes d'usure :</strong> Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée, voyant frein allumé.
                   </p>
                 </div>
                 

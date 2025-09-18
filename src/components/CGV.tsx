@@ -116,7 +116,7 @@ const CGV: React.FC<CGVProps> = ({ onBack }) => {
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 font-futuristic">
               <div className="w-8 h-8 bg-orange-500 text-white rounded-lg flex items-center justify-center text-sm font-bold">4</div>
-              Changement d'adresse ou d'heure d'intervention
+              Changement d'adresse ou d\'heure d'intervention
             </h2>
             <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-orange-500">
               <p className="text-gray-700 leading-relaxed font-tech mb-3">

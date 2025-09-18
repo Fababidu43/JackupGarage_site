@@ -179,43 +179,43 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       id: 'vidange', 
       name: 'Vidange / Entretien', 
       icon: <Droplets className="w-6 h-6" />, 
-      time: '30-45 min',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-blue-500 to-blue-600',
+      warning: 'Changement d\'huile nécessaire tous les 10 000-15 000 km selon constructeur'
     },
     { 
       id: 'freins', 
       name: 'Freins / Plaquettes', 
       icon: <Car className="w-6 h-6" />, 
-      time: '1-2h',
-      color: 'from-red-500 to-red-600'
+      color: 'from-red-500 to-red-600',
+      warning: 'Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée'
     },
     { 
       id: 'embrayage', 
       name: 'Embrayage / Volant', 
       icon: <Zap className="w-6 h-6" />, 
-      time: '3-5h',
-      color: 'from-yellow-500 to-yellow-600'
+      color: 'from-yellow-500 to-yellow-600',
+      warning: 'Pédale d\'embrayage qui patine, bruits au débrayage, difficulté à passer les vitesses'
     },
     { 
       id: 'distribution', 
       name: 'Kit Distribution', 
       icon: <Settings className="w-6 h-6" />, 
-      time: '4-6h',
-      color: 'from-purple-500 to-purple-600'
+      color: 'from-purple-500 to-purple-600',
+      warning: 'Remplacement préventif tous les 60 000-120 000 km selon constructeur'
     },
     { 
       id: 'suspension', 
       name: 'Suspensions / Amortisseurs', 
       icon: <Wrench className="w-6 h-6" />, 
-      time: '2-3h',
-      color: 'from-green-500 to-green-600'
+      color: 'from-green-500 to-green-600',
+      warning: 'Véhicule qui rebondit, tenue de route dégradée, usure irrégulière des pneus'
     },
     { 
       id: 'autre', 
       name: 'Autre / Diagnostic', 
       icon: <Car className="w-6 h-6" />, 
-      time: 'Variable',
-      color: 'from-gray-500 to-gray-600'
+      color: 'from-gray-500 to-gray-600',
+      warning: 'Contactez-nous pour tout autre problème mécanique'
     }
   ];
 
@@ -414,7 +414,12 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                           <div className="font-medium text-white font-tech text-xs sm:text-sm">{service.name}</div>
-                          <div className="text-xs text-orange-400 font-tech">Durée: {service.time}</div>
+                          {(service.id === 'vidange' || service.id === 'embrayage' || service.id === 'distribution') && (
+                            <div className="text-xs text-yellow-300 font-tech mt-1 flex items-start gap-1">
+                              <span>🚗</span>
+                              <span>{service.warning}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <ArrowRight className="w-4 h-4 text-orange-400 group-hover:translate-x-1 transition-transform duration-200" />

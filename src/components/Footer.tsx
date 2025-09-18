@@ -40,21 +40,15 @@ const Footer = () => {
         {/* Layout horizontal compact */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-3 min-h-[80px] sm:min-h-[90px] pb-4">
           
-          {/* Nom seulement */}
+          {/* Logo à la place du nom */}
           <div className="text-center lg:text-left">
-            <h3 className="text-sm sm:text-base font-bold text-white font-futuristic">JACK Up Auto</h3>
-            <p className="text-orange-400 text-xs font-tech">Mécanicien à domicile</p>
-          </div>
-
-          {/* Logo super large centré */}
-          <div className="flex-1 flex justify-center items-center">
             <div 
-              className="w-24 h-10 sm:w-32 sm:h-12 lg:w-40 lg:h-16 xl:w-48 xl:h-18 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-1 sm:p-2 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
+              className="w-32 h-14 sm:w-40 sm:h-18 lg:w-48 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 sm:p-3 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
                 src={logo} 
-                alt="Jack Up Garage" 
+                alt="JACK Up Auto" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
                 onError={(e) => {
@@ -62,6 +56,19 @@ const Footer = () => {
                 }}
               />
             </div>
+          </div>
+
+          {/* CGV au centre */}
+          <div className="flex-1 flex justify-center items-center">
+            <button
+              onClick={() => {
+                // Navigation vers la page CGV
+                window.open('/cgv', '_blank');
+              }}
+              className="text-orange-400 hover:text-orange-300 transition-colors text-sm font-tech underline hover:no-underline"
+            >
+              Conditions Générales de Vente
+            </button>
           </div>
 
           {/* Contact + Réseaux sociaux */}

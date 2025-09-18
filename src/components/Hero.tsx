@@ -88,7 +88,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo principal centré */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-48 h-20 sm:w-64 sm:h-28 lg:w-80 lg:h-36 xl:w-96 xl:h-40 bg-white/95 border-2 border-orange-500/30 rounded-2xl flex items-center justify-center p-3 sm:p-4 lg:p-5 mx-auto shadow-2xl hover:border-orange-500/50 transition-all duration-300 hover-scale backdrop-blur-sm">
+          <div className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 bg-white/95 border-2 border-orange-500/30 rounded-2xl flex items-center justify-center p-4 sm:p-5 lg:p-6 xl:p-7 mx-auto shadow-2xl hover:border-orange-500/50 transition-all duration-300 hover-scale backdrop-blur-sm">
             <img 
               src={logo} 
               alt="Jack Up Garage - Mécanicien à domicile" 

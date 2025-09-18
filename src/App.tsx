@@ -14,10 +14,11 @@ import MobileCTA from './components/MobileCTA';
 import DiagonalSlash from './components/DiagonalSlash';
 import DiagonalBackslash from './components/DiagonalBackslash';
 import QuotePopup from './components/QuotePopup';
+import CGV from './components/CGV';
 
 function App() {
   const [isQuotePopupOpen, setIsQuotePopupOpen] = React.useState(false);
-  const [currentPage, setCurrentPage] = React.useState<'home' | 'gallery'>('home');
+  const [currentPage, setCurrentPage] = React.useState<'home' | 'gallery' | 'cgv'>('home');
   const scrollDirectionRef = useRef<'up' | 'down'>('down');
   const lastScrollYRef = useRef(0);
 
@@ -152,6 +153,42 @@ function App() {
       }
     }, 50);
   };
+
+  const navigateToCGV = () => {
+    setCurrentPage('cgv');
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  };
+
+  // Écouter les clics sur les liens CGV
+  useEffect(() => {
+    const handleCGVClick = () => {
+      navigateToCGV();
+    };
+
+    // Remplacer les liens CGV par des événements
+    const cgvLinks = document.querySelectorAll('a[href="/cgv"]');
+    cgvLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        handleCGVClick();
+      });
+    });
+
+    return () => {
+      cgvLinks.forEach(link => {
+        link.removeEventListener('click', handleCGVClick);
+      });
+    };
+  }, []);
+
+  // Rendu conditionnel selon la page
+  if (currentPage === 'cgv') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <CGV onBack={navigateToHome} />
+      </div>
+    );
+  }
 
   // Rendu conditionnel selon la page
   if (currentPage === 'gallery') {

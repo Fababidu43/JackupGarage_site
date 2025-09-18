@@ -13,16 +13,8 @@ const FAQ = () => {
       answer: "Gratuit dans un rayon de 30 km. Pour la zone élargie selon nature des travaux (30-70 km), supplément de 1€/km. Voir notre zone d'intervention pour plus de détails."
     },
     {
-      question: "Combien de temps dure une intervention ?",
-      answer: "Vidange 30-45min, freins 1-2h, embrayage 3-5h, distribution 4-6h."
-    },
-    {
       question: "Fournissez-vous les pièces ?",
       answer: "Oui, pièces de qualité constructeur incluses dans le devis."
-    },
-    {
-      question: "Êtes-vous assurés ?",
-      answer: "Oui, assurance RC Professionnelle complète."
     },
     {
       question: "Que se passe-t-il s'il pleut ?",

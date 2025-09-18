@@ -122,35 +122,38 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
           }`}>
             
             {/* Logo */}
-            <div 
-              className="flex items-center cursor-pointer group"
-              onClick={() => {
-                if (onNavigateHome) {
-                  onNavigateHome();
-                } else {
-                  scrollToSection('hero');
-                }
-              }}
-            >
-              <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 sm:px-3 py-1 sm:py-2 
-                hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
-                transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
+            {/* Logo - affiché seulement après scroll */}
+            {isScrolled && (
+              <div 
+                className="flex items-center cursor-pointer group"
+                onClick={() => {
+                  if (onNavigateHome) {
+                    onNavigateHome();
+                  } else {
+                    scrollToSection('hero');
+                  }
+                }}
               >
-                <img 
-                  src={logo} 
-                  alt="Jack Up Garage" 
-                  className="w-full h-full object-contain transition-all duration-300"
-                  style={{ maxWidth: '100%', maxHeight: '100%' }}
-                  onError={(e) => {
-                    console.error('Header logo failed to load');
-                  }}
-                />
+                <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 sm:px-3 py-1 sm:py-2 
+                  hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
+                  transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
+                  w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
+                >
+                  <img 
+                    src={logo} 
+                    alt="JACK Up Auto" 
+                    className="w-full h-full object-contain transition-all duration-300"
+                    style={{ maxWidth: '100%', maxHeight: '100%' }}
+                    onError={(e) => {
+                      console.error('Header logo failed to load');
+                    }}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+            <div className={`hidden lg:flex items-center space-x-6 xl:space-x-8 ${!isScrolled ? 'ml-auto' : ''}`}>
               {isGalleryPage ? (
                 <button
                   onClick={() => {

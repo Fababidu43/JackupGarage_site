@@ -20,7 +20,7 @@ const serviceNames: { [key: string]: string } = {
   'embrayage': 'Embrayage / Volant',
   'distribution': 'Kit Distribution',
   'suspension': 'Suspensions / Amortisseurs',
-  'autre': 'Autre / Diagnostic'
+  'autre': 'Autre'
 };
 
 const urgencyNames: { [key: string]: string } = {

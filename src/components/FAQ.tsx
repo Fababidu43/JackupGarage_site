@@ -26,7 +26,7 @@ const FAQ = () => {
     },
     {
       question: "Comment payer ?",
-      answer: "Nous acceptons les espèces, chèques et virements. Le paiement se fait après l'intervention, une fois que vous êtes satisfait."
+      answer: "Nous acceptons les espèces, chèques et virements. Un acompte peut vous être demandé."
     }
   ];
 

@@ -187,7 +187,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       name: 'Freins / Plaquettes', 
       icon: <Car className="w-6 h-6" />, 
       color: 'from-red-500 to-red-600',
-      warning: 'Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée'
+      warning: 'Grincements, vibrations au freinage, pédale spongieuse, distance de freinage allongée, voyant frein allumé'
     },
     { 
       id: 'embrayage', 
@@ -208,7 +208,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       name: 'Suspensions / Amortisseurs', 
       icon: <Wrench className="w-6 h-6" />, 
       color: 'from-green-500 to-green-600',
-      warning: 'Véhicule qui rebondit, tenue de route dégradée, usure irrégulière des pneus'
+      warning: 'Véhicule qui rebondit, tenue de route dégradée, bruits de suspension, usure irrégulière des pneus, direction qui tire'
     },
     { 
       id: 'autre', 
@@ -414,7 +414,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                           <div className="font-medium text-white font-tech text-xs sm:text-sm">{service.name}</div>
-                          {(service.id === 'vidange' || service.id === 'embrayage' || service.id === 'distribution') && (
+                          {service.warning && service.id !== 'autre' && (
                             <div className="text-xs text-yellow-300 font-tech mt-1 flex items-start gap-1">
                               <span>🚗</span>
                               <span>{service.warning}</span>

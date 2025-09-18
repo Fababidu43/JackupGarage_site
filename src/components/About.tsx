@@ -22,11 +22,6 @@ const About = () => {
                   loading="lazy"
                 />
               </div>
-              
-              {/* Badge professionnel - plus grand */}
-              <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-xl shadow-lg">
-                <Award className="w-6 h-6" />
-              </div>
             </div>
           </div>
 

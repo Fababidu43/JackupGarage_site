@@ -138,10 +138,22 @@ const Footer = () => {
         </div>
 
         {/* Copyright minimaliste */}
-        <div className="mt-2 pt-2 pb-2 border-t border-gray-800 text-center">
-          <p className="text-gray-500 text-xs font-tech">
-            © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
-          </p>
+        <div className="mt-2 pt-2 pb-2 border-t border-gray-800">
+          <div className="flex items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                // Navigation vers la page CGV
+                const event = new CustomEvent('navigateToCGV');
+                window.dispatchEvent(event);
+              }}
+              className="text-gray-500 hover:text-orange-400 transition-colors text-xs font-tech underline hover:no-underline"
+            >
+              CGV
+            </button>
+            <p className="text-gray-500 text-xs font-tech">
+              © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
+            </p>
+          </div>
         </div>
       </div>
 

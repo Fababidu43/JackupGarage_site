@@ -161,23 +161,15 @@ function App() {
 
   // Écouter les clics sur les liens CGV
   useEffect(() => {
-    const handleCGVClick = () => {
+    const handleCGVNavigation = () => {
       navigateToCGV();
     };
 
-    // Remplacer les liens CGV par des événements
-    const cgvLinks = document.querySelectorAll('a[href="/cgv"]');
-    cgvLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        handleCGVClick();
-      });
-    });
+    // Écouter l'événement personnalisé pour la navigation CGV
+    window.addEventListener('navigateToCGV', handleCGVNavigation);
 
     return () => {
-      cgvLinks.forEach(link => {
-        link.removeEventListener('click', handleCGVClick);
-      });
+      window.removeEventListener('navigateToCGV', handleCGVNavigation);
     };
   }, []);
 
@@ -236,6 +228,12 @@ function App() {
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
                   Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
                 </p>
+                
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
+                    🚗 <strong>Signes d'usure :</strong> Changement d'huile nécessaire tous les 10 000-15 000 km selon constructeur, voyant moteur allumé, bruit moteur anormal.
+                  </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}
@@ -321,6 +319,12 @@ function App() {
                   Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande.
                 </p>
                 
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
+                    🚗 <strong>Signes d'usure :</strong> Pédale d'embrayage qui patine, bruits au débrayage, difficulté à passer les vitesses, odeur de brûlé.
+                  </p>
+                </div>
+                
                 <button 
                   onClick={openQuotePopup}
                   className="inline-flex items-center font-semibold text-sm sm:text-base lg:text-lg group uppercase tracking-wide text-orange-400 hover:text-orange-300 font-tech transition-colors hover-lift underline-animate"
@@ -359,6 +363,12 @@ function App() {
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
                   Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires.
                 </p>
+                
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                  <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
+                    🚗 <strong>Signes d'usure :</strong> Remplacement préventif tous les 60 000-120 000 km selon constructeur, bruits de courroie, fuite de liquide de refroidissement.
+                  </p>
+                </div>
                 
                 <button 
                   onClick={openQuotePopup}

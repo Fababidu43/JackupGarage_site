@@ -108,6 +108,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
 
   const homeNavigationItems = [
     { name: 'Accueil', id: 'hero', icon: '🏠' },
+    { name: 'À propos', id: 'about', icon: '👤' },
     { name: 'Services', id: 'services', icon: '🔧' },
     { name: 'Zone d\'intervention', id: 'area', icon: '📍' },
     { name: 'FAQ', id: 'faq', icon: '❓' },

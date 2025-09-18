@@ -5,6 +5,7 @@ import StructuredData from './components/StructuredData';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import About from './components/About';
 import Gallery from './components/Gallery';
 import FAQ from './components/FAQ';
 import ServiceArea from './components/ServiceArea';
@@ -204,6 +205,13 @@ function App() {
       <main className="flex-1">
         {/* Hero (orange #DE5121) */}
         <Hero onQuoteClick={openQuotePopup} />
+        
+        {/* À propos (blanc #FFFFFF) */}
+        <div className="relative">
+          <div className="scroll-animate">
+            <About />
+          </div>
+        </div>
         
         {/* Services intro (blanc #FFFFFF) */}
         <div className="relative">

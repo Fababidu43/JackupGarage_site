@@ -112,12 +112,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
         
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">
-          <span className="hover-glow-text animate-text-glow">JACK Up Auto</span>
+          <span className="hover-glow-text animate-text-glow">Mécanicien à domicile</span>
         </h1>
-        
-        <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-orange-400 font-bold mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll animate-slide-in-up">
-          Mécanicien à domicile
-        </div>
         
         <div className="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-orange-300 font-medium mb-3 sm:mb-4 tracking-wide uppercase font-futuristic reveal-on-scroll">
           Haute-Loire & Loire (43–42)

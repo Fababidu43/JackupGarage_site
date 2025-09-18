@@ -22,7 +22,7 @@ const FAQ = () => {
     },
     {
       question: "Acceptez-vous tous les véhicules ?",
-      answer: "Nous intervenons sur la plupart des véhicules légers (voitures, utilitaires légers). Contactez-nous pour confirmer la compatibilité avec votre modèle."
+      answer: "Nous intervenons sur la plupart des véhicules légers (voitures, utilitaires légers etc ...)."
     },
     {
       question: "Comment payer ?",

@@ -20,22 +20,24 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
     const handleScroll = () => {
       const scrollY = window.scrollY;
       
-      // Détecter si on a dépassé la section Hero (Services commence)
+      // Détecter si on a dépassé la première section de services (Entretiens)
       const heroSection = document.getElementById('hero');
-      const servicesSection = document.getElementById('services');
       
       let shouldShowLogo = false;
       let shouldBeScrolled = scrollY > 50;
       
-      if (heroSection && servicesSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        const servicesTop = servicesSection.offsetTop;
+      if (heroSection) {
+        // Calculer la position après le Hero + toute la section Services intro + première section Entretiens
+        const heroHeight = heroSection.offsetHeight;
+        const servicesIntroHeight = 200; // Hauteur approximative de la section Services intro
+        const firstServiceHeight = 400; // Hauteur approximative de la première section Entretiens
         
-        // Afficher le logo quand on atteint la section Services (avec un offset pour plus de fluidité)
-        shouldShowLogo = scrollY >= (servicesTop - 100);
+        // Le logo apparaît seulement après avoir complètement dépassé la section Entretiens
+        const triggerPoint = heroHeight + servicesIntroHeight + firstServiceHeight;
+        shouldShowLogo = scrollY >= triggerPoint;
       } else {
-        // Fallback si les sections ne sont pas trouvées
-        shouldShowLogo = scrollY > window.innerHeight * 0.8;
+        // Fallback si le hero n'est pas trouvé - beaucoup plus bas
+        shouldShowLogo = scrollY > window.innerHeight * 1.5;
       }
       
       setIsScrolled(shouldBeScrolled);

@@ -212,7 +212,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     },
     { 
       id: 'autre', 
-      name: 'Autre / Diagnostic', 
+      name: 'Autre', 
       icon: <Car className="w-6 h-6" />, 
       color: 'from-gray-500 to-gray-600',
       warning: 'Contactez-nous pour tout autre problème mécanique'

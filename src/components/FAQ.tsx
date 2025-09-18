@@ -17,8 +17,8 @@ const FAQ = () => {
       answer: "Oui, pièces de qualité constructeur incluses dans le devis."
     },
     {
-      question: "Que se passe-t-il s'il pleut ?",
-      answer: "Report en cas de pluie pour la sécurité. Nouveau RDV dès que possible."
+      question: "Que se passe-t-il s'il en cas d'intempéries ?",
+      answer: "En cas d'intempéries report du rendez vous."
     },
     {
       question: "Acceptez-vous tous les véhicules ?",

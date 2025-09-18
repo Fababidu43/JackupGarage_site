@@ -456,7 +456,7 @@ function App() {
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
-                    🔧 <strong>Service complet :</strong> Diagnostic, réparation et remplacement de nombreux éléments. Contactez-nous pour toute demande spécifique.
+                    🔧 <strong>Service complet :</strong> Réparation et remplacement de nombreux éléments. Contactez-nous pour toute demande spécifique.
                   </p>
                 </div>
                 

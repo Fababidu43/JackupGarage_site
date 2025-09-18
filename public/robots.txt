@@ -10,7 +10,7 @@ Allow: /reparation-freins-le-puy-en-velay
 Allow: /embrayage-monistrol-sur-loire
 
 # Sitemap
-Sitemap: https://jackupgarage.fr/sitemap.xml
+Sitemap: https://jackupauto.fr/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

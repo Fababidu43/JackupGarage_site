@@ -1,4 +1,4 @@
-# 🚗 Jack Up Garage - Site Web
+# 🚗 JACK Up Auto - Site Web
 
 Site professionnel pour mécanicien à domicile en Haute-Loire (43).
 
@@ -34,8 +34,7 @@ VITE_SUPABASE_ANON_KEY=votre_cle_supabase
 
 - **Accès** : Petit point gris dans le footer
 - **Comptes** : 
-  - `benjamin.froussard@outlook.fr` / `43benji43`
-  - `fabian.measson123@gmail.com` / `43benji43`
+  - `jackup-auto@outlook.fr` / `43benji43`
 
 ## 🛠️ Commandes
 

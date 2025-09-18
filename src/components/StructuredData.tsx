@@ -4,18 +4,18 @@ const StructuredData: React.FC = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": ["AutoRepair", "LocalBusiness"],
-    "name": "Jack Up Garage - Garagiste à Domicile Haute-Loire",
-    "alternateName": ["Jack Up Garage", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire"],
-    "description": "Garagiste professionnel à domicile en Haute-Loire (43). Mécanicien mobile spécialisé en vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Le Puy-en-Velay, Monistrol-sur-Loire, Yssingeaux.",
-    "url": "https://jackupgarage.fr",
-    "logo": "https://jackupgarage.fr/logo.png",
+    "name": "JACK Up Auto - Garagiste à Domicile Haute-Loire",
+    "alternateName": ["JACK Up Auto", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire"],
+    "description": "JACK Up Auto - Garagiste professionnel à domicile en Haute-Loire (43). Mécanicien mobile spécialisé en vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Le Puy-en-Velay, Monistrol-sur-Loire, Yssingeaux.",
+    "url": "https://jackupauto.fr",
+    "logo": "https://jackupauto.fr/logo.png",
     "image": [
-      "https://jackupgarage.fr/logo.png",
-      "https://jackupgarage.fr/entretiens_photos.jpg",
-      "https://jackupgarage.fr/freins_photos.jpg"
+      "https://jackupauto.fr/logo.png",
+      "https://jackupauto.fr/entretiens_photos.jpg",
+      "https://jackupauto.fr/freins_photos.jpg"
     ],
-    "telephone": "+33630703036",
-    "email": "fabian.measson123@gmail.com",
+    "telephone": "+33629485339",
+    "email": "jackup-auto@outlook.fr",
     "priceRange": "€€",
     "paymentAccepted": ["Cash", "Check", "Bank transfer"],
     "currenciesAccepted": "EUR",
@@ -221,14 +221,14 @@ const StructuredData: React.FC = () => {
     "sameAs": [
       "https://www.facebook.com/jackupgarage",
       "https://www.instagram.com/jackupgarage",
-      "https://www.google.com/maps/place/Jack+Up+Garage",
-      "https://www.pagesjaunes.fr/pros/jack-up-garage"
+      "https://www.google.com/maps/place/JACK+Up+Auto",
+      "https://www.pagesjaunes.fr/pros/jack-up-auto"
     ],
     "founder": {
       "@type": "Person",
-      "name": "Mécanicien Jack Up Garage"
+      "name": "Mécanicien JACK Up Auto"
     },
-    "slogan": "Votre mécanicien à domicile en Haute-Loire",
+    "slogan": "JACK Up Auto - Votre mécanicien à domicile en Haute-Loire",
     "knowsAbout": [
       "Mécanique automobile",
       "Diagnostic électronique",
@@ -250,7 +250,7 @@ const StructuredData: React.FC = () => {
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+33630703036",
+      "telephone": "+33629485339",
       "contactType": "customer service",
       "availableLanguage": "French"
     }

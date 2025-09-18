@@ -7,20 +7,20 @@
 
   <!-- Page d'accueil -->
   <url>
-    <loc>https://jackupgarage.fr/</loc>
+    <loc>https://jackupauto.fr/</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://jackupgarage.fr/logo.png</image:loc>
-      <image:title>Jack Up Garage - Logo</image:title>
+      <image:loc>https://jackupauto.fr/logo.png</image:loc>
+      <image:title>JACK Up Auto - Logo</image:title>
       <image:caption>Garagiste à domicile Haute-Loire</image:caption>
     </image:image>
   </url>
 
   <!-- Galerie -->
   <url>
-    <loc>https://jackupgarage.fr/galerie</loc>
+    <loc>https://jackupauto.fr/galerie</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -28,7 +28,7 @@
 
   <!-- Services -->
   <url>
-    <loc>https://jackupgarage.fr/services</loc>
+    <loc>https://jackupauto.fr/services</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -36,7 +36,7 @@
 
   <!-- Zone d'intervention -->
   <url>
-    <loc>https://jackupgarage.fr/zone-intervention</loc>
+    <loc>https://jackupauto.fr/zone-intervention</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -44,7 +44,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://jackupgarage.fr/contact</loc>
+    <loc>https://jackupauto.fr/contact</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -52,14 +52,14 @@
 
   <!-- Pages de services spécifiques -->
   <url>
-    <loc>https://jackupgarage.fr/vidange-domicile-haute-loire</loc>
+    <loc>https://jackupauto.fr/vidange-domicile-haute-loire</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/reparation-freins-le-puy-en-velay</loc>
+    <loc>https://jackupauto.fr/reparation-freins-le-puy-en-velay</loc>
     <lastmod>2024-12-19</lastmod>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -67,7 +67,7 @@
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/embrayage-monistrol-sur-loire</loc>
+    <loc>https://jackupauto.fr/embrayage-monistrol-sur-loire</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -75,28 +75,28 @@
 
   <!-- Pages géolocalisées -->
   <url>
-    <loc>https://jackupgarage.fr/garagiste-le-puy-en-velay</loc>
+    <loc>https://jackupauto.fr/garagiste-le-puy-en-velay</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/mecanicien-monistrol-sur-loire</loc>
+    <loc>https://jackupauto.fr/mecanicien-monistrol-sur-loire</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/garage-yssingeaux</loc>
+    <loc>https://jackupauto.fr/garage-yssingeaux</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/reparation-auto-brioude</loc>
+    <loc>https://jackupauto.fr/reparation-auto-brioude</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -104,14 +104,14 @@
 
   <!-- Services détaillés -->
   <url>
-    <loc>https://jackupgarage.fr/distribution-yssingeaux</loc>
+    <loc>https://jackupauto.fr/distribution-yssingeaux</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://jackupgarage.fr/suspensions-amortisseurs-43</loc>
+    <loc>https://jackupauto.fr/suspensions-amortisseurs-43</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

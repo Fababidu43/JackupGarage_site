@@ -1,4 +1,4 @@
-# 🚀 Déploiement Jack Up Garage
+# 🚀 Déploiement JACK Up Auto
 
 ## Netlify (5 minutes)
 

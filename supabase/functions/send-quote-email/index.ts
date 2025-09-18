@@ -55,7 +55,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouvelle demande de devis - Jack Up Garage</title>
+    <title>Nouvelle demande de devis - JACK Up Auto</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -214,7 +214,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚗 JACK UP GARAGE</h1>
+            <h1>🚗 JACK UP AUTO</h1>
             <h2>Nouvelle demande de devis</h2>
         </div>
         
@@ -265,7 +265,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
             <h4>📞 Rappeler le client</h4>
             <p><a href="tel:${quoteData.phone}">${quoteData.phone}</a></p>
             <p style="margin-top: 20px; font-size: 12px; opacity: 0.8; color: #ccc;">
-                Email automatique généré par le site Jack Up Garage<br>
+                Email automatique généré par le site JACK Up Auto<br>
                 ${new Date().toISOString()}
             </p>
         </div>
@@ -275,7 +275,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
 
     // Version texte simple pour les clients email qui ne supportent pas HTML
     const textContent = `
-🚗 JACK UP GARAGE - NOUVELLE DEMANDE DE DEVIS
+🚗 JACK UP AUTO - NOUVELLE DEMANDE DE DEVIS
 
 === INFORMATIONS CLIENT ===
 👤 Nom: ${quoteData.name}
@@ -296,7 +296,7 @@ Recontacter le client pour établir un devis personnalisé.
 Téléphone: ${quoteData.phone}
 
 ---
-Email automatique généré par le site Jack Up Garage
+Email automatique généré par le site JACK Up Auto
 ${new Date().toISOString()}
 `;
 
@@ -306,12 +306,12 @@ ${new Date().toISOString()}
     const emailPayload = {
       from: {
         email: "MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net",
-        name: "Jack Up Garage"
+        name: "JACK Up Auto"
       },
       to: [
         {
-          email: "fabian.measson123@gmail.com",
-          name: "Fabian - Jack Up Garage"
+          email: "jackup-auto@outlook.fr",
+          name: "JACK Up Auto"
         }
       ],
       subject: `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`,
@@ -365,7 +365,7 @@ ${new Date().toISOString()}
         success: true, 
         message: "Email envoyé avec succès via MailerSend",
         details: {
-          to: 'fabian.measson123@gmail.com',
+          to: 'jackup-auto@outlook.fr',
           subject: emailPayload.subject,
           timestamp: new Date().toISOString(),
           service: serviceName,

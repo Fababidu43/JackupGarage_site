@@ -14,7 +14,7 @@ const About = () => {
           <div className="text-center lg:text-left">
             <div className="relative inline-block mb-6">
               {/* Photo du mécanicien */}
-              <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover-scale">
+              <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover-scale">
                 <img 
                   src="https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
                   alt="Votre mécanicien JACK Up Auto" 

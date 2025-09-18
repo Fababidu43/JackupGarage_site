@@ -12,13 +12,34 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavigateHome, isGalleryPage = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showLogo, setShowLogo] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setIsScrolled(scrollY > 50);
+      
+      // Détecter si on a dépassé la section Hero (Services commence)
+      const heroSection = document.getElementById('hero');
+      const servicesSection = document.getElementById('services');
+      
+      let shouldShowLogo = false;
+      let shouldBeScrolled = scrollY > 50;
+      
+      if (heroSection && servicesSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+        const servicesTop = servicesSection.offsetTop;
+        
+        // Afficher le logo quand on atteint la section Services (avec un offset pour plus de fluidité)
+        shouldShowLogo = scrollY >= (servicesTop - 100);
+      } else {
+        // Fallback si les sections ne sont pas trouvées
+        shouldShowLogo = scrollY > window.innerHeight * 0.8;
+      }
+      
+      setIsScrolled(shouldBeScrolled);
+      setShowLogo(shouldShowLogo);
       
       // Barre de progression de lecture
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -122,8 +143,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
           }`}>
             
             {/* Logo */}
-            {/* Logo - affiché seulement après scroll */}
-            {isScrolled && (
+            {/* Logo - affiché dynamiquement avec animation */}
+            <div className={`transition-all duration-500 ease-out transform ${
+              showLogo 
+                ? 'opacity-100 translate-x-0 scale-100' 
+                : 'opacity-0 -translate-x-4 scale-95 pointer-events-none'
+            }`}>
               <div 
                 className="flex items-center cursor-pointer group"
                 onClick={() => {
@@ -134,15 +159,15 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   }
                 }}
               >
-                <div className={`bg-white/95 border border-orange-500/25 rounded-md flex items-center justify-center px-2 sm:px-3 py-1 sm:py-2 
-                  hover:bg-white hover:border-orange-500/40 transition-all duration-300 shadow-md
-                  transform hover:scale-105 hover:shadow-lg group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                  w-24 h-12 sm:w-32 sm:h-16 flex-shrink-0`}
+                <div className={`bg-white/95 border border-orange-500/30 rounded-lg flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 
+                  hover:bg-white hover:border-orange-500/60 hover:shadow-xl transition-all duration-300 shadow-lg
+                  transform hover:scale-110 hover:rotate-1 group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
+                  w-28 h-14 sm:w-36 sm:h-18 flex-shrink-0 backdrop-blur-sm`}
                 >
                   <img 
                     src={logo} 
                     alt="JACK Up Auto" 
-                    className="w-full h-full object-contain transition-all duration-300"
+                    className="w-full h-full object-contain transition-all duration-300 group-hover:brightness-110"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
                     onError={(e) => {
                       console.error('Header logo failed to load');
@@ -150,10 +175,10 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   />
                 </div>
               </div>
-            )}
+            </div>
 
             {/* Desktop Navigation */}
-            <div className={`hidden lg:flex items-center space-x-6 xl:space-x-8 ${!isScrolled ? 'ml-auto' : ''}`}>
+            <div className={`hidden lg:flex items-center space-x-6 xl:space-x-8 transition-all duration-500 ${!showLogo ? 'ml-auto' : ''}`}>
               {isGalleryPage ? (
                 <button
                   onClick={() => {

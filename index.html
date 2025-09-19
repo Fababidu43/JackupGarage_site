@@ -45,39 +45,20 @@
     
     <!-- Lazy load Google Maps -->
     <script>
-      // Optimized Google Maps loading with performance enhancements
+      // Charger Google Maps immédiatement
       (function() {
-        // Prevent multiple loads
-        if (window.googleMapsInitialized) return;
-        window.googleMapsInitialized = true;
-        
         const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDoCTZnuGmUTYMFcMNybmxnN3jr1V4jVg0&libraries=places,geometry&loading=async&callback=initGoogleMaps&v=weekly';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
         script.async = true;
         script.defer = true;
-        script.crossOrigin = 'anonymous';
-        
-        // Global callback function
-        window.initGoogleMaps = function() {
-          window.googleMapsLoaded = true;
-          window.googleMapsError = false;
-          console.log('✅ Google Maps API chargée avec succès (optimisée)');
-          
-          // Dispatch custom event for components
-          window.dispatchEvent(new CustomEvent('googleMapsReady'));
-        };
-        
         script.onload = function() {
-          // Fallback if callback doesn't fire
-          if (!window.googleMapsLoaded) {
-            setTimeout(() => {
-              if (window.google && window.google.maps) {
-                window.initGoogleMaps();
-              }
-            }, 1000);
-          }
+          window.googleMapsLoaded = true;
+          console.log('✅ Google Maps API chargée avec succès');
         };
-        
+        script.onerror = function() {
+          window.googleMapsError = true;
+          console.error('❌ Erreur chargement Google Maps API');
+        };
         document.head.appendChild(script);
       })();
     </script>

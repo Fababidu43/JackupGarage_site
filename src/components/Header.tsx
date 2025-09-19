@@ -57,12 +57,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 150 && rect.bottom >= 50;
+          return rect.top <= 200 && rect.bottom >= 100;
         }
         return false;
       });
       
-      if (currentSection && currentSection !== activeSection) {
+      if (currentSection !== activeSection) {
         setActiveSection(currentSection);
       }
     };

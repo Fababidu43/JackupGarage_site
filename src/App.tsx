@@ -207,11 +207,10 @@ function App() {
         <Hero onQuoteClick={openQuotePopup} />
         
         {/* À propos (blanc #FFFFFF) */}
-        <div id="about" className="relative">
+        <section id="about" className="relative">
           <div className="scroll-animate">
             <About />
           </div>
-        </div>
         
         {/* Diagonale de séparation À propos -> Services */}
         <DiagonalSlash 

@@ -38,6 +38,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const embrayageCircleRef = useRef<any>(null);
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
+  const centerMarkerRef = useRef<any>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
 
@@ -281,7 +282,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       });
 
       // Marqueur centre
-      const centerMarker = new window.google.maps.Marker({
+      centerMarkerRef.current = new window.google.maps.Marker({
         position: CENTER_COORDS,
         map: mapInstance.current,
         title: 'Monistrol-sur-Loire - Centre d\'intervention',
@@ -361,8 +362,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             markerRef.current.setMap(null);
             markerRef.current = null;
           }
-          if (centerMarker) {
-            centerMarker.setMap(null);
+          if (centerMarkerRef.current) {
+            centerMarkerRef.current.setMap(null);
+            centerMarkerRef.current = null;
           }
           
           // Nettoyer l'autocomplete

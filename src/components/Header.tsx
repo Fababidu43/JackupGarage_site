@@ -14,8 +14,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const [showLogo, setShowLogo] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       
@@ -47,24 +45,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
       setShowLogo(shouldShowLogo);
       
       // Barre de progression de lecture
-      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollY / documentHeight) * 100;
-      setScrollProgress(Math.min(progress, 100));
-      
-      // Scroll spy pour section active
-      const sections = ['hero', 'services', 'area', 'faq', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 200 && rect.bottom >= 100;
-        }
-        return false;
-      });
-      
-      if (currentSection !== activeSection) {
-        setActiveSection(currentSection);
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -127,10 +107,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   return (
     <>
       {/* Barre de progression de lecture */}
-      <div 
-        className="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 z-50 transition-all duration-300 ease-out"
-        style={{ width: `${scrollProgress}%` }}
-      />
       
       <header 
         className={`fixed w-full top-0 z-40 transition-all duration-300 ease-out ${
@@ -208,24 +184,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-2 lg:px-3 py-2 text-xs xl:text-sm font-medium tracking-wide uppercase font-tech
+                  className="relative px-2 lg:px-3 py-2 text-xs xl:text-sm font-medium tracking-wide uppercase font-tech
                     transition-all duration-200 ease-out transform hover:translate-y-[-1px]
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
-                    ${activeSection === item.id 
-                      ? 'text-orange-400' 
-                      : 'text-white/90 hover:text-orange-400'
-                    }`}
+                    text-white/90 hover:text-orange-400"
                 >
                   {item.name}
-                  
-                  {/* Soulignement animé */}
-                  <span className={`absolute bottom-0 left-0 h-0.5 bg-orange-500 transition-all duration-300 ease-out
-                    ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-                  
-                  {/* Indicateur section active */}
-                  {activeSection === item.id && (
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500" />
-                  )}
                 </button>
                 ))
               )}
@@ -314,26 +278,15 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                         scrollToSection(item.id);
                       }
                     }}
-                    className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out group
-                      hover:bg-orange-500/5
-                      ${activeSection === item.id 
-                        ? 'text-orange-300 bg-orange-500/5' 
-                        : 'text-white/80 hover:text-orange-200'
-                      }`}
+                    className="relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out group
+                      hover:bg-orange-500/5 text-white/80 hover:text-orange-200"
                   >
                     <div className="flex items-center gap-2">
-                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-200 ${
-                        activeSection === item.id ? 'bg-orange-300' : 'bg-white/30 group-hover:bg-orange-300/70'
-                      }`}></div>
+                      <div className="w-1.5 h-1.5 rounded-full transition-all duration-200 bg-white/30 group-hover:bg-orange-300/70"></div>
                       <span className="font-medium">
                         {isGalleryPage && item.id === 'hero' ? '🏠 Retour à l\'accueil' : item.name}
                       </span>
                     </div>
-                    
-                    {/* Barre latérale active */}
-                    {activeSection === item.id && (
-                      <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-orange-300 rounded-r"></div>
-                    )}
                   </button>
                 ))}
               </nav>

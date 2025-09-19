@@ -30,6 +30,12 @@ VITE_SUPABASE_ANON_KEY=votre_cle_supabase
 - **Contact** : Modifiez le téléphone dans les composants
 - **Logo** : Remplacez `src/logo.png` et `public/logo.png`
 
+## 📸 Galerie Admin
+
+- **Accès** : Petit point gris dans le footer
+- **Comptes** : 
+  - `jackup-auto@outlook.fr` / `43benji43`
+
 ## 🛠️ Commandes
 
 ```bash

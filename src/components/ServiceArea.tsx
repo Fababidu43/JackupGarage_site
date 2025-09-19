@@ -40,6 +40,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const initializationRef = useRef(false);
+  const cleanupRef = useRef<(() => void) | null>(null);
 
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
@@ -121,113 +122,142 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Initialiser Google Maps
   useEffect(() => {
+    let mounted = true;
+    
     const initializeMap = () => {
-      if (initializationRef.current || !window.google || !mapRef.current) {
+      if (initializationRef.current || !window.google || !mapRef.current || !mounted) {
         return;
       }
       
       initializationRef.current = true;
-      console.log('🗺️ Initialisation de Google Maps...');
+      console.log('🗺️ Initialisation de Google Maps (optimisée)...');
       
       try {
         // Créer la carte
         mapInstance.current = new window.google.maps.Map(mapRef.current, {
           center: CENTER_COORDS,
-          zoom: 8,
-          styles: [
-            { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
-            { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
-            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-            {
-              featureType: "administrative.locality",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }]
-            },
-            {
-              featureType: "poi",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "geometry",
-              stylers: [{ color: "#263c3f" }]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#6b9a76" }]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [{ color: "#38414e" }]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry.stroke",
-              stylers: [{ color: "#212a37" }]
-            },
-            {
-              featureType: "road",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#9ca5b3" }]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry",
-              stylers: [{ color: "#746855" }]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry.stroke",
-              stylers: [{ color: "#1f2835" }]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#f3d19c" }]
-            },
-            {
-              featureType: "transit",
-              elementType: "geometry",
-              stylers: [{ color: "#2f3948" }]
-            },
-            {
-              featureType: "transit.station",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#d59563" }]
-            },
-            {
-              featureType: "water",
-              elementType: "geometry",
-              stylers: [{ color: "#17263c" }]
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.fill",
-              stylers: [{ color: "#515c6d" }]
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.stroke",
-              stylers: [{ color: "#17263c" }]
-            }
-          ],
-          disableDefaultUI: true,
+          zoom: 9,
+          disableDefaultUI: false,
           zoomControl: true,
-          mapTypeControl: false,
+          mapTypeControl: true,
           streetViewControl: false,
-          fullscreenControl: false
+          fullscreenControl: false,
+          gestureHandling: 'cooperative',
+          clickableIcons: false,
+          mapId: 'jack-up-auto-map',
+          styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [{"color": "#212121"}]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [{"visibility": "off"}]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [{"color": "#212121"}]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "administrative.country",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#9e9e9e"}]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "stylers": [{"visibility": "off"}]
+            },
+            {
+              "featureType": "administrative.locality",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#bdbdbd"}]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [{"color": "#181818"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#616161"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.stroke",
+              "stylers": [{"color": "#1b1b1b"}]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry.fill",
+              "stylers": [{"color": "#2c2c2c"}]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#8a8a8a"}]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry",
+              "stylers": [{"color": "#373737"}]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [{"color": "#3c3c3c"}]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry",
+              "stylers": [{"color": "#4e4e4e"}]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#616161"}]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [{"color": "#000000"}]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#3d3d3d"}]
+            }
+          ]
         });
+
+        if (!mounted) return;
 
         // Cercle standard (30km)
         standardCircleRef.current = new window.google.maps.Circle({
-          strokeColor: '#10B981',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#10B981',
-          fillOpacity: 0.15,
+          strokeColor: '#22C55E',
+          strokeOpacity: 1,
+          strokeWeight: 3,
+          fillColor: '#22C55E',
+          fillOpacity: 0.25,
           map: mapInstance.current,
           center: CENTER_COORDS,
           radius: STANDARD_RADIUS * 1000 // en mètres
@@ -235,11 +265,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
         // Cercle embrayage (60km)
         embrayageCircleRef.current = new window.google.maps.Circle({
-          strokeColor: '#F59E0B',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#F59E0B',
-          fillOpacity: 0.1,
+          strokeColor: '#F97316',
+          strokeOpacity: 1,
+          strokeWeight: 3,
+          fillColor: '#F97316',
+          fillOpacity: 0.2,
           map: mapInstance.current,
           center: CENTER_COORDS,
           radius: EMBRAYAGE_RADIUS * 1000
@@ -248,114 +278,171 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         // Zone Lyon sur demande
         lyonCircleRef.current = new window.google.maps.Circle({
           strokeColor: '#3B82F6',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
+          strokeOpacity: 1,
+          strokeWeight: 3,
           fillColor: '#3B82F6',
-          fillOpacity: 0.2,
+          fillOpacity: 0.25,
           map: mapInstance.current,
           center: LYON_COORDS,
           radius: LYON_ON_DEMAND_RADIUS * 1000
         });
 
-        // Marqueur centre
-        new window.google.maps.Marker({
+        // Marqueur centre - Optimized marker creation
+        const centerMarker = new window.google.maps.Marker({
           position: CENTER_COORDS,
           map: mapInstance.current,
           title: 'Monistrol-sur-Loire - Centre d\'intervention',
+          optimized: true,
+          icon: {
+            path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 10,
+            fillColor: '#FF6B35',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 3,
+            rotation: 0
+          }
+        });
+
+        // Marqueur Lyon
+        const lyonMarker = new window.google.maps.Marker({
+          position: LYON_COORDS,
+          map: mapInstance.current,
+          title: 'Lyon - Zone sur demande',
+          optimized: true,
           icon: {
             path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 8,
-            fillColor: '#FF6B35',
+            scale: 6,
+            fillColor: '#3B82F6',
             fillOpacity: 1,
             strokeColor: '#ffffff',
             strokeWeight: 2
           }
         });
 
+        if (!mounted) return;
+
         // Autocomplete
         if (inputRef.current) {
-          autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
-            componentRestrictions: { country: 'fr' },
-            fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
-          });
-
-          autocompleteRef.current.addListener('place_changed', () => {
-            const place = autocompleteRef.current.getPlace();
-            
-            if (!place || !place.geometry || !place.geometry.location) {
-              setCoverageResult({ status: null, city: '' });
-              return;
-            }
-
-            const coords = {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng()
-            };
-
-            // Extraire le nom du lieu
-            const placeName = place.name || place.formatted_address || '';
-            
-            // Vérifier la couverture
-            checkCoverage(coords, placeName);
-
-            // Ajouter/déplacer le marqueur
-            if (markerRef.current) {
-              markerRef.current.setMap(null);
-            }
-
-            markerRef.current = new window.google.maps.Marker({
-              position: coords,
-              map: mapInstance.current,
-              title: place.name,
-              animation: window.google.maps.Animation.DROP
+          try {
+            autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
+              componentRestrictions: { country: 'fr' },
+              fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components'],
+              types: ['(cities)']
             });
 
-            // Centrer la carte sur le lieu
-            mapInstance.current.panTo(coords);
-            mapInstance.current.setZoom(11);
-          });
+            if (!mounted) return;
+
+            autocompleteRef.current.addListener('place_changed', () => {
+              if (!mounted) return;
+              
+              const place = autocompleteRef.current.getPlace();
+              
+              if (!place || !place.geometry || !place.geometry.location) {
+                setCoverageResult({ status: null, city: '' });
+                return;
+              }
+
+              const coords = {
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng()
+              };
+
+              // Extraire le nom du lieu
+              const placeName = place.name || place.formatted_address || '';
+              
+              // Vérifier la couverture
+              checkCoverage(coords, placeName);
+
+              // Ajouter/déplacer le marqueur
+              if (markerRef.current) {
+                markerRef.current.setMap(null);
+              }
+
+              markerRef.current = new window.google.maps.Marker({
+                position: coords,
+                map: mapInstance.current,
+                title: place.name,
+                animation: window.google.maps.Animation.DROP,
+                optimized: true
+              });
+
+              // Centrer la carte sur le lieu
+              mapInstance.current.panTo(coords);
+              mapInstance.current.setZoom(11);
+            });
+
+          } catch (autocompleteError) {
+            console.warn('Autocomplete non disponible, utilisation du fallback:', autocompleteError);
+            if (inputRef.current) {
+              inputRef.current.placeholder = "Entrez votre ville (ex: Le Puy-en-Velay)";
+            }
+          }
         }
 
-        setIsMapReady(true);
-        console.log('✅ Google Maps initialisée avec succès');
+        if (mounted) {
+          setIsMapReady(true);
+          console.log('✅ Google Maps initialisée avec succès (optimisée)');
+        }
         
       } catch (error) {
         console.error('❌ Erreur initialisation Google Maps:', error);
-        setMapError(true);
+        if (mounted) {
+          setMapError(true);
+        }
       }
     };
 
-    const initMap = () => {
-      // Vérifier si Google Maps est disponible
+    const handleGoogleMapsReady = () => {
       if (window.google) {
-        initializeMap();
-      } else if (window.googleMapsError) {
-        setMapError(true);
-      } else {
-        // Attendre que Google Maps soit chargé
-        const checkGoogle = setInterval(() => {
-          if (window.google) {
-            clearInterval(checkGoogle);
-            initializeMap();
-          } else if (window.googleMapsError) {
-            clearInterval(checkGoogle);
-            setMapError(true);
-          }
-        }, 100);
-        
-        // Timeout après 10 secondes
-        setTimeout(() => {
-          if (!window.google && !window.googleMapsError) {
-            clearInterval(checkGoogle);
-            setMapError(true);
-            console.error('❌ Timeout: Google Maps non chargé après 10s');
-          }
-        }, 10000);
+        if (mounted) {
+          initializeMap();
+        }
       }
     };
 
-    // Initialiser dès que le composant est monté
-    initMap();
+    const handleGoogleMapsError = () => {
+      if (mounted) {
+        setMapError(true);
+      }
+    };
+
+    // Listen for Google Maps ready event
+    window.addEventListener('googleMapsReady', handleGoogleMapsReady);
+    window.addEventListener('googleMapsError', handleGoogleMapsError);
+
+    // Check if already loaded
+    if (window.googleMapsLoaded && window.google) {
+      handleGoogleMapsReady();
+    } else if (window.googleMapsError) {
+      handleGoogleMapsError();
+    }
+
+    // Cleanup function
+    cleanupRef.current = () => {
+      window.removeEventListener('googleMapsReady', handleGoogleMapsReady);
+      window.removeEventListener('googleMapsError', handleGoogleMapsError);
+      
+      if (markerRef.current) {
+        markerRef.current.setMap(null);
+      }
+      if (standardCircleRef.current) {
+        standardCircleRef.current.setMap(null);
+      }
+      if (embrayageCircleRef.current) {
+        embrayageCircleRef.current.setMap(null);
+      }
+      if (lyonCircleRef.current) {
+        lyonCircleRef.current.setMap(null);
+      }
+    };
+
+    return () => {
+      mounted = false;
+      if (cleanupRef.current) {
+        cleanupRef.current();
+      }
+    };
   }, []);
 
   const getCTAText = () => {
@@ -488,15 +575,15 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   isMapReady ? 'opacity-100' : 'opacity-50'
                 }`}>
                   <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
-                    <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg border border-white"></div>
                     <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-30km)</span>
                   </div>
-                  <div className="flex items-center gap-1 sm:gap-2 bg-yellow-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                  <div className="flex items-center gap-1 sm:gap-2 bg-orange-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full shadow-lg border border-white"></div>
                     <span className="text-white font-medium whitespace-nowrap">Zone élargie (30-60km)</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-blue-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg"></div>
+                    <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg border border-white"></div>
                     <span className="text-white font-medium whitespace-nowrap">Lyon sur demande (10km)</span>
                   </div>
                 </div>

@@ -136,26 +136,128 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         // Créer la carte
         mapInstance.current = new window.google.maps.Map(mapRef.current, {
           center: CENTER_COORDS,
-          zoom: 8,
-          disableDefaultUI: true,
+          zoom: 9,
+          disableDefaultUI: false,
           zoomControl: true,
-          mapTypeControl: false,
+          mapTypeControl: true,
           streetViewControl: false,
           fullscreenControl: false,
           gestureHandling: 'cooperative',
           clickableIcons: false,
-          mapId: 'jack-up-auto-map'
+          mapId: 'jack-up-auto-map',
+          styles: [
+            {
+              "elementType": "geometry",
+              "stylers": [{"color": "#212121"}]
+            },
+            {
+              "elementType": "labels.icon",
+              "stylers": [{"visibility": "off"}]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [{"color": "#212121"}]
+            },
+            {
+              "featureType": "administrative",
+              "elementType": "geometry",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "administrative.country",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#9e9e9e"}]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "stylers": [{"visibility": "off"}]
+            },
+            {
+              "featureType": "administrative.locality",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#bdbdbd"}]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry",
+              "stylers": [{"color": "#181818"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#616161"}]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.stroke",
+              "stylers": [{"color": "#1b1b1b"}]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry.fill",
+              "stylers": [{"color": "#2c2c2c"}]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#8a8a8a"}]
+            },
+            {
+              "featureType": "road.arterial",
+              "elementType": "geometry",
+              "stylers": [{"color": "#373737"}]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [{"color": "#3c3c3c"}]
+            },
+            {
+              "featureType": "road.highway.controlled_access",
+              "elementType": "geometry",
+              "stylers": [{"color": "#4e4e4e"}]
+            },
+            {
+              "featureType": "road.local",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#616161"}]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#757575"}]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [{"color": "#000000"}]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [{"color": "#3d3d3d"}]
+            }
+          ]
         });
 
         if (!mounted) return;
 
         // Cercle standard (30km)
         standardCircleRef.current = new window.google.maps.Circle({
-          strokeColor: '#10B981',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#10B981',
-          fillOpacity: 0.15,
+          strokeColor: '#22C55E',
+          strokeOpacity: 1,
+          strokeWeight: 3,
+          fillColor: '#22C55E',
+          fillOpacity: 0.25,
           map: mapInstance.current,
           center: CENTER_COORDS,
           radius: STANDARD_RADIUS * 1000 // en mètres
@@ -163,11 +265,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
         // Cercle embrayage (60km)
         embrayageCircleRef.current = new window.google.maps.Circle({
-          strokeColor: '#F59E0B',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#F59E0B',
-          fillOpacity: 0.1,
+          strokeColor: '#F97316',
+          strokeOpacity: 1,
+          strokeWeight: 3,
+          fillColor: '#F97316',
+          fillOpacity: 0.2,
           map: mapInstance.current,
           center: CENTER_COORDS,
           radius: EMBRAYAGE_RADIUS * 1000
@@ -176,10 +278,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         // Zone Lyon sur demande
         lyonCircleRef.current = new window.google.maps.Circle({
           strokeColor: '#3B82F6',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
+          strokeOpacity: 1,
+          strokeWeight: 3,
           fillColor: '#3B82F6',
-          fillOpacity: 0.2,
+          fillOpacity: 0.25,
           map: mapInstance.current,
           center: LYON_COORDS,
           radius: LYON_ON_DEMAND_RADIUS * 1000
@@ -192,9 +294,26 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           title: 'Monistrol-sur-Loire - Centre d\'intervention',
           optimized: true,
           icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 8,
+            path: window.google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 10,
             fillColor: '#FF6B35',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 3,
+            rotation: 0
+          }
+        });
+
+        // Marqueur Lyon
+        const lyonMarker = new window.google.maps.Marker({
+          position: LYON_COORDS,
+          map: mapInstance.current,
+          title: 'Lyon - Zone sur demande',
+          optimized: true,
+          icon: {
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 6,
+            fillColor: '#3B82F6',
             fillOpacity: 1,
             strokeColor: '#ffffff',
             strokeWeight: 2

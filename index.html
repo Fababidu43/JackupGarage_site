@@ -73,17 +73,6 @@
             setTimeout(() => {
               if (window.google && window.google.maps) {
                 window.initGoogleMaps();
-              }
-            }, 100);
-          }
-        };
-        
-        script.onerror = function() {
-          window.googleMapsError = true;
-          window.googleMapsLoaded = false;
-          console.error('❌ Erreur chargement Google Maps API');
-          window.dispatchEvent(new CustomEvent('googleMapsError'));
-        };
         
         document.head.appendChild(script);
       })();

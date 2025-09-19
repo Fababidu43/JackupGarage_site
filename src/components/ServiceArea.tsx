@@ -356,11 +356,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
     const handleGoogleMapsReady = () => {
       if (window.google) {
-        setTimeout(() => {
-          if (mounted) {
-            initializeMap();
-          }
-        }, 100);
+        if (mounted) {
+          initializeMap();
+        }
       }
     };
 

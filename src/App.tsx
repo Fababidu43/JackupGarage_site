@@ -211,6 +211,7 @@ function App() {
           <div className="scroll-animate">
             <About />
           </div>
+        </section>
         
         {/* Diagonale de séparation À propos -> Services */}
         <DiagonalSlash 
@@ -220,7 +221,7 @@ function App() {
         />
         
         {/* Services intro (blanc #FFFFFF) */}
-        <div id="about" className="relative">
+        <div id="services-intro" className="relative">
           <div className="scroll-animate services-effect">
             <Services />
           </div>

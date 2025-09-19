@@ -28,6 +28,8 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     city: string;
     distance?: number;
   }>({ status: null, city: '' });
+  const [isMapReady, setIsMapReady] = useState(false);
+  const [mapError, setMapError] = useState(false);
   
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);
@@ -37,6 +39,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const embrayageCircleRef = useRef<any>(null);
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
+  const initializationRef = useRef(false);
 
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
@@ -118,207 +121,241 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Initialiser Google Maps
   useEffect(() => {
-    const initMap = () => {
-      if (!window.google || !mapRef.current) return;
-
-      // Créer la carte
-      mapInstance.current = new window.google.maps.Map(mapRef.current, {
-        center: CENTER_COORDS,
-        zoom: 8,
-        styles: [
-          { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
-          { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
-          { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-          {
-            featureType: "administrative.locality",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#d59563" }]
-          },
-          {
-            featureType: "poi",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#d59563" }]
-          },
-          {
-            featureType: "poi.park",
-            elementType: "geometry",
-            stylers: [{ color: "#263c3f" }]
-          },
-          {
-            featureType: "poi.park",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#6b9a76" }]
-          },
-          {
-            featureType: "road",
-            elementType: "geometry",
-            stylers: [{ color: "#38414e" }]
-          },
-          {
-            featureType: "road",
-            elementType: "geometry.stroke",
-            stylers: [{ color: "#212a37" }]
-          },
-          {
-            featureType: "road",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#9ca5b3" }]
-          },
-          {
-            featureType: "road.highway",
-            elementType: "geometry",
-            stylers: [{ color: "#746855" }]
-          },
-          {
-            featureType: "road.highway",
-            elementType: "geometry.stroke",
-            stylers: [{ color: "#1f2835" }]
-          },
-          {
-            featureType: "road.highway",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#f3d19c" }]
-          },
-          {
-            featureType: "transit",
-            elementType: "geometry",
-            stylers: [{ color: "#2f3948" }]
-          },
-          {
-            featureType: "transit.station",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#d59563" }]
-          },
-          {
-            featureType: "water",
-            elementType: "geometry",
-            stylers: [{ color: "#17263c" }]
-          },
-          {
-            featureType: "water",
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#515c6d" }]
-          },
-          {
-            featureType: "water",
-            elementType: "labels.text.stroke",
-            stylers: [{ color: "#17263c" }]
-          }
-        ],
-        disableDefaultUI: true,
-        zoomControl: true,
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false
-      });
-
-      // Cercle standard (50km)
-      standardCircleRef.current = new window.google.maps.Circle({
-        strokeColor: '#10B981',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#10B981',
-        fillOpacity: 0.15,
-        map: mapInstance.current,
-        center: CENTER_COORDS,
-        radius: STANDARD_RADIUS * 1000 // en mètres
-      });
-
-      // Cercle embrayage (70km) - initialement caché
-      embrayageCircleRef.current = new window.google.maps.Circle({
-        strokeColor: '#F59E0B',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#F59E0B',
-        fillOpacity: 0.1,
-        map: mapInstance.current, // Affiché par défaut
-        center: CENTER_COORDS,
-        radius: EMBRAYAGE_RADIUS * 1000 // 60km
-      });
-
-      // Zone Lyon sur demande
-      lyonCircleRef.current = new window.google.maps.Circle({
-        strokeColor: '#3B82F6',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#3B82F6',
-        fillOpacity: 0.2,
-        map: mapInstance.current,
-        center: LYON_COORDS,
-        radius: LYON_ON_DEMAND_RADIUS * 1000 // 10km
-      });
-
-      // Marqueur centre
-      new window.google.maps.Marker({
-        position: CENTER_COORDS,
-        map: mapInstance.current,
-        title: 'Monistrol-sur-Loire - Centre d\'intervention',
-        icon: {
-          path: window.google.maps.SymbolPath.CIRCLE,
-          scale: 8,
-          fillColor: '#FF6B35',
-          fillOpacity: 1,
-          strokeColor: '#ffffff',
-          strokeWeight: 2
-        }
-      });
-
-      // Autocomplete
-      if (inputRef.current) {
-        autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
-          componentRestrictions: { country: 'fr' },
-          fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
+    const initializeMap = () => {
+      if (initializationRef.current || !window.google || !mapRef.current) {
+        return;
+      }
+      
+      initializationRef.current = true;
+      console.log('🗺️ Initialisation de Google Maps...');
+      
+      try {
+        // Créer la carte
+        mapInstance.current = new window.google.maps.Map(mapRef.current, {
+          center: CENTER_COORDS,
+          zoom: 8,
+          styles: [
+            { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+            {
+              featureType: "administrative.locality",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }]
+            },
+            {
+              featureType: "poi",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }]
+            },
+            {
+              featureType: "poi.park",
+              elementType: "geometry",
+              stylers: [{ color: "#263c3f" }]
+            },
+            {
+              featureType: "poi.park",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#6b9a76" }]
+            },
+            {
+              featureType: "road",
+              elementType: "geometry",
+              stylers: [{ color: "#38414e" }]
+            },
+            {
+              featureType: "road",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#212a37" }]
+            },
+            {
+              featureType: "road",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#9ca5b3" }]
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry",
+              stylers: [{ color: "#746855" }]
+            },
+            {
+              featureType: "road.highway",
+              elementType: "geometry.stroke",
+              stylers: [{ color: "#1f2835" }]
+            },
+            {
+              featureType: "road.highway",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#f3d19c" }]
+            },
+            {
+              featureType: "transit",
+              elementType: "geometry",
+              stylers: [{ color: "#2f3948" }]
+            },
+            {
+              featureType: "transit.station",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#d59563" }]
+            },
+            {
+              featureType: "water",
+              elementType: "geometry",
+              stylers: [{ color: "#17263c" }]
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.fill",
+              stylers: [{ color: "#515c6d" }]
+            },
+            {
+              featureType: "water",
+              elementType: "labels.text.stroke",
+              stylers: [{ color: "#17263c" }]
+            }
+          ],
+          disableDefaultUI: true,
+          zoomControl: true,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false
         });
 
-        autocompleteRef.current.addListener('place_changed', () => {
-          const place = autocompleteRef.current.getPlace();
-          
-          if (!place || !place.geometry || !place.geometry.location) {
-            setCoverageResult({ status: null, city: '' });
-            return;
+        // Cercle standard (30km)
+        standardCircleRef.current = new window.google.maps.Circle({
+          strokeColor: '#10B981',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#10B981',
+          fillOpacity: 0.15,
+          map: mapInstance.current,
+          center: CENTER_COORDS,
+          radius: STANDARD_RADIUS * 1000 // en mètres
+        });
+
+        // Cercle embrayage (60km)
+        embrayageCircleRef.current = new window.google.maps.Circle({
+          strokeColor: '#F59E0B',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#F59E0B',
+          fillOpacity: 0.1,
+          map: mapInstance.current,
+          center: CENTER_COORDS,
+          radius: EMBRAYAGE_RADIUS * 1000
+        });
+
+        // Zone Lyon sur demande
+        lyonCircleRef.current = new window.google.maps.Circle({
+          strokeColor: '#3B82F6',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#3B82F6',
+          fillOpacity: 0.2,
+          map: mapInstance.current,
+          center: LYON_COORDS,
+          radius: LYON_ON_DEMAND_RADIUS * 1000
+        });
+
+        // Marqueur centre
+        new window.google.maps.Marker({
+          position: CENTER_COORDS,
+          map: mapInstance.current,
+          title: 'Monistrol-sur-Loire - Centre d\'intervention',
+          icon: {
+            path: window.google.maps.SymbolPath.CIRCLE,
+            scale: 8,
+            fillColor: '#FF6B35',
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2
           }
+        });
 
-          const coords = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-          };
-
-          // Extraire le nom du lieu
-          const placeName = place.name || place.formatted_address || '';
-          
-          // Vérifier la couverture
-          checkCoverage(coords, placeName);
-
-          // Ajouter/déplacer le marqueur
-          if (markerRef.current) {
-            markerRef.current.setMap(null);
-          }
-
-          markerRef.current = new window.google.maps.Marker({
-            position: coords,
-            map: mapInstance.current,
-            title: place.name,
-            animation: window.google.maps.Animation.DROP
+        // Autocomplete
+        if (inputRef.current) {
+          autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
+            componentRestrictions: { country: 'fr' },
+            fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
           });
 
-          // Centrer la carte sur le lieu
-          mapInstance.current.panTo(coords);
-          mapInstance.current.setZoom(11);
-        });
+          autocompleteRef.current.addListener('place_changed', () => {
+            const place = autocompleteRef.current.getPlace();
+            
+            if (!place || !place.geometry || !place.geometry.location) {
+              setCoverageResult({ status: null, city: '' });
+              return;
+            }
+
+            const coords = {
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng()
+            };
+
+            // Extraire le nom du lieu
+            const placeName = place.name || place.formatted_address || '';
+            
+            // Vérifier la couverture
+            checkCoverage(coords, placeName);
+
+            // Ajouter/déplacer le marqueur
+            if (markerRef.current) {
+              markerRef.current.setMap(null);
+            }
+
+            markerRef.current = new window.google.maps.Marker({
+              position: coords,
+              map: mapInstance.current,
+              title: place.name,
+              animation: window.google.maps.Animation.DROP
+            });
+
+            // Centrer la carte sur le lieu
+            mapInstance.current.panTo(coords);
+            mapInstance.current.setZoom(11);
+          });
+        }
+
+        setIsMapReady(true);
+        console.log('✅ Google Maps initialisée avec succès');
+        
+      } catch (error) {
+        console.error('❌ Erreur initialisation Google Maps:', error);
+        setMapError(true);
       }
     };
 
-    // Attendre que Google Maps soit chargé
-    if (window.google) {
-      initMap();
-    } else {
-      const checkGoogle = setInterval(() => {
-        if (window.google) {
-          clearInterval(checkGoogle);
-          initMap();
-        }
-      }, 100);
-    }
+    const initMap = () => {
+      // Vérifier si Google Maps est disponible
+      if (window.google) {
+        initializeMap();
+      } else if (window.googleMapsError) {
+        setMapError(true);
+      } else {
+        // Attendre que Google Maps soit chargé
+        const checkGoogle = setInterval(() => {
+          if (window.google) {
+            clearInterval(checkGoogle);
+            initializeMap();
+          } else if (window.googleMapsError) {
+            clearInterval(checkGoogle);
+            setMapError(true);
+          }
+        }, 100);
+        
+        // Timeout après 10 secondes
+        setTimeout(() => {
+          if (!window.google && !window.googleMapsError) {
+            clearInterval(checkGoogle);
+            setMapError(true);
+            console.error('❌ Timeout: Google Maps non chargé après 10s');
+          }
+        }, 10000);
+      }
+    };
+
+    // Initialiser dès que le composant est monté
+    initMap();
   }, []);
 
   const getCTAText = () => {
@@ -413,16 +450,43 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 font-futuristic text-center">
                   Carte Interactive
                 </h3>
-                <div className="text-center mb-3 sm:mb-4 px-2">
-                </div>
+                
+                {/* État de chargement */}
+                {!isMapReady && !mapError && (
+                  <div className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl flex items-center justify-center bg-gray-900/50">
+                    <div className="text-center">
+                      <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                      <p className="text-orange-300 font-tech text-sm">Chargement de la carte...</p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* État d'erreur */}
+                {mapError && (
+                  <div className="w-full h-96 rounded-xl border-2 border-red-500/30 overflow-hidden shadow-2xl flex items-center justify-center bg-red-900/20">
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <span className="text-red-400 text-2xl">⚠️</span>
+                      </div>
+                      <p className="text-red-300 font-tech text-sm">Erreur de chargement de la carte</p>
+                      <p className="text-red-400 font-tech text-xs mt-1">Vérifiez votre connexion internet</p>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Carte Google Maps */}
                 <div 
                   ref={mapRef}
-                  className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
+                  className={`w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl transition-opacity duration-500 ${
+                    isMapReady ? 'opacity-100' : 'opacity-0 absolute'
+                  }`}
                   style={{ minHeight: '400px' }}
                 />
 
                 {/* Légende élégante */}
-                <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
+                <div className={`mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2 transition-opacity duration-500 ${
+                  isMapReady ? 'opacity-100' : 'opacity-50'
+                }`}>
                   <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
                     <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-30km)</span>
@@ -462,7 +526,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     value={coverageInput}
                     onChange={(e) => setCoverageInput(e.target.value)}
                     placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
+                    className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner ${
+                      !isMapReady ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                    disabled={!isMapReady}
                   />
                 </div>
 

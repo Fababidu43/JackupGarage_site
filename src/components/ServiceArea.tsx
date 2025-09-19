@@ -127,13 +127,14 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       }
       
       initializationRef.current = true;
-      console.log('🗺️ Initialisation de Google Maps...');
+      console.log('🗺️ Initialisation de Google Maps avec nouvelles APIs...');
       
       try {
         // Créer la carte
         mapInstance.current = new window.google.maps.Map(mapRef.current, {
           center: CENTER_COORDS,
           zoom: 8,
+          mapId: 'DEMO_MAP_ID', // Requis pour les nouveaux marqueurs
           styles: [
             { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
@@ -257,8 +258,8 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           radius: LYON_ON_DEMAND_RADIUS * 1000
         });
 
-        // Marqueur centre
-        new window.google.maps.Marker({
+        // Marqueur centre - Utiliser l'ancienne API pour la compatibilité
+        const centerMarker = new window.google.maps.Marker({
           position: CENTER_COORDS,
           map: mapInstance.current,
           title: 'Monistrol-sur-Loire - Centre d\'intervention',
@@ -274,6 +275,19 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
         // Autocomplete
         if (inputRef.current) {
+          // Utiliser l'ancienne API Autocomplete pour la compatibilité
+          try {
+            autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
+              componentRestrictions: { country: 'fr' },
+              fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
+            });
+          } catch (autocompleteError) {
+            console.warn('Autocomplete non disponible, utilisation du fallback:', autocompleteError);
+            // Fallback : input simple sans autocomplete
+            inputRef.current.placeholder = "Entrez votre ville (ex: Le Puy-en-Velay)";
+            return;
+          }
+
           autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
             componentRestrictions: { country: 'fr' },
             fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
@@ -303,6 +317,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               markerRef.current.setMap(null);
             }
 
+            // Utiliser l'ancienne API Marker pour la compatibilité
             markerRef.current = new window.google.maps.Marker({
               position: coords,
               map: mapInstance.current,
@@ -317,7 +332,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         }
 
         setIsMapReady(true);
-        console.log('✅ Google Maps initialisée avec succès');
+        console.log('✅ Google Maps initialisée avec succès (compatibilité maintenue)');
         
       } catch (error) {
         console.error('❌ Erreur initialisation Google Maps:', error);
@@ -328,7 +343,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     const initMap = () => {
       // Vérifier si Google Maps est disponible
       if (window.google) {
-        initializeMap();
+        // Petit délai pour s'assurer que toutes les APIs sont chargées
+        setTimeout(() => {
+          initializeMap();
+        }, 100);
       } else if (window.googleMapsError) {
         setMapError(true);
       } else {
@@ -336,7 +354,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         const checkGoogle = setInterval(() => {
           if (window.google) {
             clearInterval(checkGoogle);
-            initializeMap();
+            // Petit délai pour s'assurer que toutes les APIs sont chargées
+            setTimeout(() => {
+              initializeMap();
+            }, 100);
           } else if (window.googleMapsError) {
             clearInterval(checkGoogle);
             setMapError(true);
@@ -348,9 +369,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           if (!window.google && !window.googleMapsError) {
             clearInterval(checkGoogle);
             setMapError(true);
-            console.error('❌ Timeout: Google Maps non chargé après 10s');
+            console.error('❌ Timeout: Google Maps non chargé après 15s');
           }
-        }, 10000);
+        }, 15000);
       }
     };
 

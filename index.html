@@ -45,15 +45,15 @@
     
     <!-- Lazy load Google Maps -->
     <script>
-      // Charger Google Maps immédiatement
+      // Charger Google Maps avec loading=async pour de meilleures performances
       (function() {
         const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry&loading=async';
         script.async = true;
         script.defer = true;
         script.onload = function() {
           window.googleMapsLoaded = true;
-          console.log('✅ Google Maps API chargée avec succès');
+          console.log('✅ Google Maps API chargée avec succès (async)');
         };
         script.onerror = function() {
           window.googleMapsError = true;

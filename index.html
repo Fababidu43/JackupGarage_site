@@ -44,17 +44,7 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap"></noscript>
     
     <!-- Lazy load Google Maps -->
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          const script = document.createElement('script');
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
-          script.async = true;
-          script.defer = true;
-          document.head.appendChild(script);
-        }, 1000);
-      });
-    </script>
+    <!-- Google Maps sera chargé dynamiquement par le composant ServiceArea -->
     
     <style>
       /* Prévention du flash de contenu non stylé */

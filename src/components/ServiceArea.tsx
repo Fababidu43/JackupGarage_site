@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info, Map, DollarSign, Search, FileText, MapIcon, Calculator } from 'lucide-react';
 
+// État global pour le chargement de Google Maps
+let isGoogleMapsLoaded = false;
+let googleMapsLoadPromise: Promise<void> | null = null;
+
 interface ServiceAreaProps {
   onQuoteClick: () => void;
 }
@@ -22,6 +26,9 @@ declare global {
 const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const [showAllCommunes43, setShowAllCommunes43] = useState(false);
   const [showAllCommunes42, setShowAllCommunes42] = useState(false);
+  const [isMapLoading, setIsMapLoading] = useState(true);
+  const [isMapReady, setIsMapReady] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [coverageInput, setCoverageInput] = useState('');
   const [coverageResult, setCoverageResult] = useState<{
     status: 'covered' | 'on-demand' | 'quote-only' | 'out-of-zone' | 'limited-access' | null;
@@ -37,6 +44,86 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const embrayageCircleRef = useRef<any>(null);
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
+
+  // Fonction pour précharger Google Maps
+  const preloadGoogleMaps = (): Promise<void> => {
+    if (googleMapsLoadPromise) {
+      return googleMapsLoadPromise;
+    }
+
+    if (isGoogleMapsLoaded) {
+      return Promise.resolve();
+    }
+
+    googleMapsLoadPromise = new Promise((resolve, reject) => {
+      // Vérifier si Google Maps est déjà chargé
+      if (window.google && window.google.maps) {
+        isGoogleMapsLoaded = true;
+        resolve();
+        return;
+      }
+
+      // Créer le script Google Maps
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        isGoogleMapsLoaded = true;
+        resolve();
+      };
+
+      script.onerror = () => {
+        reject(new Error('Erreur de chargement Google Maps'));
+      };
+
+      document.head.appendChild(script);
+    });
+
+    return googleMapsLoadPromise;
+  };
+
+  // Observer d'intersection pour détecter quand la section devient visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isVisible) {
+            setIsVisible(true);
+            // Précharger Google Maps dès que la section devient visible
+            preloadGoogleMaps()
+              .then(() => {
+                setIsMapLoading(false);
+                // Petit délai pour une transition fluide
+                setTimeout(() => {
+                  setIsMapReady(true);
+                }, 300);
+              })
+              .catch((error) => {
+                console.error('Erreur préchargement Google Maps:', error);
+                setIsMapLoading(false);
+              });
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '200px 0px 0px 0px' // Commencer le chargement 200px avant
+      }
+    );
+
+    const sectionElement = document.getElementById('area');
+    if (sectionElement) {
+      observer.observe(sectionElement);
+    }
+
+    return () => {
+      if (sectionElement) {
+        observer.unobserve(sectionElement);
+      }
+    };
+  }, [isVisible]);
 
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
@@ -118,6 +205,8 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Initialiser Google Maps
   useEffect(() => {
+    if (!isMapReady) return;
+
     const initMap = () => {
       if (!window.google || !mapRef.current) return;
 
@@ -308,18 +397,11 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       }
     };
 
-    // Attendre que Google Maps soit chargé
-    if (window.google) {
+    // Initialiser la carte seulement quand elle est prête
+    if (isMapReady && window.google) {
       initMap();
-    } else {
-      const checkGoogle = setInterval(() => {
-        if (window.google) {
-          clearInterval(checkGoogle);
-          initMap();
-        }
-      }, 100);
     }
-  }, []);
+  }, [isMapReady]);
 
   const getCTAText = () => {
     switch (coverageResult.status) {
@@ -415,14 +497,42 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 </h3>
                 <div className="text-center mb-3 sm:mb-4 px-2">
                 </div>
-                <div 
-                  ref={mapRef}
-                  className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
-                  style={{ minHeight: '400px' }}
-                />
+                
+                {/* Conteneur de la carte avec état de chargement */}
+                <div className="relative w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl" style={{ minHeight: '400px' }}>
+                  {/* Indicateur de chargement */}
+                  {isMapLoading && (
+                    <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <p className="text-white font-tech text-sm">Chargement de la carte...</p>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Carte Google Maps */}
+                  <div 
+                    ref={mapRef}
+                    className={`w-full h-full transition-opacity duration-500 ${
+                      isMapReady ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                  
+                  {/* Fallback si erreur de chargement */}
+                  {!isMapLoading && !isMapReady && (
+                    <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+                      <div className="text-center">
+                        <AlertTriangle className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+                        <p className="text-white font-tech text-sm">Erreur de chargement de la carte</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
 
                 {/* Légende élégante */}
-                <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
+                <div className={`mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2 transition-opacity duration-500 ${
+                  isMapReady ? 'opacity-100' : 'opacity-50'
+                }`}>
                   <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
                     <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-30km)</span>
@@ -441,7 +551,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
             {/* Vérificateur de Couverture */}
             <div className="max-w-sm sm:max-w-md mx-auto px-2 sm:px-0">
-              <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-2xl border-2 border-orange-500/40 hover:border-orange-500/60 transition-all duration-300">
+              <div className={`bg-white/95 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-2xl border-2 border-orange-500/40 hover:border-orange-500/60 transition-all duration-500 ${
+                isMapReady ? 'opacity-100 transform translate-y-0' : 'opacity-70 transform translate-y-2'
+              }`}>
                 <div className="text-center mb-3 sm:mb-4">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center text-white mx-auto mb-2 sm:mb-3 shadow-lg">
                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -462,7 +574,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     value={coverageInput}
                     onChange={(e) => setCoverageInput(e.target.value)}
                     placeholder="Ex: Monistrol-sur-Loire, 43120..."
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner"
+                    className={`w-full px-3 sm:px-4 py-2 sm:py-3 bg-white border-2 border-gray-300 text-gray-900 focus:border-orange-500 focus:outline-none rounded-xl font-tech text-sm transition-all duration-200 shadow-inner ${
+                      !isMapReady ? 'cursor-not-allowed opacity-50' : ''
+                    }`}
+                    disabled={!isMapReady}
                   />
                 </div>
 

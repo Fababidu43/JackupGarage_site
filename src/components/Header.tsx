@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../logo.png';
 
 interface HeaderProps {
   onQuoteClick: () => void;
@@ -172,13 +171,10 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   w-28 h-14 sm:w-36 sm:h-18 flex-shrink-0 backdrop-blur-sm`}
                 >
                   <img 
-                    src={logo} 
+                    src="/logo.png" 
                     alt="JACK Up Auto" 
                     className="w-full h-full object-contain transition-all duration-300 group-hover:brightness-110"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
-                    onError={(e) => {
-                      console.error('Header logo failed to load');
-                    }}
                   />
                 </div>
               </div>
@@ -277,7 +273,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-6 bg-white/90 border border-orange-500/20 rounded flex items-center justify-center">
                     <img 
-                      src={logo} 
+                      src="/logo.png" 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
                     />

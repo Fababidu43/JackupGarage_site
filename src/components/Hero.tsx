@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { ArrowRight, Phone, Shield, Clock, FileText } from 'lucide-react';
-import logo from '../logo.png';
 
 interface HeroProps {
   onQuoteClick: () => void;
@@ -90,16 +89,13 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
           <div className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 bg-white/95 border-2 border-orange-500/30 rounded-2xl flex items-center justify-center p-4 sm:p-5 lg:p-6 xl:p-7 mx-auto shadow-2xl hover:border-orange-500/50 transition-all duration-300 hover-scale backdrop-blur-sm">
             <img 
-              src={logo} 
+              src="/logo.png" 
               alt="Jack Up Garage - Mécanicien à domicile" 
               className="w-full h-full object-contain transition-all duration-300"
               loading="eager"
               decoding="async"
               fetchpriority="high"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
-              onError={(e) => {
-                console.error('Hero logo failed to load');
-              }}
               onLoad={() => {
                 // Marquer le contenu comme chargé pour éviter le FOUC
                 const heroContent = document.querySelector('.hero-content');

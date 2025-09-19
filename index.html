@@ -45,20 +45,46 @@
     
     <!-- Lazy load Google Maps -->
     <script>
-      // Charger Google Maps avec loading=async pour de meilleures performances
+      // Optimized Google Maps loading with performance enhancements
       (function() {
+        // Prevent multiple loads
+        if (window.googleMapsInitialized) return;
+        window.googleMapsInitialized = true;
+        
         const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry&loading=async';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4&libraries=places,geometry&loading=async&callback=initGoogleMaps&v=weekly';
         script.async = true;
         script.defer = true;
-        script.onload = function() {
+        script.crossOrigin = 'anonymous';
+        
+        // Global callback function
+        window.initGoogleMaps = function() {
           window.googleMapsLoaded = true;
-          console.log('✅ Google Maps API chargée avec succès (async)');
+          window.googleMapsError = false;
+          console.log('✅ Google Maps API chargée avec succès (optimisée)');
+          
+          // Dispatch custom event for components
+          window.dispatchEvent(new CustomEvent('googleMapsReady'));
         };
+        
+        script.onload = function() {
+          // Fallback if callback doesn't fire
+          if (!window.googleMapsLoaded) {
+            setTimeout(() => {
+              if (window.google && window.google.maps) {
+                window.initGoogleMaps();
+              }
+            }, 100);
+          }
+        };
+        
         script.onerror = function() {
           window.googleMapsError = true;
+          window.googleMapsLoaded = false;
           console.error('❌ Erreur chargement Google Maps API');
+          window.dispatchEvent(new CustomEvent('googleMapsError'));
         };
+        
         document.head.appendChild(script);
       })();
     </script>

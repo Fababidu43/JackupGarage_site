@@ -7,27 +7,40 @@ export default defineConfig({
   define: {
     global: 'globalThis',
   },
+  server: {
+    hmr: {
+      overlay: false
+    },
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'credentialless',
+      'Cross-Origin-Opener-Policy': 'same-origin'
+    }
+  },
   build: {
+    target: 'es2015',
+    cssTarget: 'chrome80',
     rollupOptions: {
       output: {
+        experimentalMinChunkSize: 1000,
         manualChunks: {
           vendor: ['react', 'react-dom'],
           icons: ['lucide-react'],
-          motion: ['framer-motion']
+          motion: ['framer-motion'],
+          supabase: ['@supabase/supabase-js']
         }
       }
     },
     cssCodeSplit: true,
     sourcemap: false,
-    minify: 'esbuild'
+    minify: 'esbuild',
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
-    include: ['react', 'react-dom']
+    include: ['react', 'react-dom', '@supabase/supabase-js'],
+    exclude: ['lucide-react']
   },
-  server: {
-    hmr: {
-      overlay: false
-    }
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
   }
 });

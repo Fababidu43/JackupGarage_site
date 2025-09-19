@@ -1,6 +1,10 @@
 # Netlify redirects for SPA
 /*    /index.html   200
 
+# Performance optimizations
+/api/*  /api/:splat  200
+/static/*  /static/:splat  200  Cache-Control: public,max-age=31536000,immutable
+
 # SEO redirects
 /garagiste-haute-loire    /    301
 /mecanicien-domicile-43   /    301

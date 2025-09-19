@@ -40,6 +40,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const initializationRef = useRef(false);
+  const cleanupRef = useRef<(() => void) | null>(null);
 
   const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
@@ -121,20 +122,29 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Initialiser Google Maps
   useEffect(() => {
+    let mounted = true;
+    
     const initializeMap = () => {
-      if (initializationRef.current || !window.google || !mapRef.current) {
+      if (initializationRef.current || !window.google || !mapRef.current || !mounted) {
         return;
       }
       
       initializationRef.current = true;
-      console.log('🗺️ Initialisation de Google Maps avec nouvelles APIs...');
+      console.log('🗺️ Initialisation de Google Maps (optimisée)...');
       
       try {
         // Créer la carte
         mapInstance.current = new window.google.maps.Map(mapRef.current, {
           center: CENTER_COORDS,
           zoom: 8,
-          mapId: 'DEMO_MAP_ID', // Requis pour les nouveaux marqueurs
+          // Remove mapId to avoid styling conflicts
+          disableDefaultUI: true,
+          zoomControl: true,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false,
+          gestureHandling: 'cooperative',
+          clickableIcons: false,
           styles: [
             { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
             { elementType: "labels.text.stroke", stylers: [{ color: "#1a1a1a" }] },
@@ -214,13 +224,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               elementType: "labels.text.stroke",
               stylers: [{ color: "#17263c" }]
             }
-          ],
-          disableDefaultUI: true,
-          zoomControl: true,
-          mapTypeControl: false,
-          streetViewControl: false,
-          fullscreenControl: false
+          ]
         });
+
+        if (!mounted) return;
 
         // Cercle standard (30km)
         standardCircleRef.current = new window.google.maps.Circle({
@@ -258,11 +265,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           radius: LYON_ON_DEMAND_RADIUS * 1000
         });
 
-        // Marqueur centre - Utiliser l'ancienne API pour la compatibilité
+        // Marqueur centre - Optimized marker creation
         const centerMarker = new window.google.maps.Marker({
           position: CENTER_COORDS,
           map: mapInstance.current,
           title: 'Monistrol-sur-Loire - Centre d\'intervention',
+          optimized: true,
           icon: {
             path: window.google.maps.SymbolPath.CIRCLE,
             scale: 8,
@@ -273,110 +281,131 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           }
         });
 
+        if (!mounted) return;
+
         // Autocomplete
         if (inputRef.current) {
-          // Utiliser l'ancienne API Autocomplete pour la compatibilité
           try {
             autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
               componentRestrictions: { country: 'fr' },
-              fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
+              fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components'],
+              types: ['(cities)']
             });
+
+            if (!mounted) return;
+
+            autocompleteRef.current.addListener('place_changed', () => {
+              if (!mounted) return;
+              
+              const place = autocompleteRef.current.getPlace();
+              
+              if (!place || !place.geometry || !place.geometry.location) {
+                setCoverageResult({ status: null, city: '' });
+                return;
+              }
+
+              const coords = {
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng()
+              };
+
+              // Extraire le nom du lieu
+              const placeName = place.name || place.formatted_address || '';
+              
+              // Vérifier la couverture
+              checkCoverage(coords, placeName);
+
+              // Ajouter/déplacer le marqueur
+              if (markerRef.current) {
+                markerRef.current.setMap(null);
+              }
+
+              markerRef.current = new window.google.maps.Marker({
+                position: coords,
+                map: mapInstance.current,
+                title: place.name,
+                animation: window.google.maps.Animation.DROP,
+                optimized: true
+              });
+
+              // Centrer la carte sur le lieu
+              mapInstance.current.panTo(coords);
+              mapInstance.current.setZoom(11);
+            });
+
           } catch (autocompleteError) {
             console.warn('Autocomplete non disponible, utilisation du fallback:', autocompleteError);
-            // Fallback : input simple sans autocomplete
-            inputRef.current.placeholder = "Entrez votre ville (ex: Le Puy-en-Velay)";
-            return;
+            if (inputRef.current) {
+              inputRef.current.placeholder = "Entrez votre ville (ex: Le Puy-en-Velay)";
+            }
           }
-
-          autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
-            componentRestrictions: { country: 'fr' },
-            fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
-          });
-
-          autocompleteRef.current.addListener('place_changed', () => {
-            const place = autocompleteRef.current.getPlace();
-            
-            if (!place || !place.geometry || !place.geometry.location) {
-              setCoverageResult({ status: null, city: '' });
-              return;
-            }
-
-            const coords = {
-              lat: place.geometry.location.lat(),
-              lng: place.geometry.location.lng()
-            };
-
-            // Extraire le nom du lieu
-            const placeName = place.name || place.formatted_address || '';
-            
-            // Vérifier la couverture
-            checkCoverage(coords, placeName);
-
-            // Ajouter/déplacer le marqueur
-            if (markerRef.current) {
-              markerRef.current.setMap(null);
-            }
-
-            // Utiliser l'ancienne API Marker pour la compatibilité
-            markerRef.current = new window.google.maps.Marker({
-              position: coords,
-              map: mapInstance.current,
-              title: place.name,
-              animation: window.google.maps.Animation.DROP
-            });
-
-            // Centrer la carte sur le lieu
-            mapInstance.current.panTo(coords);
-            mapInstance.current.setZoom(11);
-          });
         }
 
-        setIsMapReady(true);
-        console.log('✅ Google Maps initialisée avec succès (compatibilité maintenue)');
+        if (mounted) {
+          setIsMapReady(true);
+          console.log('✅ Google Maps initialisée avec succès (optimisée)');
+        }
         
       } catch (error) {
         console.error('❌ Erreur initialisation Google Maps:', error);
-        setMapError(true);
+        if (mounted) {
+          setMapError(true);
+        }
       }
     };
 
-    const initMap = () => {
-      // Vérifier si Google Maps est disponible
+    const handleGoogleMapsReady = () => {
       if (window.google) {
-        // Petit délai pour s'assurer que toutes les APIs sont chargées
         setTimeout(() => {
-          initializeMap();
-        }, 100);
-      } else if (window.googleMapsError) {
-        setMapError(true);
-      } else {
-        // Attendre que Google Maps soit chargé
-        const checkGoogle = setInterval(() => {
-          if (window.google) {
-            clearInterval(checkGoogle);
-            // Petit délai pour s'assurer que toutes les APIs sont chargées
-            setTimeout(() => {
-              initializeMap();
-            }, 100);
-          } else if (window.googleMapsError) {
-            clearInterval(checkGoogle);
-            setMapError(true);
+          if (mounted) {
+            initializeMap();
           }
         }, 100);
-        
-        // Timeout après 10 secondes
-        setTimeout(() => {
-          if (!window.google && !window.googleMapsError) {
-            clearInterval(checkGoogle);
-            setMapError(true);
-            console.error('❌ Timeout: Google Maps non chargé après 15s');
-          }
-        }, 15000);
       }
     };
 
-    // Initialiser dès que le composant est monté
-    initMap();
+    const handleGoogleMapsError = () => {
+      if (mounted) {
+        setMapError(true);
+      }
+    };
+
+    // Listen for Google Maps ready event
+    window.addEventListener('googleMapsReady', handleGoogleMapsReady);
+    window.addEventListener('googleMapsError', handleGoogleMapsError);
+
+    // Check if already loaded
+    if (window.googleMapsLoaded && window.google) {
+      handleGoogleMapsReady();
+    } else if (window.googleMapsError) {
+      handleGoogleMapsError();
+    }
+
+    // Cleanup function
+    cleanupRef.current = () => {
+      window.removeEventListener('googleMapsReady', handleGoogleMapsReady);
+      window.removeEventListener('googleMapsError', handleGoogleMapsError);
+      
+      if (markerRef.current) {
+        markerRef.current.setMap(null);
+      }
+      if (standardCircleRef.current) {
+        standardCircleRef.current.setMap(null);
+      }
+      if (embrayageCircleRef.current) {
+        embrayageCircleRef.current.setMap(null);
+      }
+      if (lyonCircleRef.current) {
+        lyonCircleRef.current.setMap(null);
+      }
+    };
+
+    return () => {
+      mounted = false;
+      if (cleanupRef.current) {
+        cleanupRef.current();
+      }
+    };
   }, []);
 
   const getCTAText = () => {

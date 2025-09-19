@@ -12,8 +12,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showLogo, setShowLogo] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,8 +44,24 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
       
       setIsScrolled(shouldBeScrolled);
       setShowLogo(shouldShowLogo);
-      
-      // Barre de progression de lecture
+
+      // Détection simple de la section active
+      const sections = ['hero', 'about', 'services', 'area', 'faq', 'contact'];
+      let currentActive = '';
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Section active si elle est visible dans la partie haute de l'écran
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            currentActive = sectionId;
+            break;
+          }
+        }
+      }
+
+      setActiveSection(currentActive);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -186,11 +201,21 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.id)}
-                  className="relative px-2 lg:px-3 py-2 text-xs xl:text-sm font-medium tracking-wide uppercase font-tech
-                    transition-all duration-200 ease-out transform hover:translate-y-[-1px]
+                  className={`relative px-2 lg:px-3 py-2 text-xs xl:text-sm font-medium tracking-wide uppercase font-tech
+                    transition-all duration-300 ease-out transform hover:translate-y-[-1px]
                     focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded
-                    text-white/90 hover:text-orange-400"
+                    ${activeSection === item.id 
+                      ? 'text-orange-400 scale-105' 
+                      : 'text-white/90 hover:text-orange-400'
+                    }`}
                 >
+                  {/* Indicateur de section active */}
+                  {activeSection === item.id && (
+                    <>
+                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-orange-400 rounded-full"></div>
+                      <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-orange-400 rounded-full"></div>
+                    </>
+                  )}
                   {item.name}
                 </button>
                 ))
@@ -280,11 +305,19 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                         scrollToSection(item.id);
                       }
                     }}
-                    className="relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-200 ease-out group
-                      hover:bg-orange-500/5 text-white/80 hover:text-orange-200"
+                    className={`relative w-full px-4 py-3 text-left text-sm font-tech transition-all duration-300 ease-out group
+                      hover:bg-orange-500/10 ${
+                        activeSection === item.id 
+                          ? 'text-orange-300 bg-orange-500/5 border-l-2 border-orange-400' 
+                          : 'text-white/80 hover:text-orange-200'
+                      }`}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full transition-all duration-200 bg-white/30 group-hover:bg-orange-300/70"></div>
+                    <div className="flex items-center gap-3">
+                      <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                        activeSection === item.id 
+                          ? 'bg-orange-400 scale-125' 
+                          : 'bg-white/30 group-hover:bg-orange-300/70'
+                      }`}></div>
                       <span className="font-medium">
                         {isGalleryPage && item.id === 'hero' ? '🏠 Retour à l\'accueil' : item.name}
                       </span>

@@ -503,25 +503,6 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
                     locationStatus.status === 'quote-only' ? 'bg-orange-500/20 text-orange-300 border-orange-500/30' :
                     'bg-red-500/20 text-red-300 border-red-500/30'
                   }`}>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className={`w-3 h-3 rounded-full ${
-                        locationStatus.status === 'covered' ? 'bg-green-400' :
-                        locationStatus.status === 'on-demand' ? 'bg-yellow-400' :
-                        locationStatus.status === 'quote-only' ? 'bg-orange-400' :
-                        'bg-red-400'
-                      }`}></div>
-                      <span className="font-bold">
-                        {locationStatus.status === 'covered' ? 'Zone Couverte' :
-                         locationStatus.status === 'on-demand' ? 'Zone Lyon (Sur demande)' :
-                         locationStatus.status === 'quote-only' ? 'Zone Élargie' :
-                         'Hors Zone'}
-                      </span>
-                      {locationStatus.distance && (
-                        <span className="text-xs opacity-80">
-                          ({Math.round(locationStatus.distance)} km)
-                        </span>
-                      )}
-                    </div>
                     <div className="font-tech leading-relaxed">
                       {getLocationStatusMessage()}
                     </div>

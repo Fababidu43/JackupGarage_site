@@ -14,6 +14,8 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const [showLogo, setShowLogo] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       

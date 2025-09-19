@@ -46,17 +46,35 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
       setShowLogo(shouldShowLogo);
 
       // Détection simple de la section active
-      const sections = ['hero', 'about', 'services', 'area', 'faq', 'contact'];
+      const sections = ['hero', 'about', 'services-intro', 'area', 'faq', 'contact'];
       let currentActive = '';
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Section active si elle est visible dans la partie haute de l'écran
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            currentActive = sectionId;
-            break;
+          
+          // Logique spéciale pour services-intro (section "Nos Services")
+          if (sectionId === 'services-intro') {
+            // Services est actif dès qu'on arrive sur la section et reste actif jusqu'à la zone d'intervention
+            const areaElement = document.getElementById('area');
+            if (areaElement) {
+              const areaRect = areaElement.getBoundingClientRect();
+              // Services reste actif tant que la zone d'intervention n'est pas proche du haut
+              if (rect.top <= 100 && areaRect.top > 200) {
+                currentActive = 'services';
+                break;
+              }
+            } else if (rect.top <= 100 && rect.bottom >= 100) {
+              currentActive = 'services';
+              break;
+            }
+          } else {
+            // Logique normale pour les autres sections
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              currentActive = sectionId;
+              break;
+            }
           }
         }
       }

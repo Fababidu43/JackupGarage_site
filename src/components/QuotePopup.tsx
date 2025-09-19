@@ -319,12 +319,13 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center gap-1 sm:gap-2">
             <div className="w-10 h-5 sm:w-12 sm:h-6 lg:w-16 lg:h-8 bg-white/95 border border-orange-500/30 rounded-md flex items-center justify-center p-0.5 sm:p-1 shadow-lg">
               <img 
-                src="/logo.png" 
+                src="./logo.png" 
                 alt="Jack Up Garage" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
                 onError={(e) => {
-                  console.error('Popup logo failed to load');
+                  console.warn('Popup logo failed to load, trying fallback');
+                  e.currentTarget.src = '/logo.png';
                 }}
               />
             </div>

@@ -171,10 +171,14 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   w-28 h-14 sm:w-36 sm:h-18 flex-shrink-0 backdrop-blur-sm`}
                 >
                   <img 
-                    src="/logo.png" 
+                    src="./logo.png" 
                     alt="JACK Up Auto" 
                     className="w-full h-full object-contain transition-all duration-300 group-hover:brightness-110"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
+                    onError={(e) => {
+                      console.warn('Header logo failed to load, trying fallback');
+                      e.currentTarget.src = '/logo.png';
+                    }}
                   />
                 </div>
               </div>
@@ -273,9 +277,13 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-6 bg-white/90 border border-orange-500/20 rounded flex items-center justify-center">
                     <img 
-                      src="/logo.png" 
+                      src="./logo.png" 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
+                      onError={(e) => {
+                        console.warn('Mobile menu logo failed to load, trying fallback');
+                        e.currentTarget.src = '/logo.png';
+                      }}
                     />
                   </div>
                   <span className="text-white/90 font-medium text-sm font-futuristic uppercase tracking-wide">Menu</span>

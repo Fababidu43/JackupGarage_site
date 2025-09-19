@@ -46,10 +46,14 @@ const Footer = () => {
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <img 
-                src="/logo.png" 
+                src="./logo.png" 
                 alt="JACK Up Auto" 
                 className="w-full h-full object-contain"
                 style={{ maxWidth: '100%', maxHeight: '100%' }}
+                onError={(e) => {
+                  console.warn('Footer logo failed to load, trying fallback');
+                  e.currentTarget.src = '/logo.png';
+                }}
               />
             </div>
           </div>

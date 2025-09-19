@@ -221,7 +221,7 @@ function App() {
         />
         
         {/* Services intro (blanc #FFFFFF) */}
-        <div className="relative">
+        <div id="about" className="relative">
           <div className="scroll-animate services-effect">
             <Services />
           </div>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle, Clock, MapPin, AlertTriangle, FileText } from 'lucide-react';
 
 // Centre de référence : Monistrol-sur-Loire
@@ -39,17 +39,17 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
   const [locationInput, setLocationInput] = useState('');
 
   // Calculer la distance entre deux points
-  const calculateDistance = useCallback((point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
+  const calculateDistance = (point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
     if (window.google && window.google.maps && window.google.maps.geometry) {
       const latLng1 = new window.google.maps.LatLng(point1.lat, point1.lng);
       const latLng2 = new window.google.maps.LatLng(point2.lat, point2.lng);
       return window.google.maps.geometry.spherical.computeDistanceBetween(latLng1, latLng2) / 1000; // en km
     }
     return 0;
-  }, []);
+  };
 
   // Vérifier la couverture d'un point
-  const checkCoverage = useCallback((coords: { lat: number; lng: number }, placeName: string, place?: any) => {
+  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string, place?: any) => {
     // Vérifier d'abord si c'est dans la zone Lyon (10km autour de Lyon)
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
     const isInLyonZone = distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
@@ -95,26 +95,23 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
       });
     }
 
-  }, [calculateDistance]);
+  };
 
   // Initialiser l'autocomplete Google Places
   React.useEffect(() => {
     if (!isOpen || step !== 3) return;
 
-    let autocompleteInstance: any = null;
-    let cleanup: (() => void) | null = null;
-
     const initAutocomplete = () => {
       const input = document.getElementById('location-input') as HTMLInputElement;
       if (!input || !window.google) return;
 
-      autocompleteInstance = new window.google.maps.places.Autocomplete(input, {
+      const autocomplete = new window.google.maps.places.Autocomplete(input, {
         componentRestrictions: { country: 'fr' },
         fields: ['place_id', 'geometry', 'name', 'formatted_address', 'address_components']
       });
 
-      autocompleteInstance.addListener('place_changed', () => {
-        const place = autocompleteInstance.getPlace();
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
         
         if (!place || !place.geometry || !place.geometry.location) {
           setLocationStatus({ status: null, city: '' });
@@ -130,18 +127,6 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
         setFormData({ ...formData, location: placeName });
         checkCoverage(coords, placeName, place);
       });
-      
-      // Fonction de nettoyage
-      cleanup = () => {
-        try {
-          if (autocompleteInstance) {
-            window.google.maps.event.clearInstanceListeners(autocompleteInstance);
-            autocompleteInstance = null;
-          }
-        } catch (error) {
-          console.warn('Erreur lors du nettoyage de l\'autocomplete:', error);
-        }
-      };
     };
 
     // Attendre que Google Maps soit chargé
@@ -155,14 +140,8 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
         }
       }, 100);
       
-      return () => {
-        clearInterval(checkGoogle);
-        if (cleanup) cleanup();
-      };
+      return () => clearInterval(checkGoogle);
     }
-    
-    // Retourner la fonction de nettoyage
-    return cleanup;
   }, [isOpen, step, formData]);
 
   const getLocationStatusMessage = () => {

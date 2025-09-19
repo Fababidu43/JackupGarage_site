@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useCallback, useMemo } from 'react';
 import { MapPin, ChevronDown, ChevronUp, CheckCircle, AlertTriangle, XCircle, Home, Wrench, Info, Map, DollarSign, Search, FileText, MapIcon, Calculator } from 'lucide-react';
 
 interface ServiceAreaProps {
@@ -38,36 +37,33 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   const embrayageCircleRef = useRef<any>(null);
   const lyonCircleRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const [isMapVisible, setIsMapVisible] = useState(false);
 
-  // Mémoiser les listes de communes pour éviter les re-créations
-  const communes43 = useMemo(() => [
+  const communes43 = [
     "Le Puy-en-Velay", "Monistrol-sur-Loire", "Yssingeaux", "Brioude", "Langeac", 
     "Sainte-Sigolène", "Retournac", "Bas-en-Basset", "Saint-Just-Malmont", "Dunières", 
     "Tence", "Saint-Didier-en-Velay", "Craponne-sur-Arzon", "Vorey", "Aurec-sur-Loire", 
     "Saint-Paulien", "Allegre"
-  ], []);
+  ];
 
-  const communes42 = useMemo(() => [
+  const communes42 = [
     "Saint-Étienne", "Firminy", "Saint-Chamond", "Rive-de-Gier", "Roanne", "Montbrison", 
     "Veauche", "Sorbiers", "La Ricamarie", "Le Chambon-Feugerolles", "Unieux", 
     "Roche-la-Molière", "Saint-Genest-Malifaux", "Bourg-Argental", "Pélussin", 
     "Charlieu", "Feurs", "Boën-sur-Lignon", "Andrézieux-Bouthéon", "Saint-Just-Saint-Rambert"
-  ], []);
+  ];
 
   // Calculer la distance entre deux points
-  const calculateDistance = useCallback((point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
+  const calculateDistance = (point1: { lat: number; lng: number }, point2: { lat: number; lng: number }) => {
     if (window.google && window.google.maps && window.google.maps.geometry) {
       const latLng1 = new window.google.maps.LatLng(point1.lat, point1.lng);
       const latLng2 = new window.google.maps.LatLng(point2.lat, point2.lng);
       return window.google.maps.geometry.spherical.computeDistanceBetween(latLng1, latLng2) / 1000; // en km
     }
     return 0;
-  }, []);
+  };
 
   // Vérifier la couverture d'un point
-  const checkCoverage = useCallback((coords: { lat: number; lng: number }, placeName: string) => {
+  const checkCoverage = (coords: { lat: number; lng: number }, placeName: string) => {
     // Vérifier d'abord si c'est dans la zone Lyon (10km autour de Lyon)
     const distanceFromLyon = calculateDistance(coords, LYON_COORDS);
     const isInLyonZone = distanceFromLyon <= LYON_ON_DEMAND_RADIUS;
@@ -118,37 +114,12 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         distance: distanceFromCenter 
       });
     }
-  }, [calculateDistance]);
+  };
 
-  // Observer d'intersection pour charger la carte seulement quand visible
+  // Initialiser Google Maps
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isMapVisible) {
-          setIsMapVisible(true);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '100px'
-      }
-    );
-
-    if (mapRef.current) {
-      observer.observe(mapRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [isMapVisible]);
-
-  // Initialiser Google Maps seulement quand visible
-  useEffect(() => {
-    if (!isMapVisible || isMapLoaded) return;
-
     const initMap = () => {
       if (!window.google || !mapRef.current) return;
-
-      console.log('Initialisation de Google Maps...');
 
       // Créer la carte
       mapInstance.current = new window.google.maps.Map(mapRef.current, {
@@ -238,8 +209,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         zoomControl: true,
         mapTypeControl: false,
         streetViewControl: false,
-        fullscreenControl: false,
-        gestureHandling: 'cooperative'
+        fullscreenControl: false
       });
 
       // Cercle standard (50km)
@@ -336,9 +306,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           mapInstance.current.setZoom(11);
         });
       }
-
-      setIsMapLoaded(true);
-      console.log('Google Maps initialisé avec succès');
     };
 
     // Attendre que Google Maps soit chargé
@@ -351,15 +318,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           initMap();
         }
       }, 100);
-      
-      // Timeout de sécurité
-      setTimeout(() => {
-        clearInterval(checkGoogle);
-      }, 10000);
     }
-  }, [isMapVisible, isMapLoaded, checkCoverage]);
+  }, []);
 
-  const getCTAText = useCallback(() => {
+  const getCTAText = () => {
     switch (coverageResult.status) {
       case 'covered':
         return 'Demander un devis';
@@ -374,9 +336,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       default:
         return 'Demander un devis';
     }
-  }, [coverageResult.status]);
+  };
 
-  const getStatusMessage = useCallback(() => {
+  const getStatusMessage = () => {
     if (!coverageResult.distance) return '';
     
     const distance = Math.round(coverageResult.distance);
@@ -404,7 +366,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       default:
         return '';
     }
-  }, [coverageResult]);
+  };
 
   return (
     <section 
@@ -455,23 +417,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 </div>
                 <div 
                   ref={mapRef}
-                  className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl bg-gray-900 flex items-center justify-center"
+                  className="w-full h-96 rounded-xl border-2 border-orange-500/30 overflow-hidden shadow-2xl"
                   style={{ minHeight: '400px' }}
-                >
-                  {!isMapVisible && (
-                    <div className="text-white text-center">
-                      <MapPin className="w-12 h-12 mx-auto mb-4 text-orange-500" />
-                      <p className="text-lg font-medium">Carte interactive</p>
-                      <p className="text-sm text-gray-400">Chargement...</p>
-                    </div>
-                  )}
-                  {isMapVisible && !isMapLoaded && (
-                    <div className="text-white text-center">
-                      <div className="animate-spin w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-                      <p className="text-lg font-medium">Chargement de la carte...</p>
-                    </div>
-                  )}
-                </div>
+                />
 
                 {/* Légende élégante */}
                 <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
@@ -554,7 +502,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   <button
                     onClick={() => setShowAllCommunes43(!showAllCommunes43)}
                     className="text-orange-300 hover:text-orange-200 transition-colors"
-                    aria-label={showAllCommunes43 ? 'Masquer les communes' : 'Afficher toutes les communes'}
                   >
                     {showAllCommunes43 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
@@ -579,7 +526,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   <button
                     onClick={() => setShowAllCommunes42(!showAllCommunes42)}
                     className="text-orange-300 hover:text-orange-200 transition-colors"
-                    aria-label={showAllCommunes42 ? 'Masquer les communes' : 'Afficher toutes les communes'}
                   >
                     {showAllCommunes42 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </button>
@@ -609,6 +555,51 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               </div>
             </div>
           </div>
+
+          {/* Anciennes listes détaillées (cachées par défaut) */}
+          {false && (showAllCommunes43 || showAllCommunes42) && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 hidden">
+              {/* Haute-Loire - Version détaillée */}
+              {showAllCommunes43 && (
+                <div className="bg-green-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-green-500/20">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-white font-futuristic">
+                      Haute-Loire (43)
+                    </h3>
+                    <button
+                      onClick={() => setShowAllCommunes43(false)}
+                      className="text-orange-300 hover:text-orange-200"
+                    >
+                      <ChevronUp className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="text-white/80 text-sm font-tech leading-relaxed">
+                    {communes43.join(' • ')}
+                  </div>
+                </div>
+              )}
+
+              {/* Loire - Version détaillée */}
+              {showAllCommunes42 && (
+                <div className="bg-green-500/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg border border-green-500/20">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-white font-futuristic">
+                      Loire (42)
+                    </h3>
+                    <button
+                      onClick={() => setShowAllCommunes42(false)}
+                      className="text-orange-300 hover:text-orange-200"
+                    >
+                      <ChevronUp className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <div className="text-white/80 text-sm font-tech leading-relaxed">
+                    {communes42.join(' • ')}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* CTA principal */}
           <div className="text-center">

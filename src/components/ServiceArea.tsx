@@ -145,6 +145,8 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
   useEffect(() => {
     if (!isMapVisible || isMapLoaded) return;
 
+    let cleanup: (() => void) | null = null;
+
     const initMap = () => {
       if (!window.google || !mapRef.current) return;
 
@@ -279,7 +281,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       });
 
       // Marqueur centre
-      new window.google.maps.Marker({
+      const centerMarker = new window.google.maps.Marker({
         position: CENTER_COORDS,
         map: mapInstance.current,
         title: 'Monistrol-sur-Loire - Centre d\'intervention',
@@ -337,6 +339,48 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         });
       }
 
+      // Fonction de nettoyage
+      cleanup = () => {
+        try {
+          // Nettoyer les cercles
+          if (standardCircleRef.current) {
+            standardCircleRef.current.setMap(null);
+            standardCircleRef.current = null;
+          }
+          if (embrayageCircleRef.current) {
+            embrayageCircleRef.current.setMap(null);
+            embrayageCircleRef.current = null;
+          }
+          if (lyonCircleRef.current) {
+            lyonCircleRef.current.setMap(null);
+            lyonCircleRef.current = null;
+          }
+          
+          // Nettoyer les marqueurs
+          if (markerRef.current) {
+            markerRef.current.setMap(null);
+            markerRef.current = null;
+          }
+          if (centerMarker) {
+            centerMarker.setMap(null);
+          }
+          
+          // Nettoyer l'autocomplete
+          if (autocompleteRef.current) {
+            window.google.maps.event.clearInstanceListeners(autocompleteRef.current);
+            autocompleteRef.current = null;
+          }
+          
+          // Nettoyer la carte
+          if (mapInstance.current) {
+            window.google.maps.event.clearInstanceListeners(mapInstance.current);
+            mapInstance.current = null;
+          }
+        } catch (error) {
+          console.warn('Erreur lors du nettoyage Google Maps:', error);
+        }
+      };
+
       setIsMapLoaded(true);
       console.log('Google Maps initialisé avec succès');
     };
@@ -353,10 +397,20 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       }, 100);
       
       // Timeout de sécurité
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         clearInterval(checkGoogle);
       }, 10000);
+      
+      // Nettoyage du timeout
+      return () => {
+        clearInterval(checkGoogle);
+        clearTimeout(timeout);
+        if (cleanup) cleanup();
+      };
     }
+    
+    // Retourner la fonction de nettoyage
+    return cleanup;
   }, [isMapVisible, isMapLoaded, checkCoverage]);
 
   const getCTAText = useCallback(() => {

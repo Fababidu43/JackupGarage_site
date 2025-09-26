@@ -14,7 +14,7 @@ const FAQ = () => {
     },
     {
       question: "Que se passe-t-il s'il en cas d'intempéries ?",
-      answer: "En cas d'intempéries report du rendez vous."
+      answer: "Le rendez-vous peut être reporté en cas d'intempéries"
     },
     {
       question: "Acceptez-vous tous les véhicules ?",

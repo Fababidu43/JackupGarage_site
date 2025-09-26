@@ -166,7 +166,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           </span>
         );
       case 'quote-only':
-        return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément kilométrique applicable.`;
+        return `${locationStatus.city} : zone élargie selon nature des travaux (${distance} km). Supplément kilométrique applicable.`;
       case 'out-of-zone':
         return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:

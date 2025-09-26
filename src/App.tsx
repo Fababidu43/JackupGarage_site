@@ -381,7 +381,7 @@ function App() {
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
-                    🚗 <strong>Signes d'usure :</strong> Remplacement préventif tous les 60 000-120 000 km selon constructeur, bruits de courroie, fuite de liquide de refroidissement.
+                    🚗 <strong>Préconisations :</strong> remplacement préventif de la courroie tous les 90 000 à 120 000 km, selon le véhicule.
                   </p>
                 </div>
                 

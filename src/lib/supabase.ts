@@ -13,17 +13,5 @@ if (import.meta.env.DEV && (!supabaseUrl || !supabaseAnonKey)) {
   console.warn('⚠️ Variables d\'environnement Supabase non configurées. Fonctionnalités limitées.')
   console.warn('Ajoutez VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY dans votre fichier .env')
 }
-
 const finalUrl = supabaseUrl || defaultUrl
 const finalKey = supabaseAnonKey || defaultKey
-
-export const supabase = createClient(finalUrl, finalKey, {
-  auth: {
-    persistSession: false
-  },
-  global: {
-    headers: {
-      'X-Client-Info': 'jackup-auto-website'
-    }
-  }
-})

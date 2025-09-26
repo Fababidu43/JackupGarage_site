@@ -246,7 +246,7 @@ function App() {
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    🚗 <strong>Signes d'usure :</strong> changement d’huile et du filtre recommandé tous les 10 000 à 15 000 km, selon le constructeur. Le voyant d’entretien s’allume lorsque la vidange est nécessaire.
+                    🚗 <strong>Signes d'usure :</strong> Changement d’huile et du filtre recommandé tous les 10 000 - 15 000 km, selon le constructeur. Le voyant d’entretien s’allume lorsque la vidange est nécessaire.
                   </p>
                 </div>
                 

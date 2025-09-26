@@ -336,7 +336,7 @@ function App() {
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-300 font-tech leading-relaxed">
-                    🚗 <strong>Signes d'usure :</strong> Pédale d'embrayage qui patine, bruits au débrayage, difficulté à passer les vitesses, odeur de brûlé.
+                    🚗 <strong>Signes d'usure :</strong> embrayage qui patine, bruits au débrayage, vitesses difficiles à passer, véhicule qui n'avance plus ou avance très mal.
                   </p>
                 </div>
                 

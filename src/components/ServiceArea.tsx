@@ -360,7 +360,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           </span>
         );
       case 'quote-only':
-        return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément 1€/km au-delà de 30 km.`;
+        return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément kilométrique applicable.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:

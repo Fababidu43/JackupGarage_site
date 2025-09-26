@@ -487,7 +487,7 @@ function App() {
               <div className="lg:order-1">
                 <div className="aspect-square w-full max-w-sm mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg flex items-center justify-center border border-gray-300 hover-scale">
                   <img 
-                    src="https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" 
+                    src="/autre_presta.jpg" 
                     alt="Autres prestations automobiles" 
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
                   />

@@ -15,3 +15,5 @@ if (import.meta.env.DEV && (!supabaseUrl || !supabaseAnonKey)) {
 }
 const finalUrl = supabaseUrl || defaultUrl
 const finalKey = supabaseAnonKey || defaultKey
+
+export const supabase = createClient(finalUrl, finalKey)

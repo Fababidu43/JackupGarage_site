@@ -67,6 +67,12 @@ const Gallery = () => {
 
   const checkAuthStatus = async () => {
     try {
+      // Vérifier si Supabase est configuré
+      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
+        setIsAdmin(false);
+        return;
+      }
+      
       const { data: { session } } = await supabase.auth.getSession();
       setIsAdmin(!!session?.user);
     } catch (error) {

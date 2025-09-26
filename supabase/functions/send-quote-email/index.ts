@@ -12,7 +12,23 @@ interface QuoteRequest {
   location: string;
   phone: string;
   name: string;
+  formType: 'quote';
 }
+
+interface ContactRequest {
+  firstName: string;
+  lastName: string;
+  address: string;
+  phone: string;
+  email: string;
+  registration?: string;
+  subject: string;
+  message: string;
+  hasHardFlatGround: boolean;
+  formType: 'contact';
+}
+
+type FormRequest = QuoteRequest | ContactRequest;
 
 const serviceNames: { [key: string]: string } = {
   'vidange': 'Vidange / Entretien',
@@ -38,18 +54,33 @@ const serviceTimes: { [key: string]: string } = {
   'autre': 'Variable'
 };
 
-async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
+const subjectNames: { [key: string]: string } = {
+  'entretien': 'Entretien / Vidange',
+  'embrayage': 'Embrayage / Volant moteur',
+  'distribution': 'Kit distribution',
+  'suspension': 'Suspensions / Amortisseurs',
+  'autre': 'Autre'
+};
+
+async function sendEmailViaMailerSend(formData: FormRequest) {
   try {
-    const serviceName = serviceNames[quoteData.service] || quoteData.service;
-    const urgencyName = urgencyNames[quoteData.urgency] || quoteData.urgency;
-    const serviceTime = serviceTimes[quoteData.service] || 'Variable';
-    
     const currentDate = new Date();
     const dateStr = currentDate.toLocaleDateString('fr-FR');
     const timeStr = currentDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
-    // Contenu de l'email HTML professionnel
-    const htmlContent = `
+    let htmlContent: string;
+    let textContent: string;
+    let emailSubject: string;
+
+    if (formData.formType === 'quote') {
+      // Email pour devis express
+      const serviceName = serviceNames[formData.service] || formData.service;
+      const urgencyName = urgencyNames[formData.urgency] || formData.urgency;
+      const serviceTime = serviceTimes[formData.service] || 'Variable';
+      
+      emailSubject = `🚗 Nouvelle demande de devis - ${serviceName} - ${formData.name}`;
+      
+      htmlContent = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,19 +254,19 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
                 <h3>👤 Informations client</h3>
                 <div class="info-row">
                     <span class="label">Nom complet :</span>
-                    <span class="value"><strong>${quoteData.name}</strong></span>
+                    <span class="value"><strong>${formData.name}</strong></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Téléphone :</span>
-                    <span class="value"><a href="tel:${quoteData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${quoteData.phone}</a></span>
+                    <span class="value"><a href="tel:${formData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.phone}</a></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Ville d'intervention :</span>
-                    <span class="value"><strong>${quoteData.location}</strong></span>
+                    <span class="value"><strong>${formData.location}</strong></span>
                 </div>
             </div>
             
-            <div class="section ${quoteData.urgency === 'tres-urgent' ? 'priority-high' : ''}">
+            <div class="section ${formData.urgency === 'tres-urgent' ? 'priority-high' : ''}">
                 <h3>🔧 Détails de l'intervention</h3>
                 <div class="info-row">
                     <span class="label">Service demandé :</span>
@@ -247,7 +278,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
                 </div>
                 <div class="info-row">
                     <span class="label">Niveau d'urgence :</span>
-                    <span class="value"><strong style="color: ${quoteData.urgency === 'tres-urgent' ? '#f44336' : quoteData.urgency === 'urgent' ? '#ff9800' : '#4caf50'}">${urgencyName}</strong></span>
+                    <span class="value"><strong style="color: ${formData.urgency === 'tres-urgent' ? '#f44336' : formData.urgency === 'urgent' ? '#ff9800' : '#4caf50'}">${urgencyName}</strong></span>
                 </div>
             </div>
             
@@ -263,7 +294,7 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
         
         <div class="footer">
             <h4>📞 Rappeler le client</h4>
-            <p><a href="tel:${quoteData.phone}">${quoteData.phone}</a></p>
+            <p><a href="tel:${formData.phone}">${formData.phone}</a></p>
             <p style="margin-top: 20px; font-size: 12px; opacity: 0.8; color: #ccc;">
                 Email automatique généré par le site JACK Up Auto<br>
                 ${new Date().toISOString()}
@@ -273,14 +304,15 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
 </body>
 </html>`;
 
+
     // Version texte simple pour les clients email qui ne supportent pas HTML
-    const textContent = `
+      textContent = `
 🚗 JACK UP AUTO - NOUVELLE DEMANDE DE DEVIS
 
 === INFORMATIONS CLIENT ===
-👤 Nom: ${quoteData.name}
-📞 Téléphone: ${quoteData.phone}
-📍 Ville: ${quoteData.location}
+👤 Nom: ${formData.name}
+📞 Téléphone: ${formData.phone}
+📍 Ville: ${formData.location}
 
 === DÉTAILS INTERVENTION ===
 🔧 Service: ${serviceName}
@@ -293,12 +325,275 @@ async function sendEmailViaMailerSend(quoteData: QuoteRequest) {
 
 === ACTION REQUISE ===
 Recontacter le client pour établir un devis personnalisé.
-Téléphone: ${quoteData.phone}
+Téléphone: ${formData.phone}
 
 ---
 Email automatique généré par le site JACK Up Auto
 ${new Date().toISOString()}
 `;
+    } else {
+      // Email pour formulaire de contact
+      const subjectName = subjectNames[formData.subject] || formData.subject;
+      
+      emailSubject = `📞 Nouveau message de contact - ${subjectName} - ${formData.firstName} ${formData.lastName}`;
+      
+      htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau message de contact - JACK Up Auto</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f5f5f5;
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 20px auto; 
+            background: white; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        .header { 
+            background: linear-gradient(135deg, #FF6B35, #FF8C42); 
+            color: white; 
+            padding: 30px 20px; 
+            text-align: center;
+            position: relative;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B35, #FFB347, #FF6B35);
+        }
+        .header h1 { 
+            margin: 0; 
+            font-size: 28px; 
+            font-weight: bold; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .header h2 { 
+            margin: 10px 0 0 0; 
+            font-size: 18px; 
+            font-weight: normal; 
+            opacity: 0.95;
+        }
+        .content { 
+            padding: 30px 25px; 
+        }
+        .section { 
+            margin-bottom: 25px; 
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #FF6B35;
+        }
+        .section h3 { 
+            color: #FF6B35; 
+            font-size: 18px; 
+            margin: 0 0 15px 0; 
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-row { 
+            display: flex; 
+            margin: 12px 0; 
+            padding: 12px 15px; 
+            background: white; 
+            border-radius: 6px; 
+            border: 1px solid #e8e8e8;
+            transition: all 0.2s ease;
+        }
+        .info-row:hover {
+            border-color: #FF6B35;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.1);
+        }
+        .label { 
+            font-weight: bold; 
+            min-width: 140px; 
+            color: #FF6B35; 
+            font-size: 14px;
+        }
+        .value { 
+            flex: 1; 
+            color: #333; 
+            font-size: 14px;
+        }
+        .message-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e8e8e8;
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .footer { 
+            text-align: center; 
+            padding: 25px 20px; 
+            background: #2c2c2c; 
+            color: white; 
+        }
+        .footer h4 {
+            color: #FF6B35;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .footer a { 
+            color: #FF6B35; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 18px;
+        }
+        .footer a:hover { 
+            text-decoration: underline; 
+        }
+        .timestamp {
+            background: #f0f8ff;
+            border: 1px solid #e3f2fd;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .call-to-action {
+            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .call-to-action a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 JACK UP AUTO</h1>
+            <h2>Nouveau message de contact</h2>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h3>👤 Informations client</h3>
+                <div class="info-row">
+                    <span class="label">Nom complet :</span>
+                    <span class="value"><strong>${formData.firstName} ${formData.lastName}</strong></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Téléphone :</span>
+                    <span class="value"><a href="tel:${formData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.phone}</a></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Email :</span>
+                    <span class="value"><a href="mailto:${formData.email}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.email}</a></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Adresse d'intervention :</span>
+                    <span class="value"><strong>${formData.address}</strong></span>
+                </div>
+                ${formData.registration ? `
+                <div class="info-row">
+                    <span class="label">Immatriculation :</span>
+                    <span class="value"><strong>${formData.registration}</strong></span>
+                </div>
+                ` : ''}
+            </div>
+            
+            <div class="section">
+                <h3>🔧 Détails de la demande</h3>
+                <div class="info-row">
+                    <span class="label">Objet :</span>
+                    <span class="value"><strong>${subjectName}</strong></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Sol dur disponible :</span>
+                    <span class="value"><strong style="color: ${formData.hasHardFlatGround ? '#4caf50' : '#f44336'}">${formData.hasHardFlatGround ? 'Oui ✓' : 'Non ✗'}</strong></span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3>💬 Message du client</h3>
+                <div class="message-content">
+                    "${formData.message}"
+                </div>
+            </div>
+            
+            <div class="timestamp">
+                <strong>📅 Message reçu le ${dateStr} à ${timeStr}</strong>
+            </div>
+            
+            <div class="call-to-action">
+                <p style="margin: 0 0 10px 0;"><strong>⚡ ACTION REQUISE</strong></p>
+                <p style="margin: 0;">Recontacter le client pour répondre à sa demande</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h4>📞 Contacter le client</h4>
+            <p>
+                <a href="tel:${formData.phone}">${formData.phone}</a> • 
+                <a href="mailto:${formData.email}">${formData.email}</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 12px; opacity: 0.8; color: #ccc;">
+                Email automatique généré par le site JACK Up Auto<br>
+                ${new Date().toISOString()}
+            </p>
+        </div>
+    </div>
+</body>
+</html>`;
+
+      textContent = `
+🚗 JACK UP AUTO - NOUVEAU MESSAGE DE CONTACT
+
+=== INFORMATIONS CLIENT ===
+👤 Nom: ${formData.firstName} ${formData.lastName}
+📞 Téléphone: ${formData.phone}
+📧 Email: ${formData.email}
+📍 Adresse: ${formData.address}
+${formData.registration ? `🚗 Immatriculation: ${formData.registration}` : ''}
+
+=== DÉTAILS DEMANDE ===
+🔧 Objet: ${subjectName}
+🏠 Sol dur disponible: ${formData.hasHardFlatGround ? 'Oui' : 'Non'}
+
+=== MESSAGE ===
+"${formData.message}"
+
+=== INFORMATIONS DEMANDE ===
+📅 Date: ${dateStr}
+🕐 Heure: ${timeStr}
+
+=== ACTION REQUISE ===
+Recontacter le client pour répondre à sa demande.
+Téléphone: ${formData.phone}
+Email: ${formData.email}
+
+---
+Email automatique généré par le site JACK Up Auto
+${new Date().toISOString()}
+`;
+    }
 
     console.log('=== ENVOI EMAIL VIA API MAILERSEND ===');
 
@@ -315,6 +610,7 @@ ${new Date().toISOString()}
         }
       ],
       subject: `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`,
+      subject: emailSubject,
       html: htmlContent,
       text: textContent
     };
@@ -366,11 +662,11 @@ ${new Date().toISOString()}
         message: "Email envoyé avec succès via MailerSend",
         details: {
           to: 'jackup-auto@outlook.fr',
-          subject: emailPayload.subject,
+          subject: emailSubject,
           timestamp: new Date().toISOString(),
-          service: serviceName,
-          client: quoteData.name,
-          phone: quoteData.phone,
+          formType: formData.formType,
+          client: formData.formType === 'quote' ? formData.name : `${formData.firstName} ${formData.lastName}`,
+          phone: formData.phone,
           mailersend_response: result
         }
       };
@@ -425,14 +721,22 @@ serve(async (req: Request) => {
       );
     }
 
-    const quoteData: QuoteRequest = await req.json();
+    const formData: FormRequest = await req.json();
     
     // Validation des données
-    if (!quoteData.name || !quoteData.phone || !quoteData.location || !quoteData.service || !quoteData.urgency) {
+    let isValid = false;
+    
+    if (formData.formType === 'quote') {
+      isValid = !!(formData.name && formData.phone && formData.location && formData.service && formData.urgency);
+    } else if (formData.formType === 'contact') {
+      isValid = !!(formData.firstName && formData.lastName && formData.phone && formData.email && formData.address && formData.subject && formData.message);
+    }
+    
+    if (!isValid) {
       return new Response(
         JSON.stringify({ 
           error: "Données manquantes",
-          received: quoteData
+          received: formData
         }),
         {
           status: 400,
@@ -441,18 +745,18 @@ serve(async (req: Request) => {
       );
     }
 
-    console.log('=== DEMANDE DE DEVIS REÇUE ===');
-    console.log('Données reçues:', JSON.stringify(quoteData, null, 2));
+    console.log(`=== ${formData.formType === 'quote' ? 'DEMANDE DE DEVIS' : 'MESSAGE DE CONTACT'} REÇU ===`);
+    console.log('Données reçues:', JSON.stringify(formData, null, 2));
 
     // Envoyer l'email via MailerSend
-    const result = await sendEmailViaMailerSend(quoteData);
+    const result = await sendEmailViaMailerSend(formData);
     
     if (result.success) {
       console.log('✅ Email traité avec succès');
       return new Response(
         JSON.stringify({ 
           success: true, 
-          message: "Demande de devis traitée avec succès",
+          message: formData.formType === 'quote' ? "Demande de devis traitée avec succès" : "Message de contact traité avec succès",
           details: result.details
         }),
         {

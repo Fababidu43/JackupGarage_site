@@ -10,19 +10,75 @@ const Contact = () => {
     email: '',
     registration: '',
     subject: '',
-    message: ''
+    message: '',
+    hasHardFlatGround: false
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
+    setIsLoading(true);
+    setSubmitError('');
+    
+    try {
+      console.log('=== ENVOI FORMULAIRE DE CONTACT ===');
+      console.log('Données à envoyer:', formData);
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-quote-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          ...formData,
+          formType: 'contact'
+        })
+      });
+
+      console.log('Réponse HTTP status:', response.status);
+      const result = await response.json();
+      console.log('Réponse du serveur:', result);
+      
+      if (result.success) {
+        console.log('✅ Message de contact envoyé avec succès !');
+        console.log('Détails:', result.details);
+        setIsSubmitted(true);
+        // Réinitialiser le formulaire
+        setFormData({
+          firstName: '',
+          lastName: '',
+          address: '',
+          phone: '',
+          email: '',
+          registration: '',
+          subject: '',
+          message: '',
+          hasHardFlatGround: false
+        });
+      } else {
+        console.error('❌ Erreur envoi message:', result.error);
+        setSubmitError(result.error || 'Erreur lors de l\'envoi du message');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      setSubmitError('Erreur de connexion. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -102,7 +158,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-2">
+            <div className={`lg:col-span-2 ${isSubmitted ? 'opacity-50 pointer-events-none' : ''}`}>
               <form onSubmit={handleSubmit} className="bg-black/90 backdrop-blur-sm p-4 sm:p-6 shadow-2xl rounded-lg border-2 border-orange-500/40 hover-scale border-glow subtle-glow animated-border">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <div>
@@ -238,6 +294,9 @@ const Contact = () => {
                   <label className="flex items-center">
                     <input
                       type="checkbox"
+                      name="hasHardFlatGround"
+                      checked={formData.hasHardFlatGround}
+                      onChange={handleChange}
                       className="mr-2 sm:mr-3 w-4 h-4 sm:w-5 sm:h-5 text-orange-500 border-2 border-gray-300 rounded focus:ring-orange-500 flex-shrink-0"
                       required
                     />
@@ -247,12 +306,29 @@ const Contact = () => {
                   </label>
                 </div>
 
+                {/* Message d'erreur */}
+                {submitError && (
+                  <div className="mb-4 sm:mb-6 p-3 bg-red-500/20 border border-red-500/30 rounded-lg">
+                    <p className="text-red-300 text-sm font-tech">{submitError}</p>
+                  </div>
+                )}
+
                 <button
                   type="submit"
+                  disabled={isLoading || isSubmitted}
                   className="w-full btn-primary py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow text-sm min-h-[48px]"
                 >
-                  <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                  Envoyer la demande
+                  {isLoading ? (
+                    <>
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                      Envoi en cours...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                      Envoyer la demande
+                    </>
+                  )}
                 </button>
                 
                 <p className="text-center text-xs sm:text-sm text-white/60 mt-3 sm:mt-4 font-tech">

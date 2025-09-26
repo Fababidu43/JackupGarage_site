@@ -10,7 +10,7 @@ const FAQ = () => {
     },
     {
       question: "Fournissez-vous les pièces ?",
-      answer: "Oui, pièces de qualité constructeur incluses dans le devis."
+      answer: "Oui, des pièces d'origines ou de marques reconnues vous sont proposées dans le devis"
     },
     {
       question: "Que se passe-t-il s'il en cas d'intempéries ?",

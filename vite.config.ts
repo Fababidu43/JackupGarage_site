@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     global: 'globalThis',
-    'window.GOOGLE_MAPS_KEY': JSON.stringify(process.env.VITE_GOOGLE_MAPS_KEY || ''),
+    'window.GOOGLE_MAPS_KEY': JSON.stringify(process.env.VITE_GOOGLE_MAPS_API_KEY || ''),
   },
   build: {
     rollupOptions: {

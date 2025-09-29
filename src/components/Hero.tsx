@@ -99,7 +99,9 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
       
-      {/* Overlay dynamique avec effet de respiration */}
+      {/* Overlay renforcé pour meilleure lisibilité */}
+      <div className="absolute inset-0 bg-black/60 z-5"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70 z-5"></div>
       
       {/* Particules flottantes subtiles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

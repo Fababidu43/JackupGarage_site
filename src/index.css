@@ -227,6 +227,26 @@
   text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
 }
 
+/* Amélioration lisibilité texte Hero */
+.hero-content h1 {
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(255, 107, 53, 0.3);
+}
+
+.hero-content .text-orange-300 {
+  text-shadow: 
+    1px 1px 3px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content .text-white\/80 {
+  text-shadow: 
+    1px 1px 2px rgba(0, 0, 0, 0.9),
+    0 0 6px rgba(0, 0, 0, 0.7);
+}
+
 /* === SYSTÈME DE PHARES DYNAMIQUES === */
 /* === FOND DYNAMIQUE AVEC SCROLL === */
 .dynamic-background {

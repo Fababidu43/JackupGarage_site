@@ -225,4 +225,5 @@
 }
 
 .text-glow {
-  text-shadow: 0 0 
+  text-shadow: 0 0 8px rgba(255, 107, 53, 0.4);
+}

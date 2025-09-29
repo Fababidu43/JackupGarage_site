@@ -596,10 +596,7 @@ const Gallery = () => {
                                 src={GalleryService.getImageUrl(photo.thumbnail_path || photo.file_path)}
                                 alt={`${project.title} - Photo ${index + 1}`}
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                width="300"
-                                height="200"
                                 loading="lazy"
-                                decoding="async"
                               />
                             </div>
                           ))}

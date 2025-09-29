@@ -73,8 +73,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         loop
         muted
         playsInline
-        preload="metadata"
-        poster="/video-poster.jpg"
+        preload="auto"
         onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
         onCanPlay={() => console.log('✅ Vidéo Hero prête à être lue')}
         onError={(e) => {
@@ -118,8 +117,6 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
             src="./logo.png" 
             alt="Jack Up Garage - Mécanicien à domicile" 
             className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 object-contain transition-all duration-300 hover-scale mx-auto"
-            width="448"
-            height="187"
             loading="eager"
             decoding="async"
             fetchpriority="high"

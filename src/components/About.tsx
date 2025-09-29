@@ -18,10 +18,6 @@ const About = () => {
                   src="/a_propos.JPG" 
                   alt="Votre mécanicien JACK Up Auto - Professionnel de la mécanique à domicile"
                   className="w-full h-full object-cover transition-all duration-300 hover:brightness-110 opacity-85 hover:opacity-95"
-                  width="512"
-                  height="576"
-                  loading="lazy"
-                  decoding="async"
                   style={{ filter: 'sepia(10%) saturate(80%) brightness(95%) contrast(90%)' }}
                   loading="lazy"
                   onError={(e) => {

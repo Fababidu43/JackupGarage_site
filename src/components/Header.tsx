@@ -180,10 +180,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   src="./logo.png" 
                   alt="JACK Up Auto" 
                   className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 hover:scale-110 hover:brightness-110 flex-shrink-0"
-                  width="144"
-                  height="72"
-                  loading="eager"
-                  decoding="async"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
                   onError={(e) => {
                     console.warn('Header logo failed to load, trying fallback');
@@ -286,10 +282,6 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                       src="./logo.png" 
                       alt="Jack Up Garage" 
                       className="w-full h-full object-contain"
-                      width="40"
-                      height="24"
-                      loading="lazy"
-                      decoding="async"
                       onError={(e) => {
                         console.warn('Mobile menu logo failed to load, trying fallback');
                         e.currentTarget.src = '/logo.png';

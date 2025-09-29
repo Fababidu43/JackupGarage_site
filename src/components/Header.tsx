@@ -241,7 +241,8 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                   font-tech uppercase tracking-wide text-sm backdrop-blur-sm"
               >
-                📞 Appeler
+                <Phone className="w-4 h-4 inline-block mr-2" />
+                Appeler
               </a>
             </div>
 

@@ -73,7 +73,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
+        poster="/logo.png"
         onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
         onCanPlay={() => console.log('✅ Vidéo Hero prête à être lue')}
         onError={(e) => {

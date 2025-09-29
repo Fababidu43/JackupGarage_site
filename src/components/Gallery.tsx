@@ -498,6 +498,7 @@ const Gallery = () => {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                   
                   {/* Badge nombre de photos */}

@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <!-- Performance Critical -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
     <!-- Force HTTPS -->
@@ -47,19 +48,42 @@
     <!-- Performance: Preload Critical Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap"></noscript>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" href="/logo.png" as="image" type="image/png" fetchpriority="high">
+    <link rel="preload" href="/presentation.MP4" as="video" type="video/mp4">
     
     <!-- Lazy load Google Maps -->
     <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
+      // Lazy load Google Maps only when needed
+      window.loadGoogleMaps = function() {
+        if (!window.google && !window.googleMapsLoading) {
+          window.googleMapsLoading = true;
           const script = document.createElement('script');
-          script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${window.GOOGLE_MAPS_KEY || ''}&libraries=places,geometry`;
           script.async = true;
           script.defer = true;
           document.head.appendChild(script);
-        }, 1000);
+        }
+      };
+      
+      // Load Google Maps when user scrolls to service area
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            window.loadGoogleMaps();
+            observer.disconnect();
+          }
+        });
+      });
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        const serviceArea = document.getElementById('area');
+        if (serviceArea) {
+          observer.observe(serviceArea);
+        }
       });
     </script>
     
@@ -86,6 +110,23 @@
       /* Critical CSS pour éviter le FOUC */
       .hero-content { opacity: 0; }
       .hero-content.loaded { opacity: 1; transition: opacity 0.3s ease; }
+      
+      /* Optimisation des fonts */
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+      }
+      
+      @font-face {
+        font-family: 'Orbitron';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/orbitron/v29/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nyGy6BoWgz.woff2') format('woff2');
+      }
     </style>
     
     <!-- Structured Data will be injected by component -->

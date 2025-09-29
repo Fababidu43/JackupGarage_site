@@ -12,18 +12,18 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          icons: ['lucide-react'],
-          motion: ['framer-motion']
+          icons: ['lucide-react']
         }
       }
     },
-    cssCodeSplit: true,
+    cssCodeSplit: false,
     sourcemap: false,
-    minify: 'esbuild'
+    minify: 'esbuild',
+    target: 'es2015',
+    assetsInlineLimit: 4096
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
-    include: ['react', 'react-dom']
+    include: ['react', 'react-dom', 'lucide-react']
   },
   server: {
     hmr: {

@@ -297,7 +297,14 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
           clearInterval(checkGoogle);
           initMap();
         }
-      }, 100);
+      }, 500);
+      
+      // Nettoyer l'intervalle après 10 secondes
+      setTimeout(() => {
+        clearInterval(checkGoogle);
+      }, 10000);
+      
+      return () => clearInterval(checkGoogle);
     }
   }, []);
 

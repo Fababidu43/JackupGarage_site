@@ -130,9 +130,16 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
           clearInterval(checkGoogle);
           initAutocomplete();
         }
-      }, 100);
+      }, 500);
       
-      return () => clearInterval(checkGoogle);
+      // Nettoyer l'intervalle après 10 secondes
+      setTimeout(() => {
+        clearInterval(checkGoogle);
+      }, 10000);
+      
+      return () => {
+        clearInterval(checkGoogle);
+      };
     }
   }, [isOpen, step, formData]);
 

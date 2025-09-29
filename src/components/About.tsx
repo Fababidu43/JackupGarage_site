@@ -15,14 +15,17 @@ const About = () => {
             <div className="relative inline-block mb-6">
               <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-orange-500/30 hover:border-orange-500/60 transition-all duration-500 hover-scale bg-black">
                 <video 
-                  src="/presentation.MP4" 
                   className="w-full h-full object-cover"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="auto"
+                  controls={false}
+                  onLoadStart={() => console.log('🎬 Début du chargement de la vidéo')}
+                  onCanPlay={() => console.log('✅ Vidéo prête à être lue')}
                   onError={(e) => {
+                    console.error('❌ Erreur chargement vidéo:', e);
                     console.warn('Vidéo de présentation non trouvée, affichage de l\'image de fallback');
                     // Fallback vers l'image si la vidéo ne charge pas
                     const video = e.currentTarget;
@@ -34,6 +37,8 @@ const About = () => {
                     video.parentNode?.replaceChild(img, video);
                   }}
                 >
+                  <source src="/presentation.MP4" type="video/mp4" />
+                  <source src="/presentation.mp4" type="video/mp4" />
                   Votre navigateur ne supporte pas la lecture de vidéos.
                 </video>
               </div>

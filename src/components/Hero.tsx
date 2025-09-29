@@ -116,7 +116,9 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <img 
             src="./logo.png" 
             alt="Jack Up Garage - Mécanicien à domicile" 
-            className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 object-contain transition-all duration-300 hover-scale mx-auto"
+            className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 object-contain transition-all duration-300 hover-scale mx-auto hero-logo"
+            width="448"
+            height="187"
             loading="eager"
             decoding="async"
             fetchpriority="high"

@@ -110,6 +110,36 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
 
   // Initialiser Google Maps
   useEffect(() => {
+    // Lazy load Google Maps seulement quand nécessaire
+    const loadGoogleMaps = () => {
+      if (window.google) {
+        initMap();
+        return;
+      }
+      
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCdX0Eh2utXFDBq0CWq3SEO_14ol6v4L-4&libraries=places,geometry';
+      script.async = true;
+      script.defer = true;
+      script.onload = initMap;
+      document.head.appendChild(script);
+    };
+    
+    // Observer pour charger Google Maps quand la section devient visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadGoogleMaps();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '100px' });
+    
+    const mapSection = document.getElementById('area');
+    if (mapSection) {
+      observer.observe(mapSection);
+    }
+    
     const initMap = () => {
       if (!window.google || !mapRef.current) return;
 
@@ -288,17 +318,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       }
     };
 
-    // Attendre que Google Maps soit chargé
-    if (window.google) {
-      initMap();
-    } else {
-      const checkGoogle = setInterval(() => {
-        if (window.google) {
-          clearInterval(checkGoogle);
-          initMap();
-        }
-      }, 100);
-    }
+    return () => {
+      observer?.disconnect();
+    };
   }, []);
 
   const getCTAText = () => {

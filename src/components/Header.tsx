@@ -179,8 +179,12 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <img 
                   src="./logo.png" 
                   alt="JACK Up Auto" 
+                  width="144"
+                  height="72"
                   className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 hover:scale-110 hover:brightness-110 flex-shrink-0"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     console.warn('Header logo failed to load, trying fallback');
                     e.currentTarget.src = '/logo.png';
@@ -259,7 +263,11 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
 
         {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
+              width="48"
+              height="24"
           <>
+              loading="lazy"
+              decoding="async"
             {/* Backdrop */}
             <div 
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"

@@ -310,8 +310,12 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
             <img 
               src="./logo.png" 
               alt="Jack Up Garage" 
+              width="64"
+              height="32"
               className="w-10 h-5 sm:w-12 sm:h-6 lg:w-16 lg:h-8 object-contain"
               style={{ maxWidth: '100%', maxHeight: '100%' }}
+              loading="lazy"
+              decoding="async"
               onError={(e) => {
                 console.warn('Popup logo failed to load, trying fallback');
                 e.currentTarget.src = '/logo.png';

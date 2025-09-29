@@ -64,18 +64,42 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       className="section relative flex items-center justify-center overflow-hidden dynamic-bg hero-diagonal-cut scroll-animate hero-effect"
       style={{ 
         minHeight: window.innerWidth <= 768 ? '100vh' : '110vh',
-        background: `
-          linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-          url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center center/cover,
-          radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
-        `,
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: window.innerWidth <= 1024 ? 'scroll' : 'fixed'
       }}
     >
+      {/* Vidéo de fond */}
+      <video 
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
+        onCanPlay={() => console.log('✅ Vidéo Hero prête à être lue')}
+        onError={(e) => {
+          console.error('❌ Erreur chargement vidéo Hero:', e);
+          console.warn('Vidéo Hero non trouvée, fallback vers image de fond');
+          // Fallback vers l'image de fond originale
+          const section = e.currentTarget.closest('section');
+          if (section) {
+            section.style.background = `
+              linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
+              url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center center/cover,
+              radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
+            `;
+            section.style.backgroundPosition = 'center center';
+            section.style.backgroundRepeat = 'no-repeat';
+            section.style.backgroundAttachment = window.innerWidth <= 1024 ? 'scroll' : 'fixed';
+          }
+          e.currentTarget.style.display = 'none';
+        }}
+      >
+        <source src="/presentation.MP4" type="video/mp4" />
+        <source src="/presentation.mp4" type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+      
       {/* Overlay dynamique avec effet de respiration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 animate-pulse-slow opacity-60"></div>
       
       {/* Particules flottantes subtiles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -14,33 +14,16 @@ const About = () => {
           <div className="text-center lg:text-left">
             <div className="relative inline-block mb-6">
               <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-orange-500/30 hover:border-orange-500/60 transition-all duration-500 hover-scale bg-black">
-                <video 
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  controls={false}
-                  onLoadStart={() => console.log('🎬 Début du chargement de la vidéo')}
-                  onCanPlay={() => console.log('✅ Vidéo prête à être lue')}
+                <img 
+                  src="/a_propos.JPG" 
+                  alt="Votre mécanicien JACK Up Auto - Professionnel de la mécanique à domicile"
+                  className="w-full h-full object-cover transition-all duration-300 hover:brightness-110"
+                  loading="lazy"
                   onError={(e) => {
-                    console.error('❌ Erreur chargement vidéo:', e);
-                    console.warn('Vidéo de présentation non trouvée, affichage de l\'image de fallback');
-                    // Fallback vers l'image si la vidéo ne charge pas
-                    const video = e.currentTarget;
-                    const img = document.createElement('img');
-                    img.src = '/a_propos.JPG';
-                    img.alt = 'Votre mécanicien JACK Up Auto';
-                    img.className = 'w-full h-full object-cover';
-                    img.loading = 'lazy';
-                    video.parentNode?.replaceChild(img, video);
+                    console.warn('Image À propos non trouvée');
+                    e.currentTarget.src = 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800';
                   }}
-                >
-                  <source src="/presentation.MP4" type="video/mp4" />
-                  <source src="/presentation.mp4" type="video/mp4" />
-                  Votre navigateur ne supporte pas la lecture de vidéos.
-                </video>
+                />
               </div>
             </div>
           </div>

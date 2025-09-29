@@ -41,21 +41,17 @@ const Footer = () => {
           
           {/* Logo à la place du nom */}
           <div className="text-center lg:text-left">
-            <div 
-              className="w-32 h-14 sm:w-40 sm:h-18 lg:w-48 lg:h-20 bg-white/95 border border-orange-500/30 rounded-xl flex items-center justify-center p-2 sm:p-3 cursor-pointer hover:bg-white hover:border-orange-500/50 transition-all duration-300 hover-scale shadow-lg flex-shrink-0"
+            <img 
+              src="./logo.png" 
+              alt="JACK Up Auto" 
+              className="w-32 h-14 sm:w-40 sm:h-18 lg:w-48 lg:h-20 object-contain cursor-pointer transition-all duration-300 hover-scale flex-shrink-0 mx-auto lg:mx-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <img 
-                src="./logo.png" 
-                alt="JACK Up Auto" 
-                className="w-full h-full object-contain"
-                style={{ maxWidth: '100%', maxHeight: '100%' }}
-                onError={(e) => {
-                  console.warn('Footer logo failed to load, trying fallback');
-                  e.currentTarget.src = '/logo.png';
-                }}
-              />
-            </div>
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              onError={(e) => {
+                console.warn('Footer logo failed to load, trying fallback');
+                e.currentTarget.src = '/logo.png';
+              }}
+            />
           </div>
 
           {/* Contact + Réseaux sociaux */}

@@ -245,22 +245,16 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
-                  font-tech uppercase tracking-wide text-xs xl:text-sm"
-              >
-                Appeler
-              </a>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-white hover:text-orange-400 transition-colors duration-200
-                focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 rounded"
-              aria-expanded={isMenuOpen}
-              aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            <img 
+              src="./logo.png" 
+              alt="JACK Up Auto" 
+              className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 group-hover:brightness-110 hover:scale-110 flex-shrink-0"
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              onError={(e) => {
+                console.warn('Header logo failed to load, trying fallback');
+                e.currentTarget.src = '/logo.png';
+              }}
+            />
           </div>
         </div>
 
@@ -284,17 +278,15 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
               {/* Header avec croix */}
               <div className="flex items-center justify-between p-4 border-b border-orange-500/10 bg-black/20">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-6 bg-white/90 border border-orange-500/20 rounded flex items-center justify-center">
-                    <img 
-                      src="./logo.png" 
-                      alt="Jack Up Garage" 
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        console.warn('Mobile menu logo failed to load, trying fallback');
-                        e.currentTarget.src = '/logo.png';
-                      }}
-                    />
-                  </div>
+                  <img 
+                    src="./logo.png" 
+                    alt="Jack Up Garage" 
+                    className="w-10 h-6 object-contain"
+                    onError={(e) => {
+                      console.warn('Mobile menu logo failed to load, trying fallback');
+                      e.currentTarget.src = '/logo.png';
+                    }}
+                  />
                   <span className="text-white/90 font-medium text-sm font-futuristic uppercase tracking-wide">Menu</span>
                 </div>
                 <button

@@ -113,28 +113,26 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="hero-content relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto pt-16 w-full transition-all duration-1000 ease-out">
         {/* Logo principal centré */}
         <div className="mb-6 sm:mb-8 reveal-on-scroll">
-          <div className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 bg-white/95 border-2 border-orange-500/30 rounded-2xl flex items-center justify-center p-4 sm:p-5 lg:p-6 xl:p-7 mx-auto shadow-2xl hover:border-orange-500/50 transition-all duration-300 hover-scale backdrop-blur-sm">
-            <img 
-              src="./logo.png" 
-              alt="Jack Up Garage - Mécanicien à domicile" 
-              className="w-full h-full object-contain transition-all duration-300"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
-              onError={(e) => {
-                console.warn('Hero logo failed to load, trying fallback');
-                e.currentTarget.src = '/logo.png';
-              }}
-              onLoad={() => {
-                // Marquer le contenu comme chargé pour éviter le FOUC
-                const heroContent = document.querySelector('.hero-content');
-                if (heroContent) {
-                  heroContent.classList.add('loaded');
-                }
-              }}
-            />
-          </div>
+          <img 
+            src="./logo.png" 
+            alt="Jack Up Garage - Mécanicien à domicile" 
+            className="w-64 h-28 sm:w-80 sm:h-36 lg:w-96 lg:h-44 xl:w-[28rem] xl:h-52 object-contain transition-all duration-300 hover-scale mx-auto"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
+            onError={(e) => {
+              console.warn('Hero logo failed to load, trying fallback');
+              e.currentTarget.src = '/logo.png';
+            }}
+            onLoad={() => {
+              // Marquer le contenu comme chargé pour éviter le FOUC
+              const heroContent = document.querySelector('.hero-content');
+              if (heroContent) {
+                heroContent.classList.add('loaded');
+              }
+            }}
+          />
         </div>
         
         <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-none tracking-tight uppercase font-futuristic text-glow reveal-on-scroll">

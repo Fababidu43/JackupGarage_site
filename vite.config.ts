@@ -8,18 +8,25 @@ export default defineConfig({
     global: 'globalThis',
   },
   build: {
+    target: 'es2015',
+    cssCodeSplit: false,
+    assetsInlineLimit: 8192,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          icons: ['lucide-react'],
-          motion: ['framer-motion']
+          vendor: ['react', 'react-dom', 'lucide-react'],
+          utils: ['framer-motion']
         }
       }
     },
-    cssCodeSplit: true,
     sourcemap: false,
-    minify: 'esbuild'
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
   },
   optimizeDeps: {
     exclude: ['lucide-react'],

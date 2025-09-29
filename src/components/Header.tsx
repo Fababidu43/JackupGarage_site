@@ -176,22 +176,16 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   }
                 }}
               >
-                <div className={`bg-white/95 border border-orange-500/30 rounded-lg flex items-center justify-center px-3 sm:px-4 py-2 sm:py-3 
-                  hover:bg-white hover:border-orange-500/60 hover:shadow-xl transition-all duration-300 shadow-lg
-                  transform hover:scale-110 hover:rotate-1 group-focus:ring-2 group-focus:ring-orange-500/50 group-focus:ring-offset-2
-                  w-28 h-14 sm:w-36 sm:h-18 flex-shrink-0 backdrop-blur-sm`}
-                >
-                  <img 
-                    src="./logo.png" 
-                    alt="JACK Up Auto" 
-                    className="w-full h-full object-contain transition-all duration-300 group-hover:brightness-110"
-                    style={{ maxWidth: '100%', maxHeight: '100%' }}
-                    onError={(e) => {
-                      console.warn('Header logo failed to load, trying fallback');
-                      e.currentTarget.src = '/logo.png';
-                    }}
-                  />
-                </div>
+                <img 
+                  src="./logo.png" 
+                  alt="JACK Up Auto" 
+                  className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 hover:scale-110 hover:brightness-110 flex-shrink-0"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
+                  onError={(e) => {
+                    console.warn('Header logo failed to load, trying fallback');
+                    e.currentTarget.src = '/logo.png';
+                  }}
+                />
               </div>
             </div>
 

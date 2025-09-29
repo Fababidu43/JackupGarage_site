@@ -54,7 +54,7 @@ Allow: /assistance-automobile-mobile-haute-loire
 Allow: /sos-auto-mobile-43
 
 # Sitemap
-Sitemap: https://jackup-auto.fr/sitemap.xml
+Sitemap: https://www.jackup-auto.fr/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

@@ -7,12 +7,12 @@
 
   <!-- Page d'accueil -->
   <url>
-    <loc>https://jackup-auto.fr/</loc>
+    <loc>https://www.jackup-auto.fr/</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://jackup-auto.fr/logo.png</image:loc>
+      <image:loc>https://www.jackup-auto.fr/logo.png</image:loc>
       <image:title>JACK Up Auto - Logo</image:title>
       <image:caption>Dépanneur & Garage auto mobile Haute-Loire Loire</image:caption>
     </image:image>
@@ -20,35 +20,35 @@
 
   <!-- Pages principales optimisées SEO -->
   <url>
-    <loc>https://jackup-auto.fr/depanneur-haute-loire</loc>
+    <loc>https://www.jackup-auto.fr/depanneur-haute-loire</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://jackup-auto.fr/depanneurs-43</loc>
+    <loc>https://www.jackup-auto.fr/depanneurs-43</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://jackup-auto.fr/garage-auto-43</loc>
+    <loc>https://www.jackup-auto.fr/garage-auto-43</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://jackup-auto.fr/garage-auto-42</loc>
+    <loc>https://www.jackup-auto.fr/garage-auto-42</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
-    <loc>https://jackup-auto.fr/garagiste-43</loc>
+    <loc>https://www.jackup-auto.fr/garagiste-43</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
@@ -56,7 +56,7 @@
 
   <!-- Galerie -->
   <url>
-    <loc>https://jackup-auto.fr/galerie</loc>
+    <loc>https://www.jackup-auto.fr/galerie</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -64,7 +64,7 @@
 
   <!-- Services -->
   <url>
-    <loc>https://jackup-auto.fr/services</loc>
+    <loc>https://www.jackup-auto.fr/services</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -72,7 +72,7 @@
 
   <!-- Zone d'intervention -->
   <url>
-    <loc>https://jackup-auto.fr/zone-intervention</loc>
+    <loc>https://www.jackup-auto.fr/zone-intervention</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -80,7 +80,7 @@
 
   <!-- Contact -->
   <url>
-    <loc>https://jackup-auto.fr/contact</loc>
+    <loc>https://www.jackup-auto.fr/contact</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

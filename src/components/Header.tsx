@@ -179,7 +179,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 <img 
                   src="./logo.png" 
                   alt="JACK Up Auto" 
-                  className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 hover:scale-110 hover:brightness-110 flex-shrink-0"
+                  className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 hover:scale-110 hover:brightness-110 flex-shrink-0 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-lg border border-white/20"
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
                   onError={(e) => {
                     console.warn('Header logo failed to load, trying fallback');

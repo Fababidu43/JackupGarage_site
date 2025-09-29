@@ -207,19 +207,6 @@ function App() {
         <Hero onQuoteClick={openQuotePopup} />
         
         {/* À propos (blanc #FFFFFF) */}
-        <section id="about" className="relative">
-          <div className="scroll-animate">
-            <About />
-          </div>
-        </section>
-        
-        {/* Diagonale de séparation À propos -> Services */}
-        <DiagonalSlash 
-          topColor="#FFFFFF" 
-          bottomColor="#FFFFFF" 
-          type="section"
-        />
-        
         {/* Services intro (blanc #FFFFFF) */}
         <div id="services-intro" className="relative">
           <div className="scroll-animate services-effect">
@@ -501,6 +488,13 @@ function App() {
         <div className="scroll-animate">
           <ServiceArea onQuoteClick={openQuotePopup} />
         </div>
+        
+        {/* À propos (blanc #FFFFFF) */}
+        <section id="about" className="relative">
+          <div className="scroll-animate">
+            <About />
+          </div>
+        </section>
         
         {/* FAQ (FOND BLANC) */}
         <div id="faq" className="scroll-animate">

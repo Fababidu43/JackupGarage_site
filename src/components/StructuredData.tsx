@@ -5,8 +5,8 @@ const StructuredData: React.FC = () => {
     "@context": "https://schema.org",
     "@type": ["AutoRepair", "LocalBusiness"],
     "name": "JACK Up Auto - Garagiste à Domicile Haute-Loire",
-    "alternateName": ["JACK Up Auto", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire"],
-    "description": "JACK Up Auto - Garagiste professionnel à domicile en Haute-Loire (43). Mécanicien mobile spécialisé en vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Le Puy-en-Velay, Monistrol-sur-Loire, Yssingeaux.",
+    "alternateName": ["JACK Up Auto", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire", "Mécanicien à domicile 42", "Garagiste mobile Loire", "Mécanicien Saint-Étienne", "Garagiste Le Puy-en-Velay"],
+    "description": "JACK Up Auto - Garagiste professionnel à domicile Haute-Loire (43) et Loire (42) dans un rayon de 60km. Mécanicien mobile spécialisé en vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Le Puy-en-Velay, Saint-Étienne, Monistrol-sur-Loire, Yssingeaux, Firminy, Saint-Chamond.",
     "url": "https://jackupauto.fr",
     "logo": "https://jackupauto.fr/logo.png",
     "image": [
@@ -41,7 +41,7 @@ const StructuredData: React.FC = () => {
           "latitude": 45.2947,
           "longitude": 4.1736
         },
-        "geoRadius": "30000"
+        "geoRadius": "60000"
       },
       {
         "@type": "State",
@@ -80,6 +80,26 @@ const StructuredData: React.FC = () => {
       {
         "@type": "City",
         "name": "Saint-Étienne"
+     },
+     {
+       "@type": "City",
+       "name": "Firminy"
+     },
+     {
+       "@type": "City",
+       "name": "Saint-Chamond"
+     },
+     {
+       "@type": "City",
+       "name": "Rive-de-Gier"
+     },
+     {
+       "@type": "City",
+       "name": "Roanne"
+     },
+     {
+       "@type": "City",
+       "name": "Montbrison"
       }
     ],
     "serviceType": [
@@ -93,15 +113,28 @@ const StructuredData: React.FC = () => {
       "Diagnostic automobile mobile",
       "Mécanicien à domicile",
       "Garagiste mobile",
+     "Mécanicien à domicile Saint-Étienne",
+     "Garagiste mobile Loire 42",
+     "Réparation auto Firminy",
+     "Vidange domicile Saint-Chamond",
+     "Mécanicien mobile Rive-de-Gier",
+     "Garagiste itinérant Roanne",
+     "Service auto domicile Montbrison",
       "Réparation auto à domicile",
       "Service mécanique itinérant"
     ],
     "keywords": [
       "garagiste haute-loire",
       "mécanicien à domicile 43",
+     "garagiste loire 42",
+     "mécanicien à domicile saint-étienne",
+     "garage mobile firminy",
+     "réparation auto saint-chamond",
       "garage monistrol sur loire",
       "réparation auto haute-loire",
+     "réparation auto loire",
       "vidange à domicile le puy",
+     "vidange domicile saint-étienne",
       "garagiste mobile"
     ],
     "openingHours": [
@@ -143,8 +176,8 @@ const StructuredData: React.FC = () => {
         "latitude": 45.2947,
         "longitude": 4.1736
       },
-      "geoRadius": "30000",
-      "description": "Zone d'intervention de 30km autour de Monistrol-sur-Loire, couvrant Le Puy-en-Velay, Yssingeaux, Brioude et environs"
+      "geoRadius": "60000",
+      "description": "Zone d'intervention de 60km autour de Monistrol-sur-Loire, couvrant Le Puy-en-Velay, Saint-Étienne, Yssingeaux, Firminy, Saint-Chamond, Brioude et environs"
     },
     "mobilitySolution": "Service à domicile",
     "vehicleType": "Véhicule d'intervention mobile équipé",
@@ -160,7 +193,7 @@ const StructuredData: React.FC = () => {
             "category": "Entretien automobile",
             "description": "Vidange complète avec changement filtre à huile et contrôle niveaux"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
         },
         {
           "@type": "Offer", 
@@ -170,7 +203,7 @@ const StructuredData: React.FC = () => {
             "category": "Sécurité automobile",
             "description": "Changement plaquettes, disques, purge liquide de frein"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
         },
         {
           "@type": "Offer",
@@ -180,7 +213,27 @@ const StructuredData: React.FC = () => {
             "category": "Transmission automobile",
             "description": "Kit embrayage complet et volant moteur"
           },
-          "areaServed": "Haute-Loire"
+          "areaServed": ["Haute-Loire", "Loire"]
+       },
+       {
+         "@type": "Offer",
+         "itemOffered": {
+           "@type": "Service",
+           "name": "Mécanicien à domicile Saint-Étienne",
+           "category": "Service automobile mobile",
+           "description": "Intervention mécanique à domicile dans la Loire"
+         },
+         "areaServed": "Loire"
+       },
+       {
+         "@type": "Offer",
+         "itemOffered": {
+           "@type": "Service",
+           "name": "Garagiste mobile Le Puy-en-Velay",
+           "category": "Service automobile mobile",
+           "description": "Service de mécanique mobile en Haute-Loire"
+         },
+         "areaServed": "Haute-Loire"
         }
       ]
     },

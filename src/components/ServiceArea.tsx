@@ -7,8 +7,7 @@ interface ServiceAreaProps {
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 30; // km (0-30 km)
-const EMBRAYAGE_RADIUS = 60; // km pour la zone élargie (30-60 km)
+const STANDARD_RADIUS = 60; // km (0-60 km)
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
@@ -91,20 +90,13 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       department = postalCode ? postalCode.substring(0, 2) : '';
     }
 
-    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire
+    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire (60km)
     if (distanceFromCenter <= STANDARD_RADIUS) {
-      // Zone standard (0-30km)
+      // Zone couverte (0-60km)
       setCoverageResult({ 
         status: 'covered', 
         city: placeName,
         distance: distanceFromCenter 
-      });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS && distanceFromCenter > STANDARD_RADIUS) {
-      // Zone élargie (30-60km) - selon nature des travaux
-      setCoverageResult({
-        status: 'quote-only',
-        city: placeName,
-        distance: distanceFromCenter
       });
     } else {
       // Au-delà de 60km - hors zone
@@ -221,19 +213,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         fillOpacity: 0.15,
         map: mapInstance.current,
         center: CENTER_COORDS,
-        radius: STANDARD_RADIUS * 1000 // en mètres
-      });
-
-      // Cercle embrayage (70km) - initialement caché
-      embrayageCircleRef.current = new window.google.maps.Circle({
-        strokeColor: '#F59E0B',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: '#F59E0B',
-        fillOpacity: 0.1,
-        map: mapInstance.current, // Affiché par défaut
-        center: CENTER_COORDS,
-        radius: EMBRAYAGE_RADIUS * 1000 // 60km
+        radius: STANDARD_RADIUS * 1000 // 60km en mètres
       });
 
       // Zone Lyon sur demande
@@ -326,9 +306,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
       case 'covered':
         return 'Demander un devis';
       case 'on-demand':
-        return 'Demander un devis (avec supplément)';
-      case 'quote-only':
-        return 'Demander un devis personnalisé';
+        return 'Nous contacter (Lyon sur demande)';
       case 'limited-access':
         return 'Nous contacter (conditions d\'accès)';
       case 'out-of-zone':
@@ -345,7 +323,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     
     switch (coverageResult.status) {
       case 'covered':
-        return `Nous intervenons à ${coverageResult.city} sans supplément (${distance} km de Monistrol-sur-Loire).`;
+        return `Nous intervenons à ${coverageResult.city} (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
         return (
           <span>
@@ -359,8 +337,6 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
             {' '}pour vérifier la faisabilité.
           </span>
         );
-      case 'quote-only':
-        return `${coverageResult.city} : zone élargie selon nature des travaux (${distance} km). Supplément kilométrique applicable.`;
       case 'out-of-zone':
         return `${coverageResult.city} est hors de notre zone d'intervention (${distance} km).`;
       default:
@@ -385,7 +361,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
               Zone d'intervention
             </h2>
             <p className="text-lg sm:text-xl lg:text-2xl text-orange-300 font-medium font-tech mb-4">
-              Rayon d'intervention : 30 km autour de Monistrol-sur-Loire
+              Rayon d'intervention : 60 km autour de Monistrol-sur-Loire
             </p>
             <p className="text-sm sm:text-base text-orange-200 font-tech mb-6">
               Haute-Loire (43) • Loire (42) • Rhône (69) sur demande
@@ -425,11 +401,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6 text-xs sm:text-sm px-2">
                   <div className="flex items-center gap-1 sm:gap-2 bg-green-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-30km)</span>
-                  </div>
-                  <div className="flex items-center gap-1 sm:gap-2 bg-yellow-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
-                    <span className="text-white font-medium whitespace-nowrap">Zone élargie (30-60km)</span>
+                    <span className="text-white font-medium whitespace-nowrap">Zone couverte (0-60km)</span>
                   </div>
                   <div className="flex items-center gap-1 sm:gap-2 bg-blue-500/20 px-2 sm:px-3 py-1 sm:py-2 rounded-full">
                     <div className="w-3 h-3 bg-blue-500 rounded-full shadow-lg"></div>
@@ -497,7 +469,7 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-base font-bold text-orange-300 font-futuristic flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    Haute-Loire (43) - Prioritaire
+                    Haute-Loire (43)
                   </h4>
                   <button
                     onClick={() => setShowAllCommunes43(!showAllCommunes43)}

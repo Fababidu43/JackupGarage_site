@@ -89,6 +89,48 @@
   </url>
 
   <url>
+    <loc>https://jackupauto.fr/garagiste-saint-etienne</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/mecanicien-firminy</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/garage-saint-chamond</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/reparation-auto-rive-de-gier</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/mecanicien-roanne</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/garage-montbrison</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://jackupauto.fr/garage-yssingeaux</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -104,6 +146,27 @@
 
   <!-- Services détaillés -->
   <url>
+    <loc>https://jackupauto.fr/vidange-domicile-saint-etienne</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/freinage-domicile-loire-42</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/embrayage-mobile-firminy</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://jackupauto.fr/distribution-yssingeaux</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -115,6 +178,20 @@
     <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/garagiste-mobile-haute-loire-loire</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jackupauto.fr/mecanicien-domicile-60km</loc>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

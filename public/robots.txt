@@ -3,11 +3,22 @@ Allow: /
 
 # Pages importantes pour le SEO
 Allow: /garagiste-le-puy-en-velay
+Allow: /garagiste-saint-etienne
 Allow: /mecanicien-monistrol-sur-loire
+Allow: /mecanicien-firminy
+Allow: /garage-saint-chamond
 Allow: /garage-yssingeaux
+Allow: /reparation-auto-rive-de-gier
+Allow: /mecanicien-roanne
+Allow: /garage-montbrison
 Allow: /vidange-domicile-haute-loire
+Allow: /vidange-domicile-saint-etienne
 Allow: /reparation-freins-le-puy-en-velay
+Allow: /freinage-domicile-loire-42
 Allow: /embrayage-monistrol-sur-loire
+Allow: /embrayage-mobile-firminy
+Allow: /garagiste-mobile-haute-loire-loire
+Allow: /mecanicien-domicile-60km
 
 # Sitemap
 Sitemap: https://jackupauto.fr/sitemap.xml

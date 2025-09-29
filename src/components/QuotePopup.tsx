@@ -3,8 +3,7 @@ import { X, Car, Wrench, Phone, ArrowRight, Zap, Settings, Droplets, CheckCircle
 
 // Centre de référence : Monistrol-sur-Loire
 const CENTER_COORDS = { lat: 45.2947, lng: 4.1736 };
-const STANDARD_RADIUS = 30; // km (0-30 km)
-const EMBRAYAGE_RADIUS = 70; // km pour la zone élargie (30-70 km)
+const STANDARD_RADIUS = 60; // km (0-60 km)
 // Point de référence Lyon
 const LYON_COORDS = { lat: 45.7640, lng: 4.8357 };
 const LYON_ON_DEMAND_RADIUS = 10; // km
@@ -71,18 +70,11 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     )?.long_name;
     const department = postalCode ? postalCode.substring(0, 2) : '';
 
-    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire
+    // Logique de couverture basée sur la distance depuis Monistrol-sur-Loire (60km)
     if (distanceFromCenter <= STANDARD_RADIUS) {
-      // Zone standard (0-30km)
+      // Zone couverte (0-60km)
       setLocationStatus({
         status: 'covered',
-        city: placeName,
-        distance: distanceFromCenter
-      });
-    } else if (distanceFromCenter <= EMBRAYAGE_RADIUS && distanceFromCenter > STANDARD_RADIUS) {
-      // Zone élargie (30-60km) - selon nature des travaux
-      setLocationStatus({
-        status: 'quote-only',
         city: placeName,
         distance: distanceFromCenter
       });
@@ -151,13 +143,13 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
     
     switch (locationStatus.status) {
       case 'covered':
-        return `Nous intervenons à ${locationStatus.city} dans notre zone standard (${distance} km).`;
+        return `Nous intervenons à ${locationStatus.city} (${distance} km de Monistrol-sur-Loire).`;
       case 'on-demand':
         return (
           <span>
             {locationStatus.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
             <a 
-              href="tel:+33123456789" 
+              href="tel:+33629485339" 
               className="underline font-semibold text-yellow-200 hover:text-yellow-100 transition-colors duration-200"
             >
               Contactez-nous
@@ -165,8 +157,6 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
             {' '}pour vérifier la faisabilité.
           </span>
         );
-      case 'quote-only':
-        return `${locationStatus.city} : zone élargie selon nature des travaux (${distance} km). Supplément kilométrique applicable.`;
       case 'out-of-zone':
         return `${locationStatus.city} est hors de notre zone d'intervention.`;
       default:

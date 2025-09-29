@@ -125,7 +125,7 @@
   }
 }
 /* === TYPOGRAPHIES FUTURISTES === */
-/* Fonts are now preloaded in HTML head */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 .font-futuristic {
   font-family: 'Orbitron', monospace;

@@ -15,7 +15,17 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+    
     const handleScroll = () => {
+      // Debounce pour éviter trop d'appels
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        performScrollCalculations();
+      }, 16); // ~60fps
+    };
+    
+    const performScrollCalculations = () => {
       const scrollY = window.scrollY;
       
       // Détecter si on a dépassé la section À propos

@@ -292,18 +292,20 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
     if (window.google) {
       initMap();
     } else {
+      let attempts = 0;
+      const maxAttempts = 20; // 10 secondes max
+      
       const checkGoogle = setInterval(() => {
+        attempts++;
         if (window.google) {
           clearInterval(checkGoogle);
           initMap();
+        } else if (attempts >= maxAttempts) {
+          clearInterval(checkGoogle);
+          console.warn('Google Maps API non disponible après 10 secondes');
         }
       }, 500);
-      
-      // Nettoyer l'intervalle après 10 secondes
-      setTimeout(() => {
-        clearInterval(checkGoogle);
-      }, 10000);
-      
+
       return () => clearInterval(checkGoogle);
     }
   }, []);

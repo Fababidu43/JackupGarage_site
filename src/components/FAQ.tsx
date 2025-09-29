@@ -9,6 +9,10 @@ const FAQ = () => {
       answer: "Oui, nous venons chez vous avec tout le matériel. Il faut juste un sol dur et plat."
     },
     {
+      question: "Le déplacement est-il facturé ?",
+      answer: "Des frais de déplacement peuvent s'appliquer selon la nature des travaux à réaliser et selon la localisation de l'intervention. Ces éventuels frais sont indiqués dans le devis."
+    },
+    {
       question: "Fournissez-vous les pièces ?",
       answer: "Oui, des pièces d'origines ou de marques reconnues vous sont proposées dans le devis"
     },

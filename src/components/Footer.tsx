@@ -44,7 +44,7 @@ const Footer = () => {
             <img 
               src="./logo.png" 
               alt="JACK Up Auto" 
-              className="w-32 h-14 sm:w-40 sm:h-18 lg:w-48 lg:h-20 object-contain cursor-pointer transition-all duration-300 hover-scale flex-shrink-0 mx-auto lg:mx-0 bg-white/10 backdrop-blur-sm rounded-lg px-2 py-1"
+              className="w-32 h-14 sm:w-40 sm:h-18 lg:w-48 lg:h-20 object-contain cursor-pointer transition-all duration-300 hover-scale flex-shrink-0 mx-auto lg:mx-0"
               onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
               style={{ maxWidth: '100%', maxHeight: '100%' }}
               onError={(e) => {

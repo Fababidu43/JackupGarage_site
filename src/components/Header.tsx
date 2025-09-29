@@ -263,11 +263,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
 
         {/* Mobile Navigation Overlay */}
         {isMenuOpen && (
-              width="48"
-              height="24"
           <>
-              loading="lazy"
-              decoding="async"
             {/* Backdrop */}
             <div 
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:hidden"

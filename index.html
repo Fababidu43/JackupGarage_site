@@ -6,6 +6,13 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     
+    <!-- Force HTTPS -->
+    <script>
+      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        location.replace('https:' + window.location.href.substring(window.location.protocol.length));
+      }
+    </script>
+    
     <!-- SEO Optimized Meta Tags -->
     <title>🚗 JACK Up Auto | Auto Haute-Loire Loire (43-42) | Garage Mobile </title>
     <meta name="description" content="🔧 JACK Up Auto - N°1 Dépanneur & Garagiste à domicile Haute-Loire Loire ! Garage auto mobile 43-42 : dépannage, vidange, freins, embrayage. Intervention Monistrol, Bas-en-Basset, Le Puy, Saint-Étienne, Yssingeaux, Firminy. Dépanneur professionnel 7j/7 - Devis gratuit !" />

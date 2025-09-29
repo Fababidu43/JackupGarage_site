@@ -7,7 +7,7 @@ const StructuredData: React.FC = () => {
     "name": "JACK Up Auto - Dépanneur & Garage Auto Haute-Loire Loire",
     "alternateName": ["JACK Up Auto", "Dépanneur 43", "Dépanneurs Haute-Loire", "Garage Auto 43", "Garage Auto 42", "Garagiste 43", "Garage Monistrol", "Garage Bas-en-Basset", "Dépanneur Monistrol sur Loire", "Garage Auto Monistrol", "Garagiste Monistrol sur Loire", "Mécanicien à domicile 43", "Garagiste mobile Haute-Loire", "Mécanicien à domicile 42", "Garagiste mobile Loire", "Mécanicien Saint-Étienne", "Garagiste Le Puy-en-Velay", "Dépanneur Le Puy", "Garage Yssingeaux", "Garagiste Yssingeaux", "Garage Brioude", "Garage Firminy", "Garage Saint-Chamond", "Dépannage Auto 43", "Dépannage Voiture Haute-Loire", "Garage Mobile 43", "Garage Itinérant Haute-Loire", "Réparation Auto Domicile 43", "Service Auto Mobile", "Atelier Mobile Automobile", "Maintenance Véhicule Domicile", "Expert Auto Mobile", "Technicien Automobile Domicile"],
     "description": "JACK Up Auto - N°1 Dépanneur & Garage auto mobile Haute-Loire (43) et Loire (42) dans un rayon de 60km. Spécialiste dépannage automobile, réparation à domicile, vidange, freinage, embrayage, distribution, suspensions. Intervention rapide Monistrol-sur-Loire, Bas-en-Basset, Le Puy-en-Velay, Saint-Étienne, Yssingeaux, Firminy, Saint-Chamond, Brioude, Retournac, Aurec-sur-Loire.",
-    "url": "https://www.jackup-auto.fr",
+    "url": "https://www.jackup-auto.fr/",
     "logo": "https://www.jackup-auto.fr/logo.png",
     "image": [
       "https://www.jackup-auto.fr/logo.png",

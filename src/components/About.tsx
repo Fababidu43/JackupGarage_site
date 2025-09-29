@@ -13,13 +13,29 @@ const About = () => {
           {/* Photo et présentation */}
           <div className="text-center lg:text-left">
             <div className="relative inline-block mb-6">
-              <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-orange-500/30 hover:border-orange-500/60 transition-all duration-500 hover-scale">
-                <img 
-                  src="/a_propos.JPG" 
-                  alt="Votre mécanicien JACK Up Auto" 
+              <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-orange-500/30 hover:border-orange-500/60 transition-all duration-500 hover-scale bg-black">
+                <video 
+                  src="/presentation.MP4" 
                   className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  onError={(e) => {
+                    console.warn('Vidéo de présentation non trouvée, affichage de l\'image de fallback');
+                    // Fallback vers l'image si la vidéo ne charge pas
+                    const video = e.currentTarget;
+                    const img = document.createElement('img');
+                    img.src = '/a_propos.JPG';
+                    img.alt = 'Votre mécanicien JACK Up Auto';
+                    img.className = 'w-full h-full object-cover';
+                    img.loading = 'lazy';
+                    video.parentNode?.replaceChild(img, video);
+                  }}
+                >
+                  Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
               </div>
             </div>
           </div>

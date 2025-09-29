@@ -145,7 +145,9 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         
         <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-white/80 font-light mb-6 sm:mb-8 tracking-wide font-tech reveal-on-scroll px-2 max-w-3xl mx-auto animate-fade-in-delayed">
           Vidange et entretien, freinage, embrayage, distribution, suspensions, échappement, transmissions.<br />
-          <span className="text-orange-300 hover-glow-text animate-text-shimmer">N’allez plus au garage, faites venir le garage !</span>
+          <span className="text-orange-200 font-semibold bg-orange-500/20 px-3 py-1 rounded-lg border border-orange-400/30 shadow-lg backdrop-blur-sm hover-glow-text animate-text-shimmer inline-block mt-2">
+            ✨ N'allez plus au garage, faites venir le garage ! ✨
+          </span>
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 reveal-on-scroll px-2 sm:px-4 animate-buttons-appear">

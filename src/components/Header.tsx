@@ -245,16 +245,21 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                 className="ml-2 xl:ml-4 px-3 lg:px-4 xl:px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium cursor-pointer
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
-            <img 
-              src="./logo.png" 
-              alt="JACK Up Auto" 
-              className="w-28 h-14 sm:w-36 sm:h-18 object-contain transition-all duration-300 group-hover:brightness-110 hover:scale-110 flex-shrink-0"
-              style={{ maxWidth: '100%', maxHeight: '100%' }}
-              onError={(e) => {
-                console.warn('Header logo failed to load, trying fallback');
-                e.currentTarget.src = '/logo.png';
-              }}
-            />
+                  font-tech uppercase tracking-wide text-xs xl:text-sm backdrop-blur-sm"
+              >
+                📞 Appeler
+              </a>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 text-white/80 hover:text-orange-300 hover:bg-orange-500/10 rounded-lg transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 backdrop-blur-sm"
+              aria-label="Menu"
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
 

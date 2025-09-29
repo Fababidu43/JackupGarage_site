@@ -11,21 +11,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom']
+          vendor: ['react', 'react-dom'],
+          icons: ['lucide-react'],
+          motion: ['framer-motion']
         }
       }
     },
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     sourcemap: false,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
-    assetsInlineLimit: 8192,
-    target: 'es2015'
+    minify: 'esbuild'
   },
   optimizeDeps: {
     exclude: ['lucide-react'],

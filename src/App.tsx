@@ -251,11 +251,7 @@ function App() {
                   <img 
                     src="/entretiens_photos.jpg" 
                     alt="Vidange moteur - Entretien automobile" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -300,11 +296,7 @@ function App() {
                   <img 
                     src="/freins_photos.jpg" 
                     alt="Système de freinage - Disques et plaquettes" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -349,11 +341,7 @@ function App() {
                   <img 
                     src="/embrayage_photos.jpg" 
                     alt="Kit embrayage et volant moteur" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -398,11 +386,7 @@ function App() {
                   <img 
                     src="/distri_photos.jpg" 
                     alt="Kit de distribution - Courroie et galets" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -447,11 +431,7 @@ function App() {
                   <img 
                     src="/amortie_photos.jpg" 
                     alt="Amortisseurs et suspensions automobile" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>
@@ -490,11 +470,7 @@ function App() {
                   <img 
                     src="/autre_presta.jpg" 
                     alt="Autres prestations automobiles" 
-                    width="400"
-                    height="400"
                     className="w-full h-full object-cover rounded-lg transition-transform duration-300" 
-                    loading="lazy"
-                    decoding="async"
                   />
                 </div>
               </div>

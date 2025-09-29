@@ -1,0 +1,37 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: upgrade-insecure-requests; block-all-mixed-content
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: public, max-age=31536000
+  
+# API endpoints
+/functions/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization
+  
+# Static assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  
+# Images
+/*.jpg
+  Cache-Control: public, max-age=31536000
+/*.jpeg
+  Cache-Control: public, max-age=31536000
+/*.png
+  Cache-Control: public, max-age=31536000
+/*.webp
+  Cache-Control: public, max-age=31536000
+/*.gif
+  Cache-Control: public, max-age=31536000
+  
+# Videos
+/*.mp4
+  Cache-Control: public, max-age=31536000
+/*.MP4
+  Cache-Control: public, max-age=31536000

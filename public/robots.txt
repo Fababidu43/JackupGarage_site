@@ -1,13 +1,39 @@
 User-agent: *
 Allow: /
 
+# Pages prioritaires pour le SEO
+Allow: /depanneur-haute-loire
+Allow: /depanneurs-43
+Allow: /garage-auto-43
+Allow: /garage-auto-42
+Allow: /garagiste-43
+Allow: /garage-monistrol
+Allow: /garage-bas-en-basset
+Allow: /depanneur-monistrol-sur-loire
+Allow: /garage-auto-monistrol
+Allow: /garagiste-monistrol-sur-loire
+Allow: /depannage-auto-43
+Allow: /depannage-voiture-haute-loire
+Allow: /garage-mobile-43
+Allow: /garage-itinerant-haute-loire
+Allow: /reparation-auto-domicile-43
+
 # Pages importantes pour le SEO
 Allow: /garagiste-le-puy-en-velay
+Allow: /garagiste-le-puy
+Allow: /depanneur-le-puy
+Allow: /garage-auto-le-puy-en-velay
 Allow: /garagiste-saint-etienne
 Allow: /mecanicien-monistrol-sur-loire
 Allow: /mecanicien-firminy
 Allow: /garage-saint-chamond
 Allow: /garage-yssingeaux
+Allow: /garagiste-yssingeaux
+Allow: /depanneur-yssingeaux
+Allow: /garage-brioude
+Allow: /garagiste-brioude
+Allow: /depanneur-brioude
+Allow: /garage-retournac
 Allow: /reparation-auto-rive-de-gier
 Allow: /mecanicien-roanne
 Allow: /garage-montbrison
@@ -20,8 +46,15 @@ Allow: /embrayage-mobile-firminy
 Allow: /garagiste-mobile-haute-loire-loire
 Allow: /mecanicien-domicile-60km
 
+# Pages longue traîne
+Allow: /depanneur-auto-mobile-haute-loire
+Allow: /garage-automobile-mobile-43-42
+Allow: /service-depannage-voiture-domicile
+Allow: /assistance-automobile-mobile-haute-loire
+Allow: /sos-auto-mobile-43
+
 # Sitemap
-Sitemap: https://jackupauto.fr/sitemap.xml
+Sitemap: https://jackup-auto.fr/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

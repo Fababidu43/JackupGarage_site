@@ -843,6 +843,14 @@
   animation: textShimmer 2s linear infinite;
 }
 
+/* Effet de glow pour le slogan */
+.glow-effect {
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.6),
+    0 0 40px rgba(255, 107, 53, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
 /* Animations d'apparition */
 @keyframes slideInUp {
   0% {

@@ -17,6 +17,8 @@ Dans Netlify → Site settings → Environment variables :
 ```
 VITE_SUPABASE_URL=https://votre-projet.supabase.co
 VITE_SUPABASE_ANON_KEY=votre_cle_anon
+VITE_GOOGLE_MAPS_KEY=votre_cle_google_maps
+VITE_SITE_URL=https://www.jackup-auto.fr
 ```
 
 ### 4. Domaine personnalisé (optionnel)
@@ -32,10 +34,12 @@ VITE_SUPABASE_ANON_KEY=votre_cle_anon
 ## ✅ Checklist finale
 
 - [ ] Variables Supabase configurées
-- [ ] Clé Google Maps mise à jour
+- [ ] Variables d'environnement configurées
+- [ ] Clé Google Maps configurée
 - [ ] Téléphone personnalisé
 - [ ] Logo remplacé
 - [ ] Test du formulaire de contact
 - [ ] Test de la galerie admin
+- [ ] Variables d'environnement en production
 
 **🎉 Votre site est prêt à attirer des clients !**

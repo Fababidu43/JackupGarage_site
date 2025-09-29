@@ -37,11 +37,18 @@ const Contact = () => {
       console.log('=== ENVOI FORMULAIRE DE CONTACT ===');
       console.log('Données à envoyer:', formData);
 
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-quote-email`, {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || window.SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || window.SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Configuration manquante');
+      }
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-quote-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${supabaseKey}`,
         },
         body: JSON.stringify({
           ...formData,

@@ -66,19 +66,16 @@ async function sendEmailViaResend(formData: FormRequest) {
   try {
     console.log('=== ENVOI EMAIL VIA RESEND API ===');
     
-    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-    const RESEND_FROM = Deno.env.get('RESEND_FROM');
-    const RESEND_TO = Deno.env.get('RESEND_TO');
+    // Variables d'environnement avec valeurs par défaut
+    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') || 're_DTRPaDL5_KzycNEmQYvq2tfbJ5S5ZCgM8';
+    const RESEND_FROM = Deno.env.get('RESEND_FROM') || 'Jackup Auto <fabian.measson123@gmail.com>';
+    const RESEND_TO = Deno.env.get('RESEND_TO') || 'jackup.auto.pro@gmail.com';
 
-    console.log('Configuration Resend:', {
+    console.log('🔧 Configuration Resend:', {
       hasApiKey: !!RESEND_API_KEY,
       from: RESEND_FROM,
       to: RESEND_TO
     });
-
-    if (!RESEND_API_KEY || !RESEND_FROM || !RESEND_TO) {
-      throw new Error('Configuration Resend manquante: RESEND_API_KEY, RESEND_FROM, RESEND_TO');
-    }
 
     const currentDate = new Date();
     const dateStr = currentDate.toLocaleDateString('fr-FR');

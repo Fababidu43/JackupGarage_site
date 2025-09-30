@@ -664,12 +664,12 @@ ${new Date().toISOString()}
       },
       body: JSON.stringify({
         from: {
-          email: "fabian.measson123@gmail.com",
+          email: "contact@jackup-auto.fr",
           name: "JACK Up Auto - Site Web"
         },
         to: [
           {
-            email: "jackup.auto.pro@gmail.com",
+            email: "contact@jackup-auto.fr",
             name: "JACK Up Auto"
           }
         ],

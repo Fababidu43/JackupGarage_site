@@ -138,6 +138,28 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Réseaux sociaux -->
+  <url>
+    <loc>https://www.jackup-auto.fr/reseaux-sociaux</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/facebook-jackup-auto</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/instagram-jackup-auto</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Pages de services spécifiques -->
   <url>
     <loc>https://jackup-auto.fr/vidange-domicile-haute-loire</loc>

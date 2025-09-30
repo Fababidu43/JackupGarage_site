@@ -178,6 +178,22 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
             <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-orange-400" />
             <span className="font-medium tracking-wide text-xs uppercase font-tech">{"Réponse < 12h"}</span>
           </div>
+          <div className="w-1 h-1 bg-orange-400 rounded-full"></div>
+          <div className="flex items-center animate-badge-float-1">
+            <a 
+              href="https://www.instagram.com/jackupauto?igsh=cnFzdXhkMzh2cTRr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-pink-300 transition-colors"
+              title="Suivez nos interventions sur Instagram"
+              aria-label="Instagram JACK Up Auto"
+            >
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.611-3.132-1.551-.684-.94-.684-2.08 0-3.02.684-.94 1.835-1.551 3.132-1.551s2.448.611 3.132 1.551c.684.94.684 2.08 0 3.02-.684.94-1.835 1.551-3.132 1.551zm7.718 0c-1.297 0-2.448-.611-3.132-1.551-.684-.94-.684-2.08 0-3.02.684-.94 1.835-1.551 3.132-1.551s2.448.611 3.132 1.551c.684.94.684 2.08 0 3.02-.684.94-1.835 1.551-3.132 1.551z"/>
+              </svg>
+              <span className="font-medium tracking-wide text-xs uppercase font-tech">@jackupauto</span>
+            </a>
+          </div>
         </div>
       </div>
       

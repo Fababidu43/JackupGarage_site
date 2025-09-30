@@ -157,6 +157,45 @@ const Contact = () => {
               </div>
             </div>
 
+            {/* Réseaux sociaux dans Contact */}
+            <div className="bg-white/95 backdrop-blur-sm p-4 sm:p-6 shadow-xl rounded-lg border border-orange-500/30 glow-hover hover-scale border-glow subtle-glow animated-border">
+              <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-wide uppercase font-futuristic hover-glow-text mb-4">Suivez-nous</h3>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://www.facebook.com/profile.php?id=61581767660833&locale=fr_FR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors hover-lift"
+                  title="JACK Up Auto sur Facebook"
+                  aria-label="Page Facebook JACK Up Auto"
+                >
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm font-tech">Facebook</span>
+                </a>
+                <a 
+                  href="https://www.instagram.com/jackupauto?igsh=cnFzdXhkMzh2cTRr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-pink-600 hover:text-pink-700 transition-colors hover-lift"
+                  title="JACK Up Auto sur Instagram - Photos de nos interventions"
+                  aria-label="Compte Instagram JACK Up Auto"
+                >
+                  <div className="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.611-3.132-1.551-.684-.94-.684-2.08 0-3.02.684-.94 1.835-1.551 3.132-1.551s2.448.611 3.132 1.551c.684.94.684 2.08 0 3.02-.684.94-1.835 1.551-3.132 1.551zm7.718 0c-1.297 0-2.448-.611-3.132-1.551-.684-.94-.684-2.08 0-3.02.684-.94 1.835-1.551 3.132-1.551s2.448.611 3.132 1.551c.684.94.684 2.08 0 3.02-.684.94-1.835 1.551-3.132 1.551z"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm font-tech">Instagram</span>
+                </a>
+              </div>
+              <p className="text-xs text-gray-600 mt-2 font-tech">
+                📸 Suivez nos interventions en direct sur Instagram !
+              </p>
+            </div>
             {/* Contact Form */}
             <div className={`lg:col-span-2 ${isSubmitted ? 'opacity-50 pointer-events-none' : ''}`}>
               <form onSubmit={handleSubmit} className="bg-black/90 backdrop-blur-sm p-4 sm:p-6 shadow-2xl rounded-lg border-2 border-orange-500/40 hover-scale border-glow subtle-glow animated-border">

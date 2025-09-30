@@ -101,18 +101,22 @@ const Footer = () => {
             {/* Réseaux sociaux */}
             <div className="flex space-x-1 sm:space-x-2">
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/profile.php?id=61581767660833&locale=fr_FR" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
+                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-blue-400 hover:bg-blue-500/20 rounded transition-colors hover-scale"
+                title="JACK Up Auto sur Facebook - Suivez nos actualités"
+                aria-label="Page Facebook JACK Up Auto"
               >
                 <Facebook className="w-3 h-3" />
               </a>
               <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/jackupauto?igsh=cnFzdXhkMzh2cTRr" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:bg-orange-500/20 rounded transition-colors hover-scale"
+                className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gray-800 flex items-center justify-center text-gray-400 hover:text-pink-400 hover:bg-pink-500/20 rounded transition-colors hover-scale"
+                title="JACK Up Auto sur Instagram - Photos de nos interventions"
+                aria-label="Compte Instagram JACK Up Auto"
               >
                 <Instagram className="w-3 h-3" />
               </a>

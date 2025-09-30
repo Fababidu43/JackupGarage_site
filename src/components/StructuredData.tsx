@@ -55,11 +55,15 @@ const StructuredData: React.FC = () => {
     "description": "⭐ JACK Up Auto - Dépanneur & Garage Mobile N°1 Haute-Loire (43) et Loire (42) ! Spécialiste mécanicien à domicile dans un rayon de 60km : dépannage automobile, vidange, freinage, embrayage, kit distribution, suspensions, amortisseurs. Intervention rapide et professionnelle à Monistrol-sur-Loire, Bas-en-Basset, Le Puy-en-Velay, Saint-Étienne, Yssingeaux, Firminy, Saint-Chamond, Brioude, Retournac, Aurec-sur-Loire. Devis gratuit 24h - Service 7j/7 - Tarifs transparents - Garantie qualité.",
     "url": "https://www.jackup-auto.fr/",
     "sameAs": [
-      "https://www.facebook.com/jackupauto",
-      "https://www.instagram.com/jackupauto",
+      "https://www.facebook.com/profile.php?id=61581767660833&locale=fr_FR",
+      "https://www.instagram.com/jackupauto?igsh=cnFzdXhkMzh2cTRr",
       "https://www.google.com/maps/place/JACK+Up+Auto",
       "https://www.pagesjaunes.fr/pros/jack-up-auto",
-      "https://www.yelp.fr/biz/jack-up-auto"
+      "https://www.yelp.fr/biz/jack-up-auto",
+      "https://www.linkedin.com/company/jack-up-auto",
+      "https://www.youtube.com/channel/jackupauto",
+      "https://business.google.com/dashboard/l/jack-up-auto",
+      "https://fr.trustpilot.com/review/jackup-auto.fr"
     ],
     "logo": "/logo.png",
     "image": [

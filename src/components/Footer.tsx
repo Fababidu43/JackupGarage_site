@@ -141,7 +141,7 @@ const Footer = () => {
               © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
             </p>
             <p>
-              &copy; 2025 Jackup Auto — Site réalisé par <a href="https://fr-informatique.fr" target="_blank" rel="noopener">FR-Informatique</a>
+              2025 Jackup Auto — Site réalisé par <a href="https://fr-informatique.fr" target="_blank" rel="noopener">FR-Informatique</a>
             </p>
           </div>
         </div>

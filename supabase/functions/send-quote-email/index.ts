@@ -602,12 +602,12 @@ ${new Date().toISOString()}
     // Payload pour l'API MailerSend
     const emailPayload = {
       from: {
-        email: "jackup.auto.pro@gmail.com",
+        email: "noreply@jackup-auto.fr",
         name: "JACK Up Auto - Site Web"
       },
       to: [
         {
-          email: "jackup.auto.pro@gmail.com", 
+          email: "jackup.auto.pro@gmail.com",
           name: "JACK Up Auto"
         }
       ],
@@ -618,7 +618,7 @@ ${new Date().toISOString()}
 
     console.log('Envoi vers MailerSend API...');
 
-    // Configuration SMTP MailerSend avec domaine propre
+    // Configuration API MailerSend
     const mailerSendToken = 'mlsn.368012cea184e4330703138da97087066c50bb8419db079ec9e2864189a686bc';
     
     if (!mailerSendToken) {

@@ -67,7 +67,7 @@ async function sendEmailViaResend(formData: FormRequest) {
     console.log('=== ENVOI EMAIL VIA RESEND API ===');
     
     // Variables d'environnement avec valeurs par défaut
-    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') || 're_DTRPaDL5_KzycNEmQYvq2tfbJ5S5ZCgM8';
+    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') || 're_99MHTWca_HXEvPqriGAz1f28ooma5zkxP';
     const RESEND_FROM = Deno.env.get('RESEND_FROM') || 'Jackup Auto <onboarding@resend.dev>';
     const RESEND_TO = Deno.env.get('RESEND_TO') || 'jackup.auto.pro@gmail.com';
 

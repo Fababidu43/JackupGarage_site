@@ -138,10 +138,7 @@ const Footer = () => {
               CGV
             </button>
             <p className="text-gray-500 text-xs font-tech">
-              © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
-            </p>
-            <p>
-              2025 Jackup Auto — Site réalisé par <a href="https://fr-informatique.fr" target="_blank" rel="noopener">FR-Informatique</a>
+              © 2025 JACK Up Auto • Haute-Loire & Loire (43-42) | Site réalisé par <a href="https://fr-informatique.fr" target="_blank" rel="noopener">FR-Informatique</a>
             </p>
           </div>
         </div>

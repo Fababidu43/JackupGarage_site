@@ -140,6 +140,9 @@ const Footer = () => {
             <p className="text-gray-500 text-xs font-tech">
               © 2024 JACK Up Auto • Haute-Loire & Loire (43-42)
             </p>
+            <p>
+              &copy; 2025 Jackup Auto — Site réalisé par <a href="https://fr-informatique.fr" target="_blank" rel="noopener">FR-Informatique</a>
+            </p>
           </div>
         </div>
       </div>

@@ -602,12 +602,12 @@ ${new Date().toISOString()}
     // Payload pour l'API MailerSend
     const emailPayload = {
       from: {
-        email: "MS_d3FIGC@jackup-auto.fr",
+        email: "jackup.auto.pro@gmail.com",
         name: "JACK Up Auto - Site Web"
       },
       to: [
         {
-          email: "contact@jackup-auto.fr", 
+          email: "jackup.auto.pro@gmail.com", 
           name: "JACK Up Auto"
         }
       ],

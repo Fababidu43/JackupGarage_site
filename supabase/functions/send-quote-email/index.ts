@@ -13,6 +13,7 @@ interface QuoteRequest {
   phone: string;
   name: string;
   formType: 'quote';
+  formType: 'quote';
 }
 
 interface ContactRequest {
@@ -25,6 +26,7 @@ interface ContactRequest {
   subject: string;
   message: string;
   hasHardFlatGround: boolean;
+  formType: 'contact';
   formType: 'contact';
 }
 
@@ -609,7 +611,6 @@ ${new Date().toISOString()}
           name: "JACK Up Auto"
         }
       ],
-      subject: `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`,
       subject: emailSubject,
       html: htmlContent,
       text: textContent

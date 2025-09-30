@@ -7,11 +7,22 @@ Allow: /depanneurs-43
 Allow: /garage-auto-43
 Allow: /garage-auto-42
 Allow: /garagiste-43
+Allow: /depanneur-loire
+Allow: /depanneurs-42
+Allow: /garagiste-42
 Allow: /mecanicien-domicile-haute-loire
+Allow: /mecanicien-domicile-loire
 Allow: /garage-mobile-haute-loire-loire
+Allow: /garage-mobile-42
+Allow: /garage-mobile-loire
 Allow: /depannage-automobile-43-42
+Allow: /depannage-automobile-42
+Allow: /depannage-voiture-loire
 Allow: /service-auto-domicile
+Allow: /service-auto-domicile-42
 Allow: /reparation-auto-mobile
+Allow: /reparation-auto-mobile-42
+Allow: /reparation-auto-loire
 
 # Pages prioritaires pour le SEO
 Allow: /garage-monistrol

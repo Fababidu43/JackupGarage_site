@@ -2,62 +2,114 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" 
         xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
         xmlns:image="https://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="https://www.google.com/schemas/sitemap-news/0.9"
         xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 
         https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <!-- Page d'accueil -->
   <url>
     <loc>https://www.jackup-auto.fr/</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.jackup-auto.fr/logo.png</image:loc>
       <image:title>JACK Up Auto - Logo</image:title>
-      <image:caption>Dépanneur & Garage auto mobile Haute-Loire Loire</image:caption>
+      <image:caption>Dépanneur & Garage auto mobile N°1 Haute-Loire Loire (43-42)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.jackup-auto.fr/entretiens_photos.jpg</image:loc>
+      <image:title>Vidange moteur à domicile</image:title>
+      <image:caption>Service de vidange et entretien automobile à domicile</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.jackup-auto.fr/freins_photos.jpg</image:loc>
+      <image:title>Réparation freins à domicile</image:title>
+      <image:caption>Changement plaquettes et disques de frein à domicile</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.jackup-auto.fr/embrayage_photos.jpg</image:loc>
+      <image:title>Remplacement embrayage à domicile</image:title>
+      <image:caption>Kit embrayage et volant moteur à domicile</image:caption>
     </image:image>
   </url>
 
   <!-- Pages principales optimisées SEO -->
   <url>
     <loc>https://www.jackup-auto.fr/depanneur-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://www.jackup-auto.fr/depanneurs-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://www.jackup-auto.fr/garage-auto-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://www.jackup-auto.fr/garage-auto-42</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://www.jackup-auto.fr/garagiste-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+  </url>
+
+  <!-- Nouvelles pages SEO ultra-ciblées -->
+  <url>
+    <loc>https://www.jackup-auto.fr/mecanicien-domicile-haute-loire</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/garage-mobile-haute-loire-loire</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/depannage-automobile-43-42</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/service-auto-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.jackup-auto.fr/reparation-auto-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Galerie -->
   <url>
     <loc>https://www.jackup-auto.fr/galerie</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,7 +117,7 @@
   <!-- Services -->
   <url>
     <loc>https://www.jackup-auto.fr/services</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -73,7 +125,7 @@
   <!-- Zone d'intervention -->
   <url>
     <loc>https://www.jackup-auto.fr/zone-intervention</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -81,7 +133,7 @@
   <!-- Contact -->
   <url>
     <loc>https://www.jackup-auto.fr/contact</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -89,22 +141,50 @@
   <!-- Pages de services spécifiques -->
   <url>
     <loc>https://jackup-auto.fr/vidange-domicile-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/reparation-freins-le-puy-en-velay</loc>
-    <lastmod>2024-12-19</lastmod>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/embrayage-monistrol-sur-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Nouvelles pages services détaillées -->
+  <url>
+    <loc>https://jackup-auto.fr/kit-distribution-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/suspensions-amortisseurs-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/diagnostic-automobile-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/entretien-auto-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -112,70 +192,70 @@
   <!-- Pages géolocalisées -->
   <url>
     <loc>https://jackup-auto.fr/garagiste-le-puy-en-velay</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/mecanicien-monistrol-sur-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-saint-etienne</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/mecanicien-firminy</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-saint-chamond</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/reparation-auto-rive-de-gier</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/mecanicien-roanne</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-montbrison</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-yssingeaux</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/reparation-auto-brioude</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -183,70 +263,70 @@
   <!-- Pages spécifiques Monistrol et Bas-en-Basset (priorité maximale) -->
   <url>
     <loc>https://jackup-auto.fr/garage-monistrol</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-bas-en-basset</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depanneur-monistrol-sur-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-auto-monistrol</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-monistrol-sur-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depannage-auto-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depannage-voiture-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-mobile-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-itinerant-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/reparation-auto-domicile-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -254,120 +334,163 @@
   <!-- Pages villes Haute-Loire détaillées -->
   <url>
     <loc>https://jackup-auto.fr/garage-auto-le-puy-en-velay</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-le-puy</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depanneur-le-puy</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-yssingeaux</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-yssingeaux</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depanneur-yssingeaux</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-brioude</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-brioude</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/depanneur-brioude</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-retournac</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+  </url>
+
+  <!-- Nouvelles pages villes Loire détaillées -->
+  <url>
+    <loc>https://jackup-auto.fr/garage-auto-saint-etienne</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/depanneur-saint-etienne</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/garage-auto-firminy</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/depanneur-firminy</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/garage-auto-saint-chamond</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/depanneur-saint-chamond</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Services détaillés -->
   <url>
     <loc>https://jackup-auto.fr/vidange-domicile-saint-etienne</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/freinage-domicile-loire-42</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/embrayage-mobile-firminy</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/distribution-yssingeaux</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/suspensions-amortisseurs-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garagiste-mobile-haute-loire-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/mecanicien-domicile-60km</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -375,36 +498,143 @@
   <!-- Pages longue traîne ultra-spécifiques -->
   <url>
     <loc>https://jackup-auto.fr/depanneur-auto-mobile-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/garage-automobile-mobile-43-42</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/service-depannage-voiture-domicile</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/assistance-automobile-mobile-haute-loire</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://jackup-auto.fr/sos-auto-mobile-43</loc>
-    <lastmod>2024-12-20</lastmod>
+    <lastmod>2024-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Nouvelles pages longue traîne 2024 -->
+  <url>
+    <loc>https://jackup-auto.fr/mecanicien-professionnel-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/expert-automobile-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/technicien-auto-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/specialiste-auto-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/reparateur-auto-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/artisan-garagiste-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/garage-certifie-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/garage-agree-domicile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/garage-qualifie-mobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/atelier-mobile-automobile</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/intervention-rapide-auto</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/devis-gratuit-auto</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/tarif-transparent-garage</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/prix-juste-reparation</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://jackup-auto.fr/qualite-garantie-auto</loc>
+    <lastmod>2024-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

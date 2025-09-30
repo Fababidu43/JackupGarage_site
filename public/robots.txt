@@ -1,12 +1,19 @@
 User-agent: *
 Allow: /
 
-# Pages prioritaires pour le SEO
+# Priorité maximale pour les pages principales
 Allow: /depanneur-haute-loire
 Allow: /depanneurs-43
 Allow: /garage-auto-43
 Allow: /garage-auto-42
 Allow: /garagiste-43
+Allow: /mecanicien-domicile-haute-loire
+Allow: /garage-mobile-haute-loire-loire
+Allow: /depannage-automobile-43-42
+Allow: /service-auto-domicile
+Allow: /reparation-auto-mobile
+
+# Pages prioritaires pour le SEO
 Allow: /garage-monistrol
 Allow: /garage-bas-en-basset
 Allow: /depanneur-monistrol-sur-loire
@@ -17,6 +24,12 @@ Allow: /depannage-voiture-haute-loire
 Allow: /garage-mobile-43
 Allow: /garage-itinerant-haute-loire
 Allow: /reparation-auto-domicile-43
+
+# Pages services détaillées
+Allow: /kit-distribution-domicile
+Allow: /suspensions-amortisseurs-domicile
+Allow: /diagnostic-automobile-domicile
+Allow: /entretien-auto-mobile
 
 # Pages importantes pour le SEO
 Allow: /garagiste-le-puy-en-velay
@@ -37,6 +50,16 @@ Allow: /garage-retournac
 Allow: /reparation-auto-rive-de-gier
 Allow: /mecanicien-roanne
 Allow: /garage-montbrison
+
+# Nouvelles pages villes Loire
+Allow: /garage-auto-saint-etienne
+Allow: /depanneur-saint-etienne
+Allow: /garage-auto-firminy
+Allow: /depanneur-firminy
+Allow: /garage-auto-saint-chamond
+Allow: /depanneur-saint-chamond
+
+# Pages services spécialisés
 Allow: /vidange-domicile-haute-loire
 Allow: /vidange-domicile-saint-etienne
 Allow: /reparation-freins-le-puy-en-velay
@@ -45,6 +68,23 @@ Allow: /embrayage-monistrol-sur-loire
 Allow: /embrayage-mobile-firminy
 Allow: /garagiste-mobile-haute-loire-loire
 Allow: /mecanicien-domicile-60km
+
+# Nouvelles pages professionnelles
+Allow: /mecanicien-professionnel-domicile
+Allow: /expert-automobile-mobile
+Allow: /technicien-auto-domicile
+Allow: /specialiste-auto-mobile
+Allow: /reparateur-auto-mobile
+Allow: /artisan-garagiste-mobile
+Allow: /garage-certifie-mobile
+Allow: /garage-agree-domicile
+Allow: /garage-qualifie-mobile
+Allow: /atelier-mobile-automobile
+Allow: /intervention-rapide-auto
+Allow: /devis-gratuit-auto
+Allow: /tarif-transparent-garage
+Allow: /prix-juste-reparation
+Allow: /qualite-garantie-auto
 
 # Pages longue traîne
 Allow: /depanneur-auto-mobile-haute-loire
@@ -55,6 +95,9 @@ Allow: /sos-auto-mobile-43
 
 # Sitemap
 Sitemap: https://www.jackup-auto.fr/sitemap.xml
+
+# Sitemap images
+Sitemap: https://www.jackup-auto.fr/sitemap-images.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
@@ -69,6 +112,7 @@ Allow: /galerie
 Allow: /services
 Allow: /zone-intervention
 Allow: /contact
+Allow: /cgv
 
 # Crawl plus fréquent pour les pages importantes
 Crawl-delay: 0.5
@@ -82,4 +126,3 @@ Disallow: /node_modules/
 # SEO boost
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 0.2

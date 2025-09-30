@@ -68,8 +68,8 @@ const GMAIL_SMTP_CONFIG = {
   port: 587,
   username: 'fabian.measson123@gmail.com',
   password: 'ajlz gahz jnun rjbs', // Mot de passe d'application
-  from: 'fabian.measson123@gmail.com',
-  to: 'jackup.auto.pro@gmail.com'
+  from: 'contact@jackup-auto.fr',
+  to: 'contact@jackup-auto.fr'
 };
 
 async function sendEmailViaGmailSMTP(formData: FormRequest) {

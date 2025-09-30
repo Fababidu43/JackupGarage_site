@@ -607,7 +607,7 @@ ${new Date().toISOString()}
       },
       to: [
         {
-          email: "jackup.auto.pro@gmail.com", 
+          email: "contact@jackup-auto.fr", 
           name: "JACK Up Auto"
         }
       ],

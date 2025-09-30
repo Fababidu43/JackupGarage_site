@@ -602,7 +602,7 @@ ${new Date().toISOString()}
     // Payload pour l'API MailerSend
     const emailPayload = {
       from: {
-        email: "MS_EOl33K@test-q3enl6kvz2r42vwr.mlsender.net",
+        email: "MS_EOl33K@trial-q3enl6kvz2r42vwr.mlsender.net",
         name: "JACK Up Auto"
       },
       to: [
@@ -619,7 +619,7 @@ ${new Date().toISOString()}
     console.log('Envoi vers MailerSend API...');
 
     // Récupérer le token depuis les variables d'environnement
-    const mailerSendToken = Deno.env.get('MAILERSEND_API_TOKEN') || 'mlsn.e80f10c4534d1626c8ef882743c6eab027f1458b14423b3e147985449f92e35b';
+    const mailerSendToken = Deno.env.get('MAILERSEND_API_TOKEN') || 'mlsn.d41c01056997774590672a5d1bd77f08b6590019f86221e996f677335848d066';
     
     if (!mailerSendToken) {
       throw new Error('Token MailerSend manquant dans les variables d\'environnement');

@@ -62,34 +62,31 @@ const subjectNames: { [key: string]: string } = {
   'autre': 'Autre'
 };
 
-// Configuration SMTP Gmail
-const GMAIL_SMTP_CONFIG = {
-  hostname: 'smtp.gmail.com',
-  port: 587,
-  username: 'fabian.measson123@gmail.com',
-  password: 'ajlz gahz jnun rjbs',
-  from: 'fabian.measson123@gmail.com',
-  to: 'jackup.auto.pro@gmail.com'
-};
-
-async function sendEmailViaGmailSMTP(formData: FormRequest) {
+async function sendEmailViaResend(formData: FormRequest) {
   try {
-    console.log('=== ENVOI EMAIL VIA SMTP GMAIL ===');
-    console.log('Configuration SMTP:', {
-      hostname: GMAIL_SMTP_CONFIG.hostname,
-      port: GMAIL_SMTP_CONFIG.port,
-      username: GMAIL_SMTP_CONFIG.username,
-      from: GMAIL_SMTP_CONFIG.from,
-      to: GMAIL_SMTP_CONFIG.to
+    console.log('=== ENVOI EMAIL VIA RESEND API ===');
+    
+    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+    const RESEND_FROM = Deno.env.get('RESEND_FROM');
+    const RESEND_TO = Deno.env.get('RESEND_TO');
+
+    console.log('Configuration Resend:', {
+      hasApiKey: !!RESEND_API_KEY,
+      from: RESEND_FROM,
+      to: RESEND_TO
     });
+
+    if (!RESEND_API_KEY || !RESEND_FROM || !RESEND_TO) {
+      throw new Error('Configuration Resend manquante: RESEND_API_KEY, RESEND_FROM, RESEND_TO');
+    }
 
     const currentDate = new Date();
     const dateStr = currentDate.toLocaleDateString('fr-FR');
     const timeStr = currentDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 
+    let emailSubject: string;
     let htmlContent: string;
     let textContent: string;
-    let emailSubject: string;
 
     // Déterminer le type de formulaire
     const isQuoteForm = !formData.formType || formData.formType === 'quote';
@@ -617,44 +614,57 @@ ${new Date().toISOString()}
 `;
     }
 
-    // Simulation d'envoi SMTP Gmail (en production, utilisez un vrai service SMTP)
-    console.log('📧 Simulation envoi SMTP Gmail...');
+    // Appel API Resend
+    console.log('📧 Envoi via API Resend...');
     console.log('Subject:', emailSubject);
-    console.log('From:', GMAIL_SMTP_CONFIG.from);
-    console.log('To:', GMAIL_SMTP_CONFIG.to);
+    console.log('From:', RESEND_FROM);
+    console.log('To:', RESEND_TO);
     
-    // En production, ici vous utiliseriez une vraie connexion SMTP
-    // Pour Deno/Edge Functions, utilisez un service comme Resend, SendGrid, etc.
-    
-    const smtpResult = {
-      success: true,
-      messageId: `smtp_${Date.now()}`,
-      timestamp: new Date().toISOString()
-    };
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: RESEND_FROM,
+        to: [RESEND_TO],
+        subject: emailSubject,
+        html: htmlContent,
+        text: textContent
+      })
+    });
 
-    console.log('✅ Email envoyé avec succès via SMTP Gmail (simulé)');
-    console.log('Détails:', smtpResult);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Erreur API Resend:', response.status, errorText);
+      throw new Error(`Resend API ${response.status}: ${errorText}`);
+    }
+
+    const resendData = await response.json();
+    console.log('✅ Email envoyé avec succès via Resend API');
+    console.log('Réponse Resend:', resendData);
     
     return { 
       success: true, 
-      message: "Email envoyé avec succès via SMTP Gmail",
+      message: "Email envoyé avec succès via Resend API",
       details: {
-        from: GMAIL_SMTP_CONFIG.from,
-        to: GMAIL_SMTP_CONFIG.to,
+        from: RESEND_FROM,
+        to: RESEND_TO,
         subject: emailSubject,
         timestamp: new Date().toISOString(),
         formType: formData.formType || 'quote',
         client: isQuoteForm ? (formData as QuoteRequest).name : `${(formData as ContactRequest).firstName} ${(formData as ContactRequest).lastName}`,
         phone: formData.phone,
-        smtp_response: smtpResult
+        resend_response: resendData
       }
     };
     
   } catch (error) {
-    console.error("Erreur envoi email SMTP Gmail:", error);
+    console.error("Erreur envoi email Resend:", error);
     return { 
       success: false, 
-      error: error.message || "Erreur inconnue lors de l'envoi SMTP Gmail"
+      error: error.message || "Erreur inconnue lors de l'envoi via Resend"
     };
   }
 }
@@ -684,7 +694,7 @@ serve(async (req: Request) => {
     console.log('=== DONNÉES REÇUES ===');
     console.log('FormData:', JSON.stringify(formData, null, 2));
     
-    // Validation des données améliorée
+    // Validation des données
     let isValid = false;
     let missingFields: string[] = [];
     
@@ -732,8 +742,8 @@ serve(async (req: Request) => {
 
     console.log(`✅ Validation réussie pour ${isQuoteForm ? 'devis express' : 'formulaire de contact'}`);
 
-    // Envoyer l'email via SMTP Gmail
-    const result = await sendEmailViaGmailSMTP(formData);
+    // Envoyer l'email via Resend API
+    const result = await sendEmailViaResend(formData);
     
     if (result.success) {
       console.log('✅ Email traité avec succès');

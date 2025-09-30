@@ -329,7 +329,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <p className="font-bold text-sm">Message envoyé avec succès !</p>
-                        <p className="text-xs">Vous recevrez une réponse sous 12h par téléphone ou email.</p>
+                        <p className="text-xs">Votre message a été transmis à notre équipe. Vous recevrez une réponse sous 12h par téléphone ou email.</p>
                       </div>
                     </div>
                   </div>
@@ -338,7 +338,11 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full btn-primary py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow text-sm min-h-[48px]"
+                  className={`w-full py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech text-sm min-h-[48px] transition-all duration-300 ${
+                    submitSuccess 
+                      ? 'bg-green-500 hover:bg-green-600 text-white' 
+                      : 'btn-primary glow-hover hover-scale morph-button subtle-glow'
+                  }`}
                 >
                   {isLoading ? (
                     <>
@@ -352,7 +356,7 @@ const Contact = () => {
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      Message envoyé !
+                      Message transmis avec succès !
                     </>
                   ) : (
                     <>
@@ -363,7 +367,7 @@ const Contact = () => {
                 </button>
                 
                 <p className="text-center text-xs sm:text-sm text-white/60 mt-3 sm:mt-4 font-tech">
-                  Retour par mail ou téléphone sous 12 h.
+                  {submitSuccess ? 'Votre message a été transmis à notre équipe.' : 'Retour par mail ou téléphone sous 12h.'}
                 </p>
               </form>
             </div>

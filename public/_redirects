@@ -7,8 +7,3 @@ http://www.jackup-auto.fr/*    https://www.jackup-auto.fr/:splat    301!
 
 # Redirect non-www to www
 https://jackup-auto.fr/*    https://www.jackup-auto.fr/:splat    301!
-
-# SEO redirects
-/garagiste-haute-loire    /    301
-/mecanicien-domicile-43   /    301
-/garage-monistrol         /    301

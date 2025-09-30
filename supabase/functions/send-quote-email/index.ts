@@ -619,7 +619,7 @@ ${new Date().toISOString()}
     console.log('Envoi vers MailerSend API...');
 
     // Configuration API MailerSend
-    const mailerSendToken = 'mlsn.368012cea184e4330703138da97087066c50bb8419db079ec9e2864189a686bc';
+    const mailerSendToken = 'mlsn.eeb793025c4e42850a6ada1f0d9f15f7acf85787bec23b445f3607609a82f2ff';
     
     if (!mailerSendToken) {
       throw new Error('Token MailerSend manquant dans les variables d\'environnement');

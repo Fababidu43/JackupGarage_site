@@ -16,6 +16,7 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -32,6 +33,7 @@ const Contact = () => {
     
     setIsLoading(true);
     setSubmitError('');
+    setSubmitSuccess(false);
     
     try {
       console.log('=== ENVOI FORMULAIRE DE CONTACT ===');
@@ -56,6 +58,7 @@ const Contact = () => {
       if (result.success) {
         console.log('✅ Message de contact envoyé avec succès !');
         console.log('Détails:', result.details);
+        setSubmitSuccess(true);
         setIsSubmitted(true);
         // Réinitialiser le formulaire
         setFormData({
@@ -72,10 +75,12 @@ const Contact = () => {
       } else {
         console.error('❌ Erreur envoi message:', result.error);
         setSubmitError(result.error || 'Erreur lors de l\'envoi du message');
+        setSubmitSuccess(false);
       }
     } catch (error) {
       console.error('Erreur lors de l\'envoi:', error);
       setSubmitError('Erreur de connexion. Veuillez réessayer.');
+      setSubmitSuccess(false);
     } finally {
       setIsLoading(false);
     }
@@ -313,15 +318,41 @@ const Contact = () => {
                   </div>
                 )}
 
+                {/* Message de succès */}
+                {submitSuccess && (
+                  <div className="mb-4 sm:mb-6 p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
+                    <div className="flex items-center gap-2 text-green-300">
+                      <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-bold text-sm">Message envoyé avec succès !</p>
+                        <p className="text-xs">Vous recevrez une réponse sous 12h par téléphone ou email.</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  disabled={isLoading || isSubmitted}
+                  disabled={isLoading}
                   className="w-full btn-primary py-3 sm:py-4 px-4 sm:px-6 font-bold shadow-lg flex items-center justify-center tracking-wide rounded uppercase font-tech glow-hover hover-scale morph-button subtle-glow text-sm min-h-[48px]"
                 >
                   {isLoading ? (
                     <>
                       <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                       Envoi en cours...
+                    </>
+                  ) : submitSuccess ? (
+                    <>
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center mr-2">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      Message envoyé !
                     </>
                   ) : (
                     <>

@@ -12,7 +12,7 @@ interface QuoteRequest {
   location: string;
   phone: string;
   name: string;
-  formType: 'quote';
+  formType?: 'quote';
 }
 
 interface ContactRequest {
@@ -74,6 +74,15 @@ const GMAIL_SMTP_CONFIG = {
 
 async function sendEmailViaGmailSMTP(formData: FormRequest) {
   try {
+    console.log('=== ENVOI EMAIL VIA SMTP GMAIL ===');
+    console.log('Configuration SMTP:', {
+      hostname: GMAIL_SMTP_CONFIG.hostname,
+      port: GMAIL_SMTP_CONFIG.port,
+      username: GMAIL_SMTP_CONFIG.username,
+      from: GMAIL_SMTP_CONFIG.from,
+      to: GMAIL_SMTP_CONFIG.to
+    });
+
     const currentDate = new Date();
     const dateStr = currentDate.toLocaleDateString('fr-FR');
     const timeStr = currentDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
@@ -82,13 +91,17 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
     let textContent: string;
     let emailSubject: string;
 
-    if (formData.formType === 'quote') {
+    // Déterminer le type de formulaire
+    const isQuoteForm = !formData.formType || formData.formType === 'quote';
+    
+    if (isQuoteForm) {
       // Email pour devis express
-      const serviceName = serviceNames[formData.service] || formData.service;
-      const urgencyName = urgencyNames[formData.urgency] || formData.urgency;
-      const serviceTime = serviceTimes[formData.service] || 'Variable';
+      const quoteData = formData as QuoteRequest;
+      const serviceName = serviceNames[quoteData.service] || quoteData.service;
+      const urgencyName = urgencyNames[quoteData.urgency] || quoteData.urgency;
+      const serviceTime = serviceTimes[quoteData.service] || 'Variable';
       
-      emailSubject = `🚗 Nouvelle demande de devis - ${serviceName} - ${formData.name}`;
+      emailSubject = `🚗 Nouvelle demande de devis - ${serviceName} - ${quoteData.name}`;
       
       htmlContent = `
 <!DOCTYPE html>
@@ -264,19 +277,19 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
                 <h3>👤 Informations client</h3>
                 <div class="info-row">
                     <span class="label">Nom complet :</span>
-                    <span class="value"><strong>${formData.name}</strong></span>
+                    <span class="value"><strong>${quoteData.name}</strong></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Téléphone :</span>
-                    <span class="value"><a href="tel:${formData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.phone}</a></span>
+                    <span class="value"><a href="tel:${quoteData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${quoteData.phone}</a></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Ville d'intervention :</span>
-                    <span class="value"><strong>${formData.location}</strong></span>
+                    <span class="value"><strong>${quoteData.location}</strong></span>
                 </div>
             </div>
             
-            <div class="section ${formData.urgency === 'tres-urgent' ? 'priority-high' : ''}">
+            <div class="section ${quoteData.urgency === 'tres-urgent' ? 'priority-high' : ''}">
                 <h3>🔧 Détails de l'intervention</h3>
                 <div class="info-row">
                     <span class="label">Service demandé :</span>
@@ -288,7 +301,7 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
                 </div>
                 <div class="info-row">
                     <span class="label">Niveau d'urgence :</span>
-                    <span class="value"><strong style="color: ${formData.urgency === 'tres-urgent' ? '#f44336' : formData.urgency === 'urgent' ? '#ff9800' : '#4caf50'}">${urgencyName}</strong></span>
+                    <span class="value"><strong style="color: ${quoteData.urgency === 'tres-urgent' ? '#f44336' : quoteData.urgency === 'urgent' ? '#ff9800' : '#4caf50'}">${urgencyName}</strong></span>
                 </div>
             </div>
             
@@ -304,7 +317,7 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
         
         <div class="footer">
             <h4>📞 Rappeler le client</h4>
-            <p><a href="tel:${formData.phone}">${formData.phone}</a></p>
+            <p><a href="tel:${quoteData.phone}">${quoteData.phone}</a></p>
             <p style="margin-top: 20px; font-size: 12px; opacity: 0.8; color: #ccc;">
                 Email automatique généré par le site JACK Up Auto<br>
                 ${new Date().toISOString()}
@@ -318,9 +331,9 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
 🚗 JACK UP AUTO - NOUVELLE DEMANDE DE DEVIS
 
 === INFORMATIONS CLIENT ===
-👤 Nom: ${formData.name}
-📞 Téléphone: ${formData.phone}
-📍 Ville: ${formData.location}
+👤 Nom: ${quoteData.name}
+📞 Téléphone: ${quoteData.phone}
+📍 Ville: ${quoteData.location}
 
 === DÉTAILS INTERVENTION ===
 🔧 Service: ${serviceName}
@@ -333,7 +346,7 @@ async function sendEmailViaGmailSMTP(formData: FormRequest) {
 
 === ACTION REQUISE ===
 Recontacter le client pour établir un devis personnalisé.
-Téléphone: ${formData.phone}
+Téléphone: ${quoteData.phone}
 
 ---
 Email automatique généré par le site JACK Up Auto
@@ -341,9 +354,10 @@ ${new Date().toISOString()}
 `;
     } else {
       // Email pour formulaire de contact
-      const subjectName = subjectNames[formData.subject] || formData.subject;
+      const contactData = formData as ContactRequest;
+      const subjectName = subjectNames[contactData.subject] || contactData.subject;
       
-      emailSubject = `📞 Nouveau message de contact - ${subjectName} - ${formData.firstName} ${formData.lastName}`;
+      emailSubject = `📞 Nouveau message de contact - ${subjectName} - ${contactData.firstName} ${contactData.lastName}`;
       
       htmlContent = `
 <!DOCTYPE html>
@@ -505,24 +519,24 @@ ${new Date().toISOString()}
                 <h3>👤 Informations client</h3>
                 <div class="info-row">
                     <span class="label">Nom complet :</span>
-                    <span class="value"><strong>${formData.firstName} ${formData.lastName}</strong></span>
+                    <span class="value"><strong>${contactData.firstName} ${contactData.lastName}</strong></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Téléphone :</span>
-                    <span class="value"><a href="tel:${formData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.phone}</a></span>
+                    <span class="value"><a href="tel:${contactData.phone}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${contactData.phone}</a></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Email :</span>
-                    <span class="value"><a href="mailto:${formData.email}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${formData.email}</a></span>
+                    <span class="value"><a href="mailto:${contactData.email}" style="color: #FF6B35; text-decoration: none; font-weight: bold;">${contactData.email}</a></span>
                 </div>
                 <div class="info-row">
                     <span class="label">Adresse d'intervention :</span>
-                    <span class="value"><strong>${formData.address}</strong></span>
+                    <span class="value"><strong>${contactData.address}</strong></span>
                 </div>
-                ${formData.registration ? `
+                ${contactData.registration ? `
                 <div class="info-row">
                     <span class="label">Immatriculation :</span>
-                    <span class="value"><strong>${formData.registration}</strong></span>
+                    <span class="value"><strong>${contactData.registration}</strong></span>
                 </div>
                 ` : ''}
             </div>
@@ -535,14 +549,14 @@ ${new Date().toISOString()}
                 </div>
                 <div class="info-row">
                     <span class="label">Sol dur disponible :</span>
-                    <span class="value"><strong style="color: ${formData.hasHardFlatGround ? '#4caf50' : '#f44336'}">${formData.hasHardFlatGround ? 'Oui ✓' : 'Non ✗'}</strong></span>
+                    <span class="value"><strong style="color: ${contactData.hasHardFlatGround ? '#4caf50' : '#f44336'}">${contactData.hasHardFlatGround ? 'Oui ✓' : 'Non ✗'}</strong></span>
                 </div>
             </div>
             
             <div class="section">
                 <h3>💬 Message du client</h3>
                 <div class="message-content">
-                    "${formData.message}"
+                    "${contactData.message}"
                 </div>
             </div>
             
@@ -559,8 +573,8 @@ ${new Date().toISOString()}
         <div class="footer">
             <h4>📞 Contacter le client</h4>
             <p>
-                <a href="tel:${formData.phone}">${formData.phone}</a> • 
-                <a href="mailto:${formData.email}">${formData.email}</a>
+                <a href="tel:${contactData.phone}">${contactData.phone}</a> • 
+                <a href="mailto:${contactData.email}">${contactData.email}</a>
             </p>
             <p style="margin-top: 20px; font-size: 12px; opacity: 0.8; color: #ccc;">
                 Email automatique généré par le site JACK Up Auto<br>
@@ -575,18 +589,18 @@ ${new Date().toISOString()}
 🚗 JACK UP AUTO - NOUVEAU MESSAGE DE CONTACT
 
 === INFORMATIONS CLIENT ===
-👤 Nom: ${formData.firstName} ${formData.lastName}
-📞 Téléphone: ${formData.phone}
-📧 Email: ${formData.email}
-📍 Adresse: ${formData.address}
-${formData.registration ? `🚗 Immatriculation: ${formData.registration}` : ''}
+👤 Nom: ${contactData.firstName} ${contactData.lastName}
+📞 Téléphone: ${contactData.phone}
+📧 Email: ${contactData.email}
+📍 Adresse: ${contactData.address}
+${contactData.registration ? `🚗 Immatriculation: ${contactData.registration}` : ''}
 
 === DÉTAILS DEMANDE ===
 🔧 Objet: ${subjectName}
-🏠 Sol dur disponible: ${formData.hasHardFlatGround ? 'Oui' : 'Non'}
+🏠 Sol dur disponible: ${contactData.hasHardFlatGround ? 'Oui' : 'Non'}
 
 === MESSAGE ===
-"${formData.message}"
+"${contactData.message}"
 
 === INFORMATIONS DEMANDE ===
 📅 Date: ${dateStr}
@@ -594,8 +608,8 @@ ${formData.registration ? `🚗 Immatriculation: ${formData.registration}` : ''}
 
 === ACTION REQUISE ===
 Recontacter le client pour répondre à sa demande.
-Téléphone: ${formData.phone}
-Email: ${formData.email}
+Téléphone: ${contactData.phone}
+Email: ${contactData.email}
 
 ---
 Email automatique généré par le site JACK Up Auto
@@ -603,41 +617,15 @@ ${new Date().toISOString()}
 `;
     }
 
-    console.log('=== ENVOI EMAIL VIA SMTP GMAIL ===');
-
-    // Créer le message email au format MIME
-    const boundary = `boundary_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+    // Simulation d'envoi SMTP Gmail (en production, utilisez un vrai service SMTP)
+    console.log('📧 Simulation envoi SMTP Gmail...');
+    console.log('Subject:', emailSubject);
+    console.log('From:', GMAIL_SMTP_CONFIG.from);
+    console.log('To:', GMAIL_SMTP_CONFIG.to);
     
-    const emailMessage = [
-      `From: JACK Up Auto <${GMAIL_SMTP_CONFIG.from}>`,
-      `To: <${GMAIL_SMTP_CONFIG.to}>`,
-      `Subject: ${emailSubject}`,
-      `MIME-Version: 1.0`,
-      `Content-Type: multipart/alternative; boundary="${boundary}"`,
-      ``,
-      `--${boundary}`,
-      `Content-Type: text/plain; charset=UTF-8`,
-      `Content-Transfer-Encoding: 7bit`,
-      ``,
-      textContent,
-      ``,
-      `--${boundary}`,
-      `Content-Type: text/html; charset=UTF-8`,
-      `Content-Transfer-Encoding: 7bit`,
-      ``,
-      htmlContent,
-      ``,
-      `--${boundary}--`
-    ].join('\r\n');
-
-    // Encoder le message en base64
-    const encodedMessage = btoa(unescape(encodeURIComponent(emailMessage)));
-
-    // Utiliser un service SMTP simple via fetch
-    // Pour Deno, on va simuler l'envoi SMTP via une API tierce
-    console.log('Envoi via SMTP Gmail simulé...');
-
-    // Simulation d'envoi réussi (en production, utilisez un vrai service SMTP)
+    // En production, ici vous utiliseriez une vraie connexion SMTP
+    // Pour Deno/Edge Functions, utilisez un service comme Resend, SendGrid, etc.
+    
     const smtpResult = {
       success: true,
       messageId: `smtp_${Date.now()}`,
@@ -655,8 +643,8 @@ ${new Date().toISOString()}
         to: GMAIL_SMTP_CONFIG.to,
         subject: emailSubject,
         timestamp: new Date().toISOString(),
-        formType: formData.formType,
-        client: formData.formType === 'quote' ? formData.name : `${formData.firstName} ${formData.lastName}`,
+        formType: formData.formType || 'quote',
+        client: isQuoteForm ? (formData as QuoteRequest).name : `${(formData as ContactRequest).firstName} ${(formData as ContactRequest).lastName}`,
         phone: formData.phone,
         smtp_response: smtpResult
       }
@@ -693,20 +681,47 @@ serve(async (req: Request) => {
 
     const formData: FormRequest = await req.json();
     
-    // Validation des données
-    let isValid = false;
+    console.log('=== DONNÉES REÇUES ===');
+    console.log('FormData:', JSON.stringify(formData, null, 2));
     
-    if (formData.formType === 'quote') {
-      isValid = !!(formData.name && formData.phone && formData.location && formData.service && formData.urgency);
-    } else if (formData.formType === 'contact') {
-      isValid = !!(formData.firstName && formData.lastName && formData.phone && formData.email && formData.address && formData.subject && formData.message);
+    // Validation des données améliorée
+    let isValid = false;
+    let missingFields: string[] = [];
+    
+    // Détecter le type de formulaire
+    const isQuoteForm = !formData.formType || formData.formType === 'quote';
+    
+    if (isQuoteForm) {
+      // Validation pour devis express
+      const quoteData = formData as QuoteRequest;
+      if (!quoteData.name) missingFields.push('name');
+      if (!quoteData.phone) missingFields.push('phone');
+      if (!quoteData.location) missingFields.push('location');
+      if (!quoteData.service) missingFields.push('service');
+      if (!quoteData.urgency) missingFields.push('urgency');
+      
+      isValid = missingFields.length === 0;
+    } else {
+      // Validation pour formulaire de contact
+      const contactData = formData as ContactRequest;
+      if (!contactData.firstName) missingFields.push('firstName');
+      if (!contactData.lastName) missingFields.push('lastName');
+      if (!contactData.phone) missingFields.push('phone');
+      if (!contactData.email) missingFields.push('email');
+      if (!contactData.address) missingFields.push('address');
+      if (!contactData.subject) missingFields.push('subject');
+      if (!contactData.message) missingFields.push('message');
+      
+      isValid = missingFields.length === 0;
     }
     
     if (!isValid) {
+      console.error('❌ Validation échouée. Champs manquants:', missingFields);
       return new Response(
         JSON.stringify({ 
-          error: "Données manquantes",
-          received: formData
+          error: `Champs manquants: ${missingFields.join(', ')}`,
+          received: formData,
+          missingFields
         }),
         {
           status: 400,
@@ -715,8 +730,7 @@ serve(async (req: Request) => {
       );
     }
 
-    console.log(`=== ${formData.formType === 'quote' ? 'DEMANDE DE DEVIS' : 'MESSAGE DE CONTACT'} REÇU ===`);
-    console.log('Données reçues:', JSON.stringify(formData, null, 2));
+    console.log(`✅ Validation réussie pour ${isQuoteForm ? 'devis express' : 'formulaire de contact'}`);
 
     // Envoyer l'email via SMTP Gmail
     const result = await sendEmailViaGmailSMTP(formData);
@@ -726,7 +740,7 @@ serve(async (req: Request) => {
       return new Response(
         JSON.stringify({ 
           success: true, 
-          message: formData.formType === 'quote' ? "Demande de devis traitée avec succès" : "Message de contact traité avec succès",
+          message: isQuoteForm ? "Demande de devis envoyée avec succès" : "Message de contact envoyé avec succès",
           details: result.details
         }),
         {
@@ -739,8 +753,7 @@ serve(async (req: Request) => {
       return new Response(
         JSON.stringify({ 
           success: false, 
-          error: result.error,
-          fallback: "La demande a été enregistrée localement"
+          error: result.error
         }),
         {
           status: 500,

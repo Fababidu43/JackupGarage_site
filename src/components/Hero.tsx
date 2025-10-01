@@ -105,7 +105,6 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <meta itemProp="contentUrl" content="https://www.jackup-auto.fr/presentation.MP4" />
         <meta itemProp="embedUrl" content="https://www.jackup-auto.fr/" />
         <source src="/presentation.MP4" type="video/mp4" />
-        <source src="/presentation.mp4" type="video/mp4" />
         <track kind="captions" src="" label="Français" srcLang="fr" />
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>

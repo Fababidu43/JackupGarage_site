@@ -337,9 +337,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
         return (
           <span>
             {coverageResult.city} se trouve dans la zone Lyon. Intervention uniquement sur demande - {' '}
-            <a 
-              href="tel:+33629485339" 
-              className="underline font-semibold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+            <a
+              href="tel:+33629485339"
+              className="font-semibold text-blue-600"
             >
               Contactez-nous
             </a>

@@ -113,6 +113,9 @@ Sitemap: https://www.jackup-auto.fr/sitemap-images.xml
 # Sitemap réseaux sociaux
 Sitemap: https://www.jackup-auto.fr/sitemap-social.xml
 
+# Sitemap vidéo
+Sitemap: https://www.jackup-auto.fr/sitemap-video.xml
+
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 

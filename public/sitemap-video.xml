@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.jackup-auto.fr/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.jackup-auto.fr/a_propos.JPG</video:thumbnail_loc>
+      <video:title>JACK Up Auto - Présentation du service de dépannage automobile mobile</video:title>
+      <video:description>Découvrez JACK Up Auto, votre dépanneur et garage automobile mobile en Haute-Loire (43) et Loire (42). Mécanicien professionnel à domicile : vidange, freinage, embrayage, distribution, suspensions. Intervention rapide dans un rayon de 60km autour de Monistrol-sur-Loire.</video:description>
+      <video:content_loc>https://www.jackup-auto.fr/presentation.MP4</video:content_loc>
+      <video:player_loc>https://www.jackup-auto.fr/</video:player_loc>
+      <video:duration>150</video:duration>
+      <video:publication_date>2024-12-29T10:00:00+01:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:requires_subscription>no</video:requires_subscription>
+      <video:uploader info="https://www.jackup-auto.fr/">JACK Up Auto</video:uploader>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+</urlset>

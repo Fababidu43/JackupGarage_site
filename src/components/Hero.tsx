@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         muted
         playsInline
         preload="auto"
-        poster="/logo.png"
+        poster="/a_propos.JPG"
         title="JACK Up Auto - Présentation du service de dépannage automobile mobile"
         aria-label="Vidéo de présentation JACK Up Auto - Dépanneur et garage mobile Haute-Loire Loire"
         onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
@@ -101,10 +101,11 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       >
         <meta itemProp="name" content="JACK Up Auto - Présentation du service de dépannage automobile mobile" />
         <meta itemProp="description" content="Découvrez JACK Up Auto, votre dépanneur et garage automobile mobile en Haute-Loire (43) et Loire (42)" />
-        <meta itemProp="thumbnailUrl" content="https://www.jackup-auto.fr/logo.png" />
+        <meta itemProp="thumbnailUrl" content="https://www.jackup-auto.fr/a_propos.JPG" />
         <meta itemProp="uploadDate" content="2024-12-29T10:00:00+01:00" />
         <meta itemProp="duration" content="PT2M30S" />
         <meta itemProp="contentUrl" content="https://www.jackup-auto.fr/presentation.MP4" />
+        <meta itemProp="embedUrl" content="https://www.jackup-auto.fr/" />
         <source src="/presentation.MP4" type="video/mp4" />
         <source src="/presentation.mp4" type="video/mp4" />
         Votre navigateur ne supporte pas la lecture de vidéos.

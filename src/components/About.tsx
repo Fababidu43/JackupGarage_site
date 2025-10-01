@@ -48,7 +48,7 @@ const About = () => {
               <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-2xl border-l-4 border-orange-500 shadow-lg">
                 <p className="text-base sm:text-lg text-gray-800 leading-relaxed font-tech font-medium">
                   Reconverti mécanicien depuis presque <strong className="text-orange-600">7 ans</strong> j'ai foulé le sol de nombreux ateliers de maintenance allant de l'automobile traditionnelle jusqu'à la <strong className="text-orange-600">voiture électrique</strong>. 
-                  De cette expérience variée j'ai fait le choix d\'aller vers une nouvelle approche de mon travail, celle de la <strong className="text-orange-600">mécanique à domicile</strong>, afin de vous proposer une solution <strong className="text-orange-600">efficace, transparente et économe</strong>.
+                  De cette expérience variée j'ai fait le choix d'aller vers une nouvelle approche de mon travail, celle de la <strong className="text-orange-600">mécanique à domicile</strong>, afin de vous proposer une solution <strong className="text-orange-600">efficace, transparente et économe</strong>.
                 </p>
               </div>
             </div>

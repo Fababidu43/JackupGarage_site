@@ -56,24 +56,6 @@ const Footer = () => {
 
           {/* Contact + Réseaux sociaux */}
           <div className="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 lg:justify-end">
-            {/* Bouton d'accès admin galerie - très discret */}
-            <button
-              onClick={() => {
-                // Si on est déjà sur la page galerie, ouvrir directement la modal
-                if (window.location.pathname.includes('gallery') || document.querySelector('[data-gallery-page]')) {
-                  // Déclencher l'événement pour ouvrir la modal admin
-                  const event = new CustomEvent('openAdminLogin');
-                  window.dispatchEvent(event);
-                } else {
-                  // Sinon, naviguer vers la galerie avec le hash
-                  window.location.href = window.location.origin + '/#gallery-admin';
-                }
-              }}
-              className="w-2 h-2 bg-gray-600 hover:bg-orange-500 rounded-full transition-all duration-200 opacity-20 hover:opacity-60 hover:scale-150 mr-1"
-              title="Administration galerie"
-            >
-            </button>
-            
             {/* Contact rapide */}
             <div className="flex items-center space-x-1 sm:space-x-2">
               <a 

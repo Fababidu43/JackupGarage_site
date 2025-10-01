@@ -483,8 +483,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   <button
                     onClick={() => setShowAllCommunes43(!showAllCommunes43)}
                     className="text-orange-300 hover:text-orange-200 transition-colors"
+                    aria-label={showAllCommunes43 ? "Masquer les communes de Haute-Loire" : "Afficher toutes les communes de Haute-Loire"}
+                    aria-expanded={showAllCommunes43}
                   >
-                    {showAllCommunes43 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    {showAllCommunes43 ? <ChevronUp className="w-4 h-4" aria-hidden="true" /> : <ChevronDown className="w-4 h-4" aria-hidden="true" />}
                   </button>
                 </div>
                 {showAllCommunes43 ? (
@@ -507,8 +509,10 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                   <button
                     onClick={() => setShowAllCommunes42(!showAllCommunes42)}
                     className="text-orange-300 hover:text-orange-200 transition-colors"
+                    aria-label={showAllCommunes42 ? "Masquer les communes de Loire" : "Afficher toutes les communes de Loire"}
+                    aria-expanded={showAllCommunes42}
                   >
-                    {showAllCommunes42 ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    {showAllCommunes42 ? <ChevronUp className="w-4 h-4" aria-hidden="true" /> : <ChevronDown className="w-4 h-4" aria-hidden="true" />}
                   </button>
                 </div>
                 {showAllCommunes42 ? (
@@ -550,8 +554,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     <button
                       onClick={() => setShowAllCommunes43(false)}
                       className="text-orange-300 hover:text-orange-200"
+                      aria-label="Masquer les communes de Haute-Loire"
                     >
-                      <ChevronUp className="w-5 h-5" />
+                      <ChevronUp className="w-5 h-5" aria-hidden="true" />
                     </button>
                   </div>
                   <div className="text-white/80 text-sm font-tech leading-relaxed">
@@ -570,8 +575,9 @@ const ServiceArea: React.FC<ServiceAreaProps> = ({ onQuoteClick }) => {
                     <button
                       onClick={() => setShowAllCommunes42(false)}
                       className="text-orange-300 hover:text-orange-200"
+                      aria-label="Masquer les communes de Loire"
                     >
-                      <ChevronUp className="w-5 h-5" />
+                      <ChevronUp className="w-5 h-5" aria-hidden="true" />
                     </button>
                   </div>
                   <div className="text-white/80 text-sm font-tech leading-relaxed">

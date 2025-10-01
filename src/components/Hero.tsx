@@ -77,16 +77,11 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="none"
         poster="/a_propos.JPG"
-        loading="lazy"
         title="JACK Up Auto - Présentation du service de dépannage automobile mobile"
         aria-label="Vidéo de présentation JACK Up Auto - Dépanneur et garage mobile Haute-Loire Loire"
-        onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
-        onCanPlay={() => console.log('✅ Vidéo Hero prête à être lue')}
         onError={(e) => {
-          console.error('❌ Erreur chargement vidéo Hero:', e);
-          console.warn('Vidéo Hero non trouvée, fallback vers image de fond');
           // Fallback vers l'image de fond originale
           const section = e.currentTarget.closest('section');
           if (section) {

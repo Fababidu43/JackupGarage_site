@@ -140,7 +140,8 @@ const FAQ = () => {
           </p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-medium rounded-xl hover:bg-orange-600 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover:shadow-lg hover:shadow-orange-500/25 hover-scale"
+            className="inline-flex items-center px-8 py-4 bg-orange-600 text-white font-medium rounded-xl hover:bg-orange-700 transition-all duration-300 font-tech uppercase tracking-wide text-sm hover:shadow-lg hover:shadow-orange-500/25 hover-scale"
+            aria-label="Aller à la section contact"
           >
             Nous Contacter
           </button>

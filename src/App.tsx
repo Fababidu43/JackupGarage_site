@@ -215,7 +215,7 @@ function App() {
         </div>
         
         {/* Service 1 - Entretiens (FOND NOIR) */}
-        <div id="service-entretiens" className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -228,7 +228,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité. Votre <span className="text-white font-medium">garage mobile Monistrol</span> intervient à domicile en <span className="text-white font-medium">Haute-Loire et Loire</span>.
+                  <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">Vidange</a>, filtres, niveaux, remise à zéro, contrôle des points de sécurité. Votre garage mobile Monistrol intervient à domicile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -260,7 +260,7 @@ function App() {
         </div>
 
         {/* Service 2 - Freinage (FOND BLANC) */}
-        <div id="service-freinage" className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -273,7 +273,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement des éléments de freinage : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main. <span className="text-gray-900 font-medium">Dépanneur 43 42</span> à votre service.
+                  Remplacement des éléments de <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">freinage</a> : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main. Dépanneur 43 42 à votre service.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -305,7 +305,7 @@ function App() {
         </div>
 
         {/* Service 3 - Embrayage (FOND NOIR) */}
-        <div id="service-embrayage" className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -318,7 +318,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. <span className="text-white font-medium">Mécanicien à domicile Haute-Loire Loire</span>. Zone d'intervention étendue sur demande.
+                  Remplacement du kit <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Mécanicien à domicile Haute-Loire Loire. Zone d'intervention étendue sur demande.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -350,7 +350,7 @@ function App() {
         </div>
 
         {/* Service 4 - Kit Distributions (FOND BLANC) */}
-        <div id="service-distribution" className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-slash diagonal-cut-bottom-backslash bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div className="lg:order-2">
@@ -363,7 +363,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires. <span className="text-gray-900 font-medium">Garage auto Monistrol</span> et secteur <span className="text-gray-900 font-medium">43-42</span>.
+                  Remplacement du kit <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">distribution</a> : courroie, galets, pompe à eau et courroie d'accessoires. Garage auto Monistrol et secteur 43-42.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -395,7 +395,7 @@ function App() {
         </div>
 
         {/* Service 5 - Suspensions (FOND NOIR) */}
-        <div id="service-suspensions" className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
+        <div className="section relative py-8 sm:py-12 lg:py-16 scroll-animate diagonal-cut-top-backslash diagonal-cut-bottom-slash" style={{ background: 'linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-6 sm:py-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center min-h-[300px] sm:min-h-[400px]">
               <div>
@@ -408,7 +408,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement d'amortisseurs, triangles, rotules, cardan, biellettes. <span className="text-white font-medium">Garagiste mobile en Haute-Loire et Loire</span>.
+                  Remplacement d'<a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">amortisseurs</a>, triangles, rotules, cardan, biellettes. Garagiste mobile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">

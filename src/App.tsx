@@ -228,7 +228,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">Vidange</a>, filtres, niveaux, remise à zéro, contrôle des points de sécurité. Votre garage mobile Monistrol intervient à domicile en Haute-Loire et Loire.
+                  <a href="#services">Vidange</a>, filtres, niveaux, remise à zéro, contrôle des points de sécurité. Votre garage mobile Monistrol intervient à domicile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -273,7 +273,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement des éléments de <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">freinage</a> : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main. Dépanneur 43 42 à votre service.
+                  Remplacement des éléments de <a href="#services">freinage</a> : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main. Dépanneur 43 42 à votre service.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -318,7 +318,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement du kit <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Mécanicien à domicile Haute-Loire Loire. Zone d'intervention étendue sur demande.
+                  Remplacement du kit <a href="#services">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Mécanicien à domicile Haute-Loire Loire. Zone d'intervention étendue sur demande.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -363,7 +363,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement du kit <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">distribution</a> : courroie, galets, pompe à eau et courroie d'accessoires. Garage auto Monistrol et secteur 43-42.
+                  Remplacement du kit <a href="#services">distribution</a> : courroie, galets, pompe à eau et courroie d'accessoires. Garage auto Monistrol et secteur 43-42.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -408,7 +408,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement d'<a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">amortisseurs</a>, triangles, rotules, cardan, biellettes. Garagiste mobile en Haute-Loire et Loire.
+                  Remplacement d'<a href="#services">amortisseurs</a>, triangles, rotules, cardan, biellettes. Garagiste mobile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">

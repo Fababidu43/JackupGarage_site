@@ -482,6 +482,9 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
               
               <div className="space-y-2 sm:space-y-3">
                 <div>
+                  <label htmlFor="location-input" className="block text-xs font-medium text-orange-400 mb-1 font-tech uppercase tracking-wide">
+                    Ville ou code postal
+                  </label>
                   <input
                     id="location-input"
                     type="text"
@@ -489,6 +492,7 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
                     onChange={(e) => setLocationInput(e.target.value)}
                     placeholder="Ex: Monistrol-sur-Loire, 43120..."
                     className="w-full px-2 sm:px-3 py-2 sm:py-2.5 bg-gray-800/50 border-2 border-gray-700 text-white rounded-lg focus:border-orange-500 focus:outline-none font-tech transition-all duration-200 hover:border-gray-600 text-xs sm:text-sm"
+                    aria-label="Saisissez votre ville ou code postal"
                   />
                 </div>
 

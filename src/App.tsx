@@ -223,12 +223,12 @@ function App() {
                   <Droplets className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
                   Entretiens
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Vidange, filtres, niveaux, remise à zéro, contrôle des points de sécurité
+                  <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">Vidange</a>, filtres, niveaux, remise à zéro, contrôle des points de sécurité. Votre garage mobile Monistrol intervient à domicile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -268,12 +268,12 @@ function App() {
                   <Car className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
                   Freinage
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement des éléments de freinage : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main.
+                  Remplacement des éléments de <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">freinage</a> : disques, plaquettes, kit freins à tambours, étriers, purge de liquide de frein, remplacement câbles et réglages frein à main. Dépanneur 43 42 à votre service.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -313,12 +313,12 @@ function App() {
                   <Cog className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
                   Kit Embrayage & Volant Moteur
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement du kit embrayage et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande.
+                  Remplacement du kit <a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Mécanicien à domicile Haute-Loire Loire. Zone d'intervention étendue sur demande.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -358,12 +358,12 @@ function App() {
                   <Settings className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
                   Kit Distribution
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
-                  Remplacement du kit distribution : courroie, galets, pompe à eau et courroie d'accessoires.
+                  Remplacement du kit <a href="#services" className="hover:text-orange-600 underline decoration-orange-500/50 transition-colors">distribution</a> : courroie, galets, pompe à eau et courroie d'accessoires. Garage auto Monistrol et secteur 43-42.
                 </p>
                 
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -403,12 +403,12 @@ function App() {
                   <Car className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-white font-futuristic hover-glow-text">
                   Suspensions, direction et transmissions
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement d'amortisseurs, triangles, rotules, cardan, biellettes
+                  Remplacement d'<a href="#services" className="hover:text-orange-300 underline decoration-orange-500/50 transition-colors">amortisseurs</a>, triangles, rotules, cardan, biellettes. Garagiste mobile en Haute-Loire et Loire.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
@@ -448,9 +448,9 @@ function App() {
                   <Wrench className="w-6 h-6 sm:w-7 sm:h-7" />
                 </div>
                 
-                <h3 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
+                <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black mb-3 sm:mb-4 tracking-tight leading-tight uppercase text-gray-900 font-futuristic hover-glow-text">
                   Autres Prestations
-                </h3>
+                </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
                   Rénovation d'optiques, remplacement d'alternateur, démarreur, batterie, carter d'huile, supports moteur, éléments de carrosserie, sondes, thermostat, radiateurs, essuie-glaces, lève-vitres, contacteurs, commodos, ampoules.
@@ -484,14 +484,12 @@ function App() {
         </div>
         
         {/* À propos (blanc #FFFFFF) */}
-        <section id="about" className="relative">
-          <div className="scroll-animate">
-            <About />
-          </div>
-        </section>
+        <div className="scroll-animate">
+          <About />
+        </div>
         
         {/* FAQ (FOND BLANC) */}
-        <div id="faq" className="scroll-animate">
+        <div className="scroll-animate">
           <FAQ />
         </div>
         

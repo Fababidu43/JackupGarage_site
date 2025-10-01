@@ -19,7 +19,15 @@ export default defineConfig({
     },
     cssCodeSplit: true,
     sourcemap: false,
-    minify: 'esbuild'
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+      }
+    },
+    chunkSizeWarningLimit: 500
   },
   optimizeDeps: {
     exclude: ['lucide-react'],

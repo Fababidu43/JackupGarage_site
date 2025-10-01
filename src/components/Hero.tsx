@@ -7,6 +7,8 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
   useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const hero = document.getElementById('hero');
@@ -18,17 +20,17 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         } else if (window.innerWidth <= 1024) {
           zoomMultiplier = 0.0004; // Tablette - effet intermédiaire
         }
-        
+
         const zoomFactor = 1 + (scrolled * zoomMultiplier);
         hero.style.backgroundSize = `${100 * zoomFactor}% auto`;
-        
+
         // Effet de parallaxe subtil sur le contenu
         const heroContent = hero.querySelector('.hero-content');
         if (heroContent) {
           const parallaxOffset = scrolled * 0.3;
           heroContent.style.transform = `translateY(${parallaxOffset}px)`;
         }
-        
+
         // Effet de fade progressif
         const opacity = Math.max(0.3, 1 - (scrolled / (window.innerHeight * 0.8)));
         if (heroContent) {
@@ -46,7 +48,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Appel initial
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -67,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
       }}
     >
       {/* Vidéo de fond */}
-      <video 
+      <video
         className="absolute inset-0 w-full h-full object-cover z-0"
         itemScope
         itemType="https://schema.org/VideoObject"
@@ -75,8 +77,9 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/a_propos.JPG"
+        loading="lazy"
         title="JACK Up Auto - Présentation du service de dépannage automobile mobile"
         aria-label="Vidéo de présentation JACK Up Auto - Dépanneur et garage mobile Haute-Loire Loire"
         onLoadStart={() => console.log('🎬 Début du chargement de la vidéo Hero')}
@@ -108,6 +111,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <meta itemProp="embedUrl" content="https://www.jackup-auto.fr/" />
         <source src="/presentation.MP4" type="video/mp4" />
         <source src="/presentation.mp4" type="video/mp4" />
+        <track kind="captions" src="" label="Français" srcLang="fr" />
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
       
@@ -166,6 +170,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <button
             onClick={onQuoteClick}
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-primary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button group"
+            aria-label="Demander un devis gratuit"
           >
             <span className="group-hover:animate-bounce-x">Demander un devis</span>
             <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -173,6 +178,7 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <a
             href="tel:+33629485339"
             className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 btn-secondary rounded-lg text-sm sm:text-base lg:text-lg font-tech glow-hover hover-scale morph-button subtle-glow min-h-[48px] w-full sm:w-auto animate-pulse-button-secondary group"
+            aria-label="Appeler JACK Up Auto"
           >
             <Phone className="mr-3 w-5 h-5 group-hover:animate-ring transition-transform duration-300" />
             <span className="group-hover:animate-bounce-x">Appeler</span>

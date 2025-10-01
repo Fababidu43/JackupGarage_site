@@ -92,7 +92,7 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
       setActiveSection(currentActive);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -250,8 +250,9 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
                   rounded-lg transition-all duration-200 ease-out transform hover:scale-105
                   hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2
                   font-tech uppercase tracking-wide text-sm backdrop-blur-sm"
+                aria-label="Appeler JACK Up Auto au 06 29 48 53 39"
               >
-                <Phone className="w-4 h-4 inline-block mr-2" />
+                <Phone className="w-4 h-4 inline-block mr-2" aria-hidden="true" />
                 Appeler
               </a>
             </div>
@@ -261,7 +262,8 @@ const Header: React.FC<HeaderProps> = ({ onQuoteClick, onNavigateGallery, onNavi
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden p-2 text-white/80 hover:text-orange-300 hover:bg-orange-500/10 rounded-lg transition-all duration-200
                 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 backdrop-blur-sm"
-              aria-label="Menu"
+              aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMenuOpen}
             >
               <Menu size={20} />
             </button>

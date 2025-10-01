@@ -3,44 +3,44 @@
         xmlns:image="https://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://jackup-auto.fr/</loc>
+    <loc>https://www.jackup-auto.fr/</loc>
     <image:image>
-      <image:loc>https://jackup-auto.fr/logo.png</image:loc>
+      <image:loc>https://www.jackup-auto.fr/logo.png</image:loc>
       <image:title>JACK Up Auto - Logo Dépanneur Garage Mobile</image:title>
       <image:caption>Logo officiel JACK Up Auto - Dépanneur et garage automobile mobile Haute-Loire Loire (43-42)</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/entretiens_photos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/entretiens_photos.jpg</image:loc>
       <image:title>Vidange moteur à domicile Haute-Loire</image:title>
       <image:caption>Service de vidange et entretien automobile à domicile par JACK Up Auto - Mécanicien professionnel</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/freins_photos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/freins_photos.jpg</image:loc>
       <image:title>Réparation freins à domicile Loire</image:title>
       <image:caption>Changement plaquettes et disques de frein à domicile - Service mobile JACK Up Auto</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/embrayage_photos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/embrayage_photos.jpg</image:loc>
       <image:title>Remplacement embrayage à domicile</image:title>
       <image:caption>Kit embrayage et volant moteur à domicile - Intervention mobile professionnelle</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/distri_photos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/distri_photos.jpg</image:loc>
       <image:title>Kit distribution à domicile</image:title>
       <image:caption>Remplacement courroie de distribution et pompe à eau à domicile - JACK Up Auto</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/amortie_photos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/amortie_photos.jpg</image:loc>
       <image:title>Suspensions amortisseurs à domicile</image:title>
       <image:caption>Remplacement amortisseurs et suspensions à domicile - Service mobile professionnel</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/autre_presta.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/autre_presta.jpg</image:loc>
       <image:title>Autres prestations automobiles</image:title>
       <image:caption>Services automobiles variés à domicile - Réparations et maintenance mobile</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jackup-auto.fr/a_propos.jpg</image:loc>
+      <image:loc>https://www.jackup-auto.fr/a_propos.JPG</image:loc>
       <image:title>Mécanicien professionnel JACK Up Auto</image:title>
       <image:caption>Votre mécanicien professionnel à domicile - Expert automobile mobile Haute-Loire Loire</image:caption>
     </image:image>

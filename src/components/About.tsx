@@ -14,15 +14,14 @@ const About = () => {
           <div className="text-center lg:text-left">
             <div className="relative inline-block mb-6">
               <div className="w-80 h-96 sm:w-96 sm:h-[28rem] lg:w-[28rem] lg:h-[32rem] xl:w-[32rem] xl:h-[36rem] mx-auto lg:mx-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-orange-500/30 hover:border-orange-500/60 transition-all duration-500 hover-scale bg-black">
-                <img
-                  src="/a_propos.jpg"
+                <img 
+                  src="/a_propos.JPG" 
                   alt="Votre mécanicien JACK Up Auto - Professionnel de la mécanique à domicile"
                   className="w-full h-full object-cover transition-all duration-300 hover:brightness-110 opacity-85 hover:opacity-95"
                   style={{ filter: 'sepia(10%) saturate(80%) brightness(95%) contrast(90%)' }}
                   loading="lazy"
-                  width="512"
-                  height="576"
                   onError={(e) => {
+                    console.warn('Image À propos non trouvée');
                     e.currentTarget.src = 'https://images.pexels.com/photos/3807277/pexels-photo-3807277.jpeg?auto=compress&cs=tinysrgb&w=800';
                   }}
                 />
@@ -48,7 +47,7 @@ const About = () => {
               <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-2xl border-l-4 border-orange-500 shadow-lg">
                 <p className="text-base sm:text-lg text-gray-800 leading-relaxed font-tech font-medium">
                   Reconverti mécanicien depuis presque <strong className="text-orange-600">7 ans</strong> j'ai foulé le sol de nombreux ateliers de maintenance allant de l'automobile traditionnelle jusqu'à la <strong className="text-orange-600">voiture électrique</strong>. 
-                  De cette expérience variée j'ai fait le choix d\'aller vers une nouvelle approche de mon travail, celle de la <strong className="text-orange-600">mécanique à domicile</strong>, afin de vous proposer une solution <strong className="text-orange-600">efficace, transparente et économe</strong>.
+                  De cette expérience variée j'ai fait le choix d'aller vers une nouvelle approche de mon travail, celle de la <strong className="text-orange-600">mécanique à domicile</strong>, afin de vous proposer une solution <strong className="text-orange-600">efficace, transparente et économe</strong>.
                 </p>
               </div>
             </div>

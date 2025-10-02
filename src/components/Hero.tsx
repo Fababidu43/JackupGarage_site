@@ -82,13 +82,12 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         title="JACK Up Auto - Présentation du service de dépannage automobile mobile"
         aria-label="Vidéo de présentation JACK Up Auto - Dépanneur et garage mobile Haute-Loire Loire"
         onError={(e) => {
-          // Fallback vers l'image de fond originale
+          // Fallback vers l'image a_propos.JPG en cas d'erreur
           const section = e.currentTarget.closest('section');
           if (section) {
             section.style.background = `
               linear-gradient(rgba(10, 10, 10, 0.85), rgba(26, 26, 26, 0.9)),
-              url('https://images.pexels.com/photos/190574/pexels-photo-190574.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop') center center/cover,
-              radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%)
+              url('/a_propos.JPG') center center/cover
             `;
             section.style.backgroundPosition = 'center center';
             section.style.backgroundRepeat = 'no-repeat';

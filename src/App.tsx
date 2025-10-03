@@ -364,7 +364,8 @@ function App() {
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 text-gray-700 font-light font-tech">
                   Remplacement du kit <a href="#services">distribution</a> : courroie, galets, pompe à eau et courroie d'accessoires.
-                
+                </p>
+
                 <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                   <p className="text-sm sm:text-base text-orange-800 font-tech leading-relaxed">
                     🚗 <strong>Préconisations :</strong> Remplacement préventif de la courroie tous les 90 000 à 120 000 km, selon le véhicule.

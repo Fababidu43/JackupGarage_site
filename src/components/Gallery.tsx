@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect, useCallback } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Car, Calendar, MapPin, ArrowLeft, Edit } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Car, Calendar, MapPin, ArrowLeft, CreditCard as Edit } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { GalleryService, Photo } from '../lib/galleryService';
 import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';

@@ -484,6 +484,30 @@ export class GalleryService {
   }
 
   /**
+   * Met à jour les métadonnées d'une photo
+   */
+  static async updatePhotoMetadata(
+    photoId: string,
+    metadata: { title?: string; description?: string }
+  ): Promise<boolean> {
+    try {
+      const { error } = await supabase
+        .from('gallery_photos')
+        .update(metadata)
+        .eq('id', photoId);
+
+      if (error) {
+        throw new Error(`Erreur mise à jour métadonnées: ${error.message}`);
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Erreur mise à jour métadonnées:', error);
+      return false;
+    }
+  }
+
+  /**
    * Obtient l'URL publique d'une image
    */
   static getImageUrl(filePath: string): string {

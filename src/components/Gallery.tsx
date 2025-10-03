@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect, useCallback } from 'react';
-import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Car, Calendar, MapPin, ArrowLeft } from 'lucide-react';
+import { Camera, X, ChevronLeft, ChevronRight, Upload, Plus, Eye, EyeOff, Trash2, AlertCircle, CheckCircle, Clock, BarChart3, Car, Calendar, MapPin, ArrowLeft, Edit } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { GalleryService, Photo } from '../lib/galleryService';
 import { ImageProcessor, ProcessingProgress } from '../lib/imageProcessor';
@@ -20,6 +20,8 @@ interface WorkProject {
 const Gallery = () => {
   const [expandedProject, setExpandedProject] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [editingProject, setEditingProject] = useState<WorkProject | null>(null);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loginForm, setLoginForm] = useState({
@@ -320,14 +322,40 @@ const Gallery = () => {
   const handleToggleProjectVisibility = async (project: WorkProject) => {
     try {
       const newVisibility = !project.is_visible;
-      
+
       // Mettre à jour la visibilité de toutes les photos du projet
       for (const photo of project.photos) {
         await GalleryService.togglePhotoVisibility(photo.id, newVisibility);
       }
-      
+
       await loadWorkProjects();
       await loadStats();
+    } catch (error) {
+      alert(`Erreur: ${error}`);
+    }
+  };
+
+  const handleEditProject = (project: WorkProject) => {
+    setEditingProject(project);
+    setShowEditForm(true);
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editingProject) return;
+
+    try {
+      // Mettre à jour toutes les photos du projet
+      for (const photo of editingProject.photos) {
+        await GalleryService.updatePhotoMetadata(photo.id, {
+          title: editingProject.title,
+          description: editingProject.description || ''
+        });
+      }
+
+      alert('Projet modifié avec succès !');
+      await loadWorkProjects();
+      setShowEditForm(false);
+      setEditingProject(null);
     } catch (error) {
       alert(`Erreur: ${error}`);
     }
@@ -465,15 +493,27 @@ const Gallery = () => {
                         handleToggleProjectVisibility(project);
                       }}
                       className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg ${
-                        project.is_visible 
-                          ? 'bg-green-500 hover:bg-green-600 text-white' 
+                        project.is_visible
+                          ? 'bg-green-500 hover:bg-green-600 text-white'
                           : 'bg-gray-500 hover:bg-gray-600 text-white'
                       }`}
                       title={project.is_visible ? 'Masquer' : 'Afficher'}
                     >
                       {project.is_visible ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                     </button>
-                    
+
+                    {/* Modification */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditProject(project);
+                      }}
+                      className="w-8 h-8 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+                      title="Modifier le projet"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+
                     {/* Suppression */}
                     <button
                       onClick={(e) => {
@@ -814,6 +854,77 @@ const Gallery = () => {
                 disabled={uploadProgress !== null || batchUploadProgress !== null}
               >
                 {uploadProgress || batchUploadProgress ? 'Upload en cours...' : 'Ajouter le projet'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de modification de projet */}
+      {showEditForm && editingProject && (
+        <div className="absolute inset-0 bg-black/70 z-[60] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-gray-900 font-futuristic">Modifier le projet</h3>
+              <button
+                onClick={() => {
+                  setShowEditForm(false);
+                  setEditingProject(null);
+                }}
+                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Titre du projet *</label>
+                <input
+                  type="text"
+                  value={editingProject.title}
+                  onChange={(e) => setEditingProject({...editingProject, title: e.target.value})}
+                  placeholder="Ex: Vidange complète Peugeot 308"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Description du travail</label>
+                <textarea
+                  value={editingProject.description}
+                  onChange={(e) => setEditingProject({...editingProject, description: e.target.value})}
+                  placeholder="Décrivez les travaux effectués, les pièces changées, etc."
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none"
+                />
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-lg border">
+                <p className="text-sm text-gray-600">
+                  <strong>Photos associées:</strong> {editingProject.photos.length} photo{editingProject.photos.length > 1 ? 's' : ''}
+                </p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Note: La modification affectera toutes les photos de ce projet
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowEditForm(false);
+                  setEditingProject(null);
+                }}
+                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleSaveEdit}
+                className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors"
+              >
+                Enregistrer les modifications
               </button>
             </div>
           </div>

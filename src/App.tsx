@@ -318,7 +318,7 @@ function App() {
                 </h2>
                 
                 <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6 font-light text-white/80 font-tech">
-                  Remplacement du kit <a href="#services">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Mécanicien à domicile Haute-Loire Loire. Zone d'intervention étendue sur demande.
+                  Remplacement du kit <a href="#services">embrayage</a> et volant moteur à domicile ou sur lieu de travail. Zone d'intervention étendue sur demande.
                 </p>
                 
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">

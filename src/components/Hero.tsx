@@ -79,8 +79,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
         playsInline
         preload="none"
         poster="/a_propos.JPG"
-        title="JACK Up Auto - Présentation du service de dépannage automobile mobile"
-        aria-label="Vidéo de présentation JACK Up Auto - Dépanneur et garage mobile Haute-Loire Loire"
+        title="JACK Up Auto - Jack Up Auto - Présentation du service garage automobile mobile"
+        aria-label="Vidéo de présentation Jack Up Auto - Garage mobile Haute-Loire Loire"
         onError={(e) => {
           // Fallback vers l'image de fond originale
           const section = e.currentTarget.closest('section');
@@ -97,8 +97,8 @@ const Hero: React.FC<HeroProps> = ({ onQuoteClick }) => {
           e.currentTarget.style.display = 'none';
         }}
       >
-        <meta itemProp="name" content="JACK Up Auto - Présentation du service de dépannage automobile mobile" />
-        <meta itemProp="description" content="Découvrez JACK Up Auto, votre dépanneur et garage automobile mobile en Haute-Loire (43) et Loire (42)" />
+        <meta itemProp="name" content="JACK Up Auto - Jack Up Auto - Présentation du service garage automobile mobile" />
+        <meta itemProp="description" content="Découvrez Jack Up Auto, votre garage automobile mobile en Haute-Loire (43) et Loire (42)" />
         <meta itemProp="thumbnailUrl" content="https://jackup-auto.fr/a_propos.JPG" />
         <meta itemProp="uploadDate" content="2024-12-29T10:00:00+01:00" />
         <meta itemProp="duration" content="PT2M30S" />

@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "JACK Up Auto",
+  "alternateName": [
+    "Jack Up Auto",
+    "JACK Up Auto",
+    "JackUp Auto",
+    "Jack up auto",
+    "jack up auto",
+    "jackup auto"
+  ],
+  "legalName": "EURL JACK UP AUTO",
+  "url": "https://www.jackup-auto.fr",
+  "logo": "https://www.jackup-auto.fr/logo.png",
+  "image": "https://www.jackup-auto.fr/logo.png",
+  "description": "Jack Up Auto - Garage automobile mobile en Haute-Loire (43) et Loire (42). Mécanicien professionnel à domicile.",
+  "telephone": "+33629485339",
+  "email": "jackup-auto@outlook.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Zone d'intervention mobile 60km",
+    "addressLocality": "Monistrol-sur-Loire",
+    "addressRegion": "Haute-Loire",
+    "postalCode": "43120",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 45.2947,
+    "longitude": 4.1736
+  },
+  "openingHours": "Mo-Sa 08:00-18:00",
+  "priceRange": "€-€€",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61581767660833&locale=fr_FR",
+    "https://www.instagram.com/jackupauto?igsh=cnFzdXhkMzh2cTRr",
+    "https://www.google.com/maps/place/JACK+Up+Auto"
+  ]
+}

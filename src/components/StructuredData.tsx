@@ -3,19 +3,18 @@ import React from 'react';
 const StructuredData: React.FC = () => {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": ["AutoRepair", "LocalBusiness", "EmergencyService", "Locksmith", "AutomotiveService", "MobileService"],
-    "name": "JACK Up Auto - Dépanneur & Garage Mobile N°1 Haute-Loire Loire",
+    "@type": ["AutoRepair", "LocalBusiness", "AutomotiveService", "MobileService"],
+    "name": "JACK Up Auto - Jack Up Auto - Garage Mobile N°1 Haute-Loire Loire",
     "legalName": "EURL JACK UP AUTO",
     "alternateName": [
-      "JACK Up Auto", 
-      "Dépanneur 43", 
-      "Dépanneurs Haute-Loire", 
+      "JACK Up Auto",
+      "Jack Up Auto", 
       "Garage Auto 43", 
       "Garage Auto 42", 
       "Garagiste 43", 
       "Garage Monistrol", 
       "Garage Bas-en-Basset", 
-      "Dépanneur Monistrol sur Loire", 
+ 
       "Garage Auto Monistrol", 
       "Garagiste Monistrol sur Loire", 
       "Mécanicien à domicile 43", 
@@ -24,14 +23,13 @@ const StructuredData: React.FC = () => {
       "Garagiste mobile Loire", 
       "Mécanicien Saint-Étienne", 
       "Garagiste Le Puy-en-Velay", 
-      "Dépanneur Le Puy", 
+ 
       "Garage Yssingeaux", 
       "Garagiste Yssingeaux", 
       "Garage Brioude", 
       "Garage Firminy", 
       "Garage Saint-Chamond", 
-      "Dépannage Auto 43", 
-      "Dépannage Voiture Haute-Loire", 
+ 
       "Garage Mobile 43", 
       "Garage Itinérant Haute-Loire", 
       "Réparation Auto Domicile 43", 
@@ -41,18 +39,14 @@ const StructuredData: React.FC = () => {
       "Expert Auto Mobile", 
       "Technicien Automobile Domicile",
       "Garage Mobile Loire 42",
-      "Dépanneur Mobile Haute-Loire",
       "Mécanicien Itinérant 43 42",
       "Service Automobile Domicile",
       "Réparateur Auto Mobile",
       "Garage à Domicile 43 42",
-      "Dépannage Rapide Haute-Loire",
-      "SOS Auto Mobile 43",
-      "Assistance Automobile Domicile",
       "Expert Mécanique Mobile",
       "Professionnel Auto Domicile"
     ],
-    "description": "⭐ JACK Up Auto - Dépanneur & Garage Mobile N°1 Haute-Loire (43) et Loire (42) ! Spécialiste mécanicien à domicile dans un rayon de 60km : dépannage automobile, vidange, freinage, embrayage, kit distribution, suspensions, amortisseurs. Intervention rapide et professionnelle à Monistrol-sur-Loire, Bas-en-Basset, Le Puy-en-Velay, Saint-Étienne, Yssingeaux, Firminy, Saint-Chamond, Brioude, Retournac, Aurec-sur-Loire. Devis gratuit 24h - Service 7j/7 - Tarifs transparents - Garantie qualité.",
+    "description": "⭐ Jack Up Auto - Garage Mobile N°1 Haute-Loire (43) et Loire (42) ! Spécialiste mécanicien à domicile dans un rayon de 60km : vidange, freinage, embrayage, kit distribution, suspensions, amortisseurs. Intervention rapide et professionnelle à Monistrol-sur-Loire, Bas-en-Basset, Le Puy-en-Velay, Saint-Étienne, Yssingeaux, Firminy, Saint-Chamond, Brioude, Retournac, Aurec-sur-Loire. Devis gratuit 24h - Service 7j/7 - Tarifs transparents - Garantie qualité.",
     "url": "https://www.jackup-auto.fr/",
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61581767660833&locale=fr_FR",
@@ -84,7 +78,7 @@ const StructuredData: React.FC = () => {
         "telephone": "+33629485339",
         "contactType": "customer service",
         "availableLanguage": "French",
-        "serviceType": "Dépannage automobile",
+        "serviceType": "Garage automobile mobile",
         "areaServed": ["FR-43", "FR-42"],
         "hoursAvailable": {
           "@type": "OpeningHoursSpecification",
@@ -96,9 +90,9 @@ const StructuredData: React.FC = () => {
       {
         "@type": "ContactPoint",
         "telephone": "+33629485339",
-        "contactType": "emergency",
+        "contactType": "sales",
         "availableLanguage": "French",
-        "serviceType": "Dépannage urgence",
+        "serviceType": "Garage automobile mobile",
         "areaServed": ["FR-43", "FR-42"]
       }
     ],
@@ -252,16 +246,9 @@ const StructuredData: React.FC = () => {
       }
     ],
     "serviceType": [
-      "Dépannage automobile à domicile",
-      "Dépanneur auto mobile",
+      "Garage automobile mobile",
       "Garage auto mobile",
       "Réparation automobile à domicile",
-      "Service dépannage voiture",
-      "Assistance automobile mobile",
-      "Dépannage panne voiture",
-      "Secours automobile",
-      "SOS auto mobile",
-      "Intervention automobile urgente",
       "Vidange moteur à domicile",
       "Entretien automobile mobile",
       "Réparation freins à domicile",
@@ -300,27 +287,27 @@ const StructuredData: React.FC = () => {
       "Garage auto Allegre",
       "Garage auto Langeac",
       "Garage auto Sainte-Sigolène",
-      "Dépanneur Monistrol-sur-Loire",
-      "Dépanneur Bas-en-Basset",
-      "Dépanneur Le Puy-en-Velay",
-      "Dépanneur Yssingeaux",
-      "Dépanneur Brioude",
-      "Dépanneur Retournac",
-      "Dépanneur Aurec-sur-Loire",
-      "Dépanneur Saint-Didier-en-Velay",
-      "Dépanneur Saint-Just-Malmont",
-      "Dépanneur Dunières",
-      "Dépanneur Tence",
-      "Dépanneur Craponne-sur-Arzon",
-      "Dépanneur Vorey",
-      "Dépanneur Saint-Paulien",
-      "Dépanneur Allegre",
-      "Dépanneur Langeac",
-      "Dépanneur Sainte-Sigolène"
+      "Garage Monistrol-sur-Loire",
+      "Garage Bas-en-Basset",
+      "Garage Le Puy-en-Velay",
+      "Garage Yssingeaux",
+      "Garage Brioude",
+      "Garage Retournac",
+      "Garage Aurec-sur-Loire",
+      "Garage Saint-Didier-en-Velay",
+      "Garage Saint-Just-Malmont",
+      "Garage Dunières",
+      "Garage Tence",
+      "Garage Craponne-sur-Arzon",
+      "Garage Vorey",
+      "Garage Saint-Paulien",
+      "Garage Allegre",
+      "Garage Langeac",
+      "Garage Sainte-Sigolène"
     ],
     "keywords": [
-      "dépanneur haute-loire",
-      "dépanneurs 43",
+      "jack up auto",
+      "jackup auto",
       "garage auto 43",
       "garage auto 42",
       "garagiste 43",
@@ -337,35 +324,26 @@ const StructuredData: React.FC = () => {
      "réparation auto loire",
       "vidange à domicile le puy",
       "vidange domicile saint-étienne",
-      "dépanneur monistrol sur loire",
       "garage auto monistrol",
       "garagiste monistrol sur loire",
-      "dépannage auto 43",
-      "dépannage voiture haute-loire",
       "garage mobile 43",
       "garage itinérant haute-loire",
       "réparation auto domicile 43",
       "garage auto le puy en velay",
       "garagiste le puy",
-      "dépanneur le puy",
       "garage yssingeaux",
       "garagiste yssingeaux",
-      "dépanneur yssingeaux",
       "garage brioude",
       "garagiste brioude",
-      "dépanneur brioude",
       "garage retournac",
       "garagiste mobile"
     ],
     "category": [
-      "Dépannage automobile",
       "Garage mobile",
       "Mécanicien à domicile",
       "Service automobile",
       "Réparation auto",
       "Maintenance véhicule",
-      "Assistance automobile",
-      "Dépanneur professionnel"
     ],
     "brand": {
       "@type": "Brand",
@@ -401,11 +379,7 @@ const StructuredData: React.FC = () => {
     ],
     "specialty": [
       "Mécanique automobile mobile",
-      "Dépannage automobile",
-      "Service d'urgence auto",
       "Intervention à domicile",
-      "Assistance automobile",
-      "Réparation sur site",
       "Réparation sur site",
       "Service client personnalisé"
     ],
@@ -456,26 +430,6 @@ const StructuredData: React.FC = () => {
       "name": "Services de mécanique automobile",
       "itemListElement": [
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Dépannage automobile à domicile Haute-Loire",
-            "provider": {
-              "@type": "Organization",
-              "name": "JACK Up Auto"
-            },
-            "category": "Entretien automobile",
-            "description": "Service de dépannage automobile complet à domicile avec diagnostic et réparation sur site",
-            "offers": {
-              "@type": "Offer",
-              "priceCurrency": "EUR",
-              "price": "Sur devis",
-              "availability": "https://schema.org/InStock"
-            }
-          },
-          "areaServed": ["Haute-Loire", "Loire"]
-        },
-        {
           "@type": "Offer", 
           "itemOffered": {
             "@type": "Service",
@@ -514,26 +468,6 @@ const StructuredData: React.FC = () => {
             }
           },
           "areaServed": ["Haute-Loire", "Loire"]
-       },
-       {
-         "@type": "Offer",
-         "itemOffered": {
-           "@type": "Service",
-           "name": "Dépanneur Saint-Étienne",
-           "provider": {
-             "@type": "Organization",
-             "name": "JACK Up Auto"
-           },
-           "category": "Service automobile mobile",
-           "description": "Service de dépannage automobile à domicile dans la Loire",
-           "offers": {
-             "@type": "Offer",
-             "priceCurrency": "EUR",
-             "price": "Sur devis",
-             "availability": "https://schema.org/InStock"
-           }
-         },
-         "areaServed": "Loire"
        },
        {
          "@type": "Offer",
@@ -696,9 +630,6 @@ const StructuredData: React.FC = () => {
       }
     },
     "knowsAbout": [
-      "Dépannage automobile",
-      "Service d'urgence auto",
-      "Assistance automobile mobile",
       "Mécanique automobile",
       "Diagnostic électronique",
       "Réparation à domicile",
@@ -709,8 +640,6 @@ const StructuredData: React.FC = () => {
       "Intervention rapide",
       "Entretien préventif",
       "Réparation à domicile",
-      "Dépannage panne voiture",
-      "Secours automobile",
       "Vidange moteur",
       "Système de freinage",
       "Kit embrayage",
@@ -718,13 +647,12 @@ const StructuredData: React.FC = () => {
       "Suspensions amortisseurs",
       "Diagnostic électronique",
       "Maintenance préventive",
-      "Réparation urgente"
     ],
     "makesOffer": [
       {
         "@type": "Offer",
-        "name": "Devis gratuit dépannage",
-        "description": "Estimation gratuite pour dépannage et réparation sous 12h",
+        "name": "Devis gratuit garage mobile",
+        "description": "Estimation gratuite pour réparation automobile sous 12h",
         "price": "0.00",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
@@ -734,7 +662,7 @@ const StructuredData: React.FC = () => {
       {
         "@type": "Offer",
         "name": "Intervention rapide",
-        "description": "Service de dépannage automobile rapide à domicile",
+        "description": "Service garage mobile rapide à domicile",
         "availability": "https://schema.org/InStock",
         "priceCurrency": "EUR",
         "priceRange": "€-€€"
@@ -760,8 +688,8 @@ const StructuredData: React.FC = () => {
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://www.jackup-auto.fr/",
-      "name": "JACK Up Auto - Dépanneur & Garage Mobile Haute-Loire Loire",
-      "description": "Site officiel de JACK Up Auto, dépanneur et garage mobile en Haute-Loire et Loire",
+      "name": "JACK Up Auto - Jack Up Auto - Garage Mobile Haute-Loire Loire",
+      "description": "Site officiel de Jack Up Auto, garage mobile en Haute-Loire et Loire",
       "url": "https://www.jackup-auto.fr/"
     }
   };

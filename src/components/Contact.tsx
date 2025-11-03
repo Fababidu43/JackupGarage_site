@@ -60,6 +60,15 @@ const Contact = () => {
         console.log('Détails:', result.details);
         setSubmitSuccess(true);
         setIsSubmitted(true);
+
+        // Déclencher l'événement de conversion Google Ads
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17610625083/8JZMCP_iiLQbELugs81B'
+          });
+          console.log('📊 Événement de conversion Google Ads déclenché');
+        }
+
         // Réinitialiser le formulaire
         setFormData({
           firstName: '',

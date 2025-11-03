@@ -264,6 +264,14 @@ const QuotePopup: React.FC<QuotePopupProps> = ({ isOpen, onClose }) => {
         console.log('✅ Email envoyé avec succès via MailerSend !');
         console.log('Détails:', result.details);
         setIsSubmitted(true);
+
+        // Déclencher l'événement de conversion Google Ads
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17610625083/8JZMCP_iiLQbELugs81B'
+          });
+          console.log('📊 Événement de conversion Google Ads déclenché');
+        }
       } else {
         console.error('❌ Erreur envoi email:', result.error);
         // Afficher le message de confirmation même en cas d'erreur (fallback UX)

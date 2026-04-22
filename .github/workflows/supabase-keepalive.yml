@@ -27,10 +27,10 @@ jobs:
       - name: Upsert single keepalive row (id=1)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_API_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_API_KEY"
+          test -n "$SUPABASE_SERVICE_ROLE_KEY"
 
           endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
           touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
@@ -40,8 +40,8 @@ jobs:
           response=$(curl -s -w "\n%{http_code}" \
             -X POST \
             "$endpoint" \
-            -H "apikey: $SUPABASE_API_KEY" \
-            -H "Authorization: Bearer $SUPABASE_API_KEY" \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
             -H "Content-Type: application/json" \
             -H "Prefer: resolution=merge-duplicates,return=representation" \
             -d "$payload")
@@ -64,11 +64,11 @@ jobs:
       - name: Upsert keepalive row every 30 seconds (test mode)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_API_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           TEST_DURATION_MINUTES: ${{ github.event.inputs.test_duration_minutes }}
         run: |
           test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_API_KEY"
+          test -n "$SUPABASE_SERVICE_ROLE_KEY"
 
           endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
           duration_min=${TEST_DURATION_MINUTES:-5}
@@ -90,8 +90,8 @@ jobs:
             response=$(curl -s -w "\n%{http_code}" \
               -X POST \
               "$endpoint" \
-              -H "apikey: $SUPABASE_API_KEY" \
-              -H "Authorization: Bearer $SUPABASE_API_KEY" \
+              -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
               -H "Content-Type: application/json" \
               -H "Prefer: resolution=merge-duplicates,return=representation" \
               -d "$payload")

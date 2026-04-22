@@ -24,20 +24,63 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event.inputs.test_mode != 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Upsert single keepalive row (id=1)
+      - name: Vérifier que Supabase est accessible
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_SERVICE_ROLE_KEY"
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "ERREUR : secret SUPABASE_URL manquant dans GitHub."
+            exit 1
+          fi
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "ERREUR : secret SUPABASE_SERVICE_ROLE_KEY manquant dans GitHub."
+            exit 1
+          fi
 
+          echo "Test de connexion à Supabase..."
+          health_response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 \
+            "$SUPABASE_URL/rest/v1/" \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY")
+
+          echo "Réponse Supabase health check : HTTP $health_response"
+
+          if [ "$health_response" = "000" ]; then
+            echo ""
+            echo "========================================================"
+            echo " ALERTE : Supabase ne répond pas (timeout/inaccessible)."
+            echo " Le projet est probablement en VEILLE."
+            echo " Connectez-vous sur https://supabase.com/dashboard"
+            echo " et relancez le projet manuellement."
+            echo "========================================================"
+            exit 1
+          fi
+
+          if [ "$health_response" = "503" ] || [ "$health_response" = "521" ] || [ "$health_response" = "522" ]; then
+            echo ""
+            echo "========================================================"
+            echo " ALERTE : Supabase répond HTTP $health_response."
+            echo " Le projet est en VEILLE ou en cours de redémarrage."
+            echo " Connectez-vous sur https://supabase.com/dashboard"
+            echo " et relancez le projet manuellement."
+            echo "========================================================"
+            exit 1
+          fi
+
+          echo "Supabase est accessible (HTTP $health_response). Poursuite..."
+
+      - name: Mettre à jour keepalive (1 ligne max)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
           endpoint_update="$SUPABASE_URL/rest/v1/keepalive?id=eq.1"
           endpoint_insert="$SUPABASE_URL/rest/v1/keepalive"
           touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           payload_update="{\"touched_at\":\"$touched_at\"}"
           payload_insert="{\"id\":1,\"touched_at\":\"$touched_at\"}"
-          echo "Updating keepalive id=1 at $touched_at"
+          echo "Mise à jour keepalive id=1 à $touched_at"
 
           response=$(curl -s -w "\n%{http_code}" \
             -X PATCH \
@@ -50,17 +93,15 @@ jobs:
 
           body=$(echo "$response" | head -n -1)
           code=$(echo "$response" | tail -n 1)
-
-          echo "UPDATE HTTP $code"
-          echo "UPDATE Body: $body"
+          echo "UPDATE HTTP $code | Body: $body"
 
           if [ "$code" != "200" ]; then
-            echo "Update failed with HTTP $code"
+            echo "ERREUR mise à jour keepalive : HTTP $code"
             exit 1
           fi
 
           if [ "$body" = "[]" ]; then
-            echo "Row id=1 not found, inserting it"
+            echo "Ligne id=1 absente, insertion..."
             response=$(curl -s -w "\n%{http_code}" \
               -X POST \
               "$endpoint_insert" \
@@ -72,13 +113,39 @@ jobs:
 
             body=$(echo "$response" | head -n -1)
             code=$(echo "$response" | tail -n 1)
-
-            echo "INSERT HTTP $code"
-            echo "INSERT Body: $body"
+            echo "INSERT HTTP $code | Body: $body"
 
             if [ "$code" != "201" ] && [ "$code" != "200" ]; then
-              echo "Insert failed with HTTP $code"
+              echo "ERREUR insertion keepalive : HTTP $code"
               exit 1
+            fi
+          fi
+
+          echo "Keepalive OK — touched_at mis à jour à $touched_at"
+
+          # --- Vérification santé : touched_at ne doit pas être > 25h ---
+          read_response=$(curl -s -w "\n%{http_code}" \
+            "$SUPABASE_URL/rest/v1/keepalive?id=eq.1&select=touched_at" \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY")
+
+          read_body=$(echo "$read_response" | head -n -1)
+          read_code=$(echo "$read_response" | tail -n 1)
+          echo "VERIFY HTTP $read_code  Body: $read_body"
+
+          stored_at=$(echo "$read_body" | grep -oP '"touched_at":"\K[^"]+' | head -1)
+          echo "Stored touched_at: $stored_at"
+
+          if [ -n "$stored_at" ]; then
+            stored_epoch=$(date -d "$stored_at" +%s 2>/dev/null || date -j -f "%Y-%m-%dT%H:%M:%SZ" "$stored_at" +%s 2>/dev/null)
+            now_epoch=$(date -u +%s)
+            diff_hours=$(( (now_epoch - stored_epoch) / 3600 ))
+            echo "Age de touched_at: ${diff_hours}h"
+            if [ "$diff_hours" -gt 25 ]; then
+              echo "ALERTE: touched_at a plus de 25h (${diff_hours}h) — le keepalive ne tourne plus correctement !"
+              exit 1
+            else
+              echo "OK: touched_at est frais (${diff_hours}h), Supabase ne sera pas mis en pause."
             fi
           fi
 
@@ -92,8 +159,14 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           TEST_DURATION_MINUTES: ${{ github.event.inputs.test_duration_minutes }}
         run: |
-          test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_SERVICE_ROLE_KEY"
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "Missing GitHub secret: SUPABASE_URL"
+            exit 1
+          fi
+          if [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "Missing GitHub secret: SUPABASE_SERVICE_ROLE_KEY"
+            exit 1
+          fi
 
           endpoint_update="$SUPABASE_URL/rest/v1/keepalive?id=eq.1"
           endpoint_insert="$SUPABASE_URL/rest/v1/keepalive"

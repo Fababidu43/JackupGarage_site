@@ -32,29 +32,54 @@ jobs:
           test -n "$SUPABASE_URL"
           test -n "$SUPABASE_SERVICE_ROLE_KEY"
 
-          endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
+          endpoint_update="$SUPABASE_URL/rest/v1/keepalive?id=eq.1"
+          endpoint_insert="$SUPABASE_URL/rest/v1/keepalive"
           touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          payload="{\"id\":1,\"touched_at\":\"$touched_at\"}"
-          echo "Upserting keepalive id=1 at $touched_at"
+          payload_update="{\"touched_at\":\"$touched_at\"}"
+          payload_insert="{\"id\":1,\"touched_at\":\"$touched_at\"}"
+          echo "Updating keepalive id=1 at $touched_at"
 
           response=$(curl -s -w "\n%{http_code}" \
-            -X POST \
-            "$endpoint" \
+            -X PATCH \
+            "$endpoint_update" \
             -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
             -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
             -H "Content-Type: application/json" \
-            -H "Prefer: resolution=merge-duplicates,return=representation" \
-            -d "$payload")
+            -H "Prefer: return=representation" \
+            -d "$payload_update")
 
           body=$(echo "$response" | head -n -1)
           code=$(echo "$response" | tail -n 1)
 
-          echo "HTTP $code"
-          echo "Body: $body"
+          echo "UPDATE HTTP $code"
+          echo "UPDATE Body: $body"
 
-          if [ "$code" != "201" ] && [ "$code" != "200" ]; then
-            echo "Upsert failed with HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "Update failed with HTTP $code"
             exit 1
+          fi
+
+          if [ "$body" = "[]" ]; then
+            echo "Row id=1 not found, inserting it"
+            response=$(curl -s -w "\n%{http_code}" \
+              -X POST \
+              "$endpoint_insert" \
+              -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+              -H "Content-Type: application/json" \
+              -H "Prefer: return=representation" \
+              -d "$payload_insert")
+
+            body=$(echo "$response" | head -n -1)
+            code=$(echo "$response" | tail -n 1)
+
+            echo "INSERT HTTP $code"
+            echo "INSERT Body: $body"
+
+            if [ "$code" != "201" ] && [ "$code" != "200" ]; then
+              echo "Insert failed with HTTP $code"
+              exit 1
+            fi
           fi
 
   ping_test_30s:
@@ -70,7 +95,8 @@ jobs:
           test -n "$SUPABASE_URL"
           test -n "$SUPABASE_SERVICE_ROLE_KEY"
 
-          endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
+          endpoint_update="$SUPABASE_URL/rest/v1/keepalive?id=eq.1"
+          endpoint_insert="$SUPABASE_URL/rest/v1/keepalive"
           duration_min=${TEST_DURATION_MINUTES:-5}
           duration_sec=$((duration_min * 60))
           iterations=$((duration_sec / 30))
@@ -80,31 +106,56 @@ jobs:
           fi
 
           echo "Starting test mode: $iterations upserts, every 30s"
-          echo "Endpoint: $endpoint"
+          echo "Update endpoint: $endpoint_update"
+          echo "Insert endpoint: $endpoint_insert"
 
           i=1
           while [ "$i" -le "$iterations" ]; do
             touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-            payload="{\"id\":1,\"touched_at\":\"$touched_at\"}"
+            payload_update="{\"touched_at\":\"$touched_at\"}"
+            payload_insert="{\"id\":1,\"touched_at\":\"$touched_at\"}"
 
             response=$(curl -s -w "\n%{http_code}" \
-              -X POST \
-              "$endpoint" \
+              -X PATCH \
+              "$endpoint_update" \
               -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
               -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
               -H "Content-Type: application/json" \
-              -H "Prefer: resolution=merge-duplicates,return=representation" \
-              -d "$payload")
+              -H "Prefer: return=representation" \
+              -d "$payload_update")
 
             body=$(echo "$response" | head -n -1)
             code=$(echo "$response" | tail -n 1)
 
-            echo "[$i/$iterations] HTTP $code"
-            echo "[$i/$iterations] Body: $body"
+            echo "[$i/$iterations] UPDATE HTTP $code"
+            echo "[$i/$iterations] UPDATE Body: $body"
 
-            if [ "$code" != "201" ] && [ "$code" != "200" ]; then
-              echo "Upsert failed with HTTP $code"
+            if [ "$code" != "200" ]; then
+              echo "Update failed with HTTP $code"
               exit 1
+            fi
+
+            if [ "$body" = "[]" ]; then
+              echo "[$i/$iterations] Row id=1 not found, inserting it"
+              response=$(curl -s -w "\n%{http_code}" \
+                -X POST \
+                "$endpoint_insert" \
+                -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+                -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+                -H "Content-Type: application/json" \
+                -H "Prefer: return=representation" \
+                -d "$payload_insert")
+
+              body=$(echo "$response" | head -n -1)
+              code=$(echo "$response" | tail -n 1)
+
+              echo "[$i/$iterations] INSERT HTTP $code"
+              echo "[$i/$iterations] INSERT Body: $body"
+
+              if [ "$code" != "201" ] && [ "$code" != "200" ]; then
+                echo "Insert failed with HTTP $code"
+                exit 1
+              fi
             fi
 
             if [ "$i" -lt "$iterations" ]; then
@@ -114,4 +165,4 @@ jobs:
             i=$((i + 1))
           done
 
-          echo "30-second upsert test completed successfully"
+          echo "30-second update/insert test completed successfully"

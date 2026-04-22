@@ -2,21 +2,100 @@ name: supabase-keepalive
 
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 */12 * * *"
   workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "Run 30s interval test loop"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      test_duration_minutes:
+        description: "Test duration in minutes when test_mode=true"
+        required: false
+        default: "5"
+        type: string
 
 jobs:
   ping:
+    if: ${{ github.event_name == 'schedule' || github.event.inputs.test_mode != 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase keepalive table
+      - name: Ping Supabase public table
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" \
-            "$SUPABASE_URL/rest/v1/keepalive?select=id&limit=1" \
+          test -n "$SUPABASE_URL"
+          test -n "$SUPABASE_ANON_KEY"
+
+          endpoint="$SUPABASE_URL/rest/v1/gallery_photos?select=id&is_visible=eq.true&limit=1"
+          echo "Pinging: $endpoint"
+
+          response=$(curl -s -w "\n%{http_code}" \
+            "$endpoint" \
             -H "apikey: $SUPABASE_ANON_KEY" \
             -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+
+          body=$(echo "$response" | head -n -1)
+          code=$(echo "$response" | tail -n 1)
+
           echo "HTTP $code"
+          echo "Body: $body"
+
           test "$code" = "200"
+
+  ping_test_30s:
+    if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.test_mode == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase every 30 seconds (test mode)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          TEST_DURATION_MINUTES: ${{ github.event.inputs.test_duration_minutes }}
+        run: |
+          test -n "$SUPABASE_URL"
+          test -n "$SUPABASE_ANON_KEY"
+
+          endpoint="$SUPABASE_URL/rest/v1/gallery_photos?select=id&is_visible=eq.true&limit=1"
+          duration_min=${TEST_DURATION_MINUTES:-5}
+          duration_sec=$((duration_min * 60))
+          iterations=$((duration_sec / 30))
+
+          if [ "$iterations" -lt 1 ]; then
+            iterations=1
+          fi
+
+          echo "Starting test mode: $iterations pings, every 30s"
+          echo "Endpoint: $endpoint"
+
+          i=1
+          while [ "$i" -le "$iterations" ]; do
+            response=$(curl -s -w "\n%{http_code}" \
+              "$endpoint" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+
+            body=$(echo "$response" | head -n -1)
+            code=$(echo "$response" | tail -n 1)
+
+            echo "[$i/$iterations] HTTP $code"
+            echo "[$i/$iterations] Body: $body"
+
+            if [ "$code" != "200" ]; then
+              echo "Ping failed with HTTP $code"
+              exit 1
+            fi
+
+            if [ "$i" -lt "$iterations" ]; then
+              sleep 30
+            fi
+
+            i=$((i + 1))
+          done
+
+          echo "30-second ping test completed successfully"

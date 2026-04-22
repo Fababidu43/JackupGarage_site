@@ -24,21 +24,27 @@ jobs:
     if: ${{ github.event_name == 'schedule' || github.event.inputs.test_mode != 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase public table
+      - name: Upsert single keepalive row (id=1)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_API_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.SUPABASE_ANON_KEY }}
         run: |
           test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_ANON_KEY"
+          test -n "$SUPABASE_API_KEY"
 
-          endpoint="$SUPABASE_URL/rest/v1/gallery_photos?select=id&is_visible=eq.true&limit=1"
-          echo "Pinging: $endpoint"
+          endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
+          touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          payload="{\"id\":1,\"touched_at\":\"$touched_at\"}"
+          echo "Upserting keepalive id=1 at $touched_at"
 
           response=$(curl -s -w "\n%{http_code}" \
+            -X POST \
             "$endpoint" \
-            -H "apikey: $SUPABASE_ANON_KEY" \
-            -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+            -H "apikey: $SUPABASE_API_KEY" \
+            -H "Authorization: Bearer $SUPABASE_API_KEY" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: resolution=merge-duplicates,return=representation" \
+            -d "$payload")
 
           body=$(echo "$response" | head -n -1)
           code=$(echo "$response" | tail -n 1)
@@ -46,22 +52,25 @@ jobs:
           echo "HTTP $code"
           echo "Body: $body"
 
-          test "$code" = "200"
+          if [ "$code" != "201" ] && [ "$code" != "200" ]; then
+            echo "Upsert failed with HTTP $code"
+            exit 1
+          fi
 
   ping_test_30s:
     if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.test_mode == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Supabase every 30 seconds (test mode)
+      - name: Upsert keepalive row every 30 seconds (test mode)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          SUPABASE_API_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY || secrets.SUPABASE_ANON_KEY }}
           TEST_DURATION_MINUTES: ${{ github.event.inputs.test_duration_minutes }}
         run: |
           test -n "$SUPABASE_URL"
-          test -n "$SUPABASE_ANON_KEY"
+          test -n "$SUPABASE_API_KEY"
 
-          endpoint="$SUPABASE_URL/rest/v1/gallery_photos?select=id&is_visible=eq.true&limit=1"
+          endpoint="$SUPABASE_URL/rest/v1/keepalive?on_conflict=id"
           duration_min=${TEST_DURATION_MINUTES:-5}
           duration_sec=$((duration_min * 60))
           iterations=$((duration_sec / 30))
@@ -70,15 +79,22 @@ jobs:
             iterations=1
           fi
 
-          echo "Starting test mode: $iterations pings, every 30s"
+          echo "Starting test mode: $iterations upserts, every 30s"
           echo "Endpoint: $endpoint"
 
           i=1
           while [ "$i" -le "$iterations" ]; do
+            touched_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            payload="{\"id\":1,\"touched_at\":\"$touched_at\"}"
+
             response=$(curl -s -w "\n%{http_code}" \
+              -X POST \
               "$endpoint" \
-              -H "apikey: $SUPABASE_ANON_KEY" \
-              -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+              -H "apikey: $SUPABASE_API_KEY" \
+              -H "Authorization: Bearer $SUPABASE_API_KEY" \
+              -H "Content-Type: application/json" \
+              -H "Prefer: resolution=merge-duplicates,return=representation" \
+              -d "$payload")
 
             body=$(echo "$response" | head -n -1)
             code=$(echo "$response" | tail -n 1)
@@ -86,8 +102,8 @@ jobs:
             echo "[$i/$iterations] HTTP $code"
             echo "[$i/$iterations] Body: $body"
 
-            if [ "$code" != "200" ]; then
-              echo "Ping failed with HTTP $code"
+            if [ "$code" != "201" ] && [ "$code" != "200" ]; then
+              echo "Upsert failed with HTTP $code"
               exit 1
             fi
 
@@ -98,4 +114,4 @@ jobs:
             i=$((i + 1))
           done
 
-          echo "30-second ping test completed successfully"
+          echo "30-second upsert test completed successfully"
